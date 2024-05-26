@@ -33,6 +33,15 @@ public interface MyDslFactory extends EFactory
   Model createModel();
 
   /**
+   * Returns a new object of class '<em>Global Protocol</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Global Protocol</em>'.
+   * @generated
+   */
+  GlobalProtocol createGlobalProtocol();
+
+  /**
    * Returns a new object of class '<em>Roles</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -130,6 +139,96 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   Payload createPayload();
+
+  /**
+   * Returns a new object of class '<em>Local Protocol</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Local Protocol</em>'.
+   * @generated
+   */
+  LocalProtocol createLocalProtocol();
+
+  /**
+   * Returns a new object of class '<em>Roles L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Roles L</em>'.
+   * @generated
+   */
+  RolesL createRolesL();
+
+  /**
+   * Returns a new object of class '<em>Role L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Role L</em>'.
+   * @generated
+   */
+  RoleL createRoleL();
+
+  /**
+   * Returns a new object of class '<em>Protocol L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Protocol L</em>'.
+   * @generated
+   */
+  ProtocolL createProtocolL();
+
+  /**
+   * Returns a new object of class '<em>Message L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Message L</em>'.
+   * @generated
+   */
+  MessageL createMessageL();
+
+  /**
+   * Returns a new object of class '<em>Sender L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Sender L</em>'.
+   * @generated
+   */
+  SenderL createSenderL();
+
+  /**
+   * Returns a new object of class '<em>Receiver L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Receiver L</em>'.
+   * @generated
+   */
+  ReceiverL createReceiverL();
+
+  /**
+   * Returns a new object of class '<em>Choice L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Choice L</em>'.
+   * @generated
+   */
+  ChoiceL createChoiceL();
+
+  /**
+   * Returns a new object of class '<em>Recursion L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Recursion L</em>'.
+   * @generated
+   */
+  RecursionL createRecursionL();
+
+  /**
+   * Returns a new object of class '<em>Close Recursion L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Close Recursion L</em>'.
+   * @generated
+   */
+  CloseRecursionL createCloseRecursionL();
 
   /**
    * Returns the package supported by this factory.

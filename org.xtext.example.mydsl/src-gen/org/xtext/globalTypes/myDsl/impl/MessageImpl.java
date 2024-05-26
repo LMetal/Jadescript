@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.xtext.globalTypes.myDsl.Message;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.Payload;
-import org.xtext.globalTypes.myDsl.Role;
 import org.xtext.globalTypes.myDsl.RoleOne;
 
 /**
@@ -84,7 +83,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * @generated
    * @ordered
    */
-  protected Role receiver;
+  protected RoleOne receiver;
 
   /**
    * <!-- begin-user-doc -->
@@ -233,12 +232,12 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * @generated
    */
   @Override
-  public Role getReceiver()
+  public RoleOne getReceiver()
   {
     if (receiver != null && receiver.eIsProxy())
     {
       InternalEObject oldReceiver = (InternalEObject)receiver;
-      receiver = (Role)eResolveProxy(oldReceiver);
+      receiver = (RoleOne)eResolveProxy(oldReceiver);
       if (receiver != oldReceiver)
       {
         if (eNotificationRequired())
@@ -253,7 +252,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  public Role basicGetReceiver()
+  public RoleOne basicGetReceiver()
   {
     return receiver;
   }
@@ -264,9 +263,9 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * @generated
    */
   @Override
-  public void setReceiver(Role newReceiver)
+  public void setReceiver(RoleOne newReceiver)
   {
-    Role oldReceiver = receiver;
+    RoleOne oldReceiver = receiver;
     receiver = newReceiver;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MESSAGE__RECEIVER, oldReceiver, receiver));
@@ -332,7 +331,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
         setSender((RoleOne)newValue);
         return;
       case MyDslPackage.MESSAGE__RECEIVER:
-        setReceiver((Role)newValue);
+        setReceiver((RoleOne)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -358,7 +357,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
         setSender((RoleOne)null);
         return;
       case MyDslPackage.MESSAGE__RECEIVER:
-        setReceiver((Role)null);
+        setReceiver((RoleOne)null);
         return;
     }
     super.eUnset(featureID);

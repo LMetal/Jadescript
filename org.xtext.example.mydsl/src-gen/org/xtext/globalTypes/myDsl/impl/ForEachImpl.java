@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.xtext.globalTypes.myDsl.ForEach;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.Protocol;
-import org.xtext.globalTypes.myDsl.Role;
 import org.xtext.globalTypes.myDsl.RoleMultiple;
+import org.xtext.globalTypes.myDsl.RoleOne;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,7 +43,7 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * @generated
    * @ordered
    */
-  protected Role eachRole;
+  protected RoleOne eachRole;
 
   /**
    * The cached value of the '{@link #getRole() <em>Role</em>}' reference.
@@ -92,7 +92,7 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * @generated
    */
   @Override
-  public Role getEachRole()
+  public RoleOne getEachRole()
   {
     return eachRole;
   }
@@ -102,9 +102,9 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetEachRole(Role newEachRole, NotificationChain msgs)
+  public NotificationChain basicSetEachRole(RoleOne newEachRole, NotificationChain msgs)
   {
-    Role oldEachRole = eachRole;
+    RoleOne oldEachRole = eachRole;
     eachRole = newEachRole;
     if (eNotificationRequired())
     {
@@ -120,7 +120,7 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * @generated
    */
   @Override
-  public void setEachRole(Role newEachRole)
+  public void setEachRole(RoleOne newEachRole)
   {
     if (newEachRole != eachRole)
     {
@@ -281,7 +281,7 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
     switch (featureID)
     {
       case MyDslPackage.FOR_EACH__EACH_ROLE:
-        setEachRole((Role)newValue);
+        setEachRole((RoleOne)newValue);
         return;
       case MyDslPackage.FOR_EACH__ROLE:
         setRole((RoleMultiple)newValue);
@@ -304,7 +304,7 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
     switch (featureID)
     {
       case MyDslPackage.FOR_EACH__EACH_ROLE:
-        setEachRole((Role)null);
+        setEachRole((RoleOne)null);
         return;
       case MyDslPackage.FOR_EACH__ROLE:
         setRole((RoleMultiple)null);

@@ -66,6 +66,7 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
     switch (eClass.getClassifierID())
     {
       case MyDslPackage.MODEL: return createModel();
+      case MyDslPackage.GLOBAL_PROTOCOL: return createGlobalProtocol();
       case MyDslPackage.ROLES: return createRoles();
       case MyDslPackage.ROLE: return createRole();
       case MyDslPackage.ROLE_ONE: return createRoleOne();
@@ -77,6 +78,16 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.CHOICE: return createChoice();
       case MyDslPackage.MESSAGE: return createMessage();
       case MyDslPackage.PAYLOAD: return createPayload();
+      case MyDslPackage.LOCAL_PROTOCOL: return createLocalProtocol();
+      case MyDslPackage.ROLES_L: return createRolesL();
+      case MyDslPackage.ROLE_L: return createRoleL();
+      case MyDslPackage.PROTOCOL_L: return createProtocolL();
+      case MyDslPackage.MESSAGE_L: return createMessageL();
+      case MyDslPackage.SENDER_L: return createSenderL();
+      case MyDslPackage.RECEIVER_L: return createReceiverL();
+      case MyDslPackage.CHOICE_L: return createChoiceL();
+      case MyDslPackage.RECURSION_L: return createRecursionL();
+      case MyDslPackage.CLOSE_RECURSION_L: return createCloseRecursionL();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -92,6 +103,18 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     ModelImpl model = new ModelImpl();
     return model;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public GlobalProtocol createGlobalProtocol()
+  {
+    GlobalProtocolImpl globalProtocol = new GlobalProtocolImpl();
+    return globalProtocol;
   }
 
   /**
@@ -224,6 +247,126 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     PayloadImpl payload = new PayloadImpl();
     return payload;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public LocalProtocol createLocalProtocol()
+  {
+    LocalProtocolImpl localProtocol = new LocalProtocolImpl();
+    return localProtocol;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public RolesL createRolesL()
+  {
+    RolesLImpl rolesL = new RolesLImpl();
+    return rolesL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public RoleL createRoleL()
+  {
+    RoleLImpl roleL = new RoleLImpl();
+    return roleL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ProtocolL createProtocolL()
+  {
+    ProtocolLImpl protocolL = new ProtocolLImpl();
+    return protocolL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public MessageL createMessageL()
+  {
+    MessageLImpl messageL = new MessageLImpl();
+    return messageL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SenderL createSenderL()
+  {
+    SenderLImpl senderL = new SenderLImpl();
+    return senderL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ReceiverL createReceiverL()
+  {
+    ReceiverLImpl receiverL = new ReceiverLImpl();
+    return receiverL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ChoiceL createChoiceL()
+  {
+    ChoiceLImpl choiceL = new ChoiceLImpl();
+    return choiceL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public RecursionL createRecursionL()
+  {
+    RecursionLImpl recursionL = new RecursionLImpl();
+    return recursionL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public CloseRecursionL createCloseRecursionL()
+  {
+    CloseRecursionLImpl closeRecursionL = new CloseRecursionLImpl();
+    return closeRecursionL;
   }
 
   /**

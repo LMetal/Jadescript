@@ -3,6 +3,10 @@ grammar org.xtext.globalTypes.MyDsl with org.eclipse.xtext.common.Terminals
 generate myDsl "http://www.xtext.org/globalTypes/MyDsl"
 
 Model:
+	protocol = GlobalProtocol | protocol = LocalProtocol
+;
+
+GlobalProtocol:
 	'global' 'protocol' protocolName=ID '(' roles=Roles '){'protocol=Protocol'}'
 	;
 	
@@ -35,8 +39,9 @@ CloseRecursion:
 	'loop' recursionVariable=[Recursion | RECNAME] ';'
 ;
 
-ForEach:
-	'foreach' eachRole=Role ':' role=[RoleMultiple | ROLENAME] '{'
+ForEach: // add ref
+
+	'foreach' eachRole=RoleOne ':' role=[RoleMultiple | ROLENAME] '{'
 		branch=Protocol
 	'}'
 ;
@@ -44,15 +49,69 @@ ForEach:
 Choice:
 	'choice' 'at' role=[RoleOne | ROLENAME] '{'
 		message+=Message
-		branch+=Protocol
+		branches+=Protocol
 	'}' ('or' '{'
 		message+=Message
-		branch+=Protocol
+		branches+=Protocol
 	'}')*
 ;
 
 Message:
-	messageType=MessageType '(' payload=Payload? ')' 'from' sender=[RoleOne | ROLENAME] 'to' receiver=[Role | ROLENAME] ';'
+	messageType=MessageType '(' payload=Payload? ')' 'from' sender=[RoleOne | ROLENAME] 'to' receiver=[RoleOne | ROLENAME] ';'
+;
+
+Payload:
+	{Payload} (types+=Type (','types+=Type)*)
+;
+
+LocalProtocol:
+	'local' 'protocol' protocolName=ID 'projection' 'on' projectedRole=ROLENAME '(' roles=RolesL ')' '{'protocol=ProtocolL'}'
+;
+
+RolesL:
+	roles+=RoleL (',' roles+=RoleL)*
+;
+
+RoleL:
+	'role' name=ROLENAME_L
+;
+
+ProtocolL:
+	{ProtocolL} (actions+=(MessageL | ChoiceL | RecursionL | CloseRecursionL))* | EndInteractionL
+;
+
+MessageL:
+	messageType=MessageType '(' payload=Payload? ')' (target=SenderL | target=ReceiverL) ';'
+;
+
+SenderL:
+	'from' sender=[RoleL | ROLENAME_L]
+;
+
+ReceiverL:
+	'to' to=[RoleL | ROLENAME_L]
+;
+
+ChoiceL:
+	'choice' 'at' role=[RoleL | ROLENAME_L] '{'
+		message+=MessageL
+		branches+=ProtocolL
+	'}' ('or' '{'
+		message+=MessageL
+		branches+=ProtocolL
+	'}')*
+;
+
+RecursionL:
+	'rec' name=RECNAME ':'
+;
+
+CloseRecursionL:
+		'loop' recursionVariable=[RecursionL | RECNAME] ';'
+;
+
+EndInteractionL:
+	'end' ';'
 ;
 
 EndInteraction:
@@ -60,16 +119,13 @@ EndInteraction:
 ;
 
 MessageType:
-	'REQUEST' | 'INFORM' | 'AGREE' | 'REFUSE'
-;
-
-Payload:
-	{Payload} (types+=Type (','types+=Type)*)
+	'REQUEST' | 'INFORM' | 'AGREE' | 'REFUSE' //add more
 ;
 
 Type:
-	'int' | 'string' | 'action'
+	'int' | 'string' | 'action'  //add more
 ;
 
 terminal ROLENAME:('A'..'Z') ('A'..'Z' ? 'a'..'z')*;
+terminal ROLENAME_L: (('A'..'Z') ('A'..'Z' ? 'a'..'z')*) ? "self";
 terminal RECNAME:('A'..'Z')+;

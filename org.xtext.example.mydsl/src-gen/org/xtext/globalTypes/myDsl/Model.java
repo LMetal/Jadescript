@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.globalTypes.myDsl.Model#getProtocolName <em>Protocol Name</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.Model#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.Model#getProtocol <em>Protocol</em>}</li>
  * </ul>
  *
@@ -26,60 +24,16 @@ import org.eclipse.emf.ecore.EObject;
 public interface Model extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Protocol Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Protocol Name</em>' attribute.
-   * @see #setProtocolName(String)
-   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getModel_ProtocolName()
-   * @model
-   * @generated
-   */
-  String getProtocolName();
-
-  /**
-   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.Model#getProtocolName <em>Protocol Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Protocol Name</em>' attribute.
-   * @see #getProtocolName()
-   * @generated
-   */
-  void setProtocolName(String value);
-
-  /**
-   * Returns the value of the '<em><b>Roles</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Roles</em>' containment reference.
-   * @see #setRoles(Roles)
-   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getModel_Roles()
-   * @model containment="true"
-   * @generated
-   */
-  Roles getRoles();
-
-  /**
-   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.Model#getRoles <em>Roles</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Roles</em>' containment reference.
-   * @see #getRoles()
-   * @generated
-   */
-  void setRoles(Roles value);
-
-  /**
    * Returns the value of the '<em><b>Protocol</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Protocol</em>' containment reference.
-   * @see #setProtocol(Protocol)
+   * @see #setProtocol(EObject)
    * @see org.xtext.globalTypes.myDsl.MyDslPackage#getModel_Protocol()
    * @model containment="true"
    * @generated
    */
-  Protocol getProtocol();
+  EObject getProtocol();
 
   /**
    * Sets the value of the '{@link org.xtext.globalTypes.myDsl.Model#getProtocol <em>Protocol</em>}' containment reference.
@@ -89,6 +43,6 @@ public interface Model extends EObject
    * @see #getProtocol()
    * @generated
    */
-  void setProtocol(Protocol value);
+  void setProtocol(EObject value);
 
 } // Model

@@ -12,10 +12,14 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.xtext.globalTypes.myDsl.Choice;
 import org.xtext.globalTypes.myDsl.CloseRecursion;
 import org.xtext.globalTypes.myDsl.ForEach;
+import org.xtext.globalTypes.myDsl.GlobalProtocol;
+import org.xtext.globalTypes.myDsl.LocalProtocol;
 import org.xtext.globalTypes.myDsl.Message;
 import org.xtext.globalTypes.myDsl.Model;
 import org.xtext.globalTypes.myDsl.Payload;
@@ -37,30 +41,47 @@ public class MyDslGenerator extends AbstractGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     Model model = ((Model) _head);
-    EList<Role> _roles = model.getRoles().getRoles();
-    for (final Role r : _roles) {
-      String _name = r.getName();
-      String _plus = ("local" + _name);
+    EObject _protocol = model.getProtocol();
+    if ((_protocol instanceof GlobalProtocol)) {
+      EObject _protocol_1 = model.getProtocol();
+      GlobalProtocol globalProtocol = ((GlobalProtocol) _protocol_1);
+      EList<Role> _roles = globalProtocol.getRoles().getRoles();
+      for (final Role r : _roles) {
+        {
+          System.out.println("LOCAL");
+          String _name = r.getName();
+          String _plus = ("local/local" + _name);
+          String _plus_1 = (_plus + ".jglobal");
+          fsa.generateFile(_plus_1, this.project(globalProtocol, r));
+        }
+      }
+    } else {
+      LocalProtocol localProtocol = ((LocalProtocol) model);
+      System.out.println("JADE");
+      String _projectedRole = localProtocol.getProjectedRole();
+      String _plus = ("jade/jade" + _projectedRole);
       String _plus_1 = (_plus + ".txt");
-      fsa.generateFile(_plus_1, this.project(model, r));
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("aaa");
+      fsa.generateFile(_plus_1, _builder);
     }
   }
 
-  public CharSequence project(final Model model, final Role role) {
+  public CharSequence project(final GlobalProtocol p, final Role role) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("local protocol ");
-    String _protocolName = model.getProtocolName();
+    String _protocolName = p.getProtocolName();
     _builder.append(_protocolName);
-    _builder.append(" for role ");
+    _builder.append(" projection on ");
     String _name = role.getName();
     _builder.append(_name);
     _builder.append("(");
-    CharSequence _projectOn = this.projectOn(model.getRoles(), role);
+    CharSequence _projectOn = this.projectOn(p.getRoles(), role);
     _builder.append(_projectOn);
     _builder.append(") {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    CharSequence _projectOn_1 = this.projectOn(model.getProtocol(), role);
+    CharSequence _projectOn_1 = this.projectOn(p.getProtocol(), role);
     _builder.append(_projectOn_1, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -123,11 +144,12 @@ public class MyDslGenerator extends AbstractGenerator {
         _builder.append(") to ");
         String _name = m.getReceiver().getName();
         _builder.append(_name);
+        _builder.append(";");
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      Role _receiver = m.getReceiver();
+      RoleOne _receiver = m.getReceiver();
       boolean _equals_1 = Objects.equal(_receiver, r);
       if (_equals_1) {
         String _messageType_1 = m.getMessageType();
@@ -138,6 +160,7 @@ public class MyDslGenerator extends AbstractGenerator {
         _builder.append(") from ");
         String _name_1 = m.getSender().getName();
         _builder.append(_name_1);
+        _builder.append(";");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
       }
@@ -160,16 +183,29 @@ public class MyDslGenerator extends AbstractGenerator {
     }
     _builder.append("{");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    Object _projectOn = this.projectOn(c.getMessage().get(0), r);
-    _builder.append(_projectOn, "\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    Object _projectOn_1 = this.projectOn(c.getBranch().get(0), r);
-    _builder.append(_projectOn_1, "\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("}");
-    _builder.newLine();
+    {
+      int _length = ((Object[])Conversions.unwrapArray(c.getBranches(), Object.class)).length;
+      int _minus = (_length - 1);
+      IntegerRange _upTo = new IntegerRange(0, _minus);
+      boolean _hasElements = false;
+      for(final int i : _upTo) {
+        if (!_hasElements) {
+          _hasElements = true;
+        } else {
+          _builder.appendImmediate(" or {", "");
+        }
+        _builder.append("\t");
+        Object _projectOn = this.projectOn(c.getMessage().get(i), r);
+        _builder.append(_projectOn, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        Object _projectOn_1 = this.projectOn(c.getBranches().get(i), r);
+        _builder.append(_projectOn_1, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
     return _builder;
   }
 

@@ -7,6 +7,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -14,8 +15,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.globalTypes.myDsl.Model;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
-import org.xtext.globalTypes.myDsl.Protocol;
-import org.xtext.globalTypes.myDsl.Roles;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,8 +24,6 @@ import org.xtext.globalTypes.myDsl.Roles;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.globalTypes.myDsl.impl.ModelImpl#getProtocolName <em>Protocol Name</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.impl.ModelImpl#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ModelImpl#getProtocol <em>Protocol</em>}</li>
  * </ul>
  *
@@ -35,36 +32,6 @@ import org.xtext.globalTypes.myDsl.Roles;
 public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
   /**
-   * The default value of the '{@link #getProtocolName() <em>Protocol Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getProtocolName()
-   * @generated
-   * @ordered
-   */
-  protected static final String PROTOCOL_NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getProtocolName() <em>Protocol Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getProtocolName()
-   * @generated
-   * @ordered
-   */
-  protected String protocolName = PROTOCOL_NAME_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getRoles() <em>Roles</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRoles()
-   * @generated
-   * @ordered
-   */
-  protected Roles roles;
-
-  /**
    * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -72,7 +39,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @generated
    * @ordered
    */
-  protected Protocol protocol;
+  protected EObject protocol;
 
   /**
    * <!-- begin-user-doc -->
@@ -101,82 +68,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @generated
    */
   @Override
-  public String getProtocolName()
-  {
-    return protocolName;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setProtocolName(String newProtocolName)
-  {
-    String oldProtocolName = protocolName;
-    protocolName = newProtocolName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MODEL__PROTOCOL_NAME, oldProtocolName, protocolName));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Roles getRoles()
-  {
-    return roles;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetRoles(Roles newRoles, NotificationChain msgs)
-  {
-    Roles oldRoles = roles;
-    roles = newRoles;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.MODEL__ROLES, oldRoles, newRoles);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setRoles(Roles newRoles)
-  {
-    if (newRoles != roles)
-    {
-      NotificationChain msgs = null;
-      if (roles != null)
-        msgs = ((InternalEObject)roles).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.MODEL__ROLES, null, msgs);
-      if (newRoles != null)
-        msgs = ((InternalEObject)newRoles).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.MODEL__ROLES, null, msgs);
-      msgs = basicSetRoles(newRoles, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MODEL__ROLES, newRoles, newRoles));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Protocol getProtocol()
+  public EObject getProtocol()
   {
     return protocol;
   }
@@ -186,9 +78,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetProtocol(Protocol newProtocol, NotificationChain msgs)
+  public NotificationChain basicSetProtocol(EObject newProtocol, NotificationChain msgs)
   {
-    Protocol oldProtocol = protocol;
+    EObject oldProtocol = protocol;
     protocol = newProtocol;
     if (eNotificationRequired())
     {
@@ -204,7 +96,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @generated
    */
   @Override
-  public void setProtocol(Protocol newProtocol)
+  public void setProtocol(EObject newProtocol)
   {
     if (newProtocol != protocol)
     {
@@ -230,8 +122,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__ROLES:
-        return basicSetRoles(null, msgs);
       case MyDslPackage.MODEL__PROTOCOL:
         return basicSetProtocol(null, msgs);
     }
@@ -248,10 +138,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__PROTOCOL_NAME:
-        return getProtocolName();
-      case MyDslPackage.MODEL__ROLES:
-        return getRoles();
       case MyDslPackage.MODEL__PROTOCOL:
         return getProtocol();
     }
@@ -268,14 +154,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__PROTOCOL_NAME:
-        setProtocolName((String)newValue);
-        return;
-      case MyDslPackage.MODEL__ROLES:
-        setRoles((Roles)newValue);
-        return;
       case MyDslPackage.MODEL__PROTOCOL:
-        setProtocol((Protocol)newValue);
+        setProtocol((EObject)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -291,14 +171,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__PROTOCOL_NAME:
-        setProtocolName(PROTOCOL_NAME_EDEFAULT);
-        return;
-      case MyDslPackage.MODEL__ROLES:
-        setRoles((Roles)null);
-        return;
       case MyDslPackage.MODEL__PROTOCOL:
-        setProtocol((Protocol)null);
+        setProtocol((EObject)null);
         return;
     }
     super.eUnset(featureID);
@@ -314,31 +188,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__PROTOCOL_NAME:
-        return PROTOCOL_NAME_EDEFAULT == null ? protocolName != null : !PROTOCOL_NAME_EDEFAULT.equals(protocolName);
-      case MyDslPackage.MODEL__ROLES:
-        return roles != null;
       case MyDslPackage.MODEL__PROTOCOL:
         return protocol != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (protocolName: ");
-    result.append(protocolName);
-    result.append(')');
-    return result.toString();
   }
 
 } //ModelImpl

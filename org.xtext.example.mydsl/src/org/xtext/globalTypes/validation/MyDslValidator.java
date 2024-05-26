@@ -38,17 +38,23 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		
 		@Check
 		public void choiceMessageFromChoiceAgent(Choice c) {
-			if(c.getRole() != c.getMessage().get(0).getSender()) {
+			for(int i=0; i<c.getMessage().size(); i++) {
+				if(c.getRole() != c.getMessage().get(i).getSender()) {
 				error("Role sending message must be the role chosing",
 						c,
 						MyDslPackage.Literals.CHOICE__ROLE
 						);
 				error("Role sending message must be the role chosing",
-						c.getMessage().get(0),
+						c.getMessage().get(i),
 						MyDslPackage.Literals.MESSAGE__SENDER
 						);
+				}
 			}
+			
 		}
+		
+		//TODO
+		//add verification each loop variable not used after each loop
 		
 		@Check
 		public void singleSender(Message m) {

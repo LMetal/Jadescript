@@ -30,12 +30,12 @@ public interface ForEach extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Each Role</em>' containment reference.
-   * @see #setEachRole(Role)
+   * @see #setEachRole(RoleOne)
    * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEach_EachRole()
    * @model containment="true"
    * @generated
    */
-  Role getEachRole();
+  RoleOne getEachRole();
 
   /**
    * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEach#getEachRole <em>Each Role</em>}' containment reference.
@@ -45,7 +45,7 @@ public interface ForEach extends EObject
    * @see #getEachRole()
    * @generated
    */
-  void setEachRole(Role value);
+  void setEachRole(RoleOne value);
 
   /**
    * Returns the value of the '<em><b>Role</b></em>' reference.
