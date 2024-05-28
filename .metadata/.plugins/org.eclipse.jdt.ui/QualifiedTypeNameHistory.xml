@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.eclipse.xtext.EcoreUtil2"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.Role"/>
+    <fullyQualifiedTypeName name="org.eclipse.emf.ecore.EReference"/>
+    <fullyQualifiedTypeName name="org.eclipse.xtext.scoping.IScope"/>
+    <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.Message"/>
+    <fullyQualifiedTypeName name="org.eclipse.xtext.scoping.Scopes"/>
+    <fullyQualifiedTypeName name="org.eclipse.xtext.EcoreUtil2"/>
+    <fullyQualifiedTypeName name="org.eclipse.emf.ecore.EObject"/>
 </qualifiedTypeNameHistroy>

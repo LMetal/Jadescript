@@ -7,6 +7,7 @@ package org.xtext.globalTypes.validation;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 import org.xtext.globalTypes.myDsl.Choice;
@@ -44,7 +45,42 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		}
 		
 		//TODO
-		//add verification each loop variable not used after each loop
+		//finish
+		@Check
+		public void forEachVariableScope(Model m) {
+			List<ForEach> forEachList = EcoreUtil2.getAllContentsOfType(m, ForEach.class);
+			List<EObject> allActions = EcoreUtil2.getAllContentsOfType(m, EObject.class);
+			
+			for(ForEach f : forEachList) {
+				List<EObject> forEachActions = EcoreUtil2.getAllContentsOfType(f, EObject.class);
+				for(EObject action : allActions) {
+					if(!forEachActions.contains(action)) {
+						if(action instanceof Message) {
+							Message message = (Message) action;
+							if(message.getSender() == f.getEachRole()) {
+								error("Role not defined",
+										message,
+										MyDslPackage.Literals.MESSAGE__SENDER
+										);}
+							if(message.getReceiver() == f.getEachRole()) {
+								error("Role not defined",
+										message,
+										MyDslPackage.Literals.MESSAGE__RECEIVER
+										);}
+						}
+						if(action instanceof Choice) {
+							Choice message = (Choice) action;
+						}
+						if(action instanceof ForEach) {
+							ForEach message = (ForEach) action;
+						}
+					}
+	
+				}
+			}
+			
+			
+		}
 		
 		
 		@Check
