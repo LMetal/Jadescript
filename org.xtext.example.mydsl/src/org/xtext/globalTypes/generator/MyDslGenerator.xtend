@@ -19,6 +19,8 @@ import org.xtext.globalTypes.myDsl.Roles
 import org.xtext.globalTypes.myDsl.Payload
 import org.xtext.globalTypes.myDsl.GlobalProtocol
 import org.xtext.globalTypes.myDsl.LocalProtocol
+import org.xtext.globalTypes.myDsl.RoleOne
+import org.xtext.globalTypes.myDsl.RoleSet
 
 /**
  * Generates code from your model files on save.
@@ -33,10 +35,10 @@ class MyDslGenerator extends AbstractGenerator {
 			var globalProtocol = model.protocol as GlobalProtocol
 			for(Role r : globalProtocol.getRoles().getRoles()){
 				System.out.println("LOCAL");
-				fsa.generateFile('local/local'+r.getName()+'.jglobal', globalProtocol.project(r))
+				fsa.generateFile('../src/local/local_'+r.getName()+'.jglobal', globalProtocol.project(r))
 			}
-		} else{
-			var localProtocol = model as LocalProtocol
+		} else {
+			var localProtocol = model.protocol as LocalProtocol
 			System.out.println("JADE");
 			fsa.generateFile('jade/jade'+localProtocol.projectedRole+'.txt', '''aaa''')
 		}
@@ -58,15 +60,28 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def dispatch projectOn(Roles roles, Role r)'''
-		«FOR role : roles.roles SEPARATOR ', '»role «IF role == r»self«ELSE»«role.name»«ENDIF»«ENDFOR»'''
+		«FOR role : roles.roles SEPARATOR ', '»
+			«projectOn(role, r)»«ENDFOR»'''
+	
+	def dispatch projectOn(Role role, Role r)'''
+		«IF role instanceof RoleOne»
+			«IF role == r»role self«ELSE»role «role.name»«ENDIF»
+		«ELSE»
+			«IF role == r»role self«ELSE»roleset «role.name»:«IF(role as RoleSet).ref == r»self«ELSE»«(role as RoleSet).ref.name»«ENDIF»«ENDIF»«ENDIF»'''
+	
 	
 	def dispatch projectOn(Message m, Role r)'''
 		«IF m.sender == r»
 			«m.messageType»(«printPayload(m.payload)») to «m.receiver.name»;
+		«ELSE»
+			«IF m.receiver == r»
+				«m.messageType»(«printPayload(m.payload)») from «m.sender.name»;
+			«ELSE»
+				«m.messageType»(«printPayload(m.payload)») from «m.sender.name» to «m.receiver.name»;
+			«ENDIF»
 		«ENDIF»
-		«IF m.receiver == r»
-			«m.messageType»(«printPayload(m.payload)») from «m.sender.name»;
-		«ENDIF»'''
+		'''
+		
 	
 	def dispatch projectOn(Choice c, Role r)'''
 		choice at «IF c.role == r»self«ELSE»«c.role.name»«ENDIF»{
@@ -90,7 +105,7 @@ class MyDslGenerator extends AbstractGenerator {
 			«projectOn(each.branch, each.eachRole)»
 		«ENDIF»
 		«IF each.role !== r»
-			foreach «each.eachRole.name»:«each.role.name»{
+			foreach role «each.eachRole.name»:«each.role.name»{
 				«projectOn(each.branch, r)»
 			}
 		«ENDIF»

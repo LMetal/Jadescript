@@ -1,0 +1,134 @@
+grammar org.xtext.globalTypes.MyDsl with org.eclipse.xtext.common.Terminals
+
+generate myDsl "http://www.xtext.org/globalTypes/MyDsl"
+
+Model:
+	protocol = GlobalProtocol | protocol = LocalProtocol
+;
+
+GlobalProtocol:
+	'global' 'protocol' protocolName=ID '(' roles=Roles '){'protocol=Protocol'}'
+	;
+	
+Roles:
+	roles+=Role (',' roles+=Role)*
+;
+
+Role:
+	RoleOne | RoleMultiple
+;
+
+RoleOne:
+	'role' name=ROLENAME
+;
+
+RoleMultiple:
+	'roleset' name=ROLENAME ':' ref=[RoleOne | ROLENAME]
+;
+    
+
+Protocol:
+	{Protocol} (actions+=(Message | Choice | Recursion | ForEach | CloseRecursion))*
+;
+
+Recursion:
+	'rec' name=RECNAME ':'
+;
+
+CloseRecursion:
+	'loop' recursionVariable=[Recursion | RECNAME] ';'
+;
+
+ForEach: // add ref
+
+	'foreach' eachRole=RoleOne ':' role=[RoleMultiple | ROLENAME] '{'
+		branch=Protocol
+	'}'
+;
+
+Choice:
+	'choice' 'at' role=[RoleOne | ROLENAME] '{'
+		message+=Message
+		branches+=Protocol
+	'}' ('or' '{'
+		message+=Message
+		branches+=Protocol
+	'}')*
+;
+
+Message:
+	messageType=MessageType '(' payload=Payload? ')' 'from' sender=[RoleOne | ROLENAME] 'to' receiver=[RoleOne | ROLENAME] ';'
+;
+
+Payload:
+	{Payload} (types+=Type (','types+=Type)*)
+;
+
+LocalProtocol:
+	'local' 'protocol' protocolName=ID 'projection' 'on' projectedRole=ROLENAME '(' roles=RolesL ')' '{'protocol=ProtocolL'}'
+;
+
+RolesL:
+	roles+=RoleL (',' roles+=RoleL)*
+;
+
+RoleL:
+	RoleOneL | RoleMultipleL
+;
+
+
+RoleOneL:
+	'role' name=ROLENAME_L
+;
+
+RoleMultipleL:
+	'roleset' name=ROLENAME_L ':' ref=[RoleOne | ROLENAME_L]
+;
+
+ProtocolL:
+	{ProtocolL} (actions+=(MessageL | Message | ChoiceL | ForEachL | Recursion | CloseRecursion))*
+;
+
+MessageL:
+	messageType=MessageType '(' payload=Payload? ')' (target=SenderL | target=ReceiverL) ';'
+;
+
+SenderL:
+	'from' sender=[RoleL | ROLENAME_L]
+;
+
+ReceiverL:
+	'to' to=[RoleL | ROLENAME_L]
+;
+
+ChoiceL:
+	'choice' 'at' role=[RoleL | ROLENAME_L] '{'
+		message+=MessageL
+		branches+=ProtocolL
+	'}' ('or' '{'
+		message+=MessageL
+		branches+=ProtocolL
+	'}')*
+;
+
+ForEachL:
+	'foreach' eachRole=RoleOne ':' role=[RoleMultiple | ROLENAME] '{'
+		branch=ProtocolL
+	'}'
+;
+
+
+
+MessageType:
+	'REQUEST' | 'INFORM' | 'AGREE' | 'REFUSE'
+;
+
+Type:
+	'int' | 'string' | 'action'  //add more
+;
+
+
+//terminal PAYLOAD_TEXT: ('A'..'Z' ? 'a'..'z')*;
+terminal ROLENAME:('A'..'Z') ('A'..'Z' ? 'a'..'z')*;
+terminal ROLENAME_L: (('A'..'Z') ('A'..'Z' ? 'a'..'z')*) ? 'self';
+terminal RECNAME:('A'..'Z')+;

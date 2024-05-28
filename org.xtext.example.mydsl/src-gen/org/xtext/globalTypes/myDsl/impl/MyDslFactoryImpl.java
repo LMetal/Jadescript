@@ -70,7 +70,7 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.ROLES: return createRoles();
       case MyDslPackage.ROLE: return createRole();
       case MyDslPackage.ROLE_ONE: return createRoleOne();
-      case MyDslPackage.ROLE_MULTIPLE: return createRoleMultiple();
+      case MyDslPackage.ROLE_SET: return createRoleSet();
       case MyDslPackage.PROTOCOL: return createProtocol();
       case MyDslPackage.RECURSION: return createRecursion();
       case MyDslPackage.CLOSE_RECURSION: return createCloseRecursion();
@@ -81,13 +81,14 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.LOCAL_PROTOCOL: return createLocalProtocol();
       case MyDslPackage.ROLES_L: return createRolesL();
       case MyDslPackage.ROLE_L: return createRoleL();
+      case MyDslPackage.ROLE_ONE_L: return createRoleOneL();
+      case MyDslPackage.ROLE_SET_L: return createRoleSetL();
       case MyDslPackage.PROTOCOL_L: return createProtocolL();
       case MyDslPackage.MESSAGE_L: return createMessageL();
       case MyDslPackage.SENDER_L: return createSenderL();
       case MyDslPackage.RECEIVER_L: return createReceiverL();
       case MyDslPackage.CHOICE_L: return createChoiceL();
-      case MyDslPackage.RECURSION_L: return createRecursionL();
-      case MyDslPackage.CLOSE_RECURSION_L: return createCloseRecursionL();
+      case MyDslPackage.FOR_EACH_L: return createForEachL();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -159,10 +160,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public RoleMultiple createRoleMultiple()
+  public RoleSet createRoleSet()
   {
-    RoleMultipleImpl roleMultiple = new RoleMultipleImpl();
-    return roleMultiple;
+    RoleSetImpl roleSet = new RoleSetImpl();
+    return roleSet;
   }
 
   /**
@@ -291,6 +292,30 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
+  public RoleOneL createRoleOneL()
+  {
+    RoleOneLImpl roleOneL = new RoleOneLImpl();
+    return roleOneL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public RoleSetL createRoleSetL()
+  {
+    RoleSetLImpl roleSetL = new RoleSetLImpl();
+    return roleSetL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public ProtocolL createProtocolL()
   {
     ProtocolLImpl protocolL = new ProtocolLImpl();
@@ -351,22 +376,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public RecursionL createRecursionL()
+  public ForEachL createForEachL()
   {
-    RecursionLImpl recursionL = new RecursionLImpl();
-    return recursionL;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public CloseRecursionL createCloseRecursionL()
-  {
-    CloseRecursionLImpl closeRecursionL = new CloseRecursionLImpl();
-    return closeRecursionL;
+    ForEachLImpl forEachL = new ForEachLImpl();
+    return forEachL;
   }
 
   /**

@@ -144,9 +144,9 @@ ruleGlobalProtocol returns [EObject current=null]
 		}
 		(
 			(
-				lv_protocolName_2_0=RULE_ID
+				lv_protocolName_2_0=RULE_PROTOCOLNAME
 				{
-					newLeafNode(lv_protocolName_2_0, grammarAccess.getGlobalProtocolAccess().getProtocolNameIDTerminalRuleCall_2_0());
+					newLeafNode(lv_protocolName_2_0, grammarAccess.getGlobalProtocolAccess().getProtocolNamePROTOCOLNAMETerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
@@ -156,7 +156,7 @@ ruleGlobalProtocol returns [EObject current=null]
 						$current,
 						"protocolName",
 						lv_protocolName_2_0,
-						"org.eclipse.xtext.common.Terminals.ID");
+						"org.xtext.globalTypes.MyDsl.PROTOCOLNAME");
 				}
 			)
 		)
@@ -302,11 +302,11 @@ ruleRole returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getRoleAccess().getRoleMultipleParserRuleCall_1());
+			newCompositeNode(grammarAccess.getRoleAccess().getRoleSetParserRuleCall_1());
 		}
-		this_RoleMultiple_1=ruleRoleMultiple
+		this_RoleSet_1=ruleRoleSet
 		{
-			$current = $this_RoleMultiple_1.current;
+			$current = $this_RoleSet_1.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -353,15 +353,15 @@ ruleRoleOne returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleRoleMultiple
-entryRuleRoleMultiple returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getRoleMultipleRule()); }
-	iv_ruleRoleMultiple=ruleRoleMultiple
-	{ $current=$iv_ruleRoleMultiple.current; }
+// Entry rule entryRuleRoleSet
+entryRuleRoleSet returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRoleSetRule()); }
+	iv_ruleRoleSet=ruleRoleSet
+	{ $current=$iv_ruleRoleSet.current; }
 	EOF;
 
-// Rule RoleMultiple
-ruleRoleMultiple returns [EObject current=null]
+// Rule RoleSet
+ruleRoleSet returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -369,42 +369,42 @@ ruleRoleMultiple returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='multrole'
+		otherlv_0='roleset'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getRoleMultipleAccess().getMultroleKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getRoleSetAccess().getRolesetKeyword_0());
 		}
 		(
 			(
-				lv_name_1_0=RULE_ROLENAME
+				lv_name_1_0=RULE_ROLESETNAME
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getRoleMultipleAccess().getNameROLENAMETerminalRuleCall_1_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getRoleSetAccess().getNameROLESETNAMETerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getRoleMultipleRule());
+						$current = createModelElement(grammarAccess.getRoleSetRule());
 					}
 					setWithLastConsumed(
 						$current,
 						"name",
 						lv_name_1_0,
-						"org.xtext.globalTypes.MyDsl.ROLENAME");
+						"org.xtext.globalTypes.MyDsl.ROLESETNAME");
 				}
 			)
 		)
 		otherlv_2=':'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getRoleMultipleAccess().getColonKeyword_2());
+			newLeafNode(otherlv_2, grammarAccess.getRoleSetAccess().getColonKeyword_2());
 		}
 		(
 			(
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getRoleMultipleRule());
+						$current = createModelElement(grammarAccess.getRoleSetRule());
 					}
 				}
 				otherlv_3=RULE_ROLENAME
 				{
-					newLeafNode(otherlv_3, grammarAccess.getRoleMultipleAccess().getRefRoleOneCrossReference_3_0());
+					newLeafNode(otherlv_3, grammarAccess.getRoleSetAccess().getRefRoleOneCrossReference_3_0());
 				}
 			)
 		)
@@ -428,107 +428,97 @@ ruleProtocol returns [EObject current=null]
 }:
 	(
 		(
-			(
-				{
-					$current = forceCreateModelElement(
-						grammarAccess.getProtocolAccess().getProtocolAction_0_0(),
-						$current);
-				}
-			)
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getProtocolAccess().getProtocolAction_0(),
+					$current);
+			}
+		)
+		(
 			(
 				(
-					(
-						{
-							newCompositeNode(grammarAccess.getProtocolAccess().getActionsMessageParserRuleCall_0_1_0_0());
+					{
+						newCompositeNode(grammarAccess.getProtocolAccess().getActionsMessageParserRuleCall_1_0_0());
+					}
+					lv_actions_1_1=ruleMessage
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProtocolRule());
 						}
-						lv_actions_1_1=ruleMessage
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getProtocolRule());
-							}
-							add(
-								$current,
-								"actions",
-								lv_actions_1_1,
-								"org.xtext.globalTypes.MyDsl.Message");
-							afterParserOrEnumRuleCall();
+						add(
+							$current,
+							"actions",
+							lv_actions_1_1,
+							"org.xtext.globalTypes.MyDsl.Message");
+						afterParserOrEnumRuleCall();
+					}
+					    |
+					{
+						newCompositeNode(grammarAccess.getProtocolAccess().getActionsChoiceParserRuleCall_1_0_1());
+					}
+					lv_actions_1_2=ruleChoice
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProtocolRule());
 						}
-						    |
-						{
-							newCompositeNode(grammarAccess.getProtocolAccess().getActionsChoiceParserRuleCall_0_1_0_1());
+						add(
+							$current,
+							"actions",
+							lv_actions_1_2,
+							"org.xtext.globalTypes.MyDsl.Choice");
+						afterParserOrEnumRuleCall();
+					}
+					    |
+					{
+						newCompositeNode(grammarAccess.getProtocolAccess().getActionsRecursionParserRuleCall_1_0_2());
+					}
+					lv_actions_1_3=ruleRecursion
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProtocolRule());
 						}
-						lv_actions_1_2=ruleChoice
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getProtocolRule());
-							}
-							add(
-								$current,
-								"actions",
-								lv_actions_1_2,
-								"org.xtext.globalTypes.MyDsl.Choice");
-							afterParserOrEnumRuleCall();
+						add(
+							$current,
+							"actions",
+							lv_actions_1_3,
+							"org.xtext.globalTypes.MyDsl.Recursion");
+						afterParserOrEnumRuleCall();
+					}
+					    |
+					{
+						newCompositeNode(grammarAccess.getProtocolAccess().getActionsForEachParserRuleCall_1_0_3());
+					}
+					lv_actions_1_4=ruleForEach
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProtocolRule());
 						}
-						    |
-						{
-							newCompositeNode(grammarAccess.getProtocolAccess().getActionsRecursionParserRuleCall_0_1_0_2());
+						add(
+							$current,
+							"actions",
+							lv_actions_1_4,
+							"org.xtext.globalTypes.MyDsl.ForEach");
+						afterParserOrEnumRuleCall();
+					}
+					    |
+					{
+						newCompositeNode(grammarAccess.getProtocolAccess().getActionsCloseRecursionParserRuleCall_1_0_4());
+					}
+					lv_actions_1_5=ruleCloseRecursion
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProtocolRule());
 						}
-						lv_actions_1_3=ruleRecursion
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getProtocolRule());
-							}
-							add(
-								$current,
-								"actions",
-								lv_actions_1_3,
-								"org.xtext.globalTypes.MyDsl.Recursion");
-							afterParserOrEnumRuleCall();
-						}
-						    |
-						{
-							newCompositeNode(grammarAccess.getProtocolAccess().getActionsForEachParserRuleCall_0_1_0_3());
-						}
-						lv_actions_1_4=ruleForEach
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getProtocolRule());
-							}
-							add(
-								$current,
-								"actions",
-								lv_actions_1_4,
-								"org.xtext.globalTypes.MyDsl.ForEach");
-							afterParserOrEnumRuleCall();
-						}
-						    |
-						{
-							newCompositeNode(grammarAccess.getProtocolAccess().getActionsCloseRecursionParserRuleCall_0_1_0_4());
-						}
-						lv_actions_1_5=ruleCloseRecursion
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getProtocolRule());
-							}
-							add(
-								$current,
-								"actions",
-								lv_actions_1_5,
-								"org.xtext.globalTypes.MyDsl.CloseRecursion");
-							afterParserOrEnumRuleCall();
-						}
-					)
+						add(
+							$current,
+							"actions",
+							lv_actions_1_5,
+							"org.xtext.globalTypes.MyDsl.CloseRecursion");
+						afterParserOrEnumRuleCall();
+					}
 				)
-			)*
-		)
-		    |
-		{
-			newCompositeNode(grammarAccess.getProtocolAccess().getEndInteractionParserRuleCall_1());
-		}
-		ruleEndInteraction
-		{
-			afterParserOrEnumRuleCall();
-		}
+			)
+		)*
 	)
 ;
 
@@ -667,9 +657,9 @@ ruleForEach returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getForEachRule());
 					}
 				}
-				otherlv_3=RULE_ROLENAME
+				otherlv_3=RULE_ROLESETNAME
 				{
-					newLeafNode(otherlv_3, grammarAccess.getForEachAccess().getRoleRoleMultipleCrossReference_3_0());
+					newLeafNode(otherlv_3, grammarAccess.getForEachAccess().getRoleRoleSetCrossReference_3_0());
 				}
 			)
 		)
@@ -961,43 +951,20 @@ rulePayload returns [EObject current=null]
 }:
 	(
 		(
-			{
-				$current = forceCreateModelElement(
-					grammarAccess.getPayloadAccess().getPayloadAction_0(),
-					$current);
-			}
-		)
-		(
 			(
-				(
-					{
-						newCompositeNode(grammarAccess.getPayloadAccess().getTypesTypeParserRuleCall_1_0_0());
-					}
-					lv_types_1_0=ruleType
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getPayloadRule());
-						}
-						add(
-							$current,
-							"types",
-							lv_types_1_0,
-							"org.xtext.globalTypes.MyDsl.Type");
-						afterParserOrEnumRuleCall();
-					}
-				)
+				{
+					$current = forceCreateModelElement(
+						grammarAccess.getPayloadAccess().getPayloadAction_0_0(),
+						$current);
+				}
 			)
 			(
-				otherlv_2=','
-				{
-					newLeafNode(otherlv_2, grammarAccess.getPayloadAccess().getCommaKeyword_1_1_0());
-				}
 				(
 					(
 						{
-							newCompositeNode(grammarAccess.getPayloadAccess().getTypesTypeParserRuleCall_1_1_1_0());
+							newCompositeNode(grammarAccess.getPayloadAccess().getTypesTypeParserRuleCall_0_1_0_0());
 						}
-						lv_types_3_0=ruleType
+						lv_types_1_0=ruleType
 						{
 							if ($current==null) {
 								$current = createModelElementForParent(grammarAccess.getPayloadRule());
@@ -1005,13 +972,57 @@ rulePayload returns [EObject current=null]
 							add(
 								$current,
 								"types",
-								lv_types_3_0,
+								lv_types_1_0,
 								"org.xtext.globalTypes.MyDsl.Type");
 							afterParserOrEnumRuleCall();
 						}
 					)
 				)
-			)*
+				(
+					otherlv_2=','
+					{
+						newLeafNode(otherlv_2, grammarAccess.getPayloadAccess().getCommaKeyword_0_1_1_0());
+					}
+					(
+						(
+							{
+								newCompositeNode(grammarAccess.getPayloadAccess().getTypesTypeParserRuleCall_0_1_1_1_0());
+							}
+							lv_types_3_0=ruleType
+							{
+								if ($current==null) {
+									$current = createModelElementForParent(grammarAccess.getPayloadRule());
+								}
+								add(
+									$current,
+									"types",
+									lv_types_3_0,
+									"org.xtext.globalTypes.MyDsl.Type");
+								afterParserOrEnumRuleCall();
+							}
+						)
+					)
+				)*
+			)
+		)
+		    |
+		(
+			(
+				lv_types_4_0=RULE_ID
+				{
+					newLeafNode(lv_types_4_0, grammarAccess.getPayloadAccess().getTypesIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getPayloadRule());
+					}
+					addWithLastConsumed(
+						$current,
+						"types",
+						lv_types_4_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
 		)
 	)
 ;
@@ -1042,9 +1053,9 @@ ruleLocalProtocol returns [EObject current=null]
 		}
 		(
 			(
-				lv_protocolName_2_0=RULE_ID
+				lv_protocolName_2_0=RULE_PROTOCOLNAME
 				{
-					newLeafNode(lv_protocolName_2_0, grammarAccess.getLocalProtocolAccess().getProtocolNameIDTerminalRuleCall_2_0());
+					newLeafNode(lv_protocolName_2_0, grammarAccess.getLocalProtocolAccess().getProtocolNamePROTOCOLNAMETerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
@@ -1054,7 +1065,7 @@ ruleLocalProtocol returns [EObject current=null]
 						$current,
 						"protocolName",
 						lv_protocolName_2_0,
-						"org.eclipse.xtext.common.Terminals.ID");
+						"org.xtext.globalTypes.MyDsl.PROTOCOLNAME");
 				}
 			)
 		)
@@ -1068,32 +1079,53 @@ ruleLocalProtocol returns [EObject current=null]
 		}
 		(
 			(
-				lv_projectedRole_5_0=RULE_ROLENAME
-				{
-					newLeafNode(lv_projectedRole_5_0, grammarAccess.getLocalProtocolAccess().getProjectedRoleROLENAMETerminalRuleCall_5_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getLocalProtocolRule());
+				(
+					lv_projectedRole_5_0=RULE_ROLENAME
+					{
+						newLeafNode(lv_projectedRole_5_0, grammarAccess.getLocalProtocolAccess().getProjectedRoleROLENAMETerminalRuleCall_5_0_0());
 					}
-					setWithLastConsumed(
-						$current,
-						"projectedRole",
-						lv_projectedRole_5_0,
-						"org.xtext.globalTypes.MyDsl.ROLENAME");
-				}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getLocalProtocolRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"projectedRole",
+							lv_projectedRole_5_0,
+							"org.xtext.globalTypes.MyDsl.ROLENAME");
+					}
+				)
+			)
+			    |
+			(
+				(
+					lv_projectedRole_6_0=RULE_ROLESETNAME
+					{
+						newLeafNode(lv_projectedRole_6_0, grammarAccess.getLocalProtocolAccess().getProjectedRoleROLESETNAMETerminalRuleCall_5_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getLocalProtocolRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"projectedRole",
+							lv_projectedRole_6_0,
+							"org.xtext.globalTypes.MyDsl.ROLESETNAME");
+					}
+				)
 			)
 		)
-		otherlv_6='('
+		otherlv_7='('
 		{
-			newLeafNode(otherlv_6, grammarAccess.getLocalProtocolAccess().getLeftParenthesisKeyword_6());
+			newLeafNode(otherlv_7, grammarAccess.getLocalProtocolAccess().getLeftParenthesisKeyword_6());
 		}
 		(
 			(
 				{
 					newCompositeNode(grammarAccess.getLocalProtocolAccess().getRolesRolesLParserRuleCall_7_0());
 				}
-				lv_roles_7_0=ruleRolesL
+				lv_roles_8_0=ruleRolesL
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getLocalProtocolRule());
@@ -1101,26 +1133,26 @@ ruleLocalProtocol returns [EObject current=null]
 					set(
 						$current,
 						"roles",
-						lv_roles_7_0,
+						lv_roles_8_0,
 						"org.xtext.globalTypes.MyDsl.RolesL");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_8=')'
+		otherlv_9=')'
 		{
-			newLeafNode(otherlv_8, grammarAccess.getLocalProtocolAccess().getRightParenthesisKeyword_8());
+			newLeafNode(otherlv_9, grammarAccess.getLocalProtocolAccess().getRightParenthesisKeyword_8());
 		}
-		otherlv_9='{'
+		otherlv_10='{'
 		{
-			newLeafNode(otherlv_9, grammarAccess.getLocalProtocolAccess().getLeftCurlyBracketKeyword_9());
+			newLeafNode(otherlv_10, grammarAccess.getLocalProtocolAccess().getLeftCurlyBracketKeyword_9());
 		}
 		(
 			(
 				{
 					newCompositeNode(grammarAccess.getLocalProtocolAccess().getProtocolProtocolLParserRuleCall_10_0());
 				}
-				lv_protocol_10_0=ruleProtocolL
+				lv_protocol_11_0=ruleProtocolL
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getLocalProtocolRule());
@@ -1128,15 +1160,15 @@ ruleLocalProtocol returns [EObject current=null]
 					set(
 						$current,
 						"protocol",
-						lv_protocol_10_0,
+						lv_protocol_11_0,
 						"org.xtext.globalTypes.MyDsl.ProtocolL");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_11='}'
+		otherlv_12='}'
 		{
-			newLeafNode(otherlv_11, grammarAccess.getLocalProtocolAccess().getRightCurlyBracketKeyword_11());
+			newLeafNode(otherlv_12, grammarAccess.getLocalProtocolAccess().getRightCurlyBracketKeyword_11());
 		}
 	)
 ;
@@ -1220,25 +1252,119 @@ ruleRoleL returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		{
+			newCompositeNode(grammarAccess.getRoleLAccess().getRoleOneLParserRuleCall_0());
+		}
+		this_RoleOneL_0=ruleRoleOneL
+		{
+			$current = $this_RoleOneL_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getRoleLAccess().getRoleSetLParserRuleCall_1());
+		}
+		this_RoleSetL_1=ruleRoleSetL
+		{
+			$current = $this_RoleSetL_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleRoleOneL
+entryRuleRoleOneL returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRoleOneLRule()); }
+	iv_ruleRoleOneL=ruleRoleOneL
+	{ $current=$iv_ruleRoleOneL.current; }
+	EOF;
+
+// Rule RoleOneL
+ruleRoleOneL returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
 		otherlv_0='role'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getRoleLAccess().getRoleKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getRoleOneLAccess().getRoleKeyword_0());
 		}
 		(
 			(
-				lv_name_1_0=RULE_ROLENAME_L
+				lv_name_1_0=RULE_ROLENAME
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getRoleLAccess().getNameROLENAME_LTerminalRuleCall_1_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getRoleOneLAccess().getNameROLENAMETerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getRoleLRule());
+						$current = createModelElement(grammarAccess.getRoleOneLRule());
 					}
 					setWithLastConsumed(
 						$current,
 						"name",
 						lv_name_1_0,
-						"org.xtext.globalTypes.MyDsl.ROLENAME_L");
+						"org.xtext.globalTypes.MyDsl.ROLENAME");
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleRoleSetL
+entryRuleRoleSetL returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRoleSetLRule()); }
+	iv_ruleRoleSetL=ruleRoleSetL
+	{ $current=$iv_ruleRoleSetL.current; }
+	EOF;
+
+// Rule RoleSetL
+ruleRoleSetL returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='roleset'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getRoleSetLAccess().getRolesetKeyword_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_ROLESETNAME
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getRoleSetLAccess().getNameROLESETNAMETerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getRoleSetLRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.xtext.globalTypes.MyDsl.ROLESETNAME");
+				}
+			)
+		)
+		otherlv_2=':'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getRoleSetLAccess().getColonKeyword_2());
+		}
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getRoleSetLRule());
+					}
+				}
+				otherlv_3=RULE_ROLENAME
+				{
+					newLeafNode(otherlv_3, grammarAccess.getRoleSetLAccess().getRefRoleOneLCrossReference_3_0());
 				}
 			)
 		)
@@ -1262,91 +1388,113 @@ ruleProtocolL returns [EObject current=null]
 }:
 	(
 		(
-			(
-				{
-					$current = forceCreateModelElement(
-						grammarAccess.getProtocolLAccess().getProtocolLAction_0_0(),
-						$current);
-				}
-			)
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getProtocolLAccess().getProtocolLAction_0(),
+					$current);
+			}
+		)
+		(
 			(
 				(
-					(
-						{
-							newCompositeNode(grammarAccess.getProtocolLAccess().getActionsMessageLParserRuleCall_0_1_0_0());
+					{
+						newCompositeNode(grammarAccess.getProtocolLAccess().getActionsMessageLParserRuleCall_1_0_0());
+					}
+					lv_actions_1_1=ruleMessageL
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProtocolLRule());
 						}
-						lv_actions_1_1=ruleMessageL
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getProtocolLRule());
-							}
-							add(
-								$current,
-								"actions",
-								lv_actions_1_1,
-								"org.xtext.globalTypes.MyDsl.MessageL");
-							afterParserOrEnumRuleCall();
+						add(
+							$current,
+							"actions",
+							lv_actions_1_1,
+							"org.xtext.globalTypes.MyDsl.MessageL");
+						afterParserOrEnumRuleCall();
+					}
+					    |
+					{
+						newCompositeNode(grammarAccess.getProtocolLAccess().getActionsMessageParserRuleCall_1_0_1());
+					}
+					lv_actions_1_2=ruleMessage
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProtocolLRule());
 						}
-						    |
-						{
-							newCompositeNode(grammarAccess.getProtocolLAccess().getActionsChoiceLParserRuleCall_0_1_0_1());
+						add(
+							$current,
+							"actions",
+							lv_actions_1_2,
+							"org.xtext.globalTypes.MyDsl.Message");
+						afterParserOrEnumRuleCall();
+					}
+					    |
+					{
+						newCompositeNode(grammarAccess.getProtocolLAccess().getActionsChoiceLParserRuleCall_1_0_2());
+					}
+					lv_actions_1_3=ruleChoiceL
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProtocolLRule());
 						}
-						lv_actions_1_2=ruleChoiceL
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getProtocolLRule());
-							}
-							add(
-								$current,
-								"actions",
-								lv_actions_1_2,
-								"org.xtext.globalTypes.MyDsl.ChoiceL");
-							afterParserOrEnumRuleCall();
+						add(
+							$current,
+							"actions",
+							lv_actions_1_3,
+							"org.xtext.globalTypes.MyDsl.ChoiceL");
+						afterParserOrEnumRuleCall();
+					}
+					    |
+					{
+						newCompositeNode(grammarAccess.getProtocolLAccess().getActionsForEachLParserRuleCall_1_0_3());
+					}
+					lv_actions_1_4=ruleForEachL
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProtocolLRule());
 						}
-						    |
-						{
-							newCompositeNode(grammarAccess.getProtocolLAccess().getActionsRecursionLParserRuleCall_0_1_0_2());
+						add(
+							$current,
+							"actions",
+							lv_actions_1_4,
+							"org.xtext.globalTypes.MyDsl.ForEachL");
+						afterParserOrEnumRuleCall();
+					}
+					    |
+					{
+						newCompositeNode(grammarAccess.getProtocolLAccess().getActionsRecursionParserRuleCall_1_0_4());
+					}
+					lv_actions_1_5=ruleRecursion
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProtocolLRule());
 						}
-						lv_actions_1_3=ruleRecursionL
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getProtocolLRule());
-							}
-							add(
-								$current,
-								"actions",
-								lv_actions_1_3,
-								"org.xtext.globalTypes.MyDsl.RecursionL");
-							afterParserOrEnumRuleCall();
+						add(
+							$current,
+							"actions",
+							lv_actions_1_5,
+							"org.xtext.globalTypes.MyDsl.Recursion");
+						afterParserOrEnumRuleCall();
+					}
+					    |
+					{
+						newCompositeNode(grammarAccess.getProtocolLAccess().getActionsCloseRecursionParserRuleCall_1_0_5());
+					}
+					lv_actions_1_6=ruleCloseRecursion
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProtocolLRule());
 						}
-						    |
-						{
-							newCompositeNode(grammarAccess.getProtocolLAccess().getActionsCloseRecursionLParserRuleCall_0_1_0_3());
-						}
-						lv_actions_1_4=ruleCloseRecursionL
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getProtocolLRule());
-							}
-							add(
-								$current,
-								"actions",
-								lv_actions_1_4,
-								"org.xtext.globalTypes.MyDsl.CloseRecursionL");
-							afterParserOrEnumRuleCall();
-						}
-					)
+						add(
+							$current,
+							"actions",
+							lv_actions_1_6,
+							"org.xtext.globalTypes.MyDsl.CloseRecursion");
+						afterParserOrEnumRuleCall();
+					}
 				)
-			)*
-		)
-		    |
-		{
-			newCompositeNode(grammarAccess.getProtocolLAccess().getEndInteractionLParserRuleCall_1());
-		}
-		ruleEndInteractionL
-		{
-			afterParserOrEnumRuleCall();
-		}
+			)
+		)*
 	)
 ;
 
@@ -1487,7 +1635,7 @@ ruleSenderL returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getSenderLRule());
 					}
 				}
-				otherlv_1=RULE_ROLENAME_L
+				otherlv_1=RULE_ROLENAME
 				{
 					newLeafNode(otherlv_1, grammarAccess.getSenderLAccess().getSenderRoleLCrossReference_1_0());
 				}
@@ -1523,7 +1671,7 @@ ruleReceiverL returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getReceiverLRule());
 					}
 				}
-				otherlv_1=RULE_ROLENAME_L
+				otherlv_1=RULE_ROLENAME
 				{
 					newLeafNode(otherlv_1, grammarAccess.getReceiverLAccess().getToRoleLCrossReference_1_0());
 				}
@@ -1563,7 +1711,7 @@ ruleChoiceL returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getChoiceLRule());
 					}
 				}
-				otherlv_2=RULE_ROLENAME_L
+				otherlv_2=RULE_ROLENAME
 				{
 					newLeafNode(otherlv_2, grammarAccess.getChoiceLAccess().getRoleRoleLCrossReference_2_0());
 				}
@@ -1670,15 +1818,15 @@ ruleChoiceL returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleRecursionL
-entryRuleRecursionL returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getRecursionLRule()); }
-	iv_ruleRecursionL=ruleRecursionL
-	{ $current=$iv_ruleRecursionL.current; }
+// Entry rule entryRuleForEachL
+entryRuleForEachL returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getForEachLRule()); }
+	iv_ruleForEachL=ruleForEachL
+	{ $current=$iv_ruleForEachL.current; }
 	EOF;
 
-// Rule RecursionL
-ruleRecursionL returns [EObject current=null]
+// Rule ForEachL
+ruleForEachL returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -1686,129 +1834,72 @@ ruleRecursionL returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='rec'
+		otherlv_0='foreach'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getRecursionLAccess().getRecKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getForEachLAccess().getForeachKeyword_0());
 		}
 		(
 			(
-				lv_name_1_0=RULE_RECNAME
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getRecursionLAccess().getNameRECNAMETerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getForEachLAccess().getEachRoleRoleOneLParserRuleCall_1_0());
 				}
+				lv_eachRole_1_0=ruleRoleOneL
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getRecursionLRule());
+						$current = createModelElementForParent(grammarAccess.getForEachLRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
-						"name",
-						lv_name_1_0,
-						"org.xtext.globalTypes.MyDsl.RECNAME");
+						"eachRole",
+						lv_eachRole_1_0,
+						"org.xtext.globalTypes.MyDsl.RoleOneL");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		otherlv_2=':'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getRecursionLAccess().getColonKeyword_2());
-		}
-	)
-;
-
-// Entry rule entryRuleCloseRecursionL
-entryRuleCloseRecursionL returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getCloseRecursionLRule()); }
-	iv_ruleCloseRecursionL=ruleCloseRecursionL
-	{ $current=$iv_ruleCloseRecursionL.current; }
-	EOF;
-
-// Rule CloseRecursionL
-ruleCloseRecursionL returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='loop'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getCloseRecursionLAccess().getLoopKeyword_0());
+			newLeafNode(otherlv_2, grammarAccess.getForEachLAccess().getColonKeyword_2());
 		}
 		(
 			(
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getCloseRecursionLRule());
+						$current = createModelElement(grammarAccess.getForEachLRule());
 					}
 				}
-				otherlv_1=RULE_RECNAME
+				otherlv_3=RULE_ROLESETNAME
 				{
-					newLeafNode(otherlv_1, grammarAccess.getCloseRecursionLAccess().getRecursionVariableRecursionLCrossReference_1_0());
+					newLeafNode(otherlv_3, grammarAccess.getForEachLAccess().getRoleRoleSetLCrossReference_3_0());
 				}
 			)
 		)
-		otherlv_2=';'
+		otherlv_4='{'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getCloseRecursionLAccess().getSemicolonKeyword_2());
+			newLeafNode(otherlv_4, grammarAccess.getForEachLAccess().getLeftCurlyBracketKeyword_4());
 		}
-	)
-;
-
-// Entry rule entryRuleEndInteractionL
-entryRuleEndInteractionL returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getEndInteractionLRule()); }
-	iv_ruleEndInteractionL=ruleEndInteractionL
-	{ $current=$iv_ruleEndInteractionL.current.getText(); }
-	EOF;
-
-// Rule EndInteractionL
-ruleEndInteractionL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		kw='end'
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getForEachLAccess().getBranchProtocolLParserRuleCall_5_0());
+				}
+				lv_branch_5_0=ruleProtocolL
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getForEachLRule());
+					}
+					set(
+						$current,
+						"branch",
+						lv_branch_5_0,
+						"org.xtext.globalTypes.MyDsl.ProtocolL");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_6='}'
 		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEndInteractionLAccess().getEndKeyword_0());
-		}
-		kw=';'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEndInteractionLAccess().getSemicolonKeyword_1());
-		}
-	)
-;
-
-// Entry rule entryRuleEndInteraction
-entryRuleEndInteraction returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getEndInteractionRule()); }
-	iv_ruleEndInteraction=ruleEndInteraction
-	{ $current=$iv_ruleEndInteraction.current.getText(); }
-	EOF;
-
-// Rule EndInteraction
-ruleEndInteraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		kw='end'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEndInteractionAccess().getEndKeyword_0());
-		}
-		kw=';'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getEndInteractionAccess().getSemicolonKeyword_1());
+			newLeafNode(otherlv_6, grammarAccess.getForEachLAccess().getRightCurlyBracketKeyword_6());
 		}
 	)
 ;
@@ -1852,6 +1943,18 @@ ruleMessageType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTok
 			$current.merge(kw);
 			newLeafNode(kw, grammarAccess.getMessageTypeAccess().getREFUSEKeyword_3());
 		}
+		    |
+		kw='CFP'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getMessageTypeAccess().getCFPKeyword_4());
+		}
+		    |
+		kw='QUIT'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getMessageTypeAccess().getQUITKeyword_5());
+		}
 	)
 ;
 
@@ -1891,11 +1994,13 @@ ruleType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	)
 ;
 
-RULE_ROLENAME : 'A'..'Z' (('A'..'Z')? 'a'..'z')*;
+RULE_ROLENAME : ('a'..'z')*;
 
-RULE_ROLENAME_L : ('A'..'Z' (('A'..'Z')? 'a'..'z')*)? 'self';
+RULE_ROLESETNAME : 'A'..'Z' ('a'..'z')*;
 
 RULE_RECNAME : ('A'..'Z')+;
+
+RULE_PROTOCOLNAME : '_' ('a'..'z')*;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

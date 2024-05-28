@@ -109,11 +109,11 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.ROLE_MULTIPLE:
+      case MyDslPackage.ROLE_SET:
       {
-        RoleMultiple roleMultiple = (RoleMultiple)theEObject;
-        T result = caseRoleMultiple(roleMultiple);
-        if (result == null) result = caseRole(roleMultiple);
+        RoleSet roleSet = (RoleSet)theEObject;
+        T result = caseRoleSet(roleSet);
+        if (result == null) result = caseRole(roleSet);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -187,6 +187,22 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MyDslPackage.ROLE_ONE_L:
+      {
+        RoleOneL roleOneL = (RoleOneL)theEObject;
+        T result = caseRoleOneL(roleOneL);
+        if (result == null) result = caseRoleL(roleOneL);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.ROLE_SET_L:
+      {
+        RoleSetL roleSetL = (RoleSetL)theEObject;
+        T result = caseRoleSetL(roleSetL);
+        if (result == null) result = caseRoleL(roleSetL);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MyDslPackage.PROTOCOL_L:
       {
         ProtocolL protocolL = (ProtocolL)theEObject;
@@ -222,17 +238,10 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.RECURSION_L:
+      case MyDslPackage.FOR_EACH_L:
       {
-        RecursionL recursionL = (RecursionL)theEObject;
-        T result = caseRecursionL(recursionL);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case MyDslPackage.CLOSE_RECURSION_L:
-      {
-        CloseRecursionL closeRecursionL = (CloseRecursionL)theEObject;
-        T result = caseCloseRecursionL(closeRecursionL);
+        ForEachL forEachL = (ForEachL)theEObject;
+        T result = caseForEachL(forEachL);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -321,17 +330,17 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Role Multiple</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Role Set</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Role Multiple</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Role Set</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseRoleMultiple(RoleMultiple object)
+  public T caseRoleSet(RoleSet object)
   {
     return null;
   }
@@ -497,6 +506,38 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Role One L</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Role One L</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRoleOneL(RoleOneL object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Role Set L</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Role Set L</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRoleSetL(RoleSetL object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Protocol L</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -577,33 +618,17 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Recursion L</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>For Each L</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Recursion L</em>'.
+   * @return the result of interpreting the object as an instance of '<em>For Each L</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseRecursionL(RecursionL object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Close Recursion L</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Close Recursion L</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseCloseRecursionL(CloseRecursionL object)
+  public T caseForEachL(ForEachL object)
   {
     return null;
   }

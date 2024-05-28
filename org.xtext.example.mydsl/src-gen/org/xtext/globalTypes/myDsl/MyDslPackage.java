@@ -216,14 +216,14 @@ public interface MyDslPackage extends EPackage
   int ROLE_ONE_FEATURE_COUNT = ROLE_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.RoleMultipleImpl <em>Role Multiple</em>}' class.
+   * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.RoleSetImpl <em>Role Set</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.xtext.globalTypes.myDsl.impl.RoleMultipleImpl
-   * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleMultiple()
+   * @see org.xtext.globalTypes.myDsl.impl.RoleSetImpl
+   * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleSet()
    * @generated
    */
-  int ROLE_MULTIPLE = 5;
+  int ROLE_SET = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -232,7 +232,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROLE_MULTIPLE__NAME = ROLE__NAME;
+  int ROLE_SET__NAME = ROLE__NAME;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -241,16 +241,16 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROLE_MULTIPLE__REF = ROLE_FEATURE_COUNT + 0;
+  int ROLE_SET__REF = ROLE_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Role Multiple</em>' class.
+   * The number of structural features of the '<em>Role Set</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ROLE_MULTIPLE_FEATURE_COUNT = ROLE_FEATURE_COUNT + 1;
+  int ROLE_SET_FEATURE_COUNT = ROLE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.ProtocolImpl <em>Protocol</em>}' class.
@@ -623,6 +623,71 @@ public interface MyDslPackage extends EPackage
   int ROLE_L_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.RoleOneLImpl <em>Role One L</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.globalTypes.myDsl.impl.RoleOneLImpl
+   * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleOneL()
+   * @generated
+   */
+  int ROLE_ONE_L = 16;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROLE_ONE_L__NAME = ROLE_L__NAME;
+
+  /**
+   * The number of structural features of the '<em>Role One L</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROLE_ONE_L_FEATURE_COUNT = ROLE_L_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.RoleSetLImpl <em>Role Set L</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.globalTypes.myDsl.impl.RoleSetLImpl
+   * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleSetL()
+   * @generated
+   */
+  int ROLE_SET_L = 17;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROLE_SET_L__NAME = ROLE_L__NAME;
+
+  /**
+   * The feature id for the '<em><b>Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROLE_SET_L__REF = ROLE_L_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Role Set L</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROLE_SET_L_FEATURE_COUNT = ROLE_L_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.ProtocolLImpl <em>Protocol L</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -630,7 +695,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getProtocolL()
    * @generated
    */
-  int PROTOCOL_L = 16;
+  int PROTOCOL_L = 18;
 
   /**
    * The feature id for the '<em><b>Actions</b></em>' containment reference list.
@@ -658,7 +723,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getMessageL()
    * @generated
    */
-  int MESSAGE_L = 17;
+  int MESSAGE_L = 19;
 
   /**
    * The feature id for the '<em><b>Message Type</b></em>' attribute.
@@ -704,7 +769,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getSenderL()
    * @generated
    */
-  int SENDER_L = 18;
+  int SENDER_L = 20;
 
   /**
    * The feature id for the '<em><b>Sender</b></em>' reference.
@@ -732,7 +797,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getReceiverL()
    * @generated
    */
-  int RECEIVER_L = 19;
+  int RECEIVER_L = 21;
 
   /**
    * The feature id for the '<em><b>To</b></em>' reference.
@@ -760,7 +825,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getChoiceL()
    * @generated
    */
-  int CHOICE_L = 20;
+  int CHOICE_L = 22;
 
   /**
    * The feature id for the '<em><b>Role</b></em>' reference.
@@ -799,60 +864,50 @@ public interface MyDslPackage extends EPackage
   int CHOICE_L_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.RecursionLImpl <em>Recursion L</em>}' class.
+   * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.ForEachLImpl <em>For Each L</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.xtext.globalTypes.myDsl.impl.RecursionLImpl
-   * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRecursionL()
+   * @see org.xtext.globalTypes.myDsl.impl.ForEachLImpl
+   * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getForEachL()
    * @generated
    */
-  int RECURSION_L = 21;
+  int FOR_EACH_L = 23;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The feature id for the '<em><b>Each Role</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RECURSION_L__NAME = 0;
+  int FOR_EACH_L__EACH_ROLE = 0;
 
   /**
-   * The number of structural features of the '<em>Recursion L</em>' class.
+   * The feature id for the '<em><b>Role</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RECURSION_L_FEATURE_COUNT = 1;
+  int FOR_EACH_L__ROLE = 1;
 
   /**
-   * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.CloseRecursionLImpl <em>Close Recursion L</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.globalTypes.myDsl.impl.CloseRecursionLImpl
-   * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getCloseRecursionL()
-   * @generated
-   */
-  int CLOSE_RECURSION_L = 22;
-
-  /**
-   * The feature id for the '<em><b>Recursion Variable</b></em>' reference.
+   * The feature id for the '<em><b>Branch</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CLOSE_RECURSION_L__RECURSION_VARIABLE = 0;
+  int FOR_EACH_L__BRANCH = 2;
 
   /**
-   * The number of structural features of the '<em>Close Recursion L</em>' class.
+   * The number of structural features of the '<em>For Each L</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CLOSE_RECURSION_L_FEATURE_COUNT = 1;
+  int FOR_EACH_L_FEATURE_COUNT = 3;
 
 
   /**
@@ -972,25 +1027,25 @@ public interface MyDslPackage extends EPackage
   EClass getRoleOne();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.RoleMultiple <em>Role Multiple</em>}'.
+   * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.RoleSet <em>Role Set</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Role Multiple</em>'.
-   * @see org.xtext.globalTypes.myDsl.RoleMultiple
+   * @return the meta object for class '<em>Role Set</em>'.
+   * @see org.xtext.globalTypes.myDsl.RoleSet
    * @generated
    */
-  EClass getRoleMultiple();
+  EClass getRoleSet();
 
   /**
-   * Returns the meta object for the reference '{@link org.xtext.globalTypes.myDsl.RoleMultiple#getRef <em>Ref</em>}'.
+   * Returns the meta object for the reference '{@link org.xtext.globalTypes.myDsl.RoleSet#getRef <em>Ref</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Ref</em>'.
-   * @see org.xtext.globalTypes.myDsl.RoleMultiple#getRef()
-   * @see #getRoleMultiple()
+   * @see org.xtext.globalTypes.myDsl.RoleSet#getRef()
+   * @see #getRoleSet()
    * @generated
    */
-  EReference getRoleMultiple_Ref();
+  EReference getRoleSet_Ref();
 
   /**
    * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.Protocol <em>Protocol</em>}'.
@@ -1313,6 +1368,37 @@ public interface MyDslPackage extends EPackage
   EAttribute getRoleL_Name();
 
   /**
+   * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.RoleOneL <em>Role One L</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Role One L</em>'.
+   * @see org.xtext.globalTypes.myDsl.RoleOneL
+   * @generated
+   */
+  EClass getRoleOneL();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.RoleSetL <em>Role Set L</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Role Set L</em>'.
+   * @see org.xtext.globalTypes.myDsl.RoleSetL
+   * @generated
+   */
+  EClass getRoleSetL();
+
+  /**
+   * Returns the meta object for the reference '{@link org.xtext.globalTypes.myDsl.RoleSetL#getRef <em>Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ref</em>'.
+   * @see org.xtext.globalTypes.myDsl.RoleSetL#getRef()
+   * @see #getRoleSetL()
+   * @generated
+   */
+  EReference getRoleSetL_Ref();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.ProtocolL <em>Protocol L</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1462,46 +1548,47 @@ public interface MyDslPackage extends EPackage
   EReference getChoiceL_Branches();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.RecursionL <em>Recursion L</em>}'.
+   * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.ForEachL <em>For Each L</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Recursion L</em>'.
-   * @see org.xtext.globalTypes.myDsl.RecursionL
+   * @return the meta object for class '<em>For Each L</em>'.
+   * @see org.xtext.globalTypes.myDsl.ForEachL
    * @generated
    */
-  EClass getRecursionL();
+  EClass getForEachL();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.globalTypes.myDsl.RecursionL#getName <em>Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.xtext.globalTypes.myDsl.ForEachL#getEachRole <em>Each Role</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.xtext.globalTypes.myDsl.RecursionL#getName()
-   * @see #getRecursionL()
+   * @return the meta object for the containment reference '<em>Each Role</em>'.
+   * @see org.xtext.globalTypes.myDsl.ForEachL#getEachRole()
+   * @see #getForEachL()
    * @generated
    */
-  EAttribute getRecursionL_Name();
+  EReference getForEachL_EachRole();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.CloseRecursionL <em>Close Recursion L</em>}'.
+   * Returns the meta object for the reference '{@link org.xtext.globalTypes.myDsl.ForEachL#getRole <em>Role</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Close Recursion L</em>'.
-   * @see org.xtext.globalTypes.myDsl.CloseRecursionL
+   * @return the meta object for the reference '<em>Role</em>'.
+   * @see org.xtext.globalTypes.myDsl.ForEachL#getRole()
+   * @see #getForEachL()
    * @generated
    */
-  EClass getCloseRecursionL();
+  EReference getForEachL_Role();
 
   /**
-   * Returns the meta object for the reference '{@link org.xtext.globalTypes.myDsl.CloseRecursionL#getRecursionVariable <em>Recursion Variable</em>}'.
+   * Returns the meta object for the containment reference '{@link org.xtext.globalTypes.myDsl.ForEachL#getBranch <em>Branch</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Recursion Variable</em>'.
-   * @see org.xtext.globalTypes.myDsl.CloseRecursionL#getRecursionVariable()
-   * @see #getCloseRecursionL()
+   * @return the meta object for the containment reference '<em>Branch</em>'.
+   * @see org.xtext.globalTypes.myDsl.ForEachL#getBranch()
+   * @see #getForEachL()
    * @generated
    */
-  EReference getCloseRecursionL_RecursionVariable();
+  EReference getForEachL_Branch();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1625,14 +1712,14 @@ public interface MyDslPackage extends EPackage
     EClass ROLE_ONE = eINSTANCE.getRoleOne();
 
     /**
-     * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.RoleMultipleImpl <em>Role Multiple</em>}' class.
+     * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.RoleSetImpl <em>Role Set</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.globalTypes.myDsl.impl.RoleMultipleImpl
-     * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleMultiple()
+     * @see org.xtext.globalTypes.myDsl.impl.RoleSetImpl
+     * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleSet()
      * @generated
      */
-    EClass ROLE_MULTIPLE = eINSTANCE.getRoleMultiple();
+    EClass ROLE_SET = eINSTANCE.getRoleSet();
 
     /**
      * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
@@ -1640,7 +1727,7 @@ public interface MyDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ROLE_MULTIPLE__REF = eINSTANCE.getRoleMultiple_Ref();
+    EReference ROLE_SET__REF = eINSTANCE.getRoleSet_Ref();
 
     /**
      * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.ProtocolImpl <em>Protocol</em>}' class.
@@ -1903,6 +1990,34 @@ public interface MyDslPackage extends EPackage
     EAttribute ROLE_L__NAME = eINSTANCE.getRoleL_Name();
 
     /**
+     * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.RoleOneLImpl <em>Role One L</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.globalTypes.myDsl.impl.RoleOneLImpl
+     * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleOneL()
+     * @generated
+     */
+    EClass ROLE_ONE_L = eINSTANCE.getRoleOneL();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.RoleSetLImpl <em>Role Set L</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.globalTypes.myDsl.impl.RoleSetLImpl
+     * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleSetL()
+     * @generated
+     */
+    EClass ROLE_SET_L = eINSTANCE.getRoleSetL();
+
+    /**
+     * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ROLE_SET_L__REF = eINSTANCE.getRoleSetL_Ref();
+
+    /**
      * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.ProtocolLImpl <em>Protocol L</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2025,40 +2140,38 @@ public interface MyDslPackage extends EPackage
     EReference CHOICE_L__BRANCHES = eINSTANCE.getChoiceL_Branches();
 
     /**
-     * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.RecursionLImpl <em>Recursion L</em>}' class.
+     * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.ForEachLImpl <em>For Each L</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.globalTypes.myDsl.impl.RecursionLImpl
-     * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRecursionL()
+     * @see org.xtext.globalTypes.myDsl.impl.ForEachLImpl
+     * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getForEachL()
      * @generated
      */
-    EClass RECURSION_L = eINSTANCE.getRecursionL();
+    EClass FOR_EACH_L = eINSTANCE.getForEachL();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Each Role</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute RECURSION_L__NAME = eINSTANCE.getRecursionL_Name();
+    EReference FOR_EACH_L__EACH_ROLE = eINSTANCE.getForEachL_EachRole();
 
     /**
-     * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.CloseRecursionLImpl <em>Close Recursion L</em>}' class.
+     * The meta object literal for the '<em><b>Role</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.globalTypes.myDsl.impl.CloseRecursionLImpl
-     * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getCloseRecursionL()
      * @generated
      */
-    EClass CLOSE_RECURSION_L = eINSTANCE.getCloseRecursionL();
+    EReference FOR_EACH_L__ROLE = eINSTANCE.getForEachL_Role();
 
     /**
-     * The meta object literal for the '<em><b>Recursion Variable</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Branch</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference CLOSE_RECURSION_L__RECURSION_VARIABLE = eINSTANCE.getCloseRecursionL_RecursionVariable();
+    EReference FOR_EACH_L__BRANCH = eINSTANCE.getForEachL_Branch();
 
   }
 

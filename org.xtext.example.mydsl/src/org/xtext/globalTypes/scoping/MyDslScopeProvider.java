@@ -3,6 +3,13 @@
  */
 package org.xtext.globalTypes.scoping;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.Scopes;
+import org.xtext.globalTypes.myDsl.Message;
+import org.xtext.globalTypes.myDsl.MyDslPackage;
+import org.xtext.globalTypes.myDsl.Role;
 
 /**
  * This class contains custom scoping description.
@@ -11,5 +18,10 @@ package org.xtext.globalTypes.scoping;
  * on how and when to use it.
  */
 public class MyDslScopeProvider extends AbstractMyDslScopeProvider {
-
+	/*IScope scopeRole(EObject context, EReference ref) {
+		if(context instanceof Message) {
+			return null;
+		}
+		return super.getScope(context, ref);
+	}*/
 }

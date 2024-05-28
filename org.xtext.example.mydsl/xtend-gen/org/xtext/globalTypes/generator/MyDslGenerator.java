@@ -26,8 +26,8 @@ import org.xtext.globalTypes.myDsl.Payload;
 import org.xtext.globalTypes.myDsl.Protocol;
 import org.xtext.globalTypes.myDsl.Recursion;
 import org.xtext.globalTypes.myDsl.Role;
-import org.xtext.globalTypes.myDsl.RoleMultiple;
 import org.xtext.globalTypes.myDsl.RoleOne;
+import org.xtext.globalTypes.myDsl.RoleSet;
 import org.xtext.globalTypes.myDsl.Roles;
 
 /**
@@ -50,13 +50,14 @@ public class MyDslGenerator extends AbstractGenerator {
         {
           System.out.println("LOCAL");
           String _name = r.getName();
-          String _plus = ("local/local" + _name);
+          String _plus = ("../src/local/local_" + _name);
           String _plus_1 = (_plus + ".jglobal");
           fsa.generateFile(_plus_1, this.project(globalProtocol, r));
         }
       }
     } else {
-      LocalProtocol localProtocol = ((LocalProtocol) model);
+      EObject _protocol_2 = model.getProtocol();
+      LocalProtocol localProtocol = ((LocalProtocol) _protocol_2);
       System.out.println("JADE");
       String _projectedRole = localProtocol.getProjectedRole();
       String _plus = ("jade/jade" + _projectedRole);
@@ -115,14 +116,48 @@ public class MyDslGenerator extends AbstractGenerator {
         } else {
           _builder.appendImmediate(", ", "");
         }
-        _builder.append("role ");
+        Object _projectOn = this.projectOn(role, r);
+        _builder.append(_projectOn);
+      }
+    }
+    return _builder;
+  }
+
+  protected CharSequence _projectOn(final Role role, final Role r) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      if ((role instanceof RoleOne)) {
         {
           boolean _equals = Objects.equal(role, r);
           if (_equals) {
-            _builder.append("self");
+            _builder.append("role self");
           } else {
-            String _name = role.getName();
+            _builder.append("role ");
+            String _name = ((RoleOne)role).getName();
             _builder.append(_name);
+          }
+        }
+        _builder.newLineIfNotEmpty();
+      } else {
+        {
+          boolean _equals_1 = Objects.equal(role, r);
+          if (_equals_1) {
+            _builder.append("role self");
+          } else {
+            _builder.append("roleset ");
+            String _name_1 = role.getName();
+            _builder.append(_name_1);
+            _builder.append(":");
+            {
+              RoleOne _ref = ((RoleSet) role).getRef();
+              boolean _equals_2 = Objects.equal(_ref, r);
+              if (_equals_2) {
+                _builder.append("self");
+              } else {
+                String _name_2 = ((RoleSet) role).getRef().getName();
+                _builder.append(_name_2);
+              }
+            }
           }
         }
       }
@@ -146,23 +181,37 @@ public class MyDslGenerator extends AbstractGenerator {
         _builder.append(_name);
         _builder.append(";");
         _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      RoleOne _receiver = m.getReceiver();
-      boolean _equals_1 = Objects.equal(_receiver, r);
-      if (_equals_1) {
-        String _messageType_1 = m.getMessageType();
-        _builder.append(_messageType_1);
-        _builder.append("(");
-        CharSequence _printPayload_1 = this.printPayload(m.getPayload());
-        _builder.append(_printPayload_1);
-        _builder.append(") from ");
-        String _name_1 = m.getSender().getName();
-        _builder.append(_name_1);
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
+      } else {
+        {
+          RoleOne _receiver = m.getReceiver();
+          boolean _equals_1 = Objects.equal(_receiver, r);
+          if (_equals_1) {
+            String _messageType_1 = m.getMessageType();
+            _builder.append(_messageType_1);
+            _builder.append("(");
+            CharSequence _printPayload_1 = this.printPayload(m.getPayload());
+            _builder.append(_printPayload_1);
+            _builder.append(") from ");
+            String _name_1 = m.getSender().getName();
+            _builder.append(_name_1);
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+          } else {
+            String _messageType_2 = m.getMessageType();
+            _builder.append(_messageType_2);
+            _builder.append("(");
+            CharSequence _printPayload_2 = this.printPayload(m.getPayload());
+            _builder.append(_printPayload_2);
+            _builder.append(") from ");
+            String _name_2 = m.getSender().getName();
+            _builder.append(_name_2);
+            _builder.append(" to ");
+            String _name_3 = m.getReceiver().getName();
+            _builder.append(_name_3);
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+          }
+        }
       }
     }
     return _builder;
@@ -232,7 +281,7 @@ public class MyDslGenerator extends AbstractGenerator {
   protected CharSequence _projectOn(final ForEach each, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      RoleMultiple _role = each.getRole();
+      RoleSet _role = each.getRole();
       boolean _equals = Objects.equal(_role, r);
       if (_equals) {
         Object _projectOn = this.projectOn(each.getBranch(), each.getEachRole());
@@ -241,10 +290,10 @@ public class MyDslGenerator extends AbstractGenerator {
       }
     }
     {
-      RoleMultiple _role_1 = each.getRole();
+      RoleSet _role_1 = each.getRole();
       boolean _tripleNotEquals = (_role_1 != r);
       if (_tripleNotEquals) {
-        _builder.append("foreach ");
+        _builder.append("foreach role ");
         String _name = each.getEachRole().getName();
         _builder.append(_name);
         _builder.append(":");
@@ -298,6 +347,8 @@ public class MyDslGenerator extends AbstractGenerator {
       return _projectOn((Protocol)c, r);
     } else if (c instanceof Recursion) {
       return _projectOn((Recursion)c, r);
+    } else if (c instanceof Role) {
+      return _projectOn((Role)c, r);
     } else if (c instanceof Roles) {
       return _projectOn((Roles)c, r);
     } else {

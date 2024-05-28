@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.xtext.globalTypes.myDsl.Choice;
 import org.xtext.globalTypes.myDsl.ChoiceL;
 import org.xtext.globalTypes.myDsl.CloseRecursion;
-import org.xtext.globalTypes.myDsl.CloseRecursionL;
 import org.xtext.globalTypes.myDsl.ForEach;
+import org.xtext.globalTypes.myDsl.ForEachL;
 import org.xtext.globalTypes.myDsl.GlobalProtocol;
 import org.xtext.globalTypes.myDsl.LocalProtocol;
 import org.xtext.globalTypes.myDsl.Message;
@@ -27,11 +27,12 @@ import org.xtext.globalTypes.myDsl.Protocol;
 import org.xtext.globalTypes.myDsl.ProtocolL;
 import org.xtext.globalTypes.myDsl.ReceiverL;
 import org.xtext.globalTypes.myDsl.Recursion;
-import org.xtext.globalTypes.myDsl.RecursionL;
 import org.xtext.globalTypes.myDsl.Role;
 import org.xtext.globalTypes.myDsl.RoleL;
-import org.xtext.globalTypes.myDsl.RoleMultiple;
 import org.xtext.globalTypes.myDsl.RoleOne;
+import org.xtext.globalTypes.myDsl.RoleOneL;
+import org.xtext.globalTypes.myDsl.RoleSet;
+import org.xtext.globalTypes.myDsl.RoleSetL;
 import org.xtext.globalTypes.myDsl.Roles;
 import org.xtext.globalTypes.myDsl.RolesL;
 import org.xtext.globalTypes.myDsl.SenderL;
@@ -84,7 +85,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass roleMultipleEClass = null;
+  private EClass roleSetEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -161,6 +162,20 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass roleOneLEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass roleSetLEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass protocolLEClass = null;
 
   /**
@@ -196,14 +211,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass recursionLEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass closeRecursionLEClass = null;
+  private EClass forEachLEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -394,9 +402,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getRoleMultiple()
+  public EClass getRoleSet()
   {
-    return roleMultipleEClass;
+    return roleSetEClass;
   }
 
   /**
@@ -405,9 +413,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getRoleMultiple_Ref()
+  public EReference getRoleSet_Ref()
   {
-    return (EReference)roleMultipleEClass.getEStructuralFeatures().get(0);
+    return (EReference)roleSetEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -746,6 +754,39 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
+  public EClass getRoleOneL()
+  {
+    return roleOneLEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getRoleSetL()
+  {
+    return roleSetLEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getRoleSetL_Ref()
+  {
+    return (EReference)roleSetLEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getProtocolL()
   {
     return protocolLEClass;
@@ -900,9 +941,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getRecursionL()
+  public EClass getForEachL()
   {
-    return recursionLEClass;
+    return forEachLEClass;
   }
 
   /**
@@ -911,9 +952,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EAttribute getRecursionL_Name()
+  public EReference getForEachL_EachRole()
   {
-    return (EAttribute)recursionLEClass.getEStructuralFeatures().get(0);
+    return (EReference)forEachLEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -922,9 +963,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getCloseRecursionL()
+  public EReference getForEachL_Role()
   {
-    return closeRecursionLEClass;
+    return (EReference)forEachLEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -933,9 +974,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getCloseRecursionL_RecursionVariable()
+  public EReference getForEachL_Branch()
   {
-    return (EReference)closeRecursionLEClass.getEStructuralFeatures().get(0);
+    return (EReference)forEachLEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -985,8 +1026,8 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     roleOneEClass = createEClass(ROLE_ONE);
 
-    roleMultipleEClass = createEClass(ROLE_MULTIPLE);
-    createEReference(roleMultipleEClass, ROLE_MULTIPLE__REF);
+    roleSetEClass = createEClass(ROLE_SET);
+    createEReference(roleSetEClass, ROLE_SET__REF);
 
     protocolEClass = createEClass(PROTOCOL);
     createEReference(protocolEClass, PROTOCOL__ACTIONS);
@@ -1028,6 +1069,11 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     roleLEClass = createEClass(ROLE_L);
     createEAttribute(roleLEClass, ROLE_L__NAME);
 
+    roleOneLEClass = createEClass(ROLE_ONE_L);
+
+    roleSetLEClass = createEClass(ROLE_SET_L);
+    createEReference(roleSetLEClass, ROLE_SET_L__REF);
+
     protocolLEClass = createEClass(PROTOCOL_L);
     createEReference(protocolLEClass, PROTOCOL_L__ACTIONS);
 
@@ -1047,11 +1093,10 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     createEReference(choiceLEClass, CHOICE_L__MESSAGE);
     createEReference(choiceLEClass, CHOICE_L__BRANCHES);
 
-    recursionLEClass = createEClass(RECURSION_L);
-    createEAttribute(recursionLEClass, RECURSION_L__NAME);
-
-    closeRecursionLEClass = createEClass(CLOSE_RECURSION_L);
-    createEReference(closeRecursionLEClass, CLOSE_RECURSION_L__RECURSION_VARIABLE);
+    forEachLEClass = createEClass(FOR_EACH_L);
+    createEReference(forEachLEClass, FOR_EACH_L__EACH_ROLE);
+    createEReference(forEachLEClass, FOR_EACH_L__ROLE);
+    createEReference(forEachLEClass, FOR_EACH_L__BRANCH);
   }
 
   /**
@@ -1084,7 +1129,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     // Add supertypes to classes
     roleOneEClass.getESuperTypes().add(this.getRole());
-    roleMultipleEClass.getESuperTypes().add(this.getRole());
+    roleSetEClass.getESuperTypes().add(this.getRole());
+    roleOneLEClass.getESuperTypes().add(this.getRoleL());
+    roleSetLEClass.getESuperTypes().add(this.getRoleL());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1103,8 +1150,8 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(roleOneEClass, RoleOne.class, "RoleOne", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(roleMultipleEClass, RoleMultiple.class, "RoleMultiple", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRoleMultiple_Ref(), this.getRoleOne(), null, "ref", null, 0, 1, RoleMultiple.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(roleSetEClass, RoleSet.class, "RoleSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getRoleSet_Ref(), this.getRoleOne(), null, "ref", null, 0, 1, RoleSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(protocolEClass, Protocol.class, "Protocol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getProtocol_Actions(), ecorePackage.getEObject(), null, "actions", null, 0, -1, Protocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1117,7 +1164,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(forEachEClass, ForEach.class, "ForEach", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getForEach_EachRole(), this.getRoleOne(), null, "eachRole", null, 0, 1, ForEach.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getForEach_Role(), this.getRoleMultiple(), null, "role", null, 0, 1, ForEach.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getForEach_Role(), this.getRoleSet(), null, "role", null, 0, 1, ForEach.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getForEach_Branch(), this.getProtocol(), null, "branch", null, 0, 1, ForEach.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(choiceEClass, Choice.class, "Choice", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1146,6 +1193,11 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     initEClass(roleLEClass, RoleL.class, "RoleL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRoleL_Name(), ecorePackage.getEString(), "name", null, 0, 1, RoleL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(roleOneLEClass, RoleOneL.class, "RoleOneL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(roleSetLEClass, RoleSetL.class, "RoleSetL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getRoleSetL_Ref(), this.getRoleOneL(), null, "ref", null, 0, 1, RoleSetL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(protocolLEClass, ProtocolL.class, "ProtocolL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getProtocolL_Actions(), ecorePackage.getEObject(), null, "actions", null, 0, -1, ProtocolL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1165,11 +1217,10 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     initEReference(getChoiceL_Message(), this.getMessageL(), null, "message", null, 0, -1, ChoiceL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getChoiceL_Branches(), this.getProtocolL(), null, "branches", null, 0, -1, ChoiceL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(recursionLEClass, RecursionL.class, "RecursionL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getRecursionL_Name(), ecorePackage.getEString(), "name", null, 0, 1, RecursionL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(closeRecursionLEClass, CloseRecursionL.class, "CloseRecursionL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getCloseRecursionL_RecursionVariable(), this.getRecursionL(), null, "recursionVariable", null, 0, 1, CloseRecursionL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(forEachLEClass, ForEachL.class, "ForEachL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getForEachL_EachRole(), this.getRoleOneL(), null, "eachRole", null, 0, 1, ForEachL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getForEachL_Role(), this.getRoleSetL(), null, "role", null, 0, 1, ForEachL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getForEachL_Branch(), this.getProtocolL(), null, "branch", null, 0, 1, ForEachL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

@@ -7,7 +7,7 @@ Model:
 ;
 
 GlobalProtocol:
-	'global' 'protocol' protocolName=ID '(' roles=Roles '){'protocol=Protocol'}'
+	'global' 'protocol' protocolName=PROTOCOLNAME '(' roles=Roles '){'protocol=Protocol'}'
 	;
 	
 Roles:
@@ -15,20 +15,20 @@ Roles:
 ;
 
 Role:
-	RoleOne | RoleMultiple
+	RoleOne | RoleSet
 ;
 
 RoleOne:
 	'role' name=ROLENAME
 ;
 
-RoleMultiple:
-	'multrole' name=ROLENAME ':' ref=[RoleOne | ROLENAME]
+RoleSet:
+	'roleset' name=ROLESETNAME ':' ref=[RoleOne | ROLENAME]
 ;
     
 
 Protocol:
-	{Protocol} (actions+=(Message | Choice | Recursion | ForEach | CloseRecursion))* | EndInteraction
+	{Protocol} (actions+=(Message | Choice | Recursion | ForEach | CloseRecursion))*
 ;
 
 Recursion:
@@ -41,7 +41,7 @@ CloseRecursion:
 
 ForEach: // add ref
 
-	'foreach' eachRole=RoleOne ':' role=[RoleMultiple | ROLENAME] '{'
+	'foreach' eachRole=RoleOne ':' role=[RoleSet | ROLESETNAME] '{'
 		branch=Protocol
 	'}'
 ;
@@ -61,11 +61,11 @@ Message:
 ;
 
 Payload:
-	{Payload} (types+=Type (','types+=Type)*)
+	{Payload} (types+=Type (','types+=Type)*) | types+=ID
 ;
 
 LocalProtocol:
-	'local' 'protocol' protocolName=ID 'projection' 'on' projectedRole=ROLENAME '(' roles=RolesL ')' '{'protocol=ProtocolL'}'
+	'local' 'protocol' protocolName=PROTOCOLNAME 'projection' 'on' (projectedRole=ROLENAME | projectedRole=ROLESETNAME) '(' roles=RolesL ')' '{'protocol=ProtocolL'}'
 ;
 
 RolesL:
@@ -73,27 +73,36 @@ RolesL:
 ;
 
 RoleL:
-	'role' name=ROLENAME_L
+	RoleOneL | RoleSetL
+;
+
+
+RoleOneL:
+	'role' name=ROLENAME
+;
+
+RoleSetL:
+	'roleset' name=ROLESETNAME ':' ref=[RoleOneL | ROLENAME]
 ;
 
 ProtocolL:
-	{ProtocolL} (actions+=(MessageL | ChoiceL | RecursionL | CloseRecursionL))* | EndInteractionL
+	{ProtocolL} (actions+=(MessageL | Message | ChoiceL | ForEachL | Recursion | CloseRecursion))*
 ;
 
 MessageL:
-	messageType=MessageType '(' payload=Payload? ')' (target=SenderL | target=ReceiverL) ';'
+	messageType=MessageType '(' payload=Payload? ')' (target+=SenderL)? (target+=ReceiverL)? ';'
 ;
 
 SenderL:
-	'from' sender=[RoleL | ROLENAME_L]
+	'from' sender=[RoleL | ROLENAME]
 ;
 
 ReceiverL:
-	'to' to=[RoleL | ROLENAME_L]
+	'to' to=[RoleL | ROLENAME]
 ;
 
 ChoiceL:
-	'choice' 'at' role=[RoleL | ROLENAME_L] '{'
+	'choice' 'at' role=[RoleL | ROLENAME] '{'
 		message+=MessageL
 		branches+=ProtocolL
 	'}' ('or' '{'
@@ -102,30 +111,24 @@ ChoiceL:
 	'}')*
 ;
 
-RecursionL:
-	'rec' name=RECNAME ':'
+ForEachL:
+	'foreach' eachRole=RoleOneL ':' role=[RoleSetL | ROLESETNAME] '{'
+		branch=ProtocolL
+	'}'
 ;
 
-CloseRecursionL:
-		'loop' recursionVariable=[RecursionL | RECNAME] ';'
-;
 
-EndInteractionL:
-	'end' ';'
-;
-
-EndInteraction:
-	'end' ';'
-;
 
 MessageType:
-	'REQUEST' | 'INFORM' | 'AGREE' | 'REFUSE' //add more
+	'REQUEST' | 'INFORM' | 'AGREE' | 'REFUSE' | 'CFP' | 'QUIT'
 ;
 
 Type:
 	'int' | 'string' | 'action'  //add more
 ;
 
-terminal ROLENAME:('A'..'Z') ('A'..'Z' ? 'a'..'z')*;
-terminal ROLENAME_L: (('A'..'Z') ('A'..'Z' ? 'a'..'z')*) ? "self";
+
+terminal ROLENAME:('a'..'z')*;
+terminal ROLESETNAME:('A'..'Z') ('a'..'z')*;
 terminal RECNAME:('A'..'Z')+;
+terminal PROTOCOLNAME: '_'('a'..'z')*;

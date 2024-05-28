@@ -101,9 +101,9 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createRoleOneAdapter();
       }
       @Override
-      public Adapter caseRoleMultiple(RoleMultiple object)
+      public Adapter caseRoleSet(RoleSet object)
       {
-        return createRoleMultipleAdapter();
+        return createRoleSetAdapter();
       }
       @Override
       public Adapter caseProtocol(Protocol object)
@@ -156,6 +156,16 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createRoleLAdapter();
       }
       @Override
+      public Adapter caseRoleOneL(RoleOneL object)
+      {
+        return createRoleOneLAdapter();
+      }
+      @Override
+      public Adapter caseRoleSetL(RoleSetL object)
+      {
+        return createRoleSetLAdapter();
+      }
+      @Override
       public Adapter caseProtocolL(ProtocolL object)
       {
         return createProtocolLAdapter();
@@ -181,14 +191,9 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createChoiceLAdapter();
       }
       @Override
-      public Adapter caseRecursionL(RecursionL object)
+      public Adapter caseForEachL(ForEachL object)
       {
-        return createRecursionLAdapter();
-      }
-      @Override
-      public Adapter caseCloseRecursionL(CloseRecursionL object)
-      {
-        return createCloseRecursionLAdapter();
+        return createForEachLAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -288,16 +293,16 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.RoleMultiple <em>Role Multiple</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.RoleSet <em>Role Set</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.globalTypes.myDsl.RoleMultiple
+   * @see org.xtext.globalTypes.myDsl.RoleSet
    * @generated
    */
-  public Adapter createRoleMultipleAdapter()
+  public Adapter createRoleSetAdapter()
   {
     return null;
   }
@@ -453,6 +458,36 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.RoleOneL <em>Role One L</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.globalTypes.myDsl.RoleOneL
+   * @generated
+   */
+  public Adapter createRoleOneLAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.RoleSetL <em>Role Set L</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.globalTypes.myDsl.RoleSetL
+   * @generated
+   */
+  public Adapter createRoleSetLAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.ProtocolL <em>Protocol L</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -528,31 +563,16 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.RecursionL <em>Recursion L</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.ForEachL <em>For Each L</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.globalTypes.myDsl.RecursionL
+   * @see org.xtext.globalTypes.myDsl.ForEachL
    * @generated
    */
-  public Adapter createRecursionLAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.CloseRecursionL <em>Close Recursion L</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.globalTypes.myDsl.CloseRecursionL
-   * @generated
-   */
-  public Adapter createCloseRecursionLAdapter()
+  public Adapter createForEachLAdapter()
   {
     return null;
   }

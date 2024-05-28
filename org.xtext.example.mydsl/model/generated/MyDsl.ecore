@@ -20,7 +20,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoleOne" eSuperTypes="#//Role"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RoleMultiple" eSuperTypes="#//Role">
+  <eClassifiers xsi:type="ecore:EClass" name="RoleSet" eSuperTypes="#//Role">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//RoleOne"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Protocol">
@@ -36,7 +36,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ForEach">
     <eStructuralFeatures xsi:type="ecore:EReference" name="eachRole" eType="#//RoleOne"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//RoleMultiple"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//RoleSet"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branch" eType="#//Protocol"
         containment="true"/>
   </eClassifiers>
@@ -73,6 +73,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="RoleL">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoleOneL" eSuperTypes="#//RoleL"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RoleSetL" eSuperTypes="#//RoleL">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//RoleOneL"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProtocolL">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
@@ -97,10 +101,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="branches" upperBound="-1"
         eType="#//ProtocolL" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RecursionL">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CloseRecursionL">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="recursionVariable" eType="#//RecursionL"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ForEachL">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eachRole" eType="#//RoleOneL"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//RoleSetL"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branch" eType="#//ProtocolL"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

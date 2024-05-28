@@ -69,13 +69,13 @@ public interface MyDslFactory extends EFactory
   RoleOne createRoleOne();
 
   /**
-   * Returns a new object of class '<em>Role Multiple</em>'.
+   * Returns a new object of class '<em>Role Set</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Role Multiple</em>'.
+   * @return a new object of class '<em>Role Set</em>'.
    * @generated
    */
-  RoleMultiple createRoleMultiple();
+  RoleSet createRoleSet();
 
   /**
    * Returns a new object of class '<em>Protocol</em>'.
@@ -168,6 +168,24 @@ public interface MyDslFactory extends EFactory
   RoleL createRoleL();
 
   /**
+   * Returns a new object of class '<em>Role One L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Role One L</em>'.
+   * @generated
+   */
+  RoleOneL createRoleOneL();
+
+  /**
+   * Returns a new object of class '<em>Role Set L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Role Set L</em>'.
+   * @generated
+   */
+  RoleSetL createRoleSetL();
+
+  /**
    * Returns a new object of class '<em>Protocol L</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -213,22 +231,13 @@ public interface MyDslFactory extends EFactory
   ChoiceL createChoiceL();
 
   /**
-   * Returns a new object of class '<em>Recursion L</em>'.
+   * Returns a new object of class '<em>For Each L</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Recursion L</em>'.
+   * @return a new object of class '<em>For Each L</em>'.
    * @generated
    */
-  RecursionL createRecursionL();
-
-  /**
-   * Returns a new object of class '<em>Close Recursion L</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Close Recursion L</em>'.
-   * @generated
-   */
-  CloseRecursionL createCloseRecursionL();
+  ForEachL createForEachL();
 
   /**
    * Returns the package supported by this factory.

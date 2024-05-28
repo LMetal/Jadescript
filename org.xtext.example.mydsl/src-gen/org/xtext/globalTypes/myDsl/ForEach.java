@@ -52,12 +52,12 @@ public interface ForEach extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Role</em>' reference.
-   * @see #setRole(RoleMultiple)
+   * @see #setRole(RoleSet)
    * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEach_Role()
    * @model
    * @generated
    */
-  RoleMultiple getRole();
+  RoleSet getRole();
 
   /**
    * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEach#getRole <em>Role</em>}' reference.
@@ -67,7 +67,7 @@ public interface ForEach extends EObject
    * @see #getRole()
    * @generated
    */
-  void setRole(RoleMultiple value);
+  void setRole(RoleSet value);
 
   /**
    * Returns the value of the '<em><b>Branch</b></em>' containment reference.

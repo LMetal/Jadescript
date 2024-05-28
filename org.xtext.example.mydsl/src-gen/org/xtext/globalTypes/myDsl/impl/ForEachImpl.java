@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.xtext.globalTypes.myDsl.ForEach;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.Protocol;
-import org.xtext.globalTypes.myDsl.RoleMultiple;
 import org.xtext.globalTypes.myDsl.RoleOne;
+import org.xtext.globalTypes.myDsl.RoleSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -53,7 +53,7 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * @generated
    * @ordered
    */
-  protected RoleMultiple role;
+  protected RoleSet role;
 
   /**
    * The cached value of the '{@link #getBranch() <em>Branch</em>}' containment reference.
@@ -142,12 +142,12 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * @generated
    */
   @Override
-  public RoleMultiple getRole()
+  public RoleSet getRole()
   {
     if (role != null && role.eIsProxy())
     {
       InternalEObject oldRole = (InternalEObject)role;
-      role = (RoleMultiple)eResolveProxy(oldRole);
+      role = (RoleSet)eResolveProxy(oldRole);
       if (role != oldRole)
       {
         if (eNotificationRequired())
@@ -162,7 +162,7 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * <!-- end-user-doc -->
    * @generated
    */
-  public RoleMultiple basicGetRole()
+  public RoleSet basicGetRole()
   {
     return role;
   }
@@ -173,9 +173,9 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * @generated
    */
   @Override
-  public void setRole(RoleMultiple newRole)
+  public void setRole(RoleSet newRole)
   {
-    RoleMultiple oldRole = role;
+    RoleSet oldRole = role;
     role = newRole;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH__ROLE, oldRole, role));
@@ -284,7 +284,7 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
         setEachRole((RoleOne)newValue);
         return;
       case MyDslPackage.FOR_EACH__ROLE:
-        setRole((RoleMultiple)newValue);
+        setRole((RoleSet)newValue);
         return;
       case MyDslPackage.FOR_EACH__BRANCH:
         setBranch((Protocol)newValue);
@@ -307,7 +307,7 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
         setEachRole((RoleOne)null);
         return;
       case MyDslPackage.FOR_EACH__ROLE:
-        setRole((RoleMultiple)null);
+        setRole((RoleSet)null);
         return;
       case MyDslPackage.FOR_EACH__BRANCH:
         setBranch((Protocol)null);
