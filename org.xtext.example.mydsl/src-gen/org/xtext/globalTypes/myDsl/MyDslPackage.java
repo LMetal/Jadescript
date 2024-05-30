@@ -744,7 +744,7 @@ public interface MyDslPackage extends EPackage
   int MESSAGE_L__PAYLOAD = 1;
 
   /**
-   * The feature id for the '<em><b>Target</b></em>' containment reference.
+   * The feature id for the '<em><b>Target</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -1452,10 +1452,10 @@ public interface MyDslPackage extends EPackage
   EReference getMessageL_Payload();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.globalTypes.myDsl.MessageL#getTarget <em>Target</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.globalTypes.myDsl.MessageL#getTarget <em>Target</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Target</em>'.
+   * @return the meta object for the containment reference list '<em>Target</em>'.
    * @see org.xtext.globalTypes.myDsl.MessageL#getTarget()
    * @see #getMessageL()
    * @generated
@@ -2062,7 +2062,7 @@ public interface MyDslPackage extends EPackage
     EReference MESSAGE_L__PAYLOAD = eINSTANCE.getMessageL_Payload();
 
     /**
-     * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Target</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated

@@ -840,46 +840,42 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Assignment cActionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final Alternatives cActionsAlternatives_1_0 = (Alternatives)cActionsAssignment_1.eContents().get(0);
 		private final RuleCall cActionsMessageLParserRuleCall_1_0_0 = (RuleCall)cActionsAlternatives_1_0.eContents().get(0);
-		private final RuleCall cActionsMessageParserRuleCall_1_0_1 = (RuleCall)cActionsAlternatives_1_0.eContents().get(1);
-		private final RuleCall cActionsChoiceLParserRuleCall_1_0_2 = (RuleCall)cActionsAlternatives_1_0.eContents().get(2);
-		private final RuleCall cActionsForEachLParserRuleCall_1_0_3 = (RuleCall)cActionsAlternatives_1_0.eContents().get(3);
-		private final RuleCall cActionsRecursionParserRuleCall_1_0_4 = (RuleCall)cActionsAlternatives_1_0.eContents().get(4);
-		private final RuleCall cActionsCloseRecursionParserRuleCall_1_0_5 = (RuleCall)cActionsAlternatives_1_0.eContents().get(5);
+		private final RuleCall cActionsChoiceLParserRuleCall_1_0_1 = (RuleCall)cActionsAlternatives_1_0.eContents().get(1);
+		private final RuleCall cActionsForEachLParserRuleCall_1_0_2 = (RuleCall)cActionsAlternatives_1_0.eContents().get(2);
+		private final RuleCall cActionsRecursionParserRuleCall_1_0_3 = (RuleCall)cActionsAlternatives_1_0.eContents().get(3);
+		private final RuleCall cActionsCloseRecursionParserRuleCall_1_0_4 = (RuleCall)cActionsAlternatives_1_0.eContents().get(4);
 		
 		//ProtocolL:
-		//    {ProtocolL} (actions+=(MessageL | Message | ChoiceL | ForEachL | Recursion | CloseRecursion))*
+		//    {ProtocolL} (actions+=(MessageL | ChoiceL | ForEachL | Recursion | CloseRecursion))*
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ProtocolL} (actions+=(MessageL | Message | ChoiceL | ForEachL | Recursion | CloseRecursion))*
+		//{ProtocolL} (actions+=(MessageL | ChoiceL | ForEachL | Recursion | CloseRecursion))*
 		public Group getGroup() { return cGroup; }
 		
 		//{ProtocolL}
 		public Action getProtocolLAction_0() { return cProtocolLAction_0; }
 		
-		//(actions+=(MessageL | Message | ChoiceL | ForEachL | Recursion | CloseRecursion))*
+		//(actions+=(MessageL | ChoiceL | ForEachL | Recursion | CloseRecursion))*
 		public Assignment getActionsAssignment_1() { return cActionsAssignment_1; }
 		
-		//(MessageL | Message | ChoiceL | ForEachL | Recursion | CloseRecursion)
+		//(MessageL | ChoiceL | ForEachL | Recursion | CloseRecursion)
 		public Alternatives getActionsAlternatives_1_0() { return cActionsAlternatives_1_0; }
 		
 		//MessageL
 		public RuleCall getActionsMessageLParserRuleCall_1_0_0() { return cActionsMessageLParserRuleCall_1_0_0; }
 		
-		//Message
-		public RuleCall getActionsMessageParserRuleCall_1_0_1() { return cActionsMessageParserRuleCall_1_0_1; }
-		
 		//ChoiceL
-		public RuleCall getActionsChoiceLParserRuleCall_1_0_2() { return cActionsChoiceLParserRuleCall_1_0_2; }
+		public RuleCall getActionsChoiceLParserRuleCall_1_0_1() { return cActionsChoiceLParserRuleCall_1_0_1; }
 		
 		//ForEachL
-		public RuleCall getActionsForEachLParserRuleCall_1_0_3() { return cActionsForEachLParserRuleCall_1_0_3; }
+		public RuleCall getActionsForEachLParserRuleCall_1_0_2() { return cActionsForEachLParserRuleCall_1_0_2; }
 		
 		//Recursion
-		public RuleCall getActionsRecursionParserRuleCall_1_0_4() { return cActionsRecursionParserRuleCall_1_0_4; }
+		public RuleCall getActionsRecursionParserRuleCall_1_0_3() { return cActionsRecursionParserRuleCall_1_0_3; }
 		
 		//CloseRecursion
-		public RuleCall getActionsCloseRecursionParserRuleCall_1_0_5() { return cActionsCloseRecursionParserRuleCall_1_0_5; }
+		public RuleCall getActionsCloseRecursionParserRuleCall_1_0_4() { return cActionsCloseRecursionParserRuleCall_1_0_4; }
 	}
 	public class MessageLElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.MessageL");
@@ -890,19 +886,18 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Assignment cPayloadAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cPayloadPayloadParserRuleCall_2_0 = (RuleCall)cPayloadAssignment_2.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Alternatives cAlternatives_4 = (Alternatives)cGroup.eContents().get(4);
-		private final Assignment cTargetAssignment_4_0 = (Assignment)cAlternatives_4.eContents().get(0);
-		private final RuleCall cTargetSenderLParserRuleCall_4_0_0 = (RuleCall)cTargetAssignment_4_0.eContents().get(0);
-		private final Assignment cTargetAssignment_4_1 = (Assignment)cAlternatives_4.eContents().get(1);
-		private final RuleCall cTargetReceiverLParserRuleCall_4_1_0 = (RuleCall)cTargetAssignment_4_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cTargetAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTargetSenderLParserRuleCall_4_0 = (RuleCall)cTargetAssignment_4.eContents().get(0);
+		private final Assignment cTargetAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cTargetReceiverLParserRuleCall_5_0 = (RuleCall)cTargetAssignment_5.eContents().get(0);
+		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//MessageL:
-		//    messageType=MessageType '(' payload=Payload? ')' (target=SenderL | target=ReceiverL) ';'
+		//    messageType=MessageType '(' payload=Payload? ')' (target+=SenderL)? (target+=ReceiverL)? ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//messageType=MessageType '(' payload=Payload? ')' (target=SenderL | target=ReceiverL) ';'
+		//messageType=MessageType '(' payload=Payload? ')' (target+=SenderL)? (target+=ReceiverL)? ';'
 		public Group getGroup() { return cGroup; }
 		
 		//messageType=MessageType
@@ -923,23 +918,20 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//')'
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 		
-		//(target=SenderL | target=ReceiverL)
-		public Alternatives getAlternatives_4() { return cAlternatives_4; }
-		
-		//target=SenderL
-		public Assignment getTargetAssignment_4_0() { return cTargetAssignment_4_0; }
+		//(target+=SenderL)?
+		public Assignment getTargetAssignment_4() { return cTargetAssignment_4; }
 		
 		//SenderL
-		public RuleCall getTargetSenderLParserRuleCall_4_0_0() { return cTargetSenderLParserRuleCall_4_0_0; }
+		public RuleCall getTargetSenderLParserRuleCall_4_0() { return cTargetSenderLParserRuleCall_4_0; }
 		
-		//target=ReceiverL
-		public Assignment getTargetAssignment_4_1() { return cTargetAssignment_4_1; }
+		//(target+=ReceiverL)?
+		public Assignment getTargetAssignment_5() { return cTargetAssignment_5; }
 		
 		//ReceiverL
-		public RuleCall getTargetReceiverLParserRuleCall_4_1_0() { return cTargetReceiverLParserRuleCall_4_1_0; }
+		public RuleCall getTargetReceiverLParserRuleCall_5_0() { return cTargetReceiverLParserRuleCall_5_0; }
 		
 		//';'
-		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
+		public Keyword getSemicolonKeyword_6() { return cSemicolonKeyword_6; }
 	}
 	public class SenderLElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.SenderL");
@@ -1528,7 +1520,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//ProtocolL:
-	//    {ProtocolL} (actions+=(MessageL | Message | ChoiceL | ForEachL | Recursion | CloseRecursion))*
+	//    {ProtocolL} (actions+=(MessageL | ChoiceL | ForEachL | Recursion | CloseRecursion))*
 	//;
 	public ProtocolLElements getProtocolLAccess() {
 		return pProtocolL;
@@ -1539,7 +1531,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//MessageL:
-	//    messageType=MessageType '(' payload=Payload? ')' (target=SenderL | target=ReceiverL) ';'
+	//    messageType=MessageType '(' payload=Payload? ')' (target+=SenderL)? (target+=ReceiverL)? ';'
 	//;
 	public MessageLElements getMessageLAccess() {
 		return pMessageL;

@@ -86,7 +86,7 @@ RoleSetL:
 ;
 
 ProtocolL:
-	{ProtocolL} (actions+=(MessageL | Message | ChoiceL | ForEachL | Recursion | CloseRecursion))*
+	{ProtocolL} (actions+=(MessageL | ChoiceL | ForEachL | Recursion | CloseRecursion))*
 ;
 
 MessageL:

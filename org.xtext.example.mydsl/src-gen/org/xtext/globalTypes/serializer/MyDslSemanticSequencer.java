@@ -270,7 +270,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     MessageL returns MessageL
 	 *
 	 * Constraint:
-	 *     (messageType=MessageType payload=Payload? (target=SenderL | target=ReceiverL))
+	 *     (messageType=MessageType payload=Payload? target+=SenderL? target+=ReceiverL?)
 	 * </pre>
 	 */
 	protected void sequence_MessageL(ISerializationContext context, MessageL semanticObject) {
@@ -326,14 +326,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     ProtocolL returns ProtocolL
 	 *
 	 * Constraint:
-	 *     (
-	 *         actions+=MessageL | 
-	 *         actions+=Message | 
-	 *         actions+=ChoiceL | 
-	 *         actions+=ForEachL | 
-	 *         actions+=Recursion | 
-	 *         actions+=CloseRecursion
-	 *     )*
+	 *     (actions+=MessageL | actions+=ChoiceL | actions+=ForEachL | actions+=Recursion | actions+=CloseRecursion)*
 	 * </pre>
 	 */
 	protected void sequence_ProtocolL(ISerializationContext context, ProtocolL semanticObject) {

@@ -3,8 +3,12 @@
  */
 package org.xtext.globalTypes.myDsl.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -12,6 +16,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.globalTypes.myDsl.MessageL;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
@@ -65,14 +72,14 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
   protected Payload payload;
 
   /**
-   * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
+   * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getTarget()
    * @generated
    * @ordered
    */
-  protected EObject target;
+  protected EList<EObject> target;
 
   /**
    * <!-- begin-user-doc -->
@@ -176,48 +183,13 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
    * @generated
    */
   @Override
-  public EObject getTarget()
+  public EList<EObject> getTarget()
   {
+    if (target == null)
+    {
+      target = new EObjectContainmentEList<EObject>(EObject.class, this, MyDslPackage.MESSAGE_L__TARGET);
+    }
     return target;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTarget(EObject newTarget, NotificationChain msgs)
-  {
-    EObject oldTarget = target;
-    target = newTarget;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.MESSAGE_L__TARGET, oldTarget, newTarget);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setTarget(EObject newTarget)
-  {
-    if (newTarget != target)
-    {
-      NotificationChain msgs = null;
-      if (target != null)
-        msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.MESSAGE_L__TARGET, null, msgs);
-      if (newTarget != null)
-        msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.MESSAGE_L__TARGET, null, msgs);
-      msgs = basicSetTarget(newTarget, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MESSAGE_L__TARGET, newTarget, newTarget));
   }
 
   /**
@@ -233,7 +205,7 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
       case MyDslPackage.MESSAGE_L__PAYLOAD:
         return basicSetPayload(null, msgs);
       case MyDslPackage.MESSAGE_L__TARGET:
-        return basicSetTarget(null, msgs);
+        return ((InternalEList<?>)getTarget()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -263,6 +235,7 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -275,7 +248,8 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
         setPayload((Payload)newValue);
         return;
       case MyDslPackage.MESSAGE_L__TARGET:
-        setTarget((EObject)newValue);
+        getTarget().clear();
+        getTarget().addAll((Collection<? extends EObject>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -298,7 +272,7 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
         setPayload((Payload)null);
         return;
       case MyDslPackage.MESSAGE_L__TARGET:
-        setTarget((EObject)null);
+        getTarget().clear();
         return;
     }
     super.eUnset(featureID);
@@ -319,7 +293,7 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
       case MyDslPackage.MESSAGE_L__PAYLOAD:
         return payload != null;
       case MyDslPackage.MESSAGE_L__TARGET:
-        return target != null;
+        return target != null && !target.isEmpty();
     }
     return super.eIsSet(featureID);
   }

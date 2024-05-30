@@ -38,7 +38,6 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getLocalProtocolAccess().getAlternatives_5(), "rule__LocalProtocol__Alternatives_5");
 			builder.put(grammarAccess.getRoleLAccess().getAlternatives(), "rule__RoleL__Alternatives");
 			builder.put(grammarAccess.getProtocolLAccess().getActionsAlternatives_1_0(), "rule__ProtocolL__ActionsAlternatives_1_0");
-			builder.put(grammarAccess.getMessageLAccess().getAlternatives_4(), "rule__MessageL__Alternatives_4");
 			builder.put(grammarAccess.getMessageTypeAccess().getAlternatives(), "rule__MessageType__Alternatives");
 			builder.put(grammarAccess.getTypeAccess().getAlternatives(), "rule__Type__Alternatives");
 			builder.put(grammarAccess.getGlobalProtocolAccess().getGroup(), "rule__GlobalProtocol__Group__0");
@@ -109,8 +108,8 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getProtocolLAccess().getActionsAssignment_1(), "rule__ProtocolL__ActionsAssignment_1");
 			builder.put(grammarAccess.getMessageLAccess().getMessageTypeAssignment_0(), "rule__MessageL__MessageTypeAssignment_0");
 			builder.put(grammarAccess.getMessageLAccess().getPayloadAssignment_2(), "rule__MessageL__PayloadAssignment_2");
-			builder.put(grammarAccess.getMessageLAccess().getTargetAssignment_4_0(), "rule__MessageL__TargetAssignment_4_0");
-			builder.put(grammarAccess.getMessageLAccess().getTargetAssignment_4_1(), "rule__MessageL__TargetAssignment_4_1");
+			builder.put(grammarAccess.getMessageLAccess().getTargetAssignment_4(), "rule__MessageL__TargetAssignment_4");
+			builder.put(grammarAccess.getMessageLAccess().getTargetAssignment_5(), "rule__MessageL__TargetAssignment_5");
 			builder.put(grammarAccess.getSenderLAccess().getSenderAssignment_1(), "rule__SenderL__SenderAssignment_1");
 			builder.put(grammarAccess.getReceiverLAccess().getToAssignment_1(), "rule__ReceiverL__ToAssignment_1");
 			builder.put(grammarAccess.getChoiceLAccess().getRoleAssignment_2(), "rule__ChoiceL__RoleAssignment_2");
