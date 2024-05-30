@@ -10,6 +10,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.testing.util.ParseHelper;
+import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.jupiter.api.Assertions;
@@ -24,11 +25,27 @@ public class MyDslParsingTest {
   @Inject
   private ParseHelper<Model> parseHelper;
 
+  @Inject
+  private ValidationTestHelper validationTester;
+
   @Test
-  public void loadModel() {
+  public void prova1() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Hello Xtext!");
+      _builder.append("global protocol _aaa(role a, role b){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("choice at a{");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("INFORM() from a to b;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("} ");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
       _builder.newLine();
       final Model result = this.parseHelper.parse(_builder);
       Assertions.assertNotNull(result);

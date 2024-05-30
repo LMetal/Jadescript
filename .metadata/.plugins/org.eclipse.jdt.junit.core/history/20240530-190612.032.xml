@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="MyDslParsingTest" project="org.xtext.example.mydsl.tests" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="org.xtext.globalTypes.tests.MyDslParsingTest" time="0.153" displayname="MyDslParsingTest" uniqueid="[engine:junit-jupiter]/[class:org.xtext.globalTypes.tests.MyDslParsingTest]">
+    <testcase name="erroreChoiceMessage" classname="org.xtext.globalTypes.tests.MyDslParsingTest" time="0.148" displayname="erroreChoiceMessage()" uniqueid="[engine:junit-jupiter]/[class:org.xtext.globalTypes.tests.MyDslParsingTest]/[method:erroreChoiceMessage()]"/>
+    <testcase name="prova1" classname="org.xtext.globalTypes.tests.MyDslParsingTest" time="0.004" displayname="prova1()" uniqueid="[engine:junit-jupiter]/[class:org.xtext.globalTypes.tests.MyDslParsingTest]/[method:prova1()]"/>
+  </testsuite>
+</testrun>

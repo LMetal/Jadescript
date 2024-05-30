@@ -48,33 +48,44 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		//finish
 		@Check
 		public void forEachVariableScope(Model m) {
+			//ottengo tutti i ForEach
 			List<ForEach> forEachList = EcoreUtil2.getAllContentsOfType(m, ForEach.class);
+			//ottengo tutto, ogni action
 			List<EObject> allActions = EcoreUtil2.getAllContentsOfType(m, EObject.class);
 			
+			//ciclo sui ForEach, controllo una variabile di ciclo alla volta
 			for(ForEach f : forEachList) {
+				//ottengo il contenuto del ForEach
 				List<EObject> forEachActions = EcoreUtil2.getAllContentsOfType(f, EObject.class);
+				//ciclo sul contenuto
 				for(EObject action : allActions) {
+					//può essere questo errore solo se ci si trova fuori dal foreach di cui si sta controllando la variabile
 					if(!forEachActions.contains(action)) {
+						//differisco per tipo di action e controllo
 						if(action instanceof Message) {
+							//se il sender o receiver di un messaggio fuori dal foreach è il ruolo definito nel foreach, errore
 							Message message = (Message) action;
 							if(message.getSender() == f.getEachRole()) {
-								error("Role not defined",
+								error("Role not defined in this scope",
 										message,
 										MyDslPackage.Literals.MESSAGE__SENDER
 										);}
 							if(message.getReceiver() == f.getEachRole()) {
-								error("Role not defined",
+								error("Role not defined in this scope",
 										message,
 										MyDslPackage.Literals.MESSAGE__RECEIVER
 										);}
 						}
+						
 						if(action instanceof Choice) {
-							Choice message = (Choice) action;
+							Choice choice = (Choice) action;
+							if(choice.getRole() == f.getEachRole()) {
+								error("Role not defined in this scope",
+										choice,
+										MyDslPackage.Literals.CHOICE__ROLE
+										);}
+							}
 						}
-						if(action instanceof ForEach) {
-							ForEach message = (ForEach) action;
-						}
-					}
 	
 				}
 			}
@@ -136,7 +147,8 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		@Check
 		public void uniqueRoleName(Model model) {
 			//estraggo tutte le dichiarazioni di Role nel model
-			List<Role> roles = EcoreUtil2.getAllContentsOfType(model, Role.class);
+			List<Role> roles = EcoreUtil2.getAllContentsOfType(model, Roles.class).get(0).getRoles();
+			//associazione nome ruolo dichiarato, oggetto Role
 			var declaredRoles = new HashMap<String, Role>();
 			
 			for(Role r : roles) {
@@ -152,6 +164,17 @@ public class MyDslValidator extends AbstractMyDslValidator {
 							);
 				} else {
 					declaredRoles.put(r.getName(), r);
+				}
+			}
+			
+			//check variabili di loop ForEach, possono essere uguali tra liro ma non con i Role già in uso
+			List<ForEach> forEachList = EcoreUtil2.getAllContentsOfType(model, ForEach.class);
+			for(ForEach f : forEachList) {
+				if(declaredRoles.containsKey(f.getEachRole().getName())) {
+					error("Role's name must be unique", 
+							f.getEachRole(),
+							MyDslPackage.Literals.ROLE__NAME
+							);
 				}
 			}
 		}
