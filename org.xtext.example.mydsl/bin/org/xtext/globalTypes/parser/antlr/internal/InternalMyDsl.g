@@ -144,9 +144,9 @@ ruleGlobalProtocol returns [EObject current=null]
 		}
 		(
 			(
-				lv_protocolName_2_0=RULE_PROTOCOLNAME
+				lv_protocolName_2_0=RULE_ID
 				{
-					newLeafNode(lv_protocolName_2_0, grammarAccess.getGlobalProtocolAccess().getProtocolNamePROTOCOLNAMETerminalRuleCall_2_0());
+					newLeafNode(lv_protocolName_2_0, grammarAccess.getGlobalProtocolAccess().getProtocolNameIDTerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
@@ -156,7 +156,7 @@ ruleGlobalProtocol returns [EObject current=null]
 						$current,
 						"protocolName",
 						lv_protocolName_2_0,
-						"org.xtext.globalTypes.MyDsl.PROTOCOLNAME");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
@@ -334,9 +334,9 @@ ruleRoleOne returns [EObject current=null]
 		}
 		(
 			(
-				lv_name_1_0=RULE_ROLENAME
+				lv_name_1_0=RULE_ID
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getRoleOneAccess().getNameROLENAMETerminalRuleCall_1_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getRoleOneAccess().getNameIDTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -346,7 +346,7 @@ ruleRoleOne returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_1_0,
-						"org.xtext.globalTypes.MyDsl.ROLENAME");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
@@ -375,9 +375,9 @@ ruleRoleSet returns [EObject current=null]
 		}
 		(
 			(
-				lv_name_1_0=RULE_ROLESETNAME
+				lv_name_1_0=RULE_ID
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getRoleSetAccess().getNameROLESETNAMETerminalRuleCall_1_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getRoleSetAccess().getNameIDTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -387,7 +387,7 @@ ruleRoleSet returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_1_0,
-						"org.xtext.globalTypes.MyDsl.ROLESETNAME");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
@@ -402,7 +402,7 @@ ruleRoleSet returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getRoleSetRule());
 					}
 				}
-				otherlv_3=RULE_ROLENAME
+				otherlv_3=RULE_ID
 				{
 					newLeafNode(otherlv_3, grammarAccess.getRoleSetAccess().getRefRoleOneCrossReference_3_0());
 				}
@@ -544,9 +544,9 @@ ruleRecursion returns [EObject current=null]
 		}
 		(
 			(
-				lv_name_1_0=RULE_RECNAME
+				lv_name_1_0=RULE_ID
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getRecursionAccess().getNameRECNAMETerminalRuleCall_1_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getRecursionAccess().getNameIDTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -556,7 +556,7 @@ ruleRecursion returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_1_0,
-						"org.xtext.globalTypes.MyDsl.RECNAME");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
@@ -594,7 +594,7 @@ ruleCloseRecursion returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getCloseRecursionRule());
 					}
 				}
-				otherlv_1=RULE_RECNAME
+				otherlv_1=RULE_ID
 				{
 					newLeafNode(otherlv_1, grammarAccess.getCloseRecursionAccess().getRecursionVariableRecursionCrossReference_1_0());
 				}
@@ -657,7 +657,7 @@ ruleForEach returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getForEachRule());
 					}
 				}
-				otherlv_3=RULE_ROLESETNAME
+				otherlv_3=RULE_ID
 				{
 					newLeafNode(otherlv_3, grammarAccess.getForEachAccess().getRoleRoleSetCrossReference_3_0());
 				}
@@ -724,7 +724,7 @@ ruleChoice returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getChoiceRule());
 					}
 				}
-				otherlv_2=RULE_ROLENAME
+				otherlv_2=RULE_ID
 				{
 					newLeafNode(otherlv_2, grammarAccess.getChoiceAccess().getRoleRoleOneCrossReference_2_0());
 				}
@@ -849,20 +849,19 @@ ruleMessage returns [EObject current=null]
 	(
 		(
 			(
+				lv_messageType_0_0=RULE_ID
 				{
-					newCompositeNode(grammarAccess.getMessageAccess().getMessageTypeMessageTypeParserRuleCall_0_0());
+					newLeafNode(lv_messageType_0_0, grammarAccess.getMessageAccess().getMessageTypeIDTerminalRuleCall_0_0());
 				}
-				lv_messageType_0_0=ruleMessageType
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getMessageRule());
+						$current = createModelElement(grammarAccess.getMessageRule());
 					}
-					set(
+					setWithLastConsumed(
 						$current,
 						"messageType",
 						lv_messageType_0_0,
-						"org.xtext.globalTypes.MyDsl.MessageType");
-					afterParserOrEnumRuleCall();
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
@@ -904,7 +903,7 @@ ruleMessage returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getMessageRule());
 					}
 				}
-				otherlv_5=RULE_ROLENAME
+				otherlv_5=RULE_ID
 				{
 					newLeafNode(otherlv_5, grammarAccess.getMessageAccess().getSenderRoleOneCrossReference_5_0());
 				}
@@ -921,7 +920,7 @@ ruleMessage returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getMessageRule());
 					}
 				}
-				otherlv_7=RULE_ROLENAME
+				otherlv_7=RULE_ID
 				{
 					newLeafNode(otherlv_7, grammarAccess.getMessageAccess().getReceiverRoleOneCrossReference_7_0());
 				}
@@ -1053,9 +1052,9 @@ ruleLocalProtocol returns [EObject current=null]
 		}
 		(
 			(
-				lv_protocolName_2_0=RULE_PROTOCOLNAME
+				lv_protocolName_2_0=RULE_ID
 				{
-					newLeafNode(lv_protocolName_2_0, grammarAccess.getLocalProtocolAccess().getProtocolNamePROTOCOLNAMETerminalRuleCall_2_0());
+					newLeafNode(lv_protocolName_2_0, grammarAccess.getLocalProtocolAccess().getProtocolNameIDTerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
@@ -1065,67 +1064,42 @@ ruleLocalProtocol returns [EObject current=null]
 						$current,
 						"protocolName",
 						lv_protocolName_2_0,
-						"org.xtext.globalTypes.MyDsl.PROTOCOLNAME");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
-		otherlv_3='projection'
+		otherlv_3='at'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getLocalProtocolAccess().getProjectionKeyword_3());
-		}
-		otherlv_4='on'
-		{
-			newLeafNode(otherlv_4, grammarAccess.getLocalProtocolAccess().getOnKeyword_4());
+			newLeafNode(otherlv_3, grammarAccess.getLocalProtocolAccess().getAtKeyword_3());
 		}
 		(
 			(
-				(
-					lv_projectedRole_5_0=RULE_ROLENAME
-					{
-						newLeafNode(lv_projectedRole_5_0, grammarAccess.getLocalProtocolAccess().getProjectedRoleROLENAMETerminalRuleCall_5_0_0());
+				lv_projectedRole_4_0=RULE_ID
+				{
+					newLeafNode(lv_projectedRole_4_0, grammarAccess.getLocalProtocolAccess().getProjectedRoleIDTerminalRuleCall_4_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getLocalProtocolRule());
 					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getLocalProtocolRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"projectedRole",
-							lv_projectedRole_5_0,
-							"org.xtext.globalTypes.MyDsl.ROLENAME");
-					}
-				)
-			)
-			    |
-			(
-				(
-					lv_projectedRole_6_0=RULE_ROLESETNAME
-					{
-						newLeafNode(lv_projectedRole_6_0, grammarAccess.getLocalProtocolAccess().getProjectedRoleROLESETNAMETerminalRuleCall_5_1_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getLocalProtocolRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"projectedRole",
-							lv_projectedRole_6_0,
-							"org.xtext.globalTypes.MyDsl.ROLESETNAME");
-					}
-				)
+					setWithLastConsumed(
+						$current,
+						"projectedRole",
+						lv_projectedRole_4_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
 			)
 		)
-		otherlv_7='('
+		otherlv_5='('
 		{
-			newLeafNode(otherlv_7, grammarAccess.getLocalProtocolAccess().getLeftParenthesisKeyword_6());
+			newLeafNode(otherlv_5, grammarAccess.getLocalProtocolAccess().getLeftParenthesisKeyword_5());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getLocalProtocolAccess().getRolesRolesLParserRuleCall_7_0());
+					newCompositeNode(grammarAccess.getLocalProtocolAccess().getRolesRolesLParserRuleCall_6_0());
 				}
-				lv_roles_8_0=ruleRolesL
+				lv_roles_6_0=ruleRolesL
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getLocalProtocolRule());
@@ -1133,26 +1107,26 @@ ruleLocalProtocol returns [EObject current=null]
 					set(
 						$current,
 						"roles",
-						lv_roles_8_0,
+						lv_roles_6_0,
 						"org.xtext.globalTypes.MyDsl.RolesL");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_9=')'
+		otherlv_7=')'
 		{
-			newLeafNode(otherlv_9, grammarAccess.getLocalProtocolAccess().getRightParenthesisKeyword_8());
+			newLeafNode(otherlv_7, grammarAccess.getLocalProtocolAccess().getRightParenthesisKeyword_7());
 		}
-		otherlv_10='{'
+		otherlv_8='{'
 		{
-			newLeafNode(otherlv_10, grammarAccess.getLocalProtocolAccess().getLeftCurlyBracketKeyword_9());
+			newLeafNode(otherlv_8, grammarAccess.getLocalProtocolAccess().getLeftCurlyBracketKeyword_8());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getLocalProtocolAccess().getProtocolProtocolLParserRuleCall_10_0());
+					newCompositeNode(grammarAccess.getLocalProtocolAccess().getProtocolProtocolLParserRuleCall_9_0());
 				}
-				lv_protocol_11_0=ruleProtocolL
+				lv_protocol_9_0=ruleProtocolL
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getLocalProtocolRule());
@@ -1160,15 +1134,15 @@ ruleLocalProtocol returns [EObject current=null]
 					set(
 						$current,
 						"protocol",
-						lv_protocol_11_0,
+						lv_protocol_9_0,
 						"org.xtext.globalTypes.MyDsl.ProtocolL");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_12='}'
+		otherlv_10='}'
 		{
-			newLeafNode(otherlv_12, grammarAccess.getLocalProtocolAccess().getRightCurlyBracketKeyword_11());
+			newLeafNode(otherlv_10, grammarAccess.getLocalProtocolAccess().getRightCurlyBracketKeyword_10());
 		}
 	)
 ;
@@ -1294,9 +1268,9 @@ ruleRoleOneL returns [EObject current=null]
 		}
 		(
 			(
-				lv_name_1_0=RULE_ROLENAME
+				lv_name_1_0=RULE_ID
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getRoleOneLAccess().getNameROLENAMETerminalRuleCall_1_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getRoleOneLAccess().getNameIDTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -1306,7 +1280,7 @@ ruleRoleOneL returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_1_0,
-						"org.xtext.globalTypes.MyDsl.ROLENAME");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
@@ -1335,9 +1309,9 @@ ruleRoleSetL returns [EObject current=null]
 		}
 		(
 			(
-				lv_name_1_0=RULE_ROLESETNAME
+				lv_name_1_0=RULE_ID
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getRoleSetLAccess().getNameROLESETNAMETerminalRuleCall_1_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getRoleSetLAccess().getNameIDTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -1347,7 +1321,7 @@ ruleRoleSetL returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_1_0,
-						"org.xtext.globalTypes.MyDsl.ROLESETNAME");
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
@@ -1362,7 +1336,7 @@ ruleRoleSetL returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getRoleSetLRule());
 					}
 				}
-				otherlv_3=RULE_ROLENAME
+				otherlv_3=RULE_ID
 				{
 					newLeafNode(otherlv_3, grammarAccess.getRoleSetLAccess().getRefRoleOneLCrossReference_3_0());
 				}
@@ -1500,20 +1474,19 @@ ruleMessageL returns [EObject current=null]
 	(
 		(
 			(
+				lv_messageType_0_0=RULE_ID
 				{
-					newCompositeNode(grammarAccess.getMessageLAccess().getMessageTypeMessageTypeParserRuleCall_0_0());
+					newLeafNode(lv_messageType_0_0, grammarAccess.getMessageLAccess().getMessageTypeIDTerminalRuleCall_0_0());
 				}
-				lv_messageType_0_0=ruleMessageType
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getMessageLRule());
+						$current = createModelElement(grammarAccess.getMessageLRule());
 					}
-					set(
+					setWithLastConsumed(
 						$current,
 						"messageType",
 						lv_messageType_0_0,
-						"org.xtext.globalTypes.MyDsl.MessageType");
-					afterParserOrEnumRuleCall();
+						"org.eclipse.xtext.common.Terminals.ID");
 				}
 			)
 		)
@@ -1616,7 +1589,7 @@ ruleSenderL returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getSenderLRule());
 					}
 				}
-				otherlv_1=RULE_ROLENAME
+				otherlv_1=RULE_ID
 				{
 					newLeafNode(otherlv_1, grammarAccess.getSenderLAccess().getSenderRoleLCrossReference_1_0());
 				}
@@ -1652,7 +1625,7 @@ ruleReceiverL returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getReceiverLRule());
 					}
 				}
-				otherlv_1=RULE_ROLENAME
+				otherlv_1=RULE_ID
 				{
 					newLeafNode(otherlv_1, grammarAccess.getReceiverLAccess().getToRoleLCrossReference_1_0());
 				}
@@ -1692,7 +1665,7 @@ ruleChoiceL returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getChoiceLRule());
 					}
 				}
-				otherlv_2=RULE_ROLENAME
+				otherlv_2=RULE_ID
 				{
 					newLeafNode(otherlv_2, grammarAccess.getChoiceLAccess().getRoleRoleLCrossReference_2_0());
 				}
@@ -1849,7 +1822,7 @@ ruleForEachL returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getForEachLRule());
 					}
 				}
-				otherlv_3=RULE_ROLESETNAME
+				otherlv_3=RULE_ID
 				{
 					newLeafNode(otherlv_3, grammarAccess.getForEachLAccess().getRoleRoleSetLCrossReference_3_0());
 				}
@@ -1881,60 +1854,6 @@ ruleForEachL returns [EObject current=null]
 		otherlv_6='}'
 		{
 			newLeafNode(otherlv_6, grammarAccess.getForEachLAccess().getRightCurlyBracketKeyword_6());
-		}
-	)
-;
-
-// Entry rule entryRuleMessageType
-entryRuleMessageType returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getMessageTypeRule()); }
-	iv_ruleMessageType=ruleMessageType
-	{ $current=$iv_ruleMessageType.current.getText(); }
-	EOF;
-
-// Rule MessageType
-ruleMessageType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		kw='REQUEST'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getMessageTypeAccess().getREQUESTKeyword_0());
-		}
-		    |
-		kw='INFORM'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getMessageTypeAccess().getINFORMKeyword_1());
-		}
-		    |
-		kw='AGREE'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getMessageTypeAccess().getAGREEKeyword_2());
-		}
-		    |
-		kw='REFUSE'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getMessageTypeAccess().getREFUSEKeyword_3());
-		}
-		    |
-		kw='CFP'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getMessageTypeAccess().getCFPKeyword_4());
-		}
-		    |
-		kw='QUIT'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getMessageTypeAccess().getQUITKeyword_5());
 		}
 	)
 ;
@@ -1974,14 +1893,6 @@ ruleType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 		}
 	)
 ;
-
-RULE_ROLENAME : ('a'..'z')*;
-
-RULE_ROLESETNAME : 'A'..'Z' ('a'..'z')*;
-
-RULE_RECNAME : ('A'..'Z')+;
-
-RULE_PROTOCOLNAME : '_' ('a'..'z')*;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

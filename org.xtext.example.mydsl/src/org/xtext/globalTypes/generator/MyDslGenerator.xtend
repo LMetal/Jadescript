@@ -47,7 +47,7 @@ class MyDslGenerator extends AbstractGenerator {
 	}
 	
 	def CharSequence project(GlobalProtocol p, Role role)'''
-		local protocol «p.protocolName» projection on «role.name»(«projectOn(p.roles, role)») {
+		local protocol «p.protocolName» at «role.name»(«projectOn(p.roles, role)») {
 			«projectOn(p.protocol, role)»
 			
 		}
@@ -64,10 +64,7 @@ class MyDslGenerator extends AbstractGenerator {
 			«projectOn(role, r)»«ENDFOR»'''
 	
 	def dispatch projectOn(Role role, Role r)'''
-		«IF role instanceof RoleOne»
-			«IF role == r»role self«ELSE»role «role.name»«ENDIF»
-		«ELSE»
-			«IF role == r»role self«ELSE»roleset «role.name»:«IF(role as RoleSet).ref == r»self«ELSE»«(role as RoleSet).ref.name»«ENDIF»«ENDIF»«ENDIF»'''
+		«IF role instanceof RoleOne»role «role.name»«ELSE»roleset «role.name»:«(role as RoleSet).ref.name»«ENDIF»'''
 	
 	
 	def dispatch projectOn(Message m, Role r)'''
@@ -76,15 +73,13 @@ class MyDslGenerator extends AbstractGenerator {
 		«ELSE»
 			«IF m.receiver == r»
 				«m.messageType»(«printPayload(m.payload)») from «m.sender.name»;
-			«ELSE»
-				«m.messageType»(«printPayload(m.payload)») from «m.sender.name» to «m.receiver.name»;
 			«ENDIF»
 		«ENDIF»
 		'''
 		
 	
 	def dispatch projectOn(Choice c, Role r)'''
-		choice at «IF c.role == r»self«ELSE»«c.role.name»«ENDIF»{
+		choice at «c.role.name»{
 		«FOR int i: 0..c.branches.length-1 SEPARATOR' or {'»
 				«projectOn(c.message.get(i), r)»
 				«projectOn(c.branches.get(i), r)»

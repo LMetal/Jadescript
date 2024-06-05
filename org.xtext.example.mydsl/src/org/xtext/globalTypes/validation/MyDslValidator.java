@@ -12,6 +12,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 import org.xtext.globalTypes.myDsl.Choice;
 import org.xtext.globalTypes.myDsl.ForEach;
+import org.xtext.globalTypes.myDsl.GlobalProtocol;
 import org.xtext.globalTypes.myDsl.Message;
 import org.xtext.globalTypes.myDsl.Model;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
@@ -105,11 +106,11 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		
 		
 		@Check
-		public void rightForEachInteractions(Model m) {
+		public void rightForEachInteractions(GlobalProtocol glob_p) {
 			//estraggo lista di foreach
-			List<ForEach> eachList = EcoreUtil2.getAllContentsOfType(m, ForEach.class);
+			List<ForEach> eachList = EcoreUtil2.getAllContentsOfType(glob_p, ForEach.class);
 			//estraggo lista di dichiarazione di roleset
-			List<RoleSet> rolesetDef = EcoreUtil2.getAllContentsOfType(m, RoleSet.class);
+			List<RoleSet> rolesetDef = EcoreUtil2.getAllContentsOfType(glob_p, RoleSet.class);
 			
 			//associo roleset a referente
 			var references = new HashMap<RoleSet, RoleOne>();
@@ -145,9 +146,9 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		
 		
 		@Check
-		public void uniqueRoleName(Model model) {
+		public void uniqueRoleName(GlobalProtocol glob_p) {
 			//estraggo tutte le dichiarazioni di Role nel model
-			List<Role> roles = EcoreUtil2.getAllContentsOfType(model, Roles.class).get(0).getRoles();
+			List<Role> roles = EcoreUtil2.getAllContentsOfType(glob_p, Roles.class).get(0).getRoles();
 			//associazione nome ruolo dichiarato, oggetto Role
 			var declaredRoles = new HashMap<String, Role>();
 			
@@ -168,7 +169,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 			}
 			
 			//check variabili di loop ForEach, possono essere uguali tra liro ma non con i Role già in uso
-			List<ForEach> forEachList = EcoreUtil2.getAllContentsOfType(model, ForEach.class);
+			List<ForEach> forEachList = EcoreUtil2.getAllContentsOfType(glob_p, ForEach.class);
 			for(ForEach f : forEachList) {
 				if(declaredRoles.containsKey(f.getEachRole().getName())) {
 					error("Role's name must be unique", 

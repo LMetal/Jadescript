@@ -7,7 +7,7 @@ Model:
 ;
 
 GlobalProtocol:
-	'global' 'protocol' protocolName=PROTOCOLNAME '(' roles=Roles '){'protocol=Protocol'}'
+	'global' 'protocol' protocolName=ID '(' roles=Roles '){'protocol=Protocol'}'
 	;
 	
 Roles:
@@ -19,11 +19,11 @@ Role:
 ;
 
 RoleOne:
-	'role' name=ROLENAME
+	'role' name=ID
 ;
 
 RoleSet:
-	'roleset' name=ROLESETNAME ':' ref=[RoleOne | ROLENAME]
+	'roleset' name=ID ':' ref=[RoleOne | ID]
 ;
     
 
@@ -32,22 +32,22 @@ Protocol:
 ;
 
 Recursion:
-	'rec' name=RECNAME ':'
+	'rec' name=ID ':'
 ;
 
 CloseRecursion:
-	'loop' recursionVariable=[Recursion | RECNAME] ';'
+	'loop' recursionVariable=[Recursion | ID] ';'
 ;
 
 ForEach: // add ref
 
-	'foreach' eachRole=RoleOne ':' role=[RoleSet | ROLESETNAME] '{'
+	'foreach' eachRole=RoleOne ':' role=[RoleSet | ID] '{'
 		branch=Protocol
 	'}'
 ;
 
 Choice:
-	'choice' 'at' role=[RoleOne | ROLENAME] '{'
+	'choice' 'at' role=[RoleOne | ID] '{'
 		message+=Message
 		branches+=Protocol
 	'}' ('or' '{'
@@ -57,7 +57,7 @@ Choice:
 ;
 
 Message:
-	messageType=MessageType '(' payload=Payload? ')' 'from' sender=[RoleOne | ROLENAME] 'to' receiver=[RoleOne | ROLENAME] ';'
+	messageType=ID '(' payload=Payload? ')' 'from' sender=[RoleOne | ID] 'to' receiver=[RoleOne | ID] ';'
 ;
 
 Payload:
@@ -65,7 +65,7 @@ Payload:
 ;
 
 LocalProtocol:
-	'local' 'protocol' protocolName=PROTOCOLNAME 'projection' 'on' (projectedRole=ROLENAME | projectedRole=ROLESETNAME) '(' roles=RolesL ')' '{'protocol=ProtocolL'}'
+	'local' 'protocol' protocolName=ID 'at' projectedRole=ID '(' roles=RolesL ')' '{'protocol=ProtocolL'}'
 ;
 
 RolesL:
@@ -78,11 +78,11 @@ RoleL:
 
 
 RoleOneL:
-	'role' name=ROLENAME
+	'role' name=ID
 ;
 
 RoleSetL:
-	'roleset' name=ROLESETNAME ':' ref=[RoleOneL | ROLENAME]
+	'roleset' name=ID ':' ref=[RoleOneL | ID]
 ;
 
 ProtocolL:
@@ -90,19 +90,19 @@ ProtocolL:
 ;
 
 MessageL:
-	messageType=MessageType '(' payload=Payload? ')' (target+=SenderL)? (target+=ReceiverL)? ';'
+	messageType=ID '(' payload=Payload? ')' (target+=SenderL)? (target+=ReceiverL)? ';'
 ;
 
 SenderL:
-	'from' sender=[RoleL | ROLENAME]
+	'from' sender=[RoleL | ID]
 ;
 
 ReceiverL:
-	'to' to=[RoleL | ROLENAME]
+	'to' to=[RoleL | ID]
 ;
 
 ChoiceL:
-	'choice' 'at' role=[RoleL | ROLENAME] '{'
+	'choice' 'at' role=[RoleL | ID] '{'
 		message+=MessageL
 		branches+=ProtocolL
 	'}' ('or' '{'
@@ -112,23 +112,15 @@ ChoiceL:
 ;
 
 ForEachL:
-	'foreach' eachRole=RoleOneL ':' role=[RoleSetL | ROLESETNAME] '{'
+	'foreach' eachRole=RoleOneL ':' role=[RoleSetL | ID] '{'
 		branch=ProtocolL
 	'}'
 ;
 
 
 
-MessageType:
-	'REQUEST' | 'INFORM' | 'AGREE' | 'REFUSE' | 'CFP' | 'QUIT'
-;
-
 Type:
 	'int' | 'string' | 'action'  //add more
 ;
 
 
-terminal ROLENAME:('a'..'z')*;
-terminal ROLESETNAME:('A'..'Z') ('a'..'z')*;
-terminal RECNAME:('A'..'Z')+;
-terminal PROTOCOLNAME: '_'('a'..'z')*;

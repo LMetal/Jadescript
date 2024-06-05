@@ -73,7 +73,7 @@ public class MyDslGenerator extends AbstractGenerator {
     _builder.append("local protocol ");
     String _protocolName = p.getProtocolName();
     _builder.append(_protocolName);
-    _builder.append(" projection on ");
+    _builder.append(" at ");
     String _name = role.getName();
     _builder.append(_name);
     _builder.append("(");
@@ -127,39 +127,16 @@ public class MyDslGenerator extends AbstractGenerator {
     StringConcatenation _builder = new StringConcatenation();
     {
       if ((role instanceof RoleOne)) {
-        {
-          boolean _equals = Objects.equal(role, r);
-          if (_equals) {
-            _builder.append("role self");
-          } else {
-            _builder.append("role ");
-            String _name = ((RoleOne)role).getName();
-            _builder.append(_name);
-          }
-        }
-        _builder.newLineIfNotEmpty();
+        _builder.append("role ");
+        String _name = ((RoleOne)role).getName();
+        _builder.append(_name);
       } else {
-        {
-          boolean _equals_1 = Objects.equal(role, r);
-          if (_equals_1) {
-            _builder.append("role self");
-          } else {
-            _builder.append("roleset ");
-            String _name_1 = role.getName();
-            _builder.append(_name_1);
-            _builder.append(":");
-            {
-              RoleOne _ref = ((RoleSet) role).getRef();
-              boolean _equals_2 = Objects.equal(_ref, r);
-              if (_equals_2) {
-                _builder.append("self");
-              } else {
-                String _name_2 = ((RoleSet) role).getRef().getName();
-                _builder.append(_name_2);
-              }
-            }
-          }
-        }
+        _builder.append("roleset ");
+        String _name_1 = role.getName();
+        _builder.append(_name_1);
+        _builder.append(":");
+        String _name_2 = ((RoleSet) role).getRef().getName();
+        _builder.append(_name_2);
       }
     }
     return _builder;
@@ -196,20 +173,6 @@ public class MyDslGenerator extends AbstractGenerator {
             _builder.append(_name_1);
             _builder.append(";");
             _builder.newLineIfNotEmpty();
-          } else {
-            String _messageType_2 = m.getMessageType();
-            _builder.append(_messageType_2);
-            _builder.append("(");
-            CharSequence _printPayload_2 = this.printPayload(m.getPayload());
-            _builder.append(_printPayload_2);
-            _builder.append(") from ");
-            String _name_2 = m.getSender().getName();
-            _builder.append(_name_2);
-            _builder.append(" to ");
-            String _name_3 = m.getReceiver().getName();
-            _builder.append(_name_3);
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
           }
         }
       }
@@ -220,16 +183,8 @@ public class MyDslGenerator extends AbstractGenerator {
   protected CharSequence _projectOn(final Choice c, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("choice at ");
-    {
-      RoleOne _role = c.getRole();
-      boolean _equals = Objects.equal(_role, r);
-      if (_equals) {
-        _builder.append("self");
-      } else {
-        String _name = c.getRole().getName();
-        _builder.append(_name);
-      }
-    }
+    String _name = c.getRole().getName();
+    _builder.append(_name);
     _builder.append("{");
     _builder.newLineIfNotEmpty();
     {
