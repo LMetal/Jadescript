@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.globalTypes.myDsl.MyDslPackage;
-import org.xtext.globalTypes.myDsl.RoleL;
+import org.xtext.globalTypes.myDsl.Role;
 import org.xtext.globalTypes.myDsl.SenderL;
 
 /**
@@ -38,7 +38,7 @@ public class SenderLImpl extends MinimalEObjectImpl.Container implements SenderL
    * @generated
    * @ordered
    */
-  protected RoleL sender;
+  protected Role sender;
 
   /**
    * <!-- begin-user-doc -->
@@ -67,12 +67,12 @@ public class SenderLImpl extends MinimalEObjectImpl.Container implements SenderL
    * @generated
    */
   @Override
-  public RoleL getSender()
+  public Role getSender()
   {
     if (sender != null && sender.eIsProxy())
     {
       InternalEObject oldSender = (InternalEObject)sender;
-      sender = (RoleL)eResolveProxy(oldSender);
+      sender = (Role)eResolveProxy(oldSender);
       if (sender != oldSender)
       {
         if (eNotificationRequired())
@@ -87,7 +87,7 @@ public class SenderLImpl extends MinimalEObjectImpl.Container implements SenderL
    * <!-- end-user-doc -->
    * @generated
    */
-  public RoleL basicGetSender()
+  public Role basicGetSender()
   {
     return sender;
   }
@@ -98,9 +98,9 @@ public class SenderLImpl extends MinimalEObjectImpl.Container implements SenderL
    * @generated
    */
   @Override
-  public void setSender(RoleL newSender)
+  public void setSender(Role newSender)
   {
-    RoleL oldSender = sender;
+    Role oldSender = sender;
     sender = newSender;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.SENDER_L__SENDER, oldSender, sender));
@@ -134,7 +134,7 @@ public class SenderLImpl extends MinimalEObjectImpl.Container implements SenderL
     switch (featureID)
     {
       case MyDslPackage.SENDER_L__SENDER:
-        setSender((RoleL)newValue);
+        setSender((Role)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -151,7 +151,7 @@ public class SenderLImpl extends MinimalEObjectImpl.Container implements SenderL
     switch (featureID)
     {
       case MyDslPackage.SENDER_L__SENDER:
-        setSender((RoleL)null);
+        setSender((Role)null);
         return;
     }
     super.eUnset(featureID);

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.ReceiverL;
-import org.xtext.globalTypes.myDsl.RoleL;
+import org.xtext.globalTypes.myDsl.Role;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,7 +38,7 @@ public class ReceiverLImpl extends MinimalEObjectImpl.Container implements Recei
    * @generated
    * @ordered
    */
-  protected RoleL to;
+  protected Role to;
 
   /**
    * <!-- begin-user-doc -->
@@ -67,12 +67,12 @@ public class ReceiverLImpl extends MinimalEObjectImpl.Container implements Recei
    * @generated
    */
   @Override
-  public RoleL getTo()
+  public Role getTo()
   {
     if (to != null && to.eIsProxy())
     {
       InternalEObject oldTo = (InternalEObject)to;
-      to = (RoleL)eResolveProxy(oldTo);
+      to = (Role)eResolveProxy(oldTo);
       if (to != oldTo)
       {
         if (eNotificationRequired())
@@ -87,7 +87,7 @@ public class ReceiverLImpl extends MinimalEObjectImpl.Container implements Recei
    * <!-- end-user-doc -->
    * @generated
    */
-  public RoleL basicGetTo()
+  public Role basicGetTo()
   {
     return to;
   }
@@ -98,9 +98,9 @@ public class ReceiverLImpl extends MinimalEObjectImpl.Container implements Recei
    * @generated
    */
   @Override
-  public void setTo(RoleL newTo)
+  public void setTo(Role newTo)
   {
-    RoleL oldTo = to;
+    Role oldTo = to;
     to = newTo;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.RECEIVER_L__TO, oldTo, to));
@@ -134,7 +134,7 @@ public class ReceiverLImpl extends MinimalEObjectImpl.Container implements Recei
     switch (featureID)
     {
       case MyDslPackage.RECEIVER_L__TO:
-        setTo((RoleL)newValue);
+        setTo((Role)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -151,7 +151,7 @@ public class ReceiverLImpl extends MinimalEObjectImpl.Container implements Recei
     switch (featureID)
     {
       case MyDslPackage.RECEIVER_L__TO:
-        setTo((RoleL)null);
+        setTo((Role)null);
         return;
     }
     super.eUnset(featureID);

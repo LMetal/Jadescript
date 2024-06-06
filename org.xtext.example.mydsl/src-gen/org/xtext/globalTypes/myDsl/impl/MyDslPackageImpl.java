@@ -28,13 +28,9 @@ import org.xtext.globalTypes.myDsl.ProtocolL;
 import org.xtext.globalTypes.myDsl.ReceiverL;
 import org.xtext.globalTypes.myDsl.Recursion;
 import org.xtext.globalTypes.myDsl.Role;
-import org.xtext.globalTypes.myDsl.RoleL;
 import org.xtext.globalTypes.myDsl.RoleOne;
-import org.xtext.globalTypes.myDsl.RoleOneL;
 import org.xtext.globalTypes.myDsl.RoleSet;
-import org.xtext.globalTypes.myDsl.RoleSetL;
 import org.xtext.globalTypes.myDsl.Roles;
-import org.xtext.globalTypes.myDsl.RolesL;
 import org.xtext.globalTypes.myDsl.SenderL;
 
 /**
@@ -142,34 +138,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   private EClass localProtocolEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass rolesLEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass roleLEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass roleOneLEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass roleSetLEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -710,83 +678,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getRolesL()
-  {
-    return rolesLEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getRolesL_Roles()
-  {
-    return (EReference)rolesLEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getRoleL()
-  {
-    return roleLEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getRoleL_Name()
-  {
-    return (EAttribute)roleLEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getRoleOneL()
-  {
-    return roleOneLEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getRoleSetL()
-  {
-    return roleSetLEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getRoleSetL_Ref()
-  {
-    return (EReference)roleSetLEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getProtocolL()
   {
     return protocolLEClass;
@@ -1063,17 +954,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     createEReference(localProtocolEClass, LOCAL_PROTOCOL__ROLES);
     createEReference(localProtocolEClass, LOCAL_PROTOCOL__PROTOCOL);
 
-    rolesLEClass = createEClass(ROLES_L);
-    createEReference(rolesLEClass, ROLES_L__ROLES);
-
-    roleLEClass = createEClass(ROLE_L);
-    createEAttribute(roleLEClass, ROLE_L__NAME);
-
-    roleOneLEClass = createEClass(ROLE_ONE_L);
-
-    roleSetLEClass = createEClass(ROLE_SET_L);
-    createEReference(roleSetLEClass, ROLE_SET_L__REF);
-
     protocolLEClass = createEClass(PROTOCOL_L);
     createEReference(protocolLEClass, PROTOCOL_L__ACTIONS);
 
@@ -1130,8 +1010,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     // Add supertypes to classes
     roleOneEClass.getESuperTypes().add(this.getRole());
     roleSetEClass.getESuperTypes().add(this.getRole());
-    roleOneLEClass.getESuperTypes().add(this.getRoleL());
-    roleSetLEClass.getESuperTypes().add(this.getRoleL());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1184,19 +1062,8 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     initEClass(localProtocolEClass, LocalProtocol.class, "LocalProtocol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getLocalProtocol_ProtocolName(), ecorePackage.getEString(), "protocolName", null, 0, 1, LocalProtocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getLocalProtocol_ProjectedRole(), ecorePackage.getEString(), "projectedRole", null, 0, 1, LocalProtocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getLocalProtocol_Roles(), this.getRolesL(), null, "roles", null, 0, 1, LocalProtocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getLocalProtocol_Roles(), this.getRoles(), null, "roles", null, 0, 1, LocalProtocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLocalProtocol_Protocol(), this.getProtocolL(), null, "protocol", null, 0, 1, LocalProtocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(rolesLEClass, RolesL.class, "RolesL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRolesL_Roles(), this.getRoleL(), null, "roles", null, 0, -1, RolesL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(roleLEClass, RoleL.class, "RoleL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getRoleL_Name(), ecorePackage.getEString(), "name", null, 0, 1, RoleL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(roleOneLEClass, RoleOneL.class, "RoleOneL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(roleSetLEClass, RoleSetL.class, "RoleSetL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRoleSetL_Ref(), this.getRoleOneL(), null, "ref", null, 0, 1, RoleSetL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(protocolLEClass, ProtocolL.class, "ProtocolL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getProtocolL_Actions(), ecorePackage.getEObject(), null, "actions", null, 0, -1, ProtocolL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1207,19 +1074,19 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     initEReference(getMessageL_Target(), ecorePackage.getEObject(), null, "target", null, 0, -1, MessageL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(senderLEClass, SenderL.class, "SenderL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSenderL_Sender(), this.getRoleL(), null, "sender", null, 0, 1, SenderL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSenderL_Sender(), this.getRole(), null, "sender", null, 0, 1, SenderL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(receiverLEClass, ReceiverL.class, "ReceiverL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getReceiverL_To(), this.getRoleL(), null, "to", null, 0, 1, ReceiverL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getReceiverL_To(), this.getRole(), null, "to", null, 0, 1, ReceiverL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(choiceLEClass, ChoiceL.class, "ChoiceL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getChoiceL_Role(), this.getRoleL(), null, "role", null, 0, 1, ChoiceL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getChoiceL_Role(), this.getRole(), null, "role", null, 0, 1, ChoiceL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getChoiceL_Message(), this.getMessageL(), null, "message", null, 0, -1, ChoiceL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getChoiceL_Branches(), this.getProtocolL(), null, "branches", null, 0, -1, ChoiceL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(forEachLEClass, ForEachL.class, "ForEachL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getForEachL_EachRole(), this.getRoleOneL(), null, "eachRole", null, 0, 1, ForEachL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getForEachL_Role(), this.getRoleSetL(), null, "role", null, 0, 1, ForEachL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getForEachL_EachRole(), this.getRoleOne(), null, "eachRole", null, 0, 1, ForEachL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getForEachL_Role(), this.getRoleSet(), null, "role", null, 0, 1, ForEachL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getForEachL_Branch(), this.getProtocolL(), null, "branch", null, 0, 1, ForEachL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource

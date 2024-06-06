@@ -30,12 +30,12 @@ public interface ForEachL extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Each Role</em>' containment reference.
-   * @see #setEachRole(RoleOneL)
+   * @see #setEachRole(RoleOne)
    * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEachL_EachRole()
    * @model containment="true"
    * @generated
    */
-  RoleOneL getEachRole();
+  RoleOne getEachRole();
 
   /**
    * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEachL#getEachRole <em>Each Role</em>}' containment reference.
@@ -45,19 +45,19 @@ public interface ForEachL extends EObject
    * @see #getEachRole()
    * @generated
    */
-  void setEachRole(RoleOneL value);
+  void setEachRole(RoleOne value);
 
   /**
    * Returns the value of the '<em><b>Role</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Role</em>' reference.
-   * @see #setRole(RoleSetL)
+   * @see #setRole(RoleSet)
    * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEachL_Role()
    * @model
    * @generated
    */
-  RoleSetL getRole();
+  RoleSet getRole();
 
   /**
    * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEachL#getRole <em>Role</em>}' reference.
@@ -67,7 +67,7 @@ public interface ForEachL extends EObject
    * @see #getRole()
    * @generated
    */
-  void setRole(RoleSetL value);
+  void setRole(RoleSet value);
 
   /**
    * Returns the value of the '<em><b>Branch</b></em>' containment reference.

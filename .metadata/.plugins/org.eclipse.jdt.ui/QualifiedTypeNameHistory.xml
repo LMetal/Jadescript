@@ -8,4 +8,5 @@
     <fullyQualifiedTypeName name="org.eclipse.xtext.scoping.Scopes"/>
     <fullyQualifiedTypeName name="org.eclipse.xtext.EcoreUtil2"/>
     <fullyQualifiedTypeName name="org.eclipse.emf.ecore.EObject"/>
+    <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.GlobalProtocol"/>
 </qualifiedTypeNameHistroy>

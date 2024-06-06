@@ -75,12 +75,12 @@ public interface LocalProtocol extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Roles</em>' containment reference.
-   * @see #setRoles(RolesL)
+   * @see #setRoles(Roles)
    * @see org.xtext.globalTypes.myDsl.MyDslPackage#getLocalProtocol_Roles()
    * @model containment="true"
    * @generated
    */
-  RolesL getRoles();
+  Roles getRoles();
 
   /**
    * Sets the value of the '{@link org.xtext.globalTypes.myDsl.LocalProtocol#getRoles <em>Roles</em>}' containment reference.
@@ -90,7 +90,7 @@ public interface LocalProtocol extends EObject
    * @see #getRoles()
    * @generated
    */
-  void setRoles(RolesL value);
+  void setRoles(Roles value);
 
   /**
    * Returns the value of the '<em><b>Protocol</b></em>' containment reference.

@@ -35,7 +35,6 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getRoleAccess().getAlternatives(), "rule__Role__Alternatives");
 			builder.put(grammarAccess.getProtocolAccess().getActionsAlternatives_1_0(), "rule__Protocol__ActionsAlternatives_1_0");
 			builder.put(grammarAccess.getPayloadAccess().getAlternatives(), "rule__Payload__Alternatives");
-			builder.put(grammarAccess.getRoleLAccess().getAlternatives(), "rule__RoleL__Alternatives");
 			builder.put(grammarAccess.getProtocolLAccess().getActionsAlternatives_1_0(), "rule__ProtocolL__ActionsAlternatives_1_0");
 			builder.put(grammarAccess.getTypeAccess().getAlternatives(), "rule__Type__Alternatives");
 			builder.put(grammarAccess.getGlobalProtocolAccess().getGroup(), "rule__GlobalProtocol__Group__0");
@@ -54,10 +53,6 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getPayloadAccess().getGroup_0_1(), "rule__Payload__Group_0_1__0");
 			builder.put(grammarAccess.getPayloadAccess().getGroup_0_1_1(), "rule__Payload__Group_0_1_1__0");
 			builder.put(grammarAccess.getLocalProtocolAccess().getGroup(), "rule__LocalProtocol__Group__0");
-			builder.put(grammarAccess.getRolesLAccess().getGroup(), "rule__RolesL__Group__0");
-			builder.put(grammarAccess.getRolesLAccess().getGroup_1(), "rule__RolesL__Group_1__0");
-			builder.put(grammarAccess.getRoleOneLAccess().getGroup(), "rule__RoleOneL__Group__0");
-			builder.put(grammarAccess.getRoleSetLAccess().getGroup(), "rule__RoleSetL__Group__0");
 			builder.put(grammarAccess.getProtocolLAccess().getGroup(), "rule__ProtocolL__Group__0");
 			builder.put(grammarAccess.getMessageLAccess().getGroup(), "rule__MessageL__Group__0");
 			builder.put(grammarAccess.getSenderLAccess().getGroup(), "rule__SenderL__Group__0");
@@ -97,11 +92,6 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getLocalProtocolAccess().getProjectedRoleAssignment_4(), "rule__LocalProtocol__ProjectedRoleAssignment_4");
 			builder.put(grammarAccess.getLocalProtocolAccess().getRolesAssignment_6(), "rule__LocalProtocol__RolesAssignment_6");
 			builder.put(grammarAccess.getLocalProtocolAccess().getProtocolAssignment_9(), "rule__LocalProtocol__ProtocolAssignment_9");
-			builder.put(grammarAccess.getRolesLAccess().getRolesAssignment_0(), "rule__RolesL__RolesAssignment_0");
-			builder.put(grammarAccess.getRolesLAccess().getRolesAssignment_1_1(), "rule__RolesL__RolesAssignment_1_1");
-			builder.put(grammarAccess.getRoleOneLAccess().getNameAssignment_1(), "rule__RoleOneL__NameAssignment_1");
-			builder.put(grammarAccess.getRoleSetLAccess().getNameAssignment_1(), "rule__RoleSetL__NameAssignment_1");
-			builder.put(grammarAccess.getRoleSetLAccess().getRefAssignment_3(), "rule__RoleSetL__RefAssignment_3");
 			builder.put(grammarAccess.getProtocolLAccess().getActionsAssignment_1(), "rule__ProtocolL__ActionsAssignment_1");
 			builder.put(grammarAccess.getMessageLAccess().getMessageTypeAssignment_0(), "rule__MessageL__MessageTypeAssignment_0");
 			builder.put(grammarAccess.getMessageLAccess().getPayloadAssignment_2(), "rule__MessageL__PayloadAssignment_2");

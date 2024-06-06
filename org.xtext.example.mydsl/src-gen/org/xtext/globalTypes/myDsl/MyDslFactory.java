@@ -150,42 +150,6 @@ public interface MyDslFactory extends EFactory
   LocalProtocol createLocalProtocol();
 
   /**
-   * Returns a new object of class '<em>Roles L</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Roles L</em>'.
-   * @generated
-   */
-  RolesL createRolesL();
-
-  /**
-   * Returns a new object of class '<em>Role L</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Role L</em>'.
-   * @generated
-   */
-  RoleL createRoleL();
-
-  /**
-   * Returns a new object of class '<em>Role One L</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Role One L</em>'.
-   * @generated
-   */
-  RoleOneL createRoleOneL();
-
-  /**
-   * Returns a new object of class '<em>Role Set L</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Role Set L</em>'.
-   * @generated
-   */
-  RoleSetL createRoleSetL();
-
-  /**
    * Returns a new object of class '<em>Protocol L</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -79,10 +79,6 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.MESSAGE: return createMessage();
       case MyDslPackage.PAYLOAD: return createPayload();
       case MyDslPackage.LOCAL_PROTOCOL: return createLocalProtocol();
-      case MyDslPackage.ROLES_L: return createRolesL();
-      case MyDslPackage.ROLE_L: return createRoleL();
-      case MyDslPackage.ROLE_ONE_L: return createRoleOneL();
-      case MyDslPackage.ROLE_SET_L: return createRoleSetL();
       case MyDslPackage.PROTOCOL_L: return createProtocolL();
       case MyDslPackage.MESSAGE_L: return createMessageL();
       case MyDslPackage.SENDER_L: return createSenderL();
@@ -260,54 +256,6 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     LocalProtocolImpl localProtocol = new LocalProtocolImpl();
     return localProtocol;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public RolesL createRolesL()
-  {
-    RolesLImpl rolesL = new RolesLImpl();
-    return rolesL;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public RoleL createRoleL()
-  {
-    RoleLImpl roleL = new RoleLImpl();
-    return roleL;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public RoleOneL createRoleOneL()
-  {
-    RoleOneLImpl roleOneL = new RoleOneLImpl();
-    return roleOneL;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public RoleSetL createRoleSetL()
-  {
-    RoleSetLImpl roleSetL = new RoleSetLImpl();
-    return roleSetL;
   }
 
   /**

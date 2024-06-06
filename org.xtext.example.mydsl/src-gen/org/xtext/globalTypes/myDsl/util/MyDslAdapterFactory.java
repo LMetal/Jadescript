@@ -146,26 +146,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createLocalProtocolAdapter();
       }
       @Override
-      public Adapter caseRolesL(RolesL object)
-      {
-        return createRolesLAdapter();
-      }
-      @Override
-      public Adapter caseRoleL(RoleL object)
-      {
-        return createRoleLAdapter();
-      }
-      @Override
-      public Adapter caseRoleOneL(RoleOneL object)
-      {
-        return createRoleOneLAdapter();
-      }
-      @Override
-      public Adapter caseRoleSetL(RoleSetL object)
-      {
-        return createRoleSetLAdapter();
-      }
-      @Override
       public Adapter caseProtocolL(ProtocolL object)
       {
         return createProtocolLAdapter();
@@ -423,66 +403,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createLocalProtocolAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.RolesL <em>Roles L</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.globalTypes.myDsl.RolesL
-   * @generated
-   */
-  public Adapter createRolesLAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.RoleL <em>Role L</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.globalTypes.myDsl.RoleL
-   * @generated
-   */
-  public Adapter createRoleLAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.RoleOneL <em>Role One L</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.globalTypes.myDsl.RoleOneL
-   * @generated
-   */
-  public Adapter createRoleOneLAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.RoleSetL <em>Role Set L</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.globalTypes.myDsl.RoleSetL
-   * @generated
-   */
-  public Adapter createRoleSetLAdapter()
   {
     return null;
   }

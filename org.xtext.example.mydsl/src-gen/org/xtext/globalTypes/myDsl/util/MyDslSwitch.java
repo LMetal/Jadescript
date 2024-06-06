@@ -173,36 +173,6 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.ROLES_L:
-      {
-        RolesL rolesL = (RolesL)theEObject;
-        T result = caseRolesL(rolesL);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case MyDslPackage.ROLE_L:
-      {
-        RoleL roleL = (RoleL)theEObject;
-        T result = caseRoleL(roleL);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case MyDslPackage.ROLE_ONE_L:
-      {
-        RoleOneL roleOneL = (RoleOneL)theEObject;
-        T result = caseRoleOneL(roleOneL);
-        if (result == null) result = caseRoleL(roleOneL);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case MyDslPackage.ROLE_SET_L:
-      {
-        RoleSetL roleSetL = (RoleSetL)theEObject;
-        T result = caseRoleSetL(roleSetL);
-        if (result == null) result = caseRoleL(roleSetL);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case MyDslPackage.PROTOCOL_L:
       {
         ProtocolL protocolL = (ProtocolL)theEObject;
@@ -469,70 +439,6 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseLocalProtocol(LocalProtocol object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Roles L</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Roles L</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseRolesL(RolesL object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Role L</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Role L</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseRoleL(RoleL object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Role One L</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Role One L</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseRoleOneL(RoleOneL object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Role Set L</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Role Set L</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseRoleSetL(RoleSetL object)
   {
     return null;
   }

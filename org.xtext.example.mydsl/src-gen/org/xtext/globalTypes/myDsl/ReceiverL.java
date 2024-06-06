@@ -28,12 +28,12 @@ public interface ReceiverL extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>To</em>' reference.
-   * @see #setTo(RoleL)
+   * @see #setTo(Role)
    * @see org.xtext.globalTypes.myDsl.MyDslPackage#getReceiverL_To()
    * @model
    * @generated
    */
-  RoleL getTo();
+  Role getTo();
 
   /**
    * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ReceiverL#getTo <em>To</em>}' reference.
@@ -43,6 +43,6 @@ public interface ReceiverL extends EObject
    * @see #getTo()
    * @generated
    */
-  void setTo(RoleL value);
+  void setTo(Role value);
 
 } // ReceiverL

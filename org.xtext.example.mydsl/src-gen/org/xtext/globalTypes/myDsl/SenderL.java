@@ -28,12 +28,12 @@ public interface SenderL extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Sender</em>' reference.
-   * @see #setSender(RoleL)
+   * @see #setSender(Role)
    * @see org.xtext.globalTypes.myDsl.MyDslPackage#getSenderL_Sender()
    * @model
    * @generated
    */
-  RoleL getSender();
+  Role getSender();
 
   /**
    * Sets the value of the '{@link org.xtext.globalTypes.myDsl.SenderL#getSender <em>Sender</em>}' reference.
@@ -43,6 +43,6 @@ public interface SenderL extends EObject
    * @see #getSender()
    * @generated
    */
-  void setSender(RoleL value);
+  void setSender(Role value);
 
 } // SenderL

@@ -567,127 +567,6 @@ public interface MyDslPackage extends EPackage
   int LOCAL_PROTOCOL_FEATURE_COUNT = 4;
 
   /**
-   * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.RolesLImpl <em>Roles L</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.globalTypes.myDsl.impl.RolesLImpl
-   * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRolesL()
-   * @generated
-   */
-  int ROLES_L = 14;
-
-  /**
-   * The feature id for the '<em><b>Roles</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROLES_L__ROLES = 0;
-
-  /**
-   * The number of structural features of the '<em>Roles L</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROLES_L_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.RoleLImpl <em>Role L</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.globalTypes.myDsl.impl.RoleLImpl
-   * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleL()
-   * @generated
-   */
-  int ROLE_L = 15;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROLE_L__NAME = 0;
-
-  /**
-   * The number of structural features of the '<em>Role L</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROLE_L_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.RoleOneLImpl <em>Role One L</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.globalTypes.myDsl.impl.RoleOneLImpl
-   * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleOneL()
-   * @generated
-   */
-  int ROLE_ONE_L = 16;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROLE_ONE_L__NAME = ROLE_L__NAME;
-
-  /**
-   * The number of structural features of the '<em>Role One L</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROLE_ONE_L_FEATURE_COUNT = ROLE_L_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.RoleSetLImpl <em>Role Set L</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.globalTypes.myDsl.impl.RoleSetLImpl
-   * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleSetL()
-   * @generated
-   */
-  int ROLE_SET_L = 17;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROLE_SET_L__NAME = ROLE_L__NAME;
-
-  /**
-   * The feature id for the '<em><b>Ref</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROLE_SET_L__REF = ROLE_L_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Role Set L</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROLE_SET_L_FEATURE_COUNT = ROLE_L_FEATURE_COUNT + 1;
-
-  /**
    * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.ProtocolLImpl <em>Protocol L</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -695,7 +574,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getProtocolL()
    * @generated
    */
-  int PROTOCOL_L = 18;
+  int PROTOCOL_L = 14;
 
   /**
    * The feature id for the '<em><b>Actions</b></em>' containment reference list.
@@ -723,7 +602,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getMessageL()
    * @generated
    */
-  int MESSAGE_L = 19;
+  int MESSAGE_L = 15;
 
   /**
    * The feature id for the '<em><b>Message Type</b></em>' attribute.
@@ -769,7 +648,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getSenderL()
    * @generated
    */
-  int SENDER_L = 20;
+  int SENDER_L = 16;
 
   /**
    * The feature id for the '<em><b>Sender</b></em>' reference.
@@ -797,7 +676,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getReceiverL()
    * @generated
    */
-  int RECEIVER_L = 21;
+  int RECEIVER_L = 17;
 
   /**
    * The feature id for the '<em><b>To</b></em>' reference.
@@ -825,7 +704,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getChoiceL()
    * @generated
    */
-  int CHOICE_L = 22;
+  int CHOICE_L = 18;
 
   /**
    * The feature id for the '<em><b>Role</b></em>' reference.
@@ -871,7 +750,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getForEachL()
    * @generated
    */
-  int FOR_EACH_L = 23;
+  int FOR_EACH_L = 19;
 
   /**
    * The feature id for the '<em><b>Each Role</b></em>' containment reference.
@@ -1324,79 +1203,6 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EReference getLocalProtocol_Protocol();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.RolesL <em>Roles L</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Roles L</em>'.
-   * @see org.xtext.globalTypes.myDsl.RolesL
-   * @generated
-   */
-  EClass getRolesL();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.globalTypes.myDsl.RolesL#getRoles <em>Roles</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Roles</em>'.
-   * @see org.xtext.globalTypes.myDsl.RolesL#getRoles()
-   * @see #getRolesL()
-   * @generated
-   */
-  EReference getRolesL_Roles();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.RoleL <em>Role L</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Role L</em>'.
-   * @see org.xtext.globalTypes.myDsl.RoleL
-   * @generated
-   */
-  EClass getRoleL();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.globalTypes.myDsl.RoleL#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.xtext.globalTypes.myDsl.RoleL#getName()
-   * @see #getRoleL()
-   * @generated
-   */
-  EAttribute getRoleL_Name();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.RoleOneL <em>Role One L</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Role One L</em>'.
-   * @see org.xtext.globalTypes.myDsl.RoleOneL
-   * @generated
-   */
-  EClass getRoleOneL();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.RoleSetL <em>Role Set L</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Role Set L</em>'.
-   * @see org.xtext.globalTypes.myDsl.RoleSetL
-   * @generated
-   */
-  EClass getRoleSetL();
-
-  /**
-   * Returns the meta object for the reference '{@link org.xtext.globalTypes.myDsl.RoleSetL#getRef <em>Ref</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Ref</em>'.
-   * @see org.xtext.globalTypes.myDsl.RoleSetL#getRef()
-   * @see #getRoleSetL()
-   * @generated
-   */
-  EReference getRoleSetL_Ref();
 
   /**
    * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.ProtocolL <em>Protocol L</em>}'.
@@ -1952,70 +1758,6 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EReference LOCAL_PROTOCOL__PROTOCOL = eINSTANCE.getLocalProtocol_Protocol();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.RolesLImpl <em>Roles L</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.globalTypes.myDsl.impl.RolesLImpl
-     * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRolesL()
-     * @generated
-     */
-    EClass ROLES_L = eINSTANCE.getRolesL();
-
-    /**
-     * The meta object literal for the '<em><b>Roles</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ROLES_L__ROLES = eINSTANCE.getRolesL_Roles();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.RoleLImpl <em>Role L</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.globalTypes.myDsl.impl.RoleLImpl
-     * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleL()
-     * @generated
-     */
-    EClass ROLE_L = eINSTANCE.getRoleL();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ROLE_L__NAME = eINSTANCE.getRoleL_Name();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.RoleOneLImpl <em>Role One L</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.globalTypes.myDsl.impl.RoleOneLImpl
-     * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleOneL()
-     * @generated
-     */
-    EClass ROLE_ONE_L = eINSTANCE.getRoleOneL();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.RoleSetLImpl <em>Role Set L</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.globalTypes.myDsl.impl.RoleSetLImpl
-     * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRoleSetL()
-     * @generated
-     */
-    EClass ROLE_SET_L = eINSTANCE.getRoleSetL();
-
-    /**
-     * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ROLE_SET_L__REF = eINSTANCE.getRoleSetL_Ref();
 
     /**
      * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.ProtocolLImpl <em>Protocol L</em>}' class.

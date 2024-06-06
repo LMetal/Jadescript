@@ -61,21 +61,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="LocalProtocol">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="protocolName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectedRole" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" eType="#//RolesL"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" eType="#//Roles"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolL"
         containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RolesL">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
-        eType="#//RoleL" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RoleL">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RoleOneL" eSuperTypes="#//RoleL"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RoleSetL" eSuperTypes="#//RoleL">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//RoleOneL"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProtocolL">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
@@ -89,22 +78,22 @@
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SenderL">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sender" eType="#//RoleL"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sender" eType="#//Role"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReceiverL">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//RoleL"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//Role"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ChoiceL">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//RoleL"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//Role"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="message" upperBound="-1"
         eType="#//MessageL" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branches" upperBound="-1"
         eType="#//ProtocolL" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ForEachL">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eachRole" eType="#//RoleOneL"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eachRole" eType="#//RoleOne"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//RoleSetL"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//RoleSet"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branch" eType="#//ProtocolL"
         containment="true"/>
   </eClassifiers>

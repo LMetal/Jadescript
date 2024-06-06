@@ -32,12 +32,12 @@ public interface ChoiceL extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Role</em>' reference.
-   * @see #setRole(RoleL)
+   * @see #setRole(Role)
    * @see org.xtext.globalTypes.myDsl.MyDslPackage#getChoiceL_Role()
    * @model
    * @generated
    */
-  RoleL getRole();
+  Role getRole();
 
   /**
    * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ChoiceL#getRole <em>Role</em>}' reference.
@@ -47,7 +47,7 @@ public interface ChoiceL extends EObject
    * @see #getRole()
    * @generated
    */
-  void setRole(RoleL value);
+  void setRole(Role value);
 
   /**
    * Returns the value of the '<em><b>Message</b></em>' containment reference list.

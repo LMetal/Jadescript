@@ -23,7 +23,7 @@ import org.xtext.globalTypes.myDsl.ChoiceL;
 import org.xtext.globalTypes.myDsl.MessageL;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.ProtocolL;
-import org.xtext.globalTypes.myDsl.RoleL;
+import org.xtext.globalTypes.myDsl.Role;
 
 /**
  * <!-- begin-user-doc -->
@@ -50,7 +50,7 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
    * @generated
    * @ordered
    */
-  protected RoleL role;
+  protected Role role;
 
   /**
    * The cached value of the '{@link #getMessage() <em>Message</em>}' containment reference list.
@@ -99,12 +99,12 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
    * @generated
    */
   @Override
-  public RoleL getRole()
+  public Role getRole()
   {
     if (role != null && role.eIsProxy())
     {
       InternalEObject oldRole = (InternalEObject)role;
-      role = (RoleL)eResolveProxy(oldRole);
+      role = (Role)eResolveProxy(oldRole);
       if (role != oldRole)
       {
         if (eNotificationRequired())
@@ -119,7 +119,7 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
    * <!-- end-user-doc -->
    * @generated
    */
-  public RoleL basicGetRole()
+  public Role basicGetRole()
   {
     return role;
   }
@@ -130,9 +130,9 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
    * @generated
    */
   @Override
-  public void setRole(RoleL newRole)
+  public void setRole(Role newRole)
   {
-    RoleL oldRole = role;
+    Role oldRole = role;
     role = newRole;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.CHOICE_L__ROLE, oldRole, role));
@@ -219,7 +219,7 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
     switch (featureID)
     {
       case MyDslPackage.CHOICE_L__ROLE:
-        setRole((RoleL)newValue);
+        setRole((Role)newValue);
         return;
       case MyDslPackage.CHOICE_L__MESSAGE:
         getMessage().clear();
@@ -244,7 +244,7 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
     switch (featureID)
     {
       case MyDslPackage.CHOICE_L__ROLE:
-        setRole((RoleL)null);
+        setRole((Role)null);
         return;
       case MyDslPackage.CHOICE_L__MESSAGE:
         getMessage().clear();

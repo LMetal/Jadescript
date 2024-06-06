@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.xtext.globalTypes.myDsl.ForEachL;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.ProtocolL;
-import org.xtext.globalTypes.myDsl.RoleOneL;
-import org.xtext.globalTypes.myDsl.RoleSetL;
+import org.xtext.globalTypes.myDsl.RoleOne;
+import org.xtext.globalTypes.myDsl.RoleSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,7 +43,7 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
    * @generated
    * @ordered
    */
-  protected RoleOneL eachRole;
+  protected RoleOne eachRole;
 
   /**
    * The cached value of the '{@link #getRole() <em>Role</em>}' reference.
@@ -53,7 +53,7 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
    * @generated
    * @ordered
    */
-  protected RoleSetL role;
+  protected RoleSet role;
 
   /**
    * The cached value of the '{@link #getBranch() <em>Branch</em>}' containment reference.
@@ -92,7 +92,7 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
    * @generated
    */
   @Override
-  public RoleOneL getEachRole()
+  public RoleOne getEachRole()
   {
     return eachRole;
   }
@@ -102,9 +102,9 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetEachRole(RoleOneL newEachRole, NotificationChain msgs)
+  public NotificationChain basicSetEachRole(RoleOne newEachRole, NotificationChain msgs)
   {
-    RoleOneL oldEachRole = eachRole;
+    RoleOne oldEachRole = eachRole;
     eachRole = newEachRole;
     if (eNotificationRequired())
     {
@@ -120,7 +120,7 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
    * @generated
    */
   @Override
-  public void setEachRole(RoleOneL newEachRole)
+  public void setEachRole(RoleOne newEachRole)
   {
     if (newEachRole != eachRole)
     {
@@ -142,12 +142,12 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
    * @generated
    */
   @Override
-  public RoleSetL getRole()
+  public RoleSet getRole()
   {
     if (role != null && role.eIsProxy())
     {
       InternalEObject oldRole = (InternalEObject)role;
-      role = (RoleSetL)eResolveProxy(oldRole);
+      role = (RoleSet)eResolveProxy(oldRole);
       if (role != oldRole)
       {
         if (eNotificationRequired())
@@ -162,7 +162,7 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
    * <!-- end-user-doc -->
    * @generated
    */
-  public RoleSetL basicGetRole()
+  public RoleSet basicGetRole()
   {
     return role;
   }
@@ -173,9 +173,9 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
    * @generated
    */
   @Override
-  public void setRole(RoleSetL newRole)
+  public void setRole(RoleSet newRole)
   {
-    RoleSetL oldRole = role;
+    RoleSet oldRole = role;
     role = newRole;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH_L__ROLE, oldRole, role));
@@ -281,10 +281,10 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
     switch (featureID)
     {
       case MyDslPackage.FOR_EACH_L__EACH_ROLE:
-        setEachRole((RoleOneL)newValue);
+        setEachRole((RoleOne)newValue);
         return;
       case MyDslPackage.FOR_EACH_L__ROLE:
-        setRole((RoleSetL)newValue);
+        setRole((RoleSet)newValue);
         return;
       case MyDslPackage.FOR_EACH_L__BRANCH:
         setBranch((ProtocolL)newValue);
@@ -304,10 +304,10 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
     switch (featureID)
     {
       case MyDslPackage.FOR_EACH_L__EACH_ROLE:
-        setEachRole((RoleOneL)null);
+        setEachRole((RoleOne)null);
         return;
       case MyDslPackage.FOR_EACH_L__ROLE:
-        setRole((RoleSetL)null);
+        setRole((RoleSet)null);
         return;
       case MyDslPackage.FOR_EACH_L__BRANCH:
         setBranch((ProtocolL)null);

@@ -146,9 +146,9 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		
 		
 		@Check
-		public void uniqueRoleName(GlobalProtocol glob_p) {
+		public void uniqueRoleName(Model m) {
 			//estraggo tutte le dichiarazioni di Role nel model
-			List<Role> roles = EcoreUtil2.getAllContentsOfType(glob_p, Roles.class).get(0).getRoles();
+			List<Role> roles = EcoreUtil2.getAllContentsOfType(m, Roles.class).get(0).getRoles();
 			//associazione nome ruolo dichiarato, oggetto Role
 			var declaredRoles = new HashMap<String, Role>();
 			
@@ -168,8 +168,8 @@ public class MyDslValidator extends AbstractMyDslValidator {
 				}
 			}
 			
-			//check variabili di loop ForEach, possono essere uguali tra liro ma non con i Role già in uso
-			List<ForEach> forEachList = EcoreUtil2.getAllContentsOfType(glob_p, ForEach.class);
+			//check variabili di loop ForEach, possono essere uguali tra loro ma non con i Role già in uso
+			List<ForEach> forEachList = EcoreUtil2.getAllContentsOfType(m, ForEach.class);
 			for(ForEach f : forEachList) {
 				if(declaredRoles.containsKey(f.getEachRole().getName())) {
 					error("Role's name must be unique", 
