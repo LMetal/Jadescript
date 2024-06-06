@@ -28,6 +28,7 @@ import org.xtext.globalTypes.myDsl.RoleSet;
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getEachRole <em>Each Role</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getRole <em>Role</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getRefRole <em>Ref Role</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getBranch <em>Branch</em>}</li>
  * </ul>
  *
@@ -54,6 +55,16 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * @ordered
    */
   protected RoleSet role;
+
+  /**
+   * The cached value of the '{@link #getRefRole() <em>Ref Role</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRefRole()
+   * @generated
+   * @ordered
+   */
+  protected RoleOne refRole;
 
   /**
    * The cached value of the '{@link #getBranch() <em>Branch</em>}' containment reference.
@@ -187,6 +198,51 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * @generated
    */
   @Override
+  public RoleOne getRefRole()
+  {
+    if (refRole != null && refRole.eIsProxy())
+    {
+      InternalEObject oldRefRole = (InternalEObject)refRole;
+      refRole = (RoleOne)eResolveProxy(oldRefRole);
+      if (refRole != oldRefRole)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.FOR_EACH__REF_ROLE, oldRefRole, refRole));
+      }
+    }
+    return refRole;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RoleOne basicGetRefRole()
+  {
+    return refRole;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setRefRole(RoleOne newRefRole)
+  {
+    RoleOne oldRefRole = refRole;
+    refRole = newRefRole;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH__REF_ROLE, oldRefRole, refRole));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Protocol getBranch()
   {
     return branch;
@@ -264,6 +320,9 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
       case MyDslPackage.FOR_EACH__ROLE:
         if (resolve) return getRole();
         return basicGetRole();
+      case MyDslPackage.FOR_EACH__REF_ROLE:
+        if (resolve) return getRefRole();
+        return basicGetRefRole();
       case MyDslPackage.FOR_EACH__BRANCH:
         return getBranch();
     }
@@ -285,6 +344,9 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
         return;
       case MyDslPackage.FOR_EACH__ROLE:
         setRole((RoleSet)newValue);
+        return;
+      case MyDslPackage.FOR_EACH__REF_ROLE:
+        setRefRole((RoleOne)newValue);
         return;
       case MyDslPackage.FOR_EACH__BRANCH:
         setBranch((Protocol)newValue);
@@ -309,6 +371,9 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
       case MyDslPackage.FOR_EACH__ROLE:
         setRole((RoleSet)null);
         return;
+      case MyDslPackage.FOR_EACH__REF_ROLE:
+        setRefRole((RoleOne)null);
+        return;
       case MyDslPackage.FOR_EACH__BRANCH:
         setBranch((Protocol)null);
         return;
@@ -330,6 +395,8 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
         return eachRole != null;
       case MyDslPackage.FOR_EACH__ROLE:
         return role != null;
+      case MyDslPackage.FOR_EACH__REF_ROLE:
+        return refRole != null;
       case MyDslPackage.FOR_EACH__BRANCH:
         return branch != null;
     }

@@ -43,7 +43,7 @@ CloseRecursion:
 
 ForEach: // add ref
 
-	'foreach' eachRole=RoleOne ':' role=[RoleSet | ID] '{'
+	'foreach' eachRole=RoleOne ':' role=[RoleSet | ID] 'at' refRole = [RoleOne | ID] '{'
 		branch=Protocol
 	'}'
 ;

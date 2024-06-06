@@ -80,7 +80,8 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getCloseRecursionAccess().getRecursionVariableAssignment_1(), "rule__CloseRecursion__RecursionVariableAssignment_1");
 			builder.put(grammarAccess.getForEachAccess().getEachRoleAssignment_1(), "rule__ForEach__EachRoleAssignment_1");
 			builder.put(grammarAccess.getForEachAccess().getRoleAssignment_3(), "rule__ForEach__RoleAssignment_3");
-			builder.put(grammarAccess.getForEachAccess().getBranchAssignment_5(), "rule__ForEach__BranchAssignment_5");
+			builder.put(grammarAccess.getForEachAccess().getRefRoleAssignment_5(), "rule__ForEach__RefRoleAssignment_5");
+			builder.put(grammarAccess.getForEachAccess().getBranchAssignment_7(), "rule__ForEach__BranchAssignment_7");
 			builder.put(grammarAccess.getChoiceAccess().getRoleAssignment_2(), "rule__Choice__RoleAssignment_2");
 			builder.put(grammarAccess.getChoiceAccess().getBranchesAssignment_4(), "rule__Choice__BranchesAssignment_4");
 			builder.put(grammarAccess.getChoiceAccess().getBranchesAssignment_6_2(), "rule__Choice__BranchesAssignment_6_2");

@@ -692,16 +692,33 @@ ruleForEach returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_4='{'
+		otherlv_4='at'
 		{
-			newLeafNode(otherlv_4, grammarAccess.getForEachAccess().getLeftCurlyBracketKeyword_4());
+			newLeafNode(otherlv_4, grammarAccess.getForEachAccess().getAtKeyword_4());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getForEachAccess().getBranchProtocolParserRuleCall_5_0());
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getForEachRule());
+					}
 				}
-				lv_branch_5_0=ruleProtocol
+				otherlv_5=RULE_ID
+				{
+					newLeafNode(otherlv_5, grammarAccess.getForEachAccess().getRefRoleRoleOneCrossReference_5_0());
+				}
+			)
+		)
+		otherlv_6='{'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getForEachAccess().getLeftCurlyBracketKeyword_6());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getForEachAccess().getBranchProtocolParserRuleCall_7_0());
+				}
+				lv_branch_7_0=ruleProtocol
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getForEachRule());
@@ -709,15 +726,15 @@ ruleForEach returns [EObject current=null]
 					set(
 						$current,
 						"branch",
-						lv_branch_5_0,
+						lv_branch_7_0,
 						"org.xtext.globalTypes.MyDsl.Protocol");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_6='}'
+		otherlv_8='}'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getForEachAccess().getRightCurlyBracketKeyword_6());
+			newLeafNode(otherlv_8, grammarAccess.getForEachAccess().getRightCurlyBracketKeyword_8());
 		}
 	)
 ;
@@ -970,7 +987,7 @@ ruleMessage returns [EObject current=null]
 				}
 				otherlv_7=RULE_ID
 				{
-					newLeafNode(otherlv_7, grammarAccess.getMessageAccess().getReceiverRoleOneCrossReference_7_0());
+					newLeafNode(otherlv_7, grammarAccess.getMessageAccess().getReceiverRoleCrossReference_7_0());
 				}
 			)
 		)

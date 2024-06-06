@@ -246,7 +246,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     ForEach returns ForEach
 	 *
 	 * Constraint:
-	 *     (eachRole=RoleOne role=[RoleSet|ID] branch=Protocol)
+	 *     (eachRole=RoleOne role=[RoleSet|ID] refRole=[RoleOne|ID] branch=Protocol)
 	 * </pre>
 	 */
 	protected void sequence_ForEach(ISerializationContext context, ForEach semanticObject) {
@@ -255,13 +255,16 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.FOR_EACH__EACH_ROLE));
 			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.FOR_EACH__ROLE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.FOR_EACH__ROLE));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.FOR_EACH__REF_ROLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.FOR_EACH__REF_ROLE));
 			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.FOR_EACH__BRANCH) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.FOR_EACH__BRANCH));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getForEachAccess().getEachRoleRoleOneParserRuleCall_1_0(), semanticObject.getEachRole());
 		feeder.accept(grammarAccess.getForEachAccess().getRoleRoleSetIDTerminalRuleCall_3_0_1(), semanticObject.eGet(MyDslPackage.Literals.FOR_EACH__ROLE, false));
-		feeder.accept(grammarAccess.getForEachAccess().getBranchProtocolParserRuleCall_5_0(), semanticObject.getBranch());
+		feeder.accept(grammarAccess.getForEachAccess().getRefRoleRoleOneIDTerminalRuleCall_5_0_1(), semanticObject.eGet(MyDslPackage.Literals.FOR_EACH__REF_ROLE, false));
+		feeder.accept(grammarAccess.getForEachAccess().getBranchProtocolParserRuleCall_7_0(), semanticObject.getBranch());
 		feeder.finish();
 	}
 	
@@ -341,7 +344,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Message returns Message
 	 *
 	 * Constraint:
-	 *     (messageType=ID payload=Payload? sender=[RoleOne|ID] receiver=[RoleOne|ID])
+	 *     (messageType=ID payload=Payload? sender=[RoleOne|ID] receiver=[Role|ID])
 	 * </pre>
 	 */
 	protected void sequence_Message(ISerializationContext context, Message semanticObject) {

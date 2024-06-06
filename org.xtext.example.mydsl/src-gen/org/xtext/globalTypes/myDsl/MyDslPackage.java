@@ -374,13 +374,22 @@ public interface MyDslPackage extends EPackage
   int FOR_EACH__ROLE = 1;
 
   /**
+   * The feature id for the '<em><b>Ref Role</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FOR_EACH__REF_ROLE = 2;
+
+  /**
    * The feature id for the '<em><b>Branch</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FOR_EACH__BRANCH = 2;
+  int FOR_EACH__BRANCH = 3;
 
   /**
    * The number of structural features of the '<em>For Each</em>' class.
@@ -389,7 +398,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FOR_EACH_FEATURE_COUNT = 3;
+  int FOR_EACH_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.ChoiceImpl <em>Choice</em>}' class.
@@ -1098,6 +1107,17 @@ public interface MyDslPackage extends EPackage
   EReference getForEach_Role();
 
   /**
+   * Returns the meta object for the reference '{@link org.xtext.globalTypes.myDsl.ForEach#getRefRole <em>Ref Role</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ref Role</em>'.
+   * @see org.xtext.globalTypes.myDsl.ForEach#getRefRole()
+   * @see #getForEach()
+   * @generated
+   */
+  EReference getForEach_RefRole();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.xtext.globalTypes.myDsl.ForEach#getBranch <em>Branch</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1740,6 +1760,14 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EReference FOR_EACH__ROLE = eINSTANCE.getForEach_Role();
+
+    /**
+     * The meta object literal for the '<em><b>Ref Role</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FOR_EACH__REF_ROLE = eINSTANCE.getForEach_RefRole();
 
     /**
      * The meta object literal for the '<em><b>Branch</b></em>' containment reference feature.

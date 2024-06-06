@@ -69,10 +69,10 @@ class MyDslGenerator extends AbstractGenerator {
 	
 	
 	def dispatch projectOn(Message m, Role r)'''
-		«IF m.sender == r»
+		«IF m.sender.name == r.name»
 			«m.messageType»(«printPayload(m.payload)») to «m.receiver.name»;
 		«ELSE»
-			«IF m.receiver == r»
+			«IF m.receiver.name == r.name»
 				«m.messageType»(«printPayload(m.payload)») from «m.sender.name»;
 			«ENDIF»
 		«ENDIF»
@@ -81,7 +81,7 @@ class MyDslGenerator extends AbstractGenerator {
 	
 	def dispatch projectOn(Choice c, Role r)'''
 		choice at «c.role.name»{
-		«FOR int i: 0..c.branches.length-1 SEPARATOR' or {'»
+		«FOR int i: 0..c.branches.length-1 SEPARATOR ' or {'»
 				«projectOn(c.branches.get(i), r)»
 			}
 		«ENDFOR»
@@ -104,7 +104,7 @@ class MyDslGenerator extends AbstractGenerator {
 		«IF each.role == r»
 			«projectOn(each.branch, each.eachRole)»
 		«ENDIF»
-		«IF each.role !== r»
+		«IF each.refRole == r»
 			foreach role «each.eachRole.name»:«each.role.name»{
 				«projectOn(each.branch, r)»
 			}

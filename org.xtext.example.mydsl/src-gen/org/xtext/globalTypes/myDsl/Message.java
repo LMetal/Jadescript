@@ -97,12 +97,12 @@ public interface Message extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Receiver</em>' reference.
-   * @see #setReceiver(RoleOne)
+   * @see #setReceiver(Role)
    * @see org.xtext.globalTypes.myDsl.MyDslPackage#getMessage_Receiver()
    * @model
    * @generated
    */
-  RoleOne getReceiver();
+  Role getReceiver();
 
   /**
    * Sets the value of the '{@link org.xtext.globalTypes.myDsl.Message#getReceiver <em>Receiver</em>}' reference.
@@ -112,6 +112,6 @@ public interface Message extends EObject
    * @see #getReceiver()
    * @generated
    */
-  void setReceiver(RoleOne value);
+  void setReceiver(Role value);
 
 } // Message

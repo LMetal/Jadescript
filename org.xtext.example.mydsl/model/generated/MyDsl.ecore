@@ -39,6 +39,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="eachRole" eType="#//RoleOne"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//RoleSet"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refRole" eType="#//RoleOne"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branch" eType="#//Protocol"
         containment="true"/>
   </eClassifiers>
@@ -58,7 +59,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="payload" eType="#//Payload"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sender" eType="#//RoleOne"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="receiver" eType="#//RoleOne"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receiver" eType="#//Role"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Payload">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="types" unique="false" upperBound="-1"

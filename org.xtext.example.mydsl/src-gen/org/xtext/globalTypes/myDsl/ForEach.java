@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getEachRole <em>Each Role</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getRole <em>Role</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getRefRole <em>Ref Role</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getBranch <em>Branch</em>}</li>
  * </ul>
  *
@@ -68,6 +69,28 @@ public interface ForEach extends EObject
    * @generated
    */
   void setRole(RoleSet value);
+
+  /**
+   * Returns the value of the '<em><b>Ref Role</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Ref Role</em>' reference.
+   * @see #setRefRole(RoleOne)
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEach_RefRole()
+   * @model
+   * @generated
+   */
+  RoleOne getRefRole();
+
+  /**
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEach#getRefRole <em>Ref Role</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Ref Role</em>' reference.
+   * @see #getRefRole()
+   * @generated
+   */
+  void setRefRole(RoleOne value);
 
   /**
    * Returns the value of the '<em><b>Branch</b></em>' containment reference.

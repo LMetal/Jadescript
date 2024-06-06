@@ -146,8 +146,9 @@ public class MyDslGenerator extends AbstractGenerator {
   protected CharSequence _projectOn(final Message m, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      RoleOne _sender = m.getSender();
-      boolean _equals = Objects.equal(_sender, r);
+      String _name = m.getSender().getName();
+      String _name_1 = r.getName();
+      boolean _equals = Objects.equal(_name, _name_1);
       if (_equals) {
         String _messageType = m.getMessageType();
         _builder.append(_messageType);
@@ -155,14 +156,15 @@ public class MyDslGenerator extends AbstractGenerator {
         CharSequence _printPayload = this.printPayload(m.getPayload());
         _builder.append(_printPayload);
         _builder.append(") to ");
-        String _name = m.getReceiver().getName();
-        _builder.append(_name);
+        String _name_2 = m.getReceiver().getName();
+        _builder.append(_name_2);
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       } else {
         {
-          RoleOne _receiver = m.getReceiver();
-          boolean _equals_1 = Objects.equal(_receiver, r);
+          String _name_3 = m.getReceiver().getName();
+          String _name_4 = r.getName();
+          boolean _equals_1 = Objects.equal(_name_3, _name_4);
           if (_equals_1) {
             String _messageType_1 = m.getMessageType();
             _builder.append(_messageType_1);
@@ -170,8 +172,8 @@ public class MyDslGenerator extends AbstractGenerator {
             CharSequence _printPayload_1 = this.printPayload(m.getPayload());
             _builder.append(_printPayload_1);
             _builder.append(") from ");
-            String _name_1 = m.getSender().getName();
-            _builder.append(_name_1);
+            String _name_5 = m.getSender().getName();
+            _builder.append(_name_5);
             _builder.append(";");
             _builder.newLineIfNotEmpty();
           }
@@ -253,9 +255,9 @@ public class MyDslGenerator extends AbstractGenerator {
       }
     }
     {
-      RoleSet _role_1 = each.getRole();
-      boolean _tripleNotEquals = (_role_1 != r);
-      if (_tripleNotEquals) {
+      RoleOne _refRole = each.getRefRole();
+      boolean _equals_1 = Objects.equal(_refRole, r);
+      if (_equals_1) {
         _builder.append("foreach role ");
         String _name = each.getEachRole().getName();
         _builder.append(_name);
