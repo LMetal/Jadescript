@@ -4,13 +4,16 @@
 package org.xtext.globalTypes.myDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.globalTypes.myDsl.MyDslPackage;
+import org.xtext.globalTypes.myDsl.Protocol;
 import org.xtext.globalTypes.myDsl.Recursion;
 
 /**
@@ -22,6 +25,7 @@ import org.xtext.globalTypes.myDsl.Recursion;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.RecursionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.impl.RecursionImpl#getRecProtocol <em>Rec Protocol</em>}</li>
  * </ul>
  *
  * @generated
@@ -47,6 +51,16 @@ public class RecursionImpl extends MinimalEObjectImpl.Container implements Recur
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getRecProtocol() <em>Rec Protocol</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRecProtocol()
+   * @generated
+   * @ordered
+   */
+  protected Protocol recProtocol;
 
   /**
    * <!-- begin-user-doc -->
@@ -100,12 +114,80 @@ public class RecursionImpl extends MinimalEObjectImpl.Container implements Recur
    * @generated
    */
   @Override
+  public Protocol getRecProtocol()
+  {
+    return recProtocol;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetRecProtocol(Protocol newRecProtocol, NotificationChain msgs)
+  {
+    Protocol oldRecProtocol = recProtocol;
+    recProtocol = newRecProtocol;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.RECURSION__REC_PROTOCOL, oldRecProtocol, newRecProtocol);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setRecProtocol(Protocol newRecProtocol)
+  {
+    if (newRecProtocol != recProtocol)
+    {
+      NotificationChain msgs = null;
+      if (recProtocol != null)
+        msgs = ((InternalEObject)recProtocol).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.RECURSION__REC_PROTOCOL, null, msgs);
+      if (newRecProtocol != null)
+        msgs = ((InternalEObject)newRecProtocol).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.RECURSION__REC_PROTOCOL, null, msgs);
+      msgs = basicSetRecProtocol(newRecProtocol, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.RECURSION__REC_PROTOCOL, newRecProtocol, newRecProtocol));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case MyDslPackage.RECURSION__REC_PROTOCOL:
+        return basicSetRecProtocol(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
       case MyDslPackage.RECURSION__NAME:
         return getName();
+      case MyDslPackage.RECURSION__REC_PROTOCOL:
+        return getRecProtocol();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -122,6 +204,9 @@ public class RecursionImpl extends MinimalEObjectImpl.Container implements Recur
     {
       case MyDslPackage.RECURSION__NAME:
         setName((String)newValue);
+        return;
+      case MyDslPackage.RECURSION__REC_PROTOCOL:
+        setRecProtocol((Protocol)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -140,6 +225,9 @@ public class RecursionImpl extends MinimalEObjectImpl.Container implements Recur
       case MyDslPackage.RECURSION__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case MyDslPackage.RECURSION__REC_PROTOCOL:
+        setRecProtocol((Protocol)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -156,6 +244,8 @@ public class RecursionImpl extends MinimalEObjectImpl.Container implements Recur
     {
       case MyDslPackage.RECURSION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case MyDslPackage.RECURSION__REC_PROTOCOL:
+        return recProtocol != null;
     }
     return super.eIsSet(featureID);
   }

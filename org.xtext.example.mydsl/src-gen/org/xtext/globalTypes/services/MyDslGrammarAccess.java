@@ -230,47 +230,55 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	public class ProtocolElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.Protocol");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cProtocolAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cActionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Alternatives cActionsAlternatives_1_0 = (Alternatives)cActionsAssignment_1.eContents().get(0);
-		private final RuleCall cActionsMessageParserRuleCall_1_0_0 = (RuleCall)cActionsAlternatives_1_0.eContents().get(0);
-		private final RuleCall cActionsChoiceParserRuleCall_1_0_1 = (RuleCall)cActionsAlternatives_1_0.eContents().get(1);
-		private final RuleCall cActionsRecursionParserRuleCall_1_0_2 = (RuleCall)cActionsAlternatives_1_0.eContents().get(2);
-		private final RuleCall cActionsForEachParserRuleCall_1_0_3 = (RuleCall)cActionsAlternatives_1_0.eContents().get(3);
-		private final RuleCall cActionsCloseRecursionParserRuleCall_1_0_4 = (RuleCall)cActionsAlternatives_1_0.eContents().get(4);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Action cProtocolAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Assignment cActionsAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final Alternatives cActionsAlternatives_0_1_0 = (Alternatives)cActionsAssignment_0_1.eContents().get(0);
+		private final RuleCall cActionsMessageParserRuleCall_0_1_0_0 = (RuleCall)cActionsAlternatives_0_1_0.eContents().get(0);
+		private final RuleCall cActionsChoiceParserRuleCall_0_1_0_1 = (RuleCall)cActionsAlternatives_0_1_0.eContents().get(1);
+		private final RuleCall cActionsRecursionParserRuleCall_0_1_0_2 = (RuleCall)cActionsAlternatives_0_1_0.eContents().get(2);
+		private final RuleCall cActionsForEachParserRuleCall_0_1_0_3 = (RuleCall)cActionsAlternatives_0_1_0.eContents().get(3);
+		private final Assignment cActionsAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cActionsCloseRecursionParserRuleCall_1_0 = (RuleCall)cActionsAssignment_1.eContents().get(0);
 		
 		//Protocol:
-		//    {Protocol} (actions+=(Message | Choice | Recursion | ForEach | CloseRecursion))*
+		//    {Protocol} (actions+=(Message | Choice | Recursion | ForEach))* | actions+=(CloseRecursion)
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Protocol} (actions+=(Message | Choice | Recursion | ForEach | CloseRecursion))*
-		public Group getGroup() { return cGroup; }
+		//{Protocol} (actions+=(Message | Choice | Recursion | ForEach))* | actions+=(CloseRecursion)
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//{Protocol} (actions+=(Message | Choice | Recursion | ForEach))*
+		public Group getGroup_0() { return cGroup_0; }
 		
 		//{Protocol}
-		public Action getProtocolAction_0() { return cProtocolAction_0; }
+		public Action getProtocolAction_0_0() { return cProtocolAction_0_0; }
 		
-		//(actions+=(Message | Choice | Recursion | ForEach | CloseRecursion))*
-		public Assignment getActionsAssignment_1() { return cActionsAssignment_1; }
+		//(actions+=(Message | Choice | Recursion | ForEach))*
+		public Assignment getActionsAssignment_0_1() { return cActionsAssignment_0_1; }
 		
-		//(Message | Choice | Recursion | ForEach | CloseRecursion)
-		public Alternatives getActionsAlternatives_1_0() { return cActionsAlternatives_1_0; }
+		//(Message | Choice | Recursion | ForEach)
+		public Alternatives getActionsAlternatives_0_1_0() { return cActionsAlternatives_0_1_0; }
 		
 		//Message
-		public RuleCall getActionsMessageParserRuleCall_1_0_0() { return cActionsMessageParserRuleCall_1_0_0; }
+		public RuleCall getActionsMessageParserRuleCall_0_1_0_0() { return cActionsMessageParserRuleCall_0_1_0_0; }
 		
 		//Choice
-		public RuleCall getActionsChoiceParserRuleCall_1_0_1() { return cActionsChoiceParserRuleCall_1_0_1; }
+		public RuleCall getActionsChoiceParserRuleCall_0_1_0_1() { return cActionsChoiceParserRuleCall_0_1_0_1; }
 		
 		//Recursion
-		public RuleCall getActionsRecursionParserRuleCall_1_0_2() { return cActionsRecursionParserRuleCall_1_0_2; }
+		public RuleCall getActionsRecursionParserRuleCall_0_1_0_2() { return cActionsRecursionParserRuleCall_0_1_0_2; }
 		
 		//ForEach
-		public RuleCall getActionsForEachParserRuleCall_1_0_3() { return cActionsForEachParserRuleCall_1_0_3; }
+		public RuleCall getActionsForEachParserRuleCall_0_1_0_3() { return cActionsForEachParserRuleCall_0_1_0_3; }
 		
-		//CloseRecursion
-		public RuleCall getActionsCloseRecursionParserRuleCall_1_0_4() { return cActionsCloseRecursionParserRuleCall_1_0_4; }
+		//actions+=(CloseRecursion)
+		public Assignment getActionsAssignment_1() { return cActionsAssignment_1; }
+		
+		//(CloseRecursion)
+		public RuleCall getActionsCloseRecursionParserRuleCall_1_0() { return cActionsCloseRecursionParserRuleCall_1_0; }
 	}
 	public class RecursionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.Recursion");
@@ -278,14 +286,21 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Keyword cRecKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cRecProtocolAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cRecProtocolProtocolParserRuleCall_3_0 = (RuleCall)cRecProtocolAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Recursion:
-		//    'rec' name=ID ':'
+		//    'rec' name=ID '{'
+		//        recProtocol=Protocol
+		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'rec' name=ID ':'
+		//'rec' name=ID '{'
+		//    recProtocol=Protocol
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'rec'
@@ -297,8 +312,17 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//':'
-		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//recProtocol=Protocol
+		public Assignment getRecProtocolAssignment_3() { return cRecProtocolAssignment_3; }
+		
+		//Protocol
+		public RuleCall getRecProtocolProtocolParserRuleCall_3_0() { return cRecProtocolProtocolParserRuleCall_3_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 	public class CloseRecursionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.CloseRecursion");
@@ -403,37 +427,29 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final CrossReference cRoleRoleOneCrossReference_2_0 = (CrossReference)cRoleAssignment_2.eContents().get(0);
 		private final RuleCall cRoleRoleOneIDTerminalRuleCall_2_0_1 = (RuleCall)cRoleRoleOneCrossReference_2_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cMessageAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cMessageMessageParserRuleCall_4_0 = (RuleCall)cMessageAssignment_4.eContents().get(0);
-		private final Assignment cBranchesAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cBranchesProtocolParserRuleCall_5_0 = (RuleCall)cBranchesAssignment_5.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cOrKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_7_1 = (Keyword)cGroup_7.eContents().get(1);
-		private final Assignment cMessageAssignment_7_2 = (Assignment)cGroup_7.eContents().get(2);
-		private final RuleCall cMessageMessageParserRuleCall_7_2_0 = (RuleCall)cMessageAssignment_7_2.eContents().get(0);
-		private final Assignment cBranchesAssignment_7_3 = (Assignment)cGroup_7.eContents().get(3);
-		private final RuleCall cBranchesProtocolParserRuleCall_7_3_0 = (RuleCall)cBranchesAssignment_7_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_7_4 = (Keyword)cGroup_7.eContents().get(4);
+		private final Assignment cBranchesAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cBranchesChoiceBranchParserRuleCall_4_0 = (RuleCall)cBranchesAssignment_4.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cOrKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
+		private final Assignment cBranchesAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
+		private final RuleCall cBranchesChoiceBranchParserRuleCall_6_2_0 = (RuleCall)cBranchesAssignment_6_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6_3 = (Keyword)cGroup_6.eContents().get(3);
 		
 		//Choice:
 		//    'choice' 'at' role=[RoleOne | ID] '{'
-		//        message+=Message
-		//        branches+=Protocol
+		//        branches+=ChoiceBranch
 		//    '}' ('or' '{'
-		//        message+=Message
-		//        branches+=Protocol
+		//        branches+=ChoiceBranch
 		//    '}')*
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'choice' 'at' role=[RoleOne | ID] '{'
-		//    message+=Message
-		//    branches+=Protocol
+		//    branches+=ChoiceBranch
 		//'}' ('or' '{'
-		//    message+=Message
-		//    branches+=Protocol
+		//    branches+=ChoiceBranch
 		//'}')*
 		public Group getGroup() { return cGroup; }
 		
@@ -455,47 +471,64 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//message+=Message
-		public Assignment getMessageAssignment_4() { return cMessageAssignment_4; }
+		//branches+=ChoiceBranch
+		public Assignment getBranchesAssignment_4() { return cBranchesAssignment_4; }
 		
-		//Message
-		public RuleCall getMessageMessageParserRuleCall_4_0() { return cMessageMessageParserRuleCall_4_0; }
-		
-		//branches+=Protocol
-		public Assignment getBranchesAssignment_5() { return cBranchesAssignment_5; }
-		
-		//Protocol
-		public RuleCall getBranchesProtocolParserRuleCall_5_0() { return cBranchesProtocolParserRuleCall_5_0; }
+		//ChoiceBranch
+		public RuleCall getBranchesChoiceBranchParserRuleCall_4_0() { return cBranchesChoiceBranchParserRuleCall_4_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 		
 		//('or' '{'
-		//       message+=Message
-		//       branches+=Protocol
+		//       branches+=ChoiceBranch
 		//   '}')*
-		public Group getGroup_7() { return cGroup_7; }
+		public Group getGroup_6() { return cGroup_6; }
 		
 		//'or'
-		public Keyword getOrKeyword_7_0() { return cOrKeyword_7_0; }
+		public Keyword getOrKeyword_6_0() { return cOrKeyword_6_0; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_7_1() { return cLeftCurlyBracketKeyword_7_1; }
+		public Keyword getLeftCurlyBracketKeyword_6_1() { return cLeftCurlyBracketKeyword_6_1; }
 		
-		//message+=Message
-		public Assignment getMessageAssignment_7_2() { return cMessageAssignment_7_2; }
+		//branches+=ChoiceBranch
+		public Assignment getBranchesAssignment_6_2() { return cBranchesAssignment_6_2; }
 		
-		//Message
-		public RuleCall getMessageMessageParserRuleCall_7_2_0() { return cMessageMessageParserRuleCall_7_2_0; }
-		
-		//branches+=Protocol
-		public Assignment getBranchesAssignment_7_3() { return cBranchesAssignment_7_3; }
-		
-		//Protocol
-		public RuleCall getBranchesProtocolParserRuleCall_7_3_0() { return cBranchesProtocolParserRuleCall_7_3_0; }
+		//ChoiceBranch
+		public RuleCall getBranchesChoiceBranchParserRuleCall_6_2_0() { return cBranchesChoiceBranchParserRuleCall_6_2_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_7_4() { return cRightCurlyBracketKeyword_7_4; }
+		public Keyword getRightCurlyBracketKeyword_6_3() { return cRightCurlyBracketKeyword_6_3; }
+	}
+	public class ChoiceBranchElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.ChoiceBranch");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cMessageAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cMessageMessageParserRuleCall_0_0 = (RuleCall)cMessageAssignment_0.eContents().get(0);
+		private final Assignment cProtocolAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cProtocolProtocolParserRuleCall_1_0 = (RuleCall)cProtocolAssignment_1.eContents().get(0);
+		
+		//ChoiceBranch:
+		//    message=Message
+		//    protocol=Protocol
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//message=Message
+		//protocol=Protocol
+		public Group getGroup() { return cGroup; }
+		
+		//message=Message
+		public Assignment getMessageAssignment_0() { return cMessageAssignment_0; }
+		
+		//Message
+		public RuleCall getMessageMessageParserRuleCall_0_0() { return cMessageMessageParserRuleCall_0_0; }
+		
+		//protocol=Protocol
+		public Assignment getProtocolAssignment_1() { return cProtocolAssignment_1; }
+		
+		//Protocol
+		public RuleCall getProtocolProtocolParserRuleCall_1_0() { return cProtocolProtocolParserRuleCall_1_0; }
 	}
 	public class MessageElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.Message");
@@ -862,37 +895,29 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final CrossReference cRoleRoleCrossReference_2_0 = (CrossReference)cRoleAssignment_2.eContents().get(0);
 		private final RuleCall cRoleRoleIDTerminalRuleCall_2_0_1 = (RuleCall)cRoleRoleCrossReference_2_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cMessageAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cMessageMessageLParserRuleCall_4_0 = (RuleCall)cMessageAssignment_4.eContents().get(0);
-		private final Assignment cBranchesAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cBranchesProtocolLParserRuleCall_5_0 = (RuleCall)cBranchesAssignment_5.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cOrKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_7_1 = (Keyword)cGroup_7.eContents().get(1);
-		private final Assignment cMessageAssignment_7_2 = (Assignment)cGroup_7.eContents().get(2);
-		private final RuleCall cMessageMessageLParserRuleCall_7_2_0 = (RuleCall)cMessageAssignment_7_2.eContents().get(0);
-		private final Assignment cBranchesAssignment_7_3 = (Assignment)cGroup_7.eContents().get(3);
-		private final RuleCall cBranchesProtocolLParserRuleCall_7_3_0 = (RuleCall)cBranchesAssignment_7_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_7_4 = (Keyword)cGroup_7.eContents().get(4);
+		private final Assignment cBranchesAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cBranchesChoiceBranchLParserRuleCall_4_0 = (RuleCall)cBranchesAssignment_4.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cOrKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
+		private final Assignment cBranchesAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
+		private final RuleCall cBranchesChoiceBranchLParserRuleCall_6_2_0 = (RuleCall)cBranchesAssignment_6_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6_3 = (Keyword)cGroup_6.eContents().get(3);
 		
 		//ChoiceL:
 		//    'choice' 'at' role=[Role | ID] '{'
-		//        message+=MessageL
-		//        branches+=ProtocolL
+		//        branches+=ChoiceBranchL
 		//    '}' ('or' '{'
-		//        message+=MessageL
-		//        branches+=ProtocolL
+		//        branches+=ChoiceBranchL
 		//    '}')*
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'choice' 'at' role=[Role | ID] '{'
-		//    message+=MessageL
-		//    branches+=ProtocolL
+		//    branches+=ChoiceBranchL
 		//'}' ('or' '{'
-		//    message+=MessageL
-		//    branches+=ProtocolL
+		//    branches+=ChoiceBranchL
 		//'}')*
 		public Group getGroup() { return cGroup; }
 		
@@ -914,47 +939,64 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//message+=MessageL
-		public Assignment getMessageAssignment_4() { return cMessageAssignment_4; }
+		//branches+=ChoiceBranchL
+		public Assignment getBranchesAssignment_4() { return cBranchesAssignment_4; }
 		
-		//MessageL
-		public RuleCall getMessageMessageLParserRuleCall_4_0() { return cMessageMessageLParserRuleCall_4_0; }
-		
-		//branches+=ProtocolL
-		public Assignment getBranchesAssignment_5() { return cBranchesAssignment_5; }
-		
-		//ProtocolL
-		public RuleCall getBranchesProtocolLParserRuleCall_5_0() { return cBranchesProtocolLParserRuleCall_5_0; }
+		//ChoiceBranchL
+		public RuleCall getBranchesChoiceBranchLParserRuleCall_4_0() { return cBranchesChoiceBranchLParserRuleCall_4_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 		
 		//('or' '{'
-		//       message+=MessageL
-		//       branches+=ProtocolL
+		//       branches+=ChoiceBranchL
 		//   '}')*
-		public Group getGroup_7() { return cGroup_7; }
+		public Group getGroup_6() { return cGroup_6; }
 		
 		//'or'
-		public Keyword getOrKeyword_7_0() { return cOrKeyword_7_0; }
+		public Keyword getOrKeyword_6_0() { return cOrKeyword_6_0; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_7_1() { return cLeftCurlyBracketKeyword_7_1; }
+		public Keyword getLeftCurlyBracketKeyword_6_1() { return cLeftCurlyBracketKeyword_6_1; }
 		
-		//message+=MessageL
-		public Assignment getMessageAssignment_7_2() { return cMessageAssignment_7_2; }
+		//branches+=ChoiceBranchL
+		public Assignment getBranchesAssignment_6_2() { return cBranchesAssignment_6_2; }
 		
-		//MessageL
-		public RuleCall getMessageMessageLParserRuleCall_7_2_0() { return cMessageMessageLParserRuleCall_7_2_0; }
-		
-		//branches+=ProtocolL
-		public Assignment getBranchesAssignment_7_3() { return cBranchesAssignment_7_3; }
-		
-		//ProtocolL
-		public RuleCall getBranchesProtocolLParserRuleCall_7_3_0() { return cBranchesProtocolLParserRuleCall_7_3_0; }
+		//ChoiceBranchL
+		public RuleCall getBranchesChoiceBranchLParserRuleCall_6_2_0() { return cBranchesChoiceBranchLParserRuleCall_6_2_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_7_4() { return cRightCurlyBracketKeyword_7_4; }
+		public Keyword getRightCurlyBracketKeyword_6_3() { return cRightCurlyBracketKeyword_6_3; }
+	}
+	public class ChoiceBranchLElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.ChoiceBranchL");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cMessageAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cMessageMessageLParserRuleCall_0_0 = (RuleCall)cMessageAssignment_0.eContents().get(0);
+		private final Assignment cProtocolAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cProtocolProtocolLParserRuleCall_1_0 = (RuleCall)cProtocolAssignment_1.eContents().get(0);
+		
+		//ChoiceBranchL:
+		//    message=MessageL
+		//    protocol=ProtocolL
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//message=MessageL
+		//protocol=ProtocolL
+		public Group getGroup() { return cGroup; }
+		
+		//message=MessageL
+		public Assignment getMessageAssignment_0() { return cMessageAssignment_0; }
+		
+		//MessageL
+		public RuleCall getMessageMessageLParserRuleCall_0_0() { return cMessageMessageLParserRuleCall_0_0; }
+		
+		//protocol=ProtocolL
+		public Assignment getProtocolAssignment_1() { return cProtocolAssignment_1; }
+		
+		//ProtocolL
+		public RuleCall getProtocolProtocolLParserRuleCall_1_0() { return cProtocolProtocolLParserRuleCall_1_0; }
 	}
 	public class ForEachLElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.ForEachL");
@@ -1053,6 +1095,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	private final CloseRecursionElements pCloseRecursion;
 	private final ForEachElements pForEach;
 	private final ChoiceElements pChoice;
+	private final ChoiceBranchElements pChoiceBranch;
 	private final MessageElements pMessage;
 	private final PayloadElements pPayload;
 	private final LocalProtocolElements pLocalProtocol;
@@ -1061,6 +1104,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	private final SenderLElements pSenderL;
 	private final ReceiverLElements pReceiverL;
 	private final ChoiceLElements pChoiceL;
+	private final ChoiceBranchLElements pChoiceBranchL;
 	private final ForEachLElements pForEachL;
 	private final TypeElements pType;
 	
@@ -1084,6 +1128,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		this.pCloseRecursion = new CloseRecursionElements();
 		this.pForEach = new ForEachElements();
 		this.pChoice = new ChoiceElements();
+		this.pChoiceBranch = new ChoiceBranchElements();
 		this.pMessage = new MessageElements();
 		this.pPayload = new PayloadElements();
 		this.pLocalProtocol = new LocalProtocolElements();
@@ -1092,6 +1137,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		this.pSenderL = new SenderLElements();
 		this.pReceiverL = new ReceiverLElements();
 		this.pChoiceL = new ChoiceLElements();
+		this.pChoiceBranchL = new ChoiceBranchLElements();
 		this.pForEachL = new ForEachLElements();
 		this.pType = new TypeElements();
 	}
@@ -1190,7 +1236,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//Protocol:
-	//    {Protocol} (actions+=(Message | Choice | Recursion | ForEach | CloseRecursion))*
+	//    {Protocol} (actions+=(Message | Choice | Recursion | ForEach))* | actions+=(CloseRecursion)
 	//;
 	public ProtocolElements getProtocolAccess() {
 		return pProtocol;
@@ -1201,7 +1247,9 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//Recursion:
-	//    'rec' name=ID ':'
+	//    'rec' name=ID '{'
+	//        recProtocol=Protocol
+	//    '}'
 	//;
 	public RecursionElements getRecursionAccess() {
 		return pRecursion;
@@ -1237,11 +1285,9 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 	//Choice:
 	//    'choice' 'at' role=[RoleOne | ID] '{'
-	//        message+=Message
-	//        branches+=Protocol
+	//        branches+=ChoiceBranch
 	//    '}' ('or' '{'
-	//        message+=Message
-	//        branches+=Protocol
+	//        branches+=ChoiceBranch
 	//    '}')*
 	//;
 	public ChoiceElements getChoiceAccess() {
@@ -1250,6 +1296,18 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 	public ParserRule getChoiceRule() {
 		return getChoiceAccess().getRule();
+	}
+	
+	//ChoiceBranch:
+	//    message=Message
+	//    protocol=Protocol
+	//;
+	public ChoiceBranchElements getChoiceBranchAccess() {
+		return pChoiceBranch;
+	}
+	
+	public ParserRule getChoiceBranchRule() {
+		return getChoiceBranchAccess().getRule();
 	}
 	
 	//Message:
@@ -1331,11 +1389,9 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 	//ChoiceL:
 	//    'choice' 'at' role=[Role | ID] '{'
-	//        message+=MessageL
-	//        branches+=ProtocolL
+	//        branches+=ChoiceBranchL
 	//    '}' ('or' '{'
-	//        message+=MessageL
-	//        branches+=ProtocolL
+	//        branches+=ChoiceBranchL
 	//    '}')*
 	//;
 	public ChoiceLElements getChoiceLAccess() {
@@ -1344,6 +1400,18 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 	public ParserRule getChoiceLRule() {
 		return getChoiceLAccess().getRule();
+	}
+	
+	//ChoiceBranchL:
+	//    message=MessageL
+	//    protocol=ProtocolL
+	//;
+	public ChoiceBranchLElements getChoiceBranchLAccess() {
+		return pChoiceBranchL;
+	}
+	
+	public ParserRule getChoiceBranchLRule() {
+		return getChoiceBranchLAccess().getRule();
 	}
 	
 	//ForEachL:

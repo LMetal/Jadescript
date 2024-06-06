@@ -29,6 +29,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Recursion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recProtocol" eType="#//Protocol"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CloseRecursion">
     <eStructuralFeatures xsi:type="ecore:EReference" name="recursionVariable" eType="#//Recursion"/>
@@ -42,10 +44,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Choice">
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//RoleOne"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="message" upperBound="-1"
-        eType="#//Message" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branches" upperBound="-1"
-        eType="#//Protocol" containment="true"/>
+        eType="#//ChoiceBranch" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChoiceBranch">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="#//Message"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//Protocol"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Message">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -85,10 +91,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ChoiceL">
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//Role"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="message" upperBound="-1"
-        eType="#//MessageL" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branches" upperBound="-1"
-        eType="#//ProtocolL" containment="true"/>
+        eType="#//ChoiceBranchL" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChoiceBranchL">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="#//MessageL"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolL"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ForEachL">
     <eStructuralFeatures xsi:type="ecore:EReference" name="eachRole" eType="#//RoleOne"

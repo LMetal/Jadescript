@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.xtext.globalTypes.myDsl.Choice;
+import org.xtext.globalTypes.myDsl.ChoiceBranch;
 import org.xtext.globalTypes.myDsl.CloseRecursion;
 import org.xtext.globalTypes.myDsl.ForEach;
 import org.xtext.globalTypes.myDsl.GlobalProtocol;
@@ -199,17 +200,24 @@ public class MyDslGenerator extends AbstractGenerator {
           _builder.appendImmediate(" or {", "");
         }
         _builder.append("\t");
-        Object _projectOn = this.projectOn(c.getMessage().get(i), r);
+        Object _projectOn = this.projectOn(c.getBranches().get(i), r);
         _builder.append(_projectOn, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        Object _projectOn_1 = this.projectOn(c.getBranches().get(i), r);
-        _builder.append(_projectOn_1, "\t");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
         _builder.newLine();
       }
     }
+    return _builder;
+  }
+
+  protected CharSequence _projectOn(final ChoiceBranch branch, final Role r) {
+    StringConcatenation _builder = new StringConcatenation();
+    Object _projectOn = this.projectOn(branch.getMessage(), r);
+    _builder.append(_projectOn);
+    _builder.newLineIfNotEmpty();
+    Object _projectOn_1 = this.projectOn(branch.getProtocol(), r);
+    _builder.append(_projectOn_1);
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
 
@@ -292,6 +300,8 @@ public class MyDslGenerator extends AbstractGenerator {
   public CharSequence projectOn(final EObject c, final Role r) {
     if (c instanceof Choice) {
       return _projectOn((Choice)c, r);
+    } else if (c instanceof ChoiceBranch) {
+      return _projectOn((ChoiceBranch)c, r);
     } else if (c instanceof CloseRecursion) {
       return _projectOn((CloseRecursion)c, r);
     } else if (c instanceof ForEach) {

@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.xtext.globalTypes.myDsl.Choice;
+import org.xtext.globalTypes.myDsl.ChoiceBranch;
+import org.xtext.globalTypes.myDsl.ChoiceBranchL;
 import org.xtext.globalTypes.myDsl.ChoiceL;
 import org.xtext.globalTypes.myDsl.CloseRecursion;
 import org.xtext.globalTypes.myDsl.ForEach;
@@ -123,6 +125,13 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass choiceBranchEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass messageEClass = null;
 
   /**
@@ -173,6 +182,13 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   private EClass choiceLEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass choiceBranchLEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -436,6 +452,17 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
+  public EReference getRecursion_RecProtocol()
+  {
+    return (EReference)recursionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getCloseRecursion()
   {
     return closeRecursionEClass;
@@ -524,7 +551,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getChoice_Message()
+  public EReference getChoice_Branches()
   {
     return (EReference)choiceEClass.getEStructuralFeatures().get(1);
   }
@@ -535,9 +562,31 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getChoice_Branches()
+  public EClass getChoiceBranch()
   {
-    return (EReference)choiceEClass.getEStructuralFeatures().get(2);
+    return choiceBranchEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getChoiceBranch_Message()
+  {
+    return (EReference)choiceBranchEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getChoiceBranch_Protocol()
+  {
+    return (EReference)choiceBranchEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -810,7 +859,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getChoiceL_Message()
+  public EReference getChoiceL_Branches()
   {
     return (EReference)choiceLEClass.getEStructuralFeatures().get(1);
   }
@@ -821,9 +870,31 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getChoiceL_Branches()
+  public EClass getChoiceBranchL()
   {
-    return (EReference)choiceLEClass.getEStructuralFeatures().get(2);
+    return choiceBranchLEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getChoiceBranchL_Message()
+  {
+    return (EReference)choiceBranchLEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getChoiceBranchL_Protocol()
+  {
+    return (EReference)choiceBranchLEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -925,6 +996,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     recursionEClass = createEClass(RECURSION);
     createEAttribute(recursionEClass, RECURSION__NAME);
+    createEReference(recursionEClass, RECURSION__REC_PROTOCOL);
 
     closeRecursionEClass = createEClass(CLOSE_RECURSION);
     createEReference(closeRecursionEClass, CLOSE_RECURSION__RECURSION_VARIABLE);
@@ -936,8 +1008,11 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     choiceEClass = createEClass(CHOICE);
     createEReference(choiceEClass, CHOICE__ROLE);
-    createEReference(choiceEClass, CHOICE__MESSAGE);
     createEReference(choiceEClass, CHOICE__BRANCHES);
+
+    choiceBranchEClass = createEClass(CHOICE_BRANCH);
+    createEReference(choiceBranchEClass, CHOICE_BRANCH__MESSAGE);
+    createEReference(choiceBranchEClass, CHOICE_BRANCH__PROTOCOL);
 
     messageEClass = createEClass(MESSAGE);
     createEAttribute(messageEClass, MESSAGE__MESSAGE_TYPE);
@@ -970,8 +1045,11 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     choiceLEClass = createEClass(CHOICE_L);
     createEReference(choiceLEClass, CHOICE_L__ROLE);
-    createEReference(choiceLEClass, CHOICE_L__MESSAGE);
     createEReference(choiceLEClass, CHOICE_L__BRANCHES);
+
+    choiceBranchLEClass = createEClass(CHOICE_BRANCH_L);
+    createEReference(choiceBranchLEClass, CHOICE_BRANCH_L__MESSAGE);
+    createEReference(choiceBranchLEClass, CHOICE_BRANCH_L__PROTOCOL);
 
     forEachLEClass = createEClass(FOR_EACH_L);
     createEReference(forEachLEClass, FOR_EACH_L__EACH_ROLE);
@@ -1036,6 +1114,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(recursionEClass, Recursion.class, "Recursion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRecursion_Name(), ecorePackage.getEString(), "name", null, 0, 1, Recursion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRecursion_RecProtocol(), this.getProtocol(), null, "recProtocol", null, 0, 1, Recursion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(closeRecursionEClass, CloseRecursion.class, "CloseRecursion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCloseRecursion_RecursionVariable(), this.getRecursion(), null, "recursionVariable", null, 0, 1, CloseRecursion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1047,8 +1126,11 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(choiceEClass, Choice.class, "Choice", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getChoice_Role(), this.getRoleOne(), null, "role", null, 0, 1, Choice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getChoice_Message(), this.getMessage(), null, "message", null, 0, -1, Choice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getChoice_Branches(), this.getProtocol(), null, "branches", null, 0, -1, Choice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getChoice_Branches(), this.getChoiceBranch(), null, "branches", null, 0, -1, Choice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(choiceBranchEClass, ChoiceBranch.class, "ChoiceBranch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getChoiceBranch_Message(), this.getMessage(), null, "message", null, 0, 1, ChoiceBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getChoiceBranch_Protocol(), this.getProtocol(), null, "protocol", null, 0, 1, ChoiceBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMessage_MessageType(), ecorePackage.getEString(), "messageType", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1081,8 +1163,11 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(choiceLEClass, ChoiceL.class, "ChoiceL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getChoiceL_Role(), this.getRole(), null, "role", null, 0, 1, ChoiceL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getChoiceL_Message(), this.getMessageL(), null, "message", null, 0, -1, ChoiceL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getChoiceL_Branches(), this.getProtocolL(), null, "branches", null, 0, -1, ChoiceL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getChoiceL_Branches(), this.getChoiceBranchL(), null, "branches", null, 0, -1, ChoiceL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(choiceBranchLEClass, ChoiceBranchL.class, "ChoiceBranchL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getChoiceBranchL_Message(), this.getMessageL(), null, "message", null, 0, 1, ChoiceBranchL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getChoiceBranchL_Protocol(), this.getProtocolL(), null, "protocol", null, 0, 1, ChoiceBranchL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(forEachLEClass, ForEachL.class, "ForEachL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getForEachL_EachRole(), this.getRoleOne(), null, "eachRole", null, 0, 1, ForEachL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

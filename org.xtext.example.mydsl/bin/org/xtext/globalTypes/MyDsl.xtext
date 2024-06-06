@@ -28,7 +28,7 @@ RoleSet:
     
 
 Protocol:
-	{Protocol} (actions+=(Message | Choice | Recursion | ForEach | CloseRecursion))*
+	{Protocol} (actions+=(Message | Choice | Recursion | ForEach))* | actions+=(CloseRecursion)
 ;
 
 Recursion:
@@ -50,16 +50,19 @@ ForEach: // add ref
 
 Choice:
 	'choice' 'at' role=[RoleOne | ID] '{'
-		message+=Message
-		branches+=Protocol
+		branches+=ChoiceBranch
 	'}' ('or' '{'
-		message+=Message
-		branches+=Protocol
+		branches+=ChoiceBranch
 	'}')*
 ;
 
+ChoiceBranch:
+	message=Message
+	protocol=Protocol
+;
+
 Message:
-	messageType=ID '(' payload=Payload? ')' 'from' sender=[RoleOne | ID] 'to' receiver=[RoleOne | ID] ';'
+	messageType=ID '(' payload=Payload? ')' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] ';'
 ;
 
 Payload:
@@ -89,12 +92,15 @@ ReceiverL:
 
 ChoiceL:
 	'choice' 'at' role=[Role | ID] '{'
-		message+=MessageL
-		branches+=ProtocolL
+		branches+=ChoiceBranchL
 	'}' ('or' '{'
-		message+=MessageL
-		branches+=ProtocolL
+		branches+=ChoiceBranchL
 	'}')*
+;
+
+ChoiceBranchL:
+	message=MessageL
+	protocol=ProtocolL
 ;
 
 ForEachL:

@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.Choice#getRole <em>Role</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.Choice#getMessage <em>Message</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.Choice#getBranches <em>Branches</em>}</li>
  * </ul>
  *
@@ -50,20 +49,8 @@ public interface Choice extends EObject
   void setRole(RoleOne value);
 
   /**
-   * Returns the value of the '<em><b>Message</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.globalTypes.myDsl.Message}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Message</em>' containment reference list.
-   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getChoice_Message()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Message> getMessage();
-
-  /**
    * Returns the value of the '<em><b>Branches</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.globalTypes.myDsl.Protocol}.
+   * The list contents are of type {@link org.xtext.globalTypes.myDsl.ChoiceBranch}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Branches</em>' containment reference list.
@@ -71,6 +58,6 @@ public interface Choice extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<Protocol> getBranches();
+  EList<ChoiceBranch> getBranches();
 
 } // Choice

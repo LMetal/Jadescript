@@ -76,6 +76,7 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.CLOSE_RECURSION: return createCloseRecursion();
       case MyDslPackage.FOR_EACH: return createForEach();
       case MyDslPackage.CHOICE: return createChoice();
+      case MyDslPackage.CHOICE_BRANCH: return createChoiceBranch();
       case MyDslPackage.MESSAGE: return createMessage();
       case MyDslPackage.PAYLOAD: return createPayload();
       case MyDslPackage.LOCAL_PROTOCOL: return createLocalProtocol();
@@ -84,6 +85,7 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.SENDER_L: return createSenderL();
       case MyDslPackage.RECEIVER_L: return createReceiverL();
       case MyDslPackage.CHOICE_L: return createChoiceL();
+      case MyDslPackage.CHOICE_BRANCH_L: return createChoiceBranchL();
       case MyDslPackage.FOR_EACH_L: return createForEachL();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -228,6 +230,18 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
+  public ChoiceBranch createChoiceBranch()
+  {
+    ChoiceBranchImpl choiceBranch = new ChoiceBranchImpl();
+    return choiceBranch;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Message createMessage()
   {
     MessageImpl message = new MessageImpl();
@@ -316,6 +330,18 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     ChoiceLImpl choiceL = new ChoiceLImpl();
     return choiceL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ChoiceBranchL createChoiceBranchL()
+  {
+    ChoiceBranchLImpl choiceBranchL = new ChoiceBranchLImpl();
+    return choiceBranchL;
   }
 
   /**

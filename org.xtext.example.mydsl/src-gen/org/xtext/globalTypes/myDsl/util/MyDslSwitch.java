@@ -152,6 +152,13 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MyDslPackage.CHOICE_BRANCH:
+      {
+        ChoiceBranch choiceBranch = (ChoiceBranch)theEObject;
+        T result = caseChoiceBranch(choiceBranch);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MyDslPackage.MESSAGE:
       {
         Message message = (Message)theEObject;
@@ -205,6 +212,13 @@ public class MyDslSwitch<T> extends Switch<T>
       {
         ChoiceL choiceL = (ChoiceL)theEObject;
         T result = caseChoiceL(choiceL);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.CHOICE_BRANCH_L:
+      {
+        ChoiceBranchL choiceBranchL = (ChoiceBranchL)theEObject;
+        T result = caseChoiceBranchL(choiceBranchL);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -396,6 +410,22 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Choice Branch</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Choice Branch</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseChoiceBranch(ChoiceBranch object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Message</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -519,6 +549,22 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseChoiceL(ChoiceL object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Choice Branch L</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Choice Branch L</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseChoiceBranchL(ChoiceBranchL object)
   {
     return null;
   }

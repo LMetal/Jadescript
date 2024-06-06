@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.Recursion#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.Recursion#getRecProtocol <em>Rec Protocol</em>}</li>
  * </ul>
  *
  * @see org.xtext.globalTypes.myDsl.MyDslPackage#getRecursion()
@@ -44,5 +45,27 @@ public interface Recursion extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Rec Protocol</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Rec Protocol</em>' containment reference.
+   * @see #setRecProtocol(Protocol)
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getRecursion_RecProtocol()
+   * @model containment="true"
+   * @generated
+   */
+  Protocol getRecProtocol();
+
+  /**
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.Recursion#getRecProtocol <em>Rec Protocol</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Rec Protocol</em>' containment reference.
+   * @see #getRecProtocol()
+   * @generated
+   */
+  void setRecProtocol(Protocol value);
 
 } // Recursion

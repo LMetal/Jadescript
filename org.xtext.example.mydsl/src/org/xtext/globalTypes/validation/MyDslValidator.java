@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 import org.xtext.globalTypes.myDsl.Choice;
+import org.xtext.globalTypes.myDsl.ChoiceL;
 import org.xtext.globalTypes.myDsl.ForEach;
 import org.xtext.globalTypes.myDsl.GlobalProtocol;
 import org.xtext.globalTypes.myDsl.Message;
@@ -30,20 +31,39 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		
 		@Check
 		public void choiceMessageFromChoiceAgent(Choice c) {
-			for(int i=0; i<c.getMessage().size(); i++) {
-				if(c.getRole() != c.getMessage().get(i).getSender()) {
+			for(int i=0; i<c.getBranches().size(); i++) {
+				if(c.getRole() != c.getBranches().get(i).getMessage().getSender()) {
 					error("Role sending message must be the role chosing",
 							c,
 							MyDslPackage.Literals.CHOICE__ROLE
 							);
 					error("Role sending message must be the role chosing",
-							c.getMessage().get(i),
+							c.getBranches().get(i).getMessage(),
 							MyDslPackage.Literals.MESSAGE__SENDER
 							);
 				}
 			}
 			
 		}
+		
+		
+		//TODO
+		/*@Check
+		public void choiceMessageFromChoiceAgentLocal(ChoiceL c) {
+			for(int i=0; i<c.getBranches().size(); i++) {
+				if(c.getRole() != c.getBranches().get(i).getMessage().getSender()) {
+					error("Role sending message must be the role chosing",
+							c,
+							MyDslPackage.Literals.CHOICE__ROLE
+							);
+					error("Role sending message must be the role chosing",
+							c.getBranches().get(i).getMessage(),
+							MyDslPackage.Literals.MESSAGE__SENDER
+							);
+				}
+			}
+			
+		}*/
 		
 		//TODO
 		//finish
@@ -95,9 +115,9 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		}
 		
 		
-		@Check
-		public void singleSender(Message m) {
-			if(m.getSender() instanceof RoleSet) {
+		//@Check
+		public void roleSetReceiver(Message m) {
+			if(m.getReceiver() instanceof RoleSet) {
 				error("Sender of message must not be a role multiple",
 						m,
 						MyDslPackage.Literals.MESSAGE__SENDER);

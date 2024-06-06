@@ -21,6 +21,7 @@ import org.xtext.globalTypes.myDsl.GlobalProtocol
 import org.xtext.globalTypes.myDsl.LocalProtocol
 import org.xtext.globalTypes.myDsl.RoleOne
 import org.xtext.globalTypes.myDsl.RoleSet
+import org.xtext.globalTypes.myDsl.ChoiceBranch
 
 /**
  * Generates code from your model files on save.
@@ -81,10 +82,14 @@ class MyDslGenerator extends AbstractGenerator {
 	def dispatch projectOn(Choice c, Role r)'''
 		choice at «c.role.name»{
 		«FOR int i: 0..c.branches.length-1 SEPARATOR' or {'»
-				«projectOn(c.message.get(i), r)»
 				«projectOn(c.branches.get(i), r)»
 			}
 		«ENDFOR»
+	'''
+	
+	def dispatch projectOn(ChoiceBranch branch, Role r)'''
+		«projectOn(branch.message, r)»
+		«projectOn(branch.protocol, r)»
 	'''
 	
 	def dispatch projectOn(Recursion rec, Role r)'''

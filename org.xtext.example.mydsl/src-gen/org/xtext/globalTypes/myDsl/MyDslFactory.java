@@ -123,6 +123,15 @@ public interface MyDslFactory extends EFactory
   Choice createChoice();
 
   /**
+   * Returns a new object of class '<em>Choice Branch</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Choice Branch</em>'.
+   * @generated
+   */
+  ChoiceBranch createChoiceBranch();
+
+  /**
    * Returns a new object of class '<em>Message</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -193,6 +202,15 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   ChoiceL createChoiceL();
+
+  /**
+   * Returns a new object of class '<em>Choice Branch L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Choice Branch L</em>'.
+   * @generated
+   */
+  ChoiceBranchL createChoiceBranchL();
 
   /**
    * Returns a new object of class '<em>For Each L</em>'.

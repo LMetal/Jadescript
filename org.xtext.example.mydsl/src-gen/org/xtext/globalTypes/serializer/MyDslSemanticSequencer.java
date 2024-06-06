@@ -15,6 +15,8 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.xtext.globalTypes.myDsl.Choice;
+import org.xtext.globalTypes.myDsl.ChoiceBranch;
+import org.xtext.globalTypes.myDsl.ChoiceBranchL;
 import org.xtext.globalTypes.myDsl.ChoiceL;
 import org.xtext.globalTypes.myDsl.CloseRecursion;
 import org.xtext.globalTypes.myDsl.ForEach;
@@ -52,6 +54,12 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			switch (semanticObject.eClass().getClassifierID()) {
 			case MyDslPackage.CHOICE:
 				sequence_Choice(context, (Choice) semanticObject); 
+				return; 
+			case MyDslPackage.CHOICE_BRANCH:
+				sequence_ChoiceBranch(context, (ChoiceBranch) semanticObject); 
+				return; 
+			case MyDslPackage.CHOICE_BRANCH_L:
+				sequence_ChoiceBranchL(context, (ChoiceBranchL) semanticObject); 
 				return; 
 			case MyDslPackage.CHOICE_L:
 				sequence_ChoiceL(context, (ChoiceL) semanticObject); 
@@ -115,10 +123,56 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ChoiceBranchL returns ChoiceBranchL
+	 *
+	 * Constraint:
+	 *     (message=MessageL protocol=ProtocolL)
+	 * </pre>
+	 */
+	protected void sequence_ChoiceBranchL(ISerializationContext context, ChoiceBranchL semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.CHOICE_BRANCH_L__MESSAGE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.CHOICE_BRANCH_L__MESSAGE));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.CHOICE_BRANCH_L__PROTOCOL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.CHOICE_BRANCH_L__PROTOCOL));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getChoiceBranchLAccess().getMessageMessageLParserRuleCall_0_0(), semanticObject.getMessage());
+		feeder.accept(grammarAccess.getChoiceBranchLAccess().getProtocolProtocolLParserRuleCall_1_0(), semanticObject.getProtocol());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ChoiceBranch returns ChoiceBranch
+	 *
+	 * Constraint:
+	 *     (message=Message protocol=Protocol)
+	 * </pre>
+	 */
+	protected void sequence_ChoiceBranch(ISerializationContext context, ChoiceBranch semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.CHOICE_BRANCH__MESSAGE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.CHOICE_BRANCH__MESSAGE));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.CHOICE_BRANCH__PROTOCOL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.CHOICE_BRANCH__PROTOCOL));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getChoiceBranchAccess().getMessageMessageParserRuleCall_0_0(), semanticObject.getMessage());
+		feeder.accept(grammarAccess.getChoiceBranchAccess().getProtocolProtocolParserRuleCall_1_0(), semanticObject.getProtocol());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     ChoiceL returns ChoiceL
 	 *
 	 * Constraint:
-	 *     (role=[Role|ID] message+=MessageL branches+=ProtocolL (message+=MessageL branches+=ProtocolL)*)
+	 *     (role=[Role|ID] branches+=ChoiceBranchL branches+=ChoiceBranchL*)
 	 * </pre>
 	 */
 	protected void sequence_ChoiceL(ISerializationContext context, ChoiceL semanticObject) {
@@ -132,7 +186,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Choice returns Choice
 	 *
 	 * Constraint:
-	 *     (role=[RoleOne|ID] message+=Message branches+=Protocol (message+=Message branches+=Protocol)*)
+	 *     (role=[RoleOne|ID] branches+=ChoiceBranch branches+=ChoiceBranch*)
 	 * </pre>
 	 */
 	protected void sequence_Choice(ISerializationContext context, Choice semanticObject) {
@@ -343,7 +397,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Protocol returns Protocol
 	 *
 	 * Constraint:
-	 *     (actions+=Message | actions+=Choice | actions+=Recursion | actions+=ForEach | actions+=CloseRecursion)*
+	 *     ((actions+=Message | actions+=Choice | actions+=Recursion | actions+=ForEach)+ | actions+=CloseRecursion)?
 	 * </pre>
 	 */
 	protected void sequence_Protocol(ISerializationContext context, Protocol semanticObject) {
@@ -377,16 +431,19 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Recursion returns Recursion
 	 *
 	 * Constraint:
-	 *     name=ID
+	 *     (name=ID recProtocol=Protocol)
 	 * </pre>
 	 */
 	protected void sequence_Recursion(ISerializationContext context, Recursion semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.RECURSION__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RECURSION__NAME));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.RECURSION__REC_PROTOCOL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.RECURSION__REC_PROTOCOL));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getRecursionAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRecursionAccess().getRecProtocolProtocolParserRuleCall_3_0(), semanticObject.getRecProtocol());
 		feeder.finish();
 	}
 	

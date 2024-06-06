@@ -20,9 +20,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.globalTypes.myDsl.Choice;
-import org.xtext.globalTypes.myDsl.Message;
+import org.xtext.globalTypes.myDsl.ChoiceBranch;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
-import org.xtext.globalTypes.myDsl.Protocol;
 import org.xtext.globalTypes.myDsl.RoleOne;
 
 /**
@@ -34,7 +33,6 @@ import org.xtext.globalTypes.myDsl.RoleOne;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ChoiceImpl#getRole <em>Role</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.impl.ChoiceImpl#getMessage <em>Message</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ChoiceImpl#getBranches <em>Branches</em>}</li>
  * </ul>
  *
@@ -53,16 +51,6 @@ public class ChoiceImpl extends MinimalEObjectImpl.Container implements Choice
   protected RoleOne role;
 
   /**
-   * The cached value of the '{@link #getMessage() <em>Message</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getMessage()
-   * @generated
-   * @ordered
-   */
-  protected EList<Message> message;
-
-  /**
    * The cached value of the '{@link #getBranches() <em>Branches</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -70,7 +58,7 @@ public class ChoiceImpl extends MinimalEObjectImpl.Container implements Choice
    * @generated
    * @ordered
    */
-  protected EList<Protocol> branches;
+  protected EList<ChoiceBranch> branches;
 
   /**
    * <!-- begin-user-doc -->
@@ -144,26 +132,11 @@ public class ChoiceImpl extends MinimalEObjectImpl.Container implements Choice
    * @generated
    */
   @Override
-  public EList<Message> getMessage()
-  {
-    if (message == null)
-    {
-      message = new EObjectContainmentEList<Message>(Message.class, this, MyDslPackage.CHOICE__MESSAGE);
-    }
-    return message;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Protocol> getBranches()
+  public EList<ChoiceBranch> getBranches()
   {
     if (branches == null)
     {
-      branches = new EObjectContainmentEList<Protocol>(Protocol.class, this, MyDslPackage.CHOICE__BRANCHES);
+      branches = new EObjectContainmentEList<ChoiceBranch>(ChoiceBranch.class, this, MyDslPackage.CHOICE__BRANCHES);
     }
     return branches;
   }
@@ -178,8 +151,6 @@ public class ChoiceImpl extends MinimalEObjectImpl.Container implements Choice
   {
     switch (featureID)
     {
-      case MyDslPackage.CHOICE__MESSAGE:
-        return ((InternalEList<?>)getMessage()).basicRemove(otherEnd, msgs);
       case MyDslPackage.CHOICE__BRANCHES:
         return ((InternalEList<?>)getBranches()).basicRemove(otherEnd, msgs);
     }
@@ -199,8 +170,6 @@ public class ChoiceImpl extends MinimalEObjectImpl.Container implements Choice
       case MyDslPackage.CHOICE__ROLE:
         if (resolve) return getRole();
         return basicGetRole();
-      case MyDslPackage.CHOICE__MESSAGE:
-        return getMessage();
       case MyDslPackage.CHOICE__BRANCHES:
         return getBranches();
     }
@@ -221,13 +190,9 @@ public class ChoiceImpl extends MinimalEObjectImpl.Container implements Choice
       case MyDslPackage.CHOICE__ROLE:
         setRole((RoleOne)newValue);
         return;
-      case MyDslPackage.CHOICE__MESSAGE:
-        getMessage().clear();
-        getMessage().addAll((Collection<? extends Message>)newValue);
-        return;
       case MyDslPackage.CHOICE__BRANCHES:
         getBranches().clear();
-        getBranches().addAll((Collection<? extends Protocol>)newValue);
+        getBranches().addAll((Collection<? extends ChoiceBranch>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -245,9 +210,6 @@ public class ChoiceImpl extends MinimalEObjectImpl.Container implements Choice
     {
       case MyDslPackage.CHOICE__ROLE:
         setRole((RoleOne)null);
-        return;
-      case MyDslPackage.CHOICE__MESSAGE:
-        getMessage().clear();
         return;
       case MyDslPackage.CHOICE__BRANCHES:
         getBranches().clear();
@@ -268,8 +230,6 @@ public class ChoiceImpl extends MinimalEObjectImpl.Container implements Choice
     {
       case MyDslPackage.CHOICE__ROLE:
         return role != null;
-      case MyDslPackage.CHOICE__MESSAGE:
-        return message != null && !message.isEmpty();
       case MyDslPackage.CHOICE__BRANCHES:
         return branches != null && !branches.isEmpty();
     }
