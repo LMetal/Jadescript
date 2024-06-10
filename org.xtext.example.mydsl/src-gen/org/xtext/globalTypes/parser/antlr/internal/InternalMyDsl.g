@@ -688,7 +688,7 @@ ruleForEach returns [EObject current=null]
 				}
 				otherlv_3=RULE_ID
 				{
-					newLeafNode(otherlv_3, grammarAccess.getForEachAccess().getRoleRoleSetCrossReference_3_0());
+					newLeafNode(otherlv_3, grammarAccess.getForEachAccess().getRolesetRoleSetCrossReference_3_0());
 				}
 			)
 		)

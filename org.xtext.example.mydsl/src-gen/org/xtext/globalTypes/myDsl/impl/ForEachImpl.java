@@ -27,7 +27,7 @@ import org.xtext.globalTypes.myDsl.RoleSet;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getEachRole <em>Each Role</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getRole <em>Role</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getRoleset <em>Roleset</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getRefRole <em>Ref Role</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getBranch <em>Branch</em>}</li>
  * </ul>
@@ -47,14 +47,14 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
   protected RoleOne eachRole;
 
   /**
-   * The cached value of the '{@link #getRole() <em>Role</em>}' reference.
+   * The cached value of the '{@link #getRoleset() <em>Roleset</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRole()
+   * @see #getRoleset()
    * @generated
    * @ordered
    */
-  protected RoleSet role;
+  protected RoleSet roleset;
 
   /**
    * The cached value of the '{@link #getRefRole() <em>Ref Role</em>}' reference.
@@ -153,19 +153,19 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * @generated
    */
   @Override
-  public RoleSet getRole()
+  public RoleSet getRoleset()
   {
-    if (role != null && role.eIsProxy())
+    if (roleset != null && roleset.eIsProxy())
     {
-      InternalEObject oldRole = (InternalEObject)role;
-      role = (RoleSet)eResolveProxy(oldRole);
-      if (role != oldRole)
+      InternalEObject oldRoleset = (InternalEObject)roleset;
+      roleset = (RoleSet)eResolveProxy(oldRoleset);
+      if (roleset != oldRoleset)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.FOR_EACH__ROLE, oldRole, role));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.FOR_EACH__ROLESET, oldRoleset, roleset));
       }
     }
-    return role;
+    return roleset;
   }
 
   /**
@@ -173,9 +173,9 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * <!-- end-user-doc -->
    * @generated
    */
-  public RoleSet basicGetRole()
+  public RoleSet basicGetRoleset()
   {
-    return role;
+    return roleset;
   }
 
   /**
@@ -184,12 +184,12 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * @generated
    */
   @Override
-  public void setRole(RoleSet newRole)
+  public void setRoleset(RoleSet newRoleset)
   {
-    RoleSet oldRole = role;
-    role = newRole;
+    RoleSet oldRoleset = roleset;
+    roleset = newRoleset;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH__ROLE, oldRole, role));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH__ROLESET, oldRoleset, roleset));
   }
 
   /**
@@ -317,9 +317,9 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
     {
       case MyDslPackage.FOR_EACH__EACH_ROLE:
         return getEachRole();
-      case MyDslPackage.FOR_EACH__ROLE:
-        if (resolve) return getRole();
-        return basicGetRole();
+      case MyDslPackage.FOR_EACH__ROLESET:
+        if (resolve) return getRoleset();
+        return basicGetRoleset();
       case MyDslPackage.FOR_EACH__REF_ROLE:
         if (resolve) return getRefRole();
         return basicGetRefRole();
@@ -342,8 +342,8 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
       case MyDslPackage.FOR_EACH__EACH_ROLE:
         setEachRole((RoleOne)newValue);
         return;
-      case MyDslPackage.FOR_EACH__ROLE:
-        setRole((RoleSet)newValue);
+      case MyDslPackage.FOR_EACH__ROLESET:
+        setRoleset((RoleSet)newValue);
         return;
       case MyDslPackage.FOR_EACH__REF_ROLE:
         setRefRole((RoleOne)newValue);
@@ -368,8 +368,8 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
       case MyDslPackage.FOR_EACH__EACH_ROLE:
         setEachRole((RoleOne)null);
         return;
-      case MyDslPackage.FOR_EACH__ROLE:
-        setRole((RoleSet)null);
+      case MyDslPackage.FOR_EACH__ROLESET:
+        setRoleset((RoleSet)null);
         return;
       case MyDslPackage.FOR_EACH__REF_ROLE:
         setRefRole((RoleOne)null);
@@ -393,8 +393,8 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
     {
       case MyDslPackage.FOR_EACH__EACH_ROLE:
         return eachRole != null;
-      case MyDslPackage.FOR_EACH__ROLE:
-        return role != null;
+      case MyDslPackage.FOR_EACH__ROLESET:
+        return roleset != null;
       case MyDslPackage.FOR_EACH__REF_ROLE:
         return refRole != null;
       case MyDslPackage.FOR_EACH__BRANCH:

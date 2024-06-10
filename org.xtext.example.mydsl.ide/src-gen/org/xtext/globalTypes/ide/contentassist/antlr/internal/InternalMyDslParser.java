@@ -5096,31 +5096,31 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ForEach__Group__3__Impl"
-    // InternalMyDsl.g:1659:1: rule__ForEach__Group__3__Impl : ( ( rule__ForEach__RoleAssignment_3 ) ) ;
+    // InternalMyDsl.g:1659:1: rule__ForEach__Group__3__Impl : ( ( rule__ForEach__RolesetAssignment_3 ) ) ;
     public final void rule__ForEach__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMyDsl.g:1663:1: ( ( ( rule__ForEach__RoleAssignment_3 ) ) )
-            // InternalMyDsl.g:1664:1: ( ( rule__ForEach__RoleAssignment_3 ) )
+            // InternalMyDsl.g:1663:1: ( ( ( rule__ForEach__RolesetAssignment_3 ) ) )
+            // InternalMyDsl.g:1664:1: ( ( rule__ForEach__RolesetAssignment_3 ) )
             {
-            // InternalMyDsl.g:1664:1: ( ( rule__ForEach__RoleAssignment_3 ) )
-            // InternalMyDsl.g:1665:2: ( rule__ForEach__RoleAssignment_3 )
+            // InternalMyDsl.g:1664:1: ( ( rule__ForEach__RolesetAssignment_3 ) )
+            // InternalMyDsl.g:1665:2: ( rule__ForEach__RolesetAssignment_3 )
             {
-             before(grammarAccess.getForEachAccess().getRoleAssignment_3()); 
-            // InternalMyDsl.g:1666:2: ( rule__ForEach__RoleAssignment_3 )
-            // InternalMyDsl.g:1666:3: rule__ForEach__RoleAssignment_3
+             before(grammarAccess.getForEachAccess().getRolesetAssignment_3()); 
+            // InternalMyDsl.g:1666:2: ( rule__ForEach__RolesetAssignment_3 )
+            // InternalMyDsl.g:1666:3: rule__ForEach__RolesetAssignment_3
             {
             pushFollow(FOLLOW_2);
-            rule__ForEach__RoleAssignment_3();
+            rule__ForEach__RolesetAssignment_3();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getForEachAccess().getRoleAssignment_3()); 
+             after(grammarAccess.getForEachAccess().getRolesetAssignment_3()); 
 
             }
 
@@ -11962,9 +11962,9 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ForEach__EachRoleAssignment_1"
 
 
-    // $ANTLR start "rule__ForEach__RoleAssignment_3"
-    // InternalMyDsl.g:4001:1: rule__ForEach__RoleAssignment_3 : ( ( RULE_ID ) ) ;
-    public final void rule__ForEach__RoleAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__ForEach__RolesetAssignment_3"
+    // InternalMyDsl.g:4001:1: rule__ForEach__RolesetAssignment_3 : ( ( RULE_ID ) ) ;
+    public final void rule__ForEach__RolesetAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -11975,17 +11975,17 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:4006:2: ( ( RULE_ID ) )
             // InternalMyDsl.g:4007:3: ( RULE_ID )
             {
-             before(grammarAccess.getForEachAccess().getRoleRoleSetCrossReference_3_0()); 
+             before(grammarAccess.getForEachAccess().getRolesetRoleSetCrossReference_3_0()); 
             // InternalMyDsl.g:4008:3: ( RULE_ID )
             // InternalMyDsl.g:4009:4: RULE_ID
             {
-             before(grammarAccess.getForEachAccess().getRoleRoleSetIDTerminalRuleCall_3_0_1()); 
+             before(grammarAccess.getForEachAccess().getRolesetRoleSetIDTerminalRuleCall_3_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
-             after(grammarAccess.getForEachAccess().getRoleRoleSetIDTerminalRuleCall_3_0_1()); 
+             after(grammarAccess.getForEachAccess().getRolesetRoleSetIDTerminalRuleCall_3_0_1()); 
 
             }
 
-             after(grammarAccess.getForEachAccess().getRoleRoleSetCrossReference_3_0()); 
+             after(grammarAccess.getForEachAccess().getRolesetRoleSetCrossReference_3_0()); 
 
             }
 
@@ -12004,7 +12004,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ForEach__RoleAssignment_3"
+    // $ANTLR end "rule__ForEach__RolesetAssignment_3"
 
 
     // $ANTLR start "rule__ForEach__RefRoleAssignment_5"

@@ -363,9 +363,9 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Assignment cEachRoleAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cEachRoleRoleOneParserRuleCall_1_0 = (RuleCall)cEachRoleAssignment_1.eContents().get(0);
 		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cRoleAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cRoleRoleSetCrossReference_3_0 = (CrossReference)cRoleAssignment_3.eContents().get(0);
-		private final RuleCall cRoleRoleSetIDTerminalRuleCall_3_0_1 = (RuleCall)cRoleRoleSetCrossReference_3_0.eContents().get(1);
+		private final Assignment cRolesetAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cRolesetRoleSetCrossReference_3_0 = (CrossReference)cRolesetAssignment_3.eContents().get(0);
+		private final RuleCall cRolesetRoleSetIDTerminalRuleCall_3_0_1 = (RuleCall)cRolesetRoleSetCrossReference_3_0.eContents().get(1);
 		private final Keyword cAtKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cRefRoleAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final CrossReference cRefRoleRoleOneCrossReference_5_0 = (CrossReference)cRefRoleAssignment_5.eContents().get(0);
@@ -376,14 +376,14 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//ForEach: // add ref
-		//    'foreach' eachRole=RoleOne ':' role=[RoleSet | ID] 'at' refRole = [RoleOne | ID] '{'
+		//    'foreach' eachRole=RoleOne ':' roleset=[RoleSet | ID] 'at' refRole = [RoleOne | ID] '{'
 		//        branch=Protocol
 		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//// add ref
-		//   'foreach' eachRole=RoleOne ':' role=[RoleSet | ID] 'at' refRole = [RoleOne | ID] '{'
+		//   'foreach' eachRole=RoleOne ':' roleset=[RoleSet | ID] 'at' refRole = [RoleOne | ID] '{'
 		//       branch=Protocol
 		//   '}'
 		public Group getGroup() { return cGroup; }
@@ -401,14 +401,14 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 		
-		//role=[RoleSet | ID]
-		public Assignment getRoleAssignment_3() { return cRoleAssignment_3; }
+		//roleset=[RoleSet | ID]
+		public Assignment getRolesetAssignment_3() { return cRolesetAssignment_3; }
 		
 		//[RoleSet | ID]
-		public CrossReference getRoleRoleSetCrossReference_3_0() { return cRoleRoleSetCrossReference_3_0; }
+		public CrossReference getRolesetRoleSetCrossReference_3_0() { return cRolesetRoleSetCrossReference_3_0; }
 		
 		//ID
-		public RuleCall getRoleRoleSetIDTerminalRuleCall_3_0_1() { return cRoleRoleSetIDTerminalRuleCall_3_0_1; }
+		public RuleCall getRolesetRoleSetIDTerminalRuleCall_3_0_1() { return cRolesetRoleSetIDTerminalRuleCall_3_0_1; }
 		
 		//'at'
 		public Keyword getAtKeyword_4() { return cAtKeyword_4; }
@@ -1287,7 +1287,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//ForEach: // add ref
-	//    'foreach' eachRole=RoleOne ':' role=[RoleSet | ID] 'at' refRole = [RoleOne | ID] '{'
+	//    'foreach' eachRole=RoleOne ':' roleset=[RoleSet | ID] 'at' refRole = [RoleOne | ID] '{'
 	//        branch=Protocol
 	//    '}'
 	//;

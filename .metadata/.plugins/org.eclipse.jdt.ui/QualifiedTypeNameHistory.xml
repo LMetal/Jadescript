@@ -9,4 +9,8 @@
     <fullyQualifiedTypeName name="org.eclipse.xtext.EcoreUtil2"/>
     <fullyQualifiedTypeName name="org.eclipse.emf.ecore.EObject"/>
     <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.GlobalProtocol"/>
+    <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.ChoiceL"/>
+    <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.ChoiceBranch"/>
+    <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.ChoiceBranchL"/>
+    <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.MyDslPackage.Literals"/>
 </qualifiedTypeNameHistroy>

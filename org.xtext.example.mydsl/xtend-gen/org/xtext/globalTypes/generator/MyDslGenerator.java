@@ -246,8 +246,8 @@ public class MyDslGenerator extends AbstractGenerator {
   protected CharSequence _projectOn(final ForEach each, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      RoleSet _role = each.getRole();
-      boolean _equals = Objects.equal(_role, r);
+      RoleSet _roleset = each.getRoleset();
+      boolean _equals = Objects.equal(_roleset, r);
       if (_equals) {
         Object _projectOn = this.projectOn(each.getBranch(), each.getEachRole());
         _builder.append(_projectOn);
@@ -262,7 +262,7 @@ public class MyDslGenerator extends AbstractGenerator {
         String _name = each.getEachRole().getName();
         _builder.append(_name);
         _builder.append(":");
-        String _name_1 = each.getRole().getName();
+        String _name_1 = each.getRoleset().getName();
         _builder.append(_name_1);
         _builder.append("{");
         _builder.newLineIfNotEmpty();

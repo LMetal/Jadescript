@@ -44,9 +44,26 @@ public class MyDslValidator extends AbstractMyDslValidator {
 			}	
 		}
 		
+		@Check
+		public void noSelfMessage(Message m) {
+			if(m.getSender() == m.getReceiver()) {
+				error(
+					"No self-message is allowed",
+					m,
+					MyDslPackage.Literals.MESSAGE__SENDER
+				);
+				
+				error(
+					"No self-message is allowed",
+					m,
+					MyDslPackage.Literals.MESSAGE__RECEIVER
+				);
+			}
+		}
+		
 		
 		//TODO
-		@Check
+		//@Check
 		public void choiceMessageFromChoiceAgentLocal(ChoiceL c) {
 			for(ChoiceBranchL b: c.getBranches()) {
 				
@@ -54,9 +71,44 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		}
 		
 		
+		HashMap<RoleSet, RoleOne> getRolesetRef(Model m) {
+			List<RoleSet> rolesetDef = EcoreUtil2.getAllContentsOfType(m, RoleSet.class);
+			
+			var references = new HashMap<RoleSet, RoleOne>();
+			for(RoleSet r: rolesetDef) {
+				references.put(r, r.getRef());
+			}
+			return references;
+		}
+		
+		HashMap<RoleSet, RoleOne> getRolesetRef(GlobalProtocol g) {
+			List<RoleSet> rolesetDef = EcoreUtil2.getAllContentsOfType(g, RoleSet.class);
+			
+			var references = new HashMap<RoleSet, RoleOne>();
+			for(RoleSet r: rolesetDef) {
+				references.put(r, r.getRef());
+			}
+			return references;
+		}
+		
 		
 		//TODO
 		//validate at role to be reference
+		@Check
+		public void rightRefRoleForEach(GlobalProtocol glob_p) {
+			var rolesetRef = getRolesetRef(glob_p);
+			List<ForEach> forEachList = EcoreUtil2.getAllContentsOfType(glob_p, ForEach.class);
+			
+			for(ForEach f : forEachList) {
+				if(f.getRefRole() != rolesetRef.get(f.getRoleset())) {
+					error(
+						"Role cicling over Roleset must be referent of that Roleset",
+						f,
+						MyDslPackage.Literals.FOR_EACH__REF_ROLE
+						);
+				}
+			}
+		}
 		
 		//finish
 		@Check
@@ -107,12 +159,33 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		}
 		
 		
-		//@Check
-		public void roleSetReceiver(Message m) {
-			if(m.getReceiver() instanceof RoleSet) {
+		@Check
+		public void noRolesetSender(Message m) {
+			if(m.getSender() instanceof RoleSet) {
 				error("Sender of message must not be a role multiple",
 						m,
 						MyDslPackage.Literals.MESSAGE__SENDER);
+			}
+		}
+		
+		
+		//TODO
+		//messages to Roleset must be from referent to that Roleset and out of ForEach loop
+		@Check
+		public void messageToRolesetRef(GlobalProtocol glob_p) {
+			List<Message> messageList = EcoreUtil2.getAllContentsOfType(glob_p, Message.class);
+			var rolesetRef = getRolesetRef(glob_p);
+			
+			for(Message m : messageList) {
+				if(m.getReceiver() instanceof RoleSet) {
+					if(m.getSender() != rolesetRef.get(m.getReceiver())) {
+						error(
+							"Sender role must be referent of that Roleset",
+							m,
+							MyDslPackage.Literals.MESSAGE__SENDER
+						);
+					}
+				}
 			}
 		}
 		
@@ -136,7 +209,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 				
 				for(Message mess : messagesToCheck) {
 					if(mess.getReceiver() == f.getEachRole()) {
-						if(mess.getSender() != references.get(f.getRole())) {
+						if(mess.getSender() != references.get(f.getRoleset())) {
 							error("Sender of message must be reference of receiver",
 									mess,
 									MyDslPackage.Literals.MESSAGE__SENDER);
@@ -144,7 +217,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 					}
 					
 					if(mess.getSender() == f.getEachRole()) {
-						if(mess.getReceiver() != references.get(f.getRole())) {
+						if(mess.getReceiver() != references.get(f.getRoleset())) {
 							error("Receiver of message must be reference of sender",
 									mess,
 									MyDslPackage.Literals.MESSAGE__RECEIVER);

@@ -365,13 +365,13 @@ public interface MyDslPackage extends EPackage
   int FOR_EACH__EACH_ROLE = 0;
 
   /**
-   * The feature id for the '<em><b>Role</b></em>' reference.
+   * The feature id for the '<em><b>Roleset</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FOR_EACH__ROLE = 1;
+  int FOR_EACH__ROLESET = 1;
 
   /**
    * The feature id for the '<em><b>Ref Role</b></em>' reference.
@@ -1096,15 +1096,15 @@ public interface MyDslPackage extends EPackage
   EReference getForEach_EachRole();
 
   /**
-   * Returns the meta object for the reference '{@link org.xtext.globalTypes.myDsl.ForEach#getRole <em>Role</em>}'.
+   * Returns the meta object for the reference '{@link org.xtext.globalTypes.myDsl.ForEach#getRoleset <em>Roleset</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Role</em>'.
-   * @see org.xtext.globalTypes.myDsl.ForEach#getRole()
+   * @return the meta object for the reference '<em>Roleset</em>'.
+   * @see org.xtext.globalTypes.myDsl.ForEach#getRoleset()
    * @see #getForEach()
    * @generated
    */
-  EReference getForEach_Role();
+  EReference getForEach_Roleset();
 
   /**
    * Returns the meta object for the reference '{@link org.xtext.globalTypes.myDsl.ForEach#getRefRole <em>Ref Role</em>}'.
@@ -1754,12 +1754,12 @@ public interface MyDslPackage extends EPackage
     EReference FOR_EACH__EACH_ROLE = eINSTANCE.getForEach_EachRole();
 
     /**
-     * The meta object literal for the '<em><b>Role</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Roleset</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FOR_EACH__ROLE = eINSTANCE.getForEach_Role();
+    EReference FOR_EACH__ROLESET = eINSTANCE.getForEach_Roleset();
 
     /**
      * The meta object literal for the '<em><b>Ref Role</b></em>' reference feature.

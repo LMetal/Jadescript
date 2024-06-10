@@ -1681,7 +1681,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             				
             otherlv_3=(Token)match(input,RULE_ID,FOLLOW_16); 
 
-            					newLeafNode(otherlv_3, grammarAccess.getForEachAccess().getRoleRoleSetCrossReference_3_0());
+            					newLeafNode(otherlv_3, grammarAccess.getForEachAccess().getRolesetRoleSetCrossReference_3_0());
             				
 
             }

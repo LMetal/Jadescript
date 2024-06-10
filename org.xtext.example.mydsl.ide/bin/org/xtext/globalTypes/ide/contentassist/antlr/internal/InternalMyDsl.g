@@ -1662,9 +1662,9 @@ rule__ForEach__Group__3__Impl
 	}
 :
 (
-	{ before(grammarAccess.getForEachAccess().getRoleAssignment_3()); }
-	(rule__ForEach__RoleAssignment_3)
-	{ after(grammarAccess.getForEachAccess().getRoleAssignment_3()); }
+	{ before(grammarAccess.getForEachAccess().getRolesetAssignment_3()); }
+	(rule__ForEach__RolesetAssignment_3)
+	{ after(grammarAccess.getForEachAccess().getRolesetAssignment_3()); }
 )
 ;
 finally {
@@ -3998,19 +3998,19 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ForEach__RoleAssignment_3
+rule__ForEach__RolesetAssignment_3
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getForEachAccess().getRoleRoleSetCrossReference_3_0()); }
+		{ before(grammarAccess.getForEachAccess().getRolesetRoleSetCrossReference_3_0()); }
 		(
-			{ before(grammarAccess.getForEachAccess().getRoleRoleSetIDTerminalRuleCall_3_0_1()); }
+			{ before(grammarAccess.getForEachAccess().getRolesetRoleSetIDTerminalRuleCall_3_0_1()); }
 			RULE_ID
-			{ after(grammarAccess.getForEachAccess().getRoleRoleSetIDTerminalRuleCall_3_0_1()); }
+			{ after(grammarAccess.getForEachAccess().getRolesetRoleSetIDTerminalRuleCall_3_0_1()); }
 		)
-		{ after(grammarAccess.getForEachAccess().getRoleRoleSetCrossReference_3_0()); }
+		{ after(grammarAccess.getForEachAccess().getRolesetRoleSetCrossReference_3_0()); }
 	)
 ;
 finally {

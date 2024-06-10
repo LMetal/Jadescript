@@ -101,11 +101,11 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def dispatch projectOn(ForEach each, Role r)'''
-		«IF each.role == r»
+		«IF each.roleset == r»
 			«projectOn(each.branch, each.eachRole)»
 		«ENDIF»
 		«IF each.refRole == r»
-			foreach role «each.eachRole.name»:«each.role.name»{
+			foreach role «each.eachRole.name»:«each.roleset.name»{
 				«projectOn(each.branch, r)»
 			}
 		«ENDIF»
