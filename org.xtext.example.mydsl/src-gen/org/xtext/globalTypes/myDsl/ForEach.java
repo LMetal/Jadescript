@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getEachRole <em>Each Role</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getLoopRole <em>Loop Role</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getRoleset <em>Roleset</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getRefRole <em>Ref Role</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getBranch <em>Branch</em>}</li>
@@ -27,26 +27,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface ForEach extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Each Role</b></em>' containment reference.
+   * Returns the value of the '<em><b>Loop Role</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Each Role</em>' containment reference.
-   * @see #setEachRole(RoleOne)
-   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEach_EachRole()
+   * @return the value of the '<em>Loop Role</em>' containment reference.
+   * @see #setLoopRole(RoleOne)
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEach_LoopRole()
    * @model containment="true"
    * @generated
    */
-  RoleOne getEachRole();
+  RoleOne getLoopRole();
 
   /**
-   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEach#getEachRole <em>Each Role</em>}' containment reference.
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEach#getLoopRole <em>Loop Role</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Each Role</em>' containment reference.
-   * @see #getEachRole()
+   * @param value the new value of the '<em>Loop Role</em>' containment reference.
+   * @see #getLoopRole()
    * @generated
    */
-  void setEachRole(RoleOne value);
+  void setLoopRole(RoleOne value);
 
   /**
    * Returns the value of the '<em><b>Roleset</b></em>' reference.

@@ -81,6 +81,7 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.PAYLOAD: return createPayload();
       case MyDslPackage.LOCAL_PROTOCOL: return createLocalProtocol();
       case MyDslPackage.PROTOCOL_L: return createProtocolL();
+      case MyDslPackage.RECURSION_L: return createRecursionL();
       case MyDslPackage.MESSAGE_L: return createMessageL();
       case MyDslPackage.SENDER_L: return createSenderL();
       case MyDslPackage.RECEIVER_L: return createReceiverL();
@@ -282,6 +283,18 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     ProtocolLImpl protocolL = new ProtocolLImpl();
     return protocolL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public RecursionL createRecursionL()
+  {
+    RecursionLImpl recursionL = new RecursionLImpl();
+    return recursionL;
   }
 
   /**

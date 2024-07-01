@@ -29,6 +29,7 @@ import org.xtext.globalTypes.myDsl.Protocol;
 import org.xtext.globalTypes.myDsl.ProtocolL;
 import org.xtext.globalTypes.myDsl.ReceiverL;
 import org.xtext.globalTypes.myDsl.Recursion;
+import org.xtext.globalTypes.myDsl.RecursionL;
 import org.xtext.globalTypes.myDsl.Role;
 import org.xtext.globalTypes.myDsl.RoleOne;
 import org.xtext.globalTypes.myDsl.RoleSet;
@@ -154,6 +155,13 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   private EClass protocolLEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass recursionLEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -430,6 +438,17 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
+  public EAttribute getProtocol_DoesEnd()
+  {
+    return (EAttribute)protocolEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getRecursion()
   {
     return recursionEClass;
@@ -496,7 +515,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getForEach_EachRole()
+  public EReference getForEach_LoopRole()
   {
     return (EReference)forEachEClass.getEStructuralFeatures().get(0);
   }
@@ -760,6 +779,39 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
+  public EClass getRecursionL()
+  {
+    return recursionLEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getRecursionL_Name()
+  {
+    return (EAttribute)recursionLEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getRecursionL_RecProtocol()
+  {
+    return (EReference)recursionLEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getMessageL()
   {
     return messageLEClass;
@@ -1004,6 +1056,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     protocolEClass = createEClass(PROTOCOL);
     createEReference(protocolEClass, PROTOCOL__ACTIONS);
+    createEAttribute(protocolEClass, PROTOCOL__DOES_END);
 
     recursionEClass = createEClass(RECURSION);
     createEAttribute(recursionEClass, RECURSION__NAME);
@@ -1013,7 +1066,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     createEReference(closeRecursionEClass, CLOSE_RECURSION__RECURSION_VARIABLE);
 
     forEachEClass = createEClass(FOR_EACH);
-    createEReference(forEachEClass, FOR_EACH__EACH_ROLE);
+    createEReference(forEachEClass, FOR_EACH__LOOP_ROLE);
     createEReference(forEachEClass, FOR_EACH__ROLESET);
     createEReference(forEachEClass, FOR_EACH__REF_ROLE);
     createEReference(forEachEClass, FOR_EACH__BRANCH);
@@ -1043,6 +1096,10 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     protocolLEClass = createEClass(PROTOCOL_L);
     createEReference(protocolLEClass, PROTOCOL_L__ACTIONS);
+
+    recursionLEClass = createEClass(RECURSION_L);
+    createEAttribute(recursionLEClass, RECURSION_L__NAME);
+    createEReference(recursionLEClass, RECURSION_L__REC_PROTOCOL);
 
     messageLEClass = createEClass(MESSAGE_L);
     createEAttribute(messageLEClass, MESSAGE_L__MESSAGE_TYPE);
@@ -1123,6 +1180,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(protocolEClass, Protocol.class, "Protocol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getProtocol_Actions(), ecorePackage.getEObject(), null, "actions", null, 0, -1, Protocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getProtocol_DoesEnd(), ecorePackage.getEString(), "doesEnd", null, 0, 1, Protocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(recursionEClass, Recursion.class, "Recursion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRecursion_Name(), ecorePackage.getEString(), "name", null, 0, 1, Recursion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1132,7 +1190,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     initEReference(getCloseRecursion_RecursionVariable(), this.getRecursion(), null, "recursionVariable", null, 0, 1, CloseRecursion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(forEachEClass, ForEach.class, "ForEach", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getForEach_EachRole(), this.getRoleOne(), null, "eachRole", null, 0, 1, ForEach.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getForEach_LoopRole(), this.getRoleOne(), null, "loopRole", null, 0, 1, ForEach.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getForEach_Roleset(), this.getRoleSet(), null, "roleset", null, 0, 1, ForEach.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getForEach_RefRole(), this.getRoleOne(), null, "refRole", null, 0, 1, ForEach.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getForEach_Branch(), this.getProtocol(), null, "branch", null, 0, 1, ForEach.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1162,6 +1220,10 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(protocolLEClass, ProtocolL.class, "ProtocolL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getProtocolL_Actions(), ecorePackage.getEObject(), null, "actions", null, 0, -1, ProtocolL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(recursionLEClass, RecursionL.class, "RecursionL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRecursionL_Name(), ecorePackage.getEString(), "name", null, 0, 1, RecursionL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRecursionL_RecProtocol(), this.getProtocolL(), null, "recProtocol", null, 0, 1, RecursionL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(messageLEClass, MessageL.class, "MessageL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMessageL_MessageType(), ecorePackage.getEString(), "messageType", null, 0, 1, MessageL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

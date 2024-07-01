@@ -272,13 +272,22 @@ public interface MyDslPackage extends EPackage
   int PROTOCOL__ACTIONS = 0;
 
   /**
+   * The feature id for the '<em><b>Does End</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROTOCOL__DOES_END = 1;
+
+  /**
    * The number of structural features of the '<em>Protocol</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PROTOCOL_FEATURE_COUNT = 1;
+  int PROTOCOL_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.RecursionImpl <em>Recursion</em>}' class.
@@ -356,13 +365,13 @@ public interface MyDslPackage extends EPackage
   int FOR_EACH = 9;
 
   /**
-   * The feature id for the '<em><b>Each Role</b></em>' containment reference.
+   * The feature id for the '<em><b>Loop Role</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FOR_EACH__EACH_ROLE = 0;
+  int FOR_EACH__LOOP_ROLE = 0;
 
   /**
    * The feature id for the '<em><b>Roleset</b></em>' reference.
@@ -641,6 +650,43 @@ public interface MyDslPackage extends EPackage
   int PROTOCOL_L_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.RecursionLImpl <em>Recursion L</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.globalTypes.myDsl.impl.RecursionLImpl
+   * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRecursionL()
+   * @generated
+   */
+  int RECURSION_L = 16;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RECURSION_L__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Rec Protocol</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RECURSION_L__REC_PROTOCOL = 1;
+
+  /**
+   * The number of structural features of the '<em>Recursion L</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RECURSION_L_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.MessageLImpl <em>Message L</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -648,7 +694,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getMessageL()
    * @generated
    */
-  int MESSAGE_L = 16;
+  int MESSAGE_L = 17;
 
   /**
    * The feature id for the '<em><b>Message Type</b></em>' attribute.
@@ -694,7 +740,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getSenderL()
    * @generated
    */
-  int SENDER_L = 17;
+  int SENDER_L = 18;
 
   /**
    * The feature id for the '<em><b>Sender</b></em>' reference.
@@ -722,7 +768,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getReceiverL()
    * @generated
    */
-  int RECEIVER_L = 18;
+  int RECEIVER_L = 19;
 
   /**
    * The feature id for the '<em><b>To</b></em>' reference.
@@ -750,7 +796,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getChoiceL()
    * @generated
    */
-  int CHOICE_L = 19;
+  int CHOICE_L = 20;
 
   /**
    * The feature id for the '<em><b>Role</b></em>' reference.
@@ -787,7 +833,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getChoiceBranchL()
    * @generated
    */
-  int CHOICE_BRANCH_L = 20;
+  int CHOICE_BRANCH_L = 21;
 
   /**
    * The feature id for the '<em><b>Message</b></em>' containment reference.
@@ -824,7 +870,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getForEachL()
    * @generated
    */
-  int FOR_EACH_L = 21;
+  int FOR_EACH_L = 22;
 
   /**
    * The feature id for the '<em><b>Each Role</b></em>' containment reference.
@@ -1022,6 +1068,17 @@ public interface MyDslPackage extends EPackage
   EReference getProtocol_Actions();
 
   /**
+   * Returns the meta object for the attribute '{@link org.xtext.globalTypes.myDsl.Protocol#getDoesEnd <em>Does End</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Does End</em>'.
+   * @see org.xtext.globalTypes.myDsl.Protocol#getDoesEnd()
+   * @see #getProtocol()
+   * @generated
+   */
+  EAttribute getProtocol_DoesEnd();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.Recursion <em>Recursion</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1085,15 +1142,15 @@ public interface MyDslPackage extends EPackage
   EClass getForEach();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.globalTypes.myDsl.ForEach#getEachRole <em>Each Role</em>}'.
+   * Returns the meta object for the containment reference '{@link org.xtext.globalTypes.myDsl.ForEach#getLoopRole <em>Loop Role</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Each Role</em>'.
-   * @see org.xtext.globalTypes.myDsl.ForEach#getEachRole()
+   * @return the meta object for the containment reference '<em>Loop Role</em>'.
+   * @see org.xtext.globalTypes.myDsl.ForEach#getLoopRole()
    * @see #getForEach()
    * @generated
    */
-  EReference getForEach_EachRole();
+  EReference getForEach_LoopRole();
 
   /**
    * Returns the meta object for the reference '{@link org.xtext.globalTypes.myDsl.ForEach#getRoleset <em>Roleset</em>}'.
@@ -1341,6 +1398,38 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EReference getProtocolL_Actions();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.RecursionL <em>Recursion L</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Recursion L</em>'.
+   * @see org.xtext.globalTypes.myDsl.RecursionL
+   * @generated
+   */
+  EClass getRecursionL();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.globalTypes.myDsl.RecursionL#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.globalTypes.myDsl.RecursionL#getName()
+   * @see #getRecursionL()
+   * @generated
+   */
+  EAttribute getRecursionL_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.globalTypes.myDsl.RecursionL#getRecProtocol <em>Rec Protocol</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Rec Protocol</em>'.
+   * @see org.xtext.globalTypes.myDsl.RecursionL#getRecProtocol()
+   * @see #getRecursionL()
+   * @generated
+   */
+  EReference getRecursionL_RecProtocol();
 
   /**
    * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.MessageL <em>Message L</em>}'.
@@ -1692,6 +1781,14 @@ public interface MyDslPackage extends EPackage
     EReference PROTOCOL__ACTIONS = eINSTANCE.getProtocol_Actions();
 
     /**
+     * The meta object literal for the '<em><b>Does End</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PROTOCOL__DOES_END = eINSTANCE.getProtocol_DoesEnd();
+
+    /**
      * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.RecursionImpl <em>Recursion</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1746,12 +1843,12 @@ public interface MyDslPackage extends EPackage
     EClass FOR_EACH = eINSTANCE.getForEach();
 
     /**
-     * The meta object literal for the '<em><b>Each Role</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Loop Role</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FOR_EACH__EACH_ROLE = eINSTANCE.getForEach_EachRole();
+    EReference FOR_EACH__LOOP_ROLE = eINSTANCE.getForEach_LoopRole();
 
     /**
      * The meta object literal for the '<em><b>Roleset</b></em>' reference feature.
@@ -1948,6 +2045,32 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EReference PROTOCOL_L__ACTIONS = eINSTANCE.getProtocolL_Actions();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.RecursionLImpl <em>Recursion L</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.globalTypes.myDsl.impl.RecursionLImpl
+     * @see org.xtext.globalTypes.myDsl.impl.MyDslPackageImpl#getRecursionL()
+     * @generated
+     */
+    EClass RECURSION_L = eINSTANCE.getRecursionL();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RECURSION_L__NAME = eINSTANCE.getRecursionL_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Rec Protocol</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RECURSION_L__REC_PROTOCOL = eINSTANCE.getRecursionL_RecProtocol();
 
     /**
      * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.MessageLImpl <em>Message L</em>}' class.

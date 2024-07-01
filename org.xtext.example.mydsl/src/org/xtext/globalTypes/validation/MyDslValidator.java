@@ -45,8 +45,9 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		}
 		
 		@Check
-		public void noSelfMessage(Message m) {
-			if(m.getSender() == m.getReceiver()) {
+		public void noSelfMessage(GlobalProtocol global) {
+			for(Message m: EcoreUtil2.getAllContentsOfType(global, Message.class)) {
+				if(m.getSender() == m.getReceiver()) {
 				error(
 					"No self-message is allowed",
 					m,
@@ -58,7 +59,9 @@ public class MyDslValidator extends AbstractMyDslValidator {
 					m,
 					MyDslPackage.Literals.MESSAGE__RECEIVER
 				);
+				}
 			}
+			
 		}
 		
 		
@@ -130,12 +133,12 @@ public class MyDslValidator extends AbstractMyDslValidator {
 						if(action instanceof Message) {
 							//se il sender o receiver di un messaggio fuori dal foreach è il ruolo definito nel foreach, errore
 							Message message = (Message) action;
-							if(message.getSender() == f.getEachRole()) {
+							if(message.getSender() == f.getLoopRole()) {
 								error("Role not defined in this scope",
 										message,
 										MyDslPackage.Literals.MESSAGE__SENDER
 										);}
-							if(message.getReceiver() == f.getEachRole()) {
+							if(message.getReceiver() == f.getLoopRole()) {
 								error("Role not defined in this scope",
 										message,
 										MyDslPackage.Literals.MESSAGE__RECEIVER
@@ -144,7 +147,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 						
 						if(action instanceof Choice) {
 							Choice choice = (Choice) action;
-							if(choice.getRole() == f.getEachRole()) {
+							if(choice.getRole() == f.getLoopRole()) {
 								error("Role not defined in this scope",
 										choice,
 										MyDslPackage.Literals.CHOICE__ROLE
@@ -208,7 +211,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 				List<Message> messagesToCheck = EcoreUtil2.getAllContentsOfType(f, Message.class);
 				
 				for(Message mess : messagesToCheck) {
-					if(mess.getReceiver() == f.getEachRole()) {
+					if(mess.getReceiver() == f.getLoopRole()) {
 						if(mess.getSender() != references.get(f.getRoleset())) {
 							error("Sender of message must be reference of receiver",
 									mess,
@@ -216,7 +219,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 						}
 					}
 					
-					if(mess.getSender() == f.getEachRole()) {
+					if(mess.getSender() == f.getLoopRole()) {
 						if(mess.getReceiver() != references.get(f.getRoleset())) {
 							error("Receiver of message must be reference of sender",
 									mess,
@@ -256,9 +259,9 @@ public class MyDslValidator extends AbstractMyDslValidator {
 			//check variabili di loop ForEach, possono essere uguali tra loro ma non con i Role già in uso
 			List<ForEach> forEachList = EcoreUtil2.getAllContentsOfType(m, ForEach.class);
 			for(ForEach f : forEachList) {
-				if(declaredRoles.containsKey(f.getEachRole().getName())) {
+				if(declaredRoles.containsKey(f.getLoopRole().getName())) {
 					error("Role's name must be unique", 
-							f.getEachRole(),
+							f.getLoopRole(),
 							MyDslPackage.Literals.ROLE__NAME
 							);
 				}

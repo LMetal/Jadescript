@@ -26,6 +26,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Protocol">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="doesEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Recursion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -36,7 +37,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="recursionVariable" eType="#//Recursion"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ForEach">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eachRole" eType="#//RoleOne"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loopRole" eType="#//RoleOne"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roleset" eType="#//RoleSet"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refRole" eType="#//RoleOne"/>
@@ -76,6 +77,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="ProtocolL">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RecursionL">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="recProtocol" eType="#//ProtocolL"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MessageL">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

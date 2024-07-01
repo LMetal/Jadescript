@@ -13,6 +13,7 @@ import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.xtext.globalTypes.myDsl.Choice;
@@ -38,6 +39,8 @@ import org.xtext.globalTypes.myDsl.Roles;
  */
 @SuppressWarnings("all")
 public class MyDslGenerator extends AbstractGenerator {
+  private boolean commaFlag;
+
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
@@ -49,11 +52,17 @@ public class MyDslGenerator extends AbstractGenerator {
       EList<Role> _roles = globalProtocol.getRoles().getRoles();
       for (final Role r : _roles) {
         {
-          System.out.println("LOCAL");
           String _name = r.getName();
-          String _plus = ("../src/local/local_" + _name);
-          String _plus_1 = (_plus + ".jglobal");
-          fsa.generateFile(_plus_1, this.project(globalProtocol, r));
+          String _plus = ("LOCAL in " + _name);
+          System.out.println(_plus);
+          this.commaFlag = false;
+          String _name_1 = r.getName();
+          String _plus_1 = ("../src/local/local_" + _name_1);
+          String _plus_2 = (_plus_1 + ".jglobal");
+          fsa.generateFile(_plus_2, this.project(globalProtocol, r));
+          String _name_2 = r.getName();
+          String _plus_3 = ("END LOCAL on " + _name_2);
+          System.out.println(_plus_3);
         }
       }
     } else {
@@ -86,8 +95,6 @@ public class MyDslGenerator extends AbstractGenerator {
     CharSequence _projectOn_1 = this.projectOn(p.getProtocol(), role);
     _builder.append(_projectOn_1, "\t");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     return _builder;
@@ -103,15 +110,26 @@ public class MyDslGenerator extends AbstractGenerator {
         _builder.newLineIfNotEmpty();
       }
     }
+    {
+      String _doesEnd = protocol.getDoesEnd();
+      boolean _equals = Objects.equal(_doesEnd, "End");
+      if (_equals) {
+        _builder.append("End");
+      }
+    }
     return _builder;
   }
 
   protected CharSequence _projectOn(final Roles roles, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      EList<Role> _roles = roles.getRoles();
+      final Function1<Role, Boolean> _function = (Role it) -> {
+        boolean _equals = it.getName().equals(r.getName());
+        return Boolean.valueOf((!_equals));
+      };
+      Iterable<Role> _filter = IterableExtensions.<Role>filter(roles.getRoles(), _function);
       boolean _hasElements = false;
-      for(final Role role : _roles) {
+      for(final Role role : _filter) {
         if (!_hasElements) {
           _hasElements = true;
         } else {
@@ -158,7 +176,7 @@ public class MyDslGenerator extends AbstractGenerator {
         _builder.append(") to ");
         String _name_2 = m.getReceiver().getName();
         _builder.append(_name_2);
-        _builder.append(";");
+        _builder.append(".");
         _builder.newLineIfNotEmpty();
       } else {
         {
@@ -174,7 +192,7 @@ public class MyDslGenerator extends AbstractGenerator {
             _builder.append(") from ");
             String _name_5 = m.getSender().getName();
             _builder.append(_name_5);
-            _builder.append(";");
+            _builder.append(".");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -228,8 +246,14 @@ public class MyDslGenerator extends AbstractGenerator {
     _builder.append("rec ");
     String _name = rec.getName();
     _builder.append(_name);
-    _builder.append(":");
+    _builder.append(": {");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    Object _projectOn = this.projectOn(rec.getRecProtocol(), r);
+    _builder.append(_projectOn, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
     return _builder;
   }
 
@@ -238,7 +262,6 @@ public class MyDslGenerator extends AbstractGenerator {
     _builder.append("loop ");
     String _name = recEnd.getRecursionVariable().getName();
     _builder.append(_name);
-    _builder.append(";");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
@@ -249,7 +272,7 @@ public class MyDslGenerator extends AbstractGenerator {
       RoleSet _roleset = each.getRoleset();
       boolean _equals = Objects.equal(_roleset, r);
       if (_equals) {
-        Object _projectOn = this.projectOn(each.getBranch(), each.getEachRole());
+        Object _projectOn = this.projectOn(each.getBranch(), each.getLoopRole());
         _builder.append(_projectOn);
         _builder.newLineIfNotEmpty();
       }
@@ -259,7 +282,7 @@ public class MyDslGenerator extends AbstractGenerator {
       boolean _equals_1 = Objects.equal(_refRole, r);
       if (_equals_1) {
         _builder.append("foreach role ");
-        String _name = each.getEachRole().getName();
+        String _name = each.getLoopRole().getName();
         _builder.append(_name);
         _builder.append(":");
         String _name_1 = each.getRoleset().getName();

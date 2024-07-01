@@ -5,6 +5,7 @@ package org.xtext.globalTypes.myDsl.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -13,6 +14,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -30,6 +32,7 @@ import org.xtext.globalTypes.myDsl.Protocol;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ProtocolImpl#getActions <em>Actions</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.impl.ProtocolImpl#getDoesEnd <em>Does End</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,6 +48,26 @@ public class ProtocolImpl extends MinimalEObjectImpl.Container implements Protoc
    * @ordered
    */
   protected EList<EObject> actions;
+
+  /**
+   * The default value of the '{@link #getDoesEnd() <em>Does End</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDoesEnd()
+   * @generated
+   * @ordered
+   */
+  protected static final String DOES_END_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getDoesEnd() <em>Does End</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDoesEnd()
+   * @generated
+   * @ordered
+   */
+  protected String doesEnd = DOES_END_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -88,6 +111,31 @@ public class ProtocolImpl extends MinimalEObjectImpl.Container implements Protoc
    * @generated
    */
   @Override
+  public String getDoesEnd()
+  {
+    return doesEnd;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setDoesEnd(String newDoesEnd)
+  {
+    String oldDoesEnd = doesEnd;
+    doesEnd = newDoesEnd;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.PROTOCOL__DOES_END, oldDoesEnd, doesEnd));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -110,6 +158,8 @@ public class ProtocolImpl extends MinimalEObjectImpl.Container implements Protoc
     {
       case MyDslPackage.PROTOCOL__ACTIONS:
         return getActions();
+      case MyDslPackage.PROTOCOL__DOES_END:
+        return getDoesEnd();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -129,6 +179,9 @@ public class ProtocolImpl extends MinimalEObjectImpl.Container implements Protoc
         getActions().clear();
         getActions().addAll((Collection<? extends EObject>)newValue);
         return;
+      case MyDslPackage.PROTOCOL__DOES_END:
+        setDoesEnd((String)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -146,6 +199,9 @@ public class ProtocolImpl extends MinimalEObjectImpl.Container implements Protoc
       case MyDslPackage.PROTOCOL__ACTIONS:
         getActions().clear();
         return;
+      case MyDslPackage.PROTOCOL__DOES_END:
+        setDoesEnd(DOES_END_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -162,8 +218,27 @@ public class ProtocolImpl extends MinimalEObjectImpl.Container implements Protoc
     {
       case MyDslPackage.PROTOCOL__ACTIONS:
         return actions != null && !actions.isEmpty();
+      case MyDslPackage.PROTOCOL__DOES_END:
+        return DOES_END_EDEFAULT == null ? doesEnd != null : !DOES_END_EDEFAULT.equals(doesEnd);
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (doesEnd: ");
+    result.append(doesEnd);
+    result.append(')');
+    return result.toString();
   }
 
 } //ProtocolImpl

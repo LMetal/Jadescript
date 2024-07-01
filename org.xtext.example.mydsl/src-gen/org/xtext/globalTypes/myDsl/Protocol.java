@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.Protocol#getActions <em>Actions</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.Protocol#getDoesEnd <em>Does End</em>}</li>
  * </ul>
  *
  * @see org.xtext.globalTypes.myDsl.MyDslPackage#getProtocol()
@@ -36,5 +37,27 @@ public interface Protocol extends EObject
    * @generated
    */
   EList<EObject> getActions();
+
+  /**
+   * Returns the value of the '<em><b>Does End</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Does End</em>' attribute.
+   * @see #setDoesEnd(String)
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getProtocol_DoesEnd()
+   * @model
+   * @generated
+   */
+  String getDoesEnd();
+
+  /**
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.Protocol#getDoesEnd <em>Does End</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Does End</em>' attribute.
+   * @see #getDoesEnd()
+   * @generated
+   */
+  void setDoesEnd(String value);
 
 } // Protocol

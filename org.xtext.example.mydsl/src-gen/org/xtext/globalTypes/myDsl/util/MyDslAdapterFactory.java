@@ -156,6 +156,11 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createProtocolLAdapter();
       }
       @Override
+      public Adapter caseRecursionL(RecursionL object)
+      {
+        return createRecursionLAdapter();
+      }
+      @Override
       public Adapter caseMessageL(MessageL object)
       {
         return createMessageLAdapter();
@@ -443,6 +448,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createProtocolLAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.RecursionL <em>Recursion L</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.globalTypes.myDsl.RecursionL
+   * @generated
+   */
+  public Adapter createRecursionLAdapter()
   {
     return null;
   }

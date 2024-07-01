@@ -168,6 +168,15 @@ public interface MyDslFactory extends EFactory
   ProtocolL createProtocolL();
 
   /**
+   * Returns a new object of class '<em>Recursion L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Recursion L</em>'.
+   * @generated
+   */
+  RecursionL createRecursionL();
+
+  /**
    * Returns a new object of class '<em>Message L</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
