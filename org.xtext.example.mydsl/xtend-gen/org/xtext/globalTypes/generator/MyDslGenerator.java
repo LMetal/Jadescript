@@ -39,8 +39,6 @@ import org.xtext.globalTypes.myDsl.Roles;
  */
 @SuppressWarnings("all")
 public class MyDslGenerator extends AbstractGenerator {
-  private boolean commaFlag;
-
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
@@ -55,7 +53,6 @@ public class MyDslGenerator extends AbstractGenerator {
           String _name = r.getName();
           String _plus = ("LOCAL in " + _name);
           System.out.println(_plus);
-          this.commaFlag = false;
           String _name_1 = r.getName();
           String _plus_1 = ("../src/local/local_" + _name_1);
           String _plus_2 = (_plus_1 + ".jglobal");
@@ -284,10 +281,13 @@ public class MyDslGenerator extends AbstractGenerator {
         _builder.append("foreach role ");
         String _name = each.getLoopRole().getName();
         _builder.append(_name);
-        _builder.append(":");
+        _builder.append(":<");
         String _name_1 = each.getRoleset().getName();
         _builder.append(_name_1);
-        _builder.append("{");
+        _builder.append(",");
+        String _name_2 = each.getRefRole().getName();
+        _builder.append(_name_2);
+        _builder.append(">{");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         Object _projectOn_1 = this.projectOn(each.getBranch(), r);

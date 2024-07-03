@@ -3,8 +3,6 @@
  */
 package org.xtext.globalTypes.myDsl;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -18,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.MessageL#getMessageType <em>Message Type</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.MessageL#getPayload <em>Payload</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.MessageL#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.MessageL#getSendReceive <em>Send Receive</em>}</li>
  * </ul>
  *
  * @see org.xtext.globalTypes.myDsl.MyDslPackage#getMessageL()
@@ -72,15 +70,25 @@ public interface MessageL extends EObject
   void setPayload(Payload value);
 
   /**
-   * Returns the value of the '<em><b>Target</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
+   * Returns the value of the '<em><b>Send Receive</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Target</em>' containment reference list.
-   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getMessageL_Target()
+   * @return the value of the '<em>Send Receive</em>' containment reference.
+   * @see #setSendReceive(MessageType)
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getMessageL_SendReceive()
    * @model containment="true"
    * @generated
    */
-  EList<EObject> getTarget();
+  MessageType getSendReceive();
+
+  /**
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.MessageL#getSendReceive <em>Send Receive</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Send Receive</em>' containment reference.
+   * @see #getSendReceive()
+   * @generated
+   */
+  void setSendReceive(MessageType value);
 
 } // MessageL

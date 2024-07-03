@@ -15,7 +15,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEachL#getEachRole <em>Each Role</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.ForEachL#getRole <em>Role</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.ForEachL#getRoleset <em>Roleset</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.ForEachL#getRefrole <em>Refrole</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEachL#getBranch <em>Branch</em>}</li>
  * </ul>
  *
@@ -48,26 +49,48 @@ public interface ForEachL extends EObject
   void setEachRole(RoleOne value);
 
   /**
-   * Returns the value of the '<em><b>Role</b></em>' reference.
+   * Returns the value of the '<em><b>Roleset</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Role</em>' reference.
-   * @see #setRole(RoleSet)
-   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEachL_Role()
+   * @return the value of the '<em>Roleset</em>' reference.
+   * @see #setRoleset(RoleSet)
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEachL_Roleset()
    * @model
    * @generated
    */
-  RoleSet getRole();
+  RoleSet getRoleset();
 
   /**
-   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEachL#getRole <em>Role</em>}' reference.
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEachL#getRoleset <em>Roleset</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Role</em>' reference.
-   * @see #getRole()
+   * @param value the new value of the '<em>Roleset</em>' reference.
+   * @see #getRoleset()
    * @generated
    */
-  void setRole(RoleSet value);
+  void setRoleset(RoleSet value);
+
+  /**
+   * Returns the value of the '<em><b>Refrole</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Refrole</em>' reference.
+   * @see #setRefrole(RoleOne)
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEachL_Refrole()
+   * @model
+   * @generated
+   */
+  RoleOne getRefrole();
+
+  /**
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEachL#getRefrole <em>Refrole</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Refrole</em>' reference.
+   * @see #getRefrole()
+   * @generated
+   */
+  void setRefrole(RoleOne value);
 
   /**
    * Returns the value of the '<em><b>Branch</b></em>' containment reference.

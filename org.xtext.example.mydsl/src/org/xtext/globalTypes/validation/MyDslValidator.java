@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 import org.xtext.globalTypes.myDsl.Choice;
@@ -16,13 +17,16 @@ import org.xtext.globalTypes.myDsl.ChoiceBranchL;
 import org.xtext.globalTypes.myDsl.ChoiceL;
 import org.xtext.globalTypes.myDsl.ForEach;
 import org.xtext.globalTypes.myDsl.GlobalProtocol;
+import org.xtext.globalTypes.myDsl.LocalProtocol;
 import org.xtext.globalTypes.myDsl.Message;
 import org.xtext.globalTypes.myDsl.Model;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
+import org.xtext.globalTypes.myDsl.ReceiverL;
 import org.xtext.globalTypes.myDsl.Role;
 import org.xtext.globalTypes.myDsl.RoleSet;
 import org.xtext.globalTypes.myDsl.RoleOne;
 import org.xtext.globalTypes.myDsl.Roles;
+import org.xtext.globalTypes.myDsl.SenderL;
 
 /**
  * This class contains custom validation rules. 
@@ -44,8 +48,56 @@ public class MyDslValidator extends AbstractMyDslValidator {
 			}	
 		}
 		
+		
 		@Check
-		public void noSelfMessage(GlobalProtocol global) {
+		public void choiceMessageFromChoiceAgentLocal(LocalProtocol lp) {
+			for(ChoiceL c: EcoreUtil2.getAllContentsOfType(lp, ChoiceL.class)) {
+				for(ChoiceBranchL b: c.getBranches()) {
+					if(c.getRoleMakingChoice().getName().equals(lp.getProjectedRole())) {
+						//se scelta interna deve essere un invio di messaggio
+						System.out.println(b.getMessage().getSendReceive() instanceof ReceiverL);
+						if(b.getMessage().getSendReceive() instanceof SenderL) {
+							error(
+								"Must send message when making a choice",
+								b.getMessage(),
+								MyDslPackage.Literals.MESSAGE_L__SEND_RECEIVE
+							);
+						}
+					} else {
+						//con scelta esterna ricevo messaggio dal ruolo che fa la scelta
+						if(!b.getMessage().getSendReceive().getRole().equals(c.getRoleMakingChoice())) {
+							error(
+								"Must receive message from role making choice",
+								b.getMessage(),
+								MyDslPackage.Literals.MESSAGE_L__SEND_RECEIVE
+							);
+						}
+					}
+				}
+			}
+		}
+		
+		@Check
+		public void differentMessagesAtChoiceBranch(Choice c) {
+			var messageTypeMap = new HashMap<String, ChoiceBranch>();
+			
+			for(ChoiceBranch b: c.getBranches()) {
+				System.out.println(messageTypeMap);
+				if(messageTypeMap.containsKey(b.getMessage().getMessageType())) {
+					error("Messages must be different",
+							b,
+							MyDslPackage.Literals.CHOICE_BRANCH__MESSAGE);
+					error("Messages must be different",
+							messageTypeMap.get(b.getMessage().getMessageType()),
+							MyDslPackage.Literals.CHOICE_BRANCH__MESSAGE);
+				} else {
+					messageTypeMap.put(b.getMessage().getMessageType(), b);
+				}
+			}
+		}
+		
+		@Check
+		public void noSelfMessage(Model global) {
 			for(Message m: EcoreUtil2.getAllContentsOfType(global, Message.class)) {
 				if(m.getSender() == m.getReceiver()) {
 				error(
@@ -64,14 +116,6 @@ public class MyDslValidator extends AbstractMyDslValidator {
 			
 		}
 		
-		
-		//TODO
-		//@Check
-		public void choiceMessageFromChoiceAgentLocal(ChoiceL c) {
-			for(ChoiceBranchL b: c.getBranches()) {
-				
-			}
-		}
 		
 		
 		HashMap<RoleSet, RoleOne> getRolesetRef(Model m) {
@@ -95,8 +139,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		}
 		
 		
-		//TODO
-		//validate at role to be reference
+
 		@Check
 		public void rightRefRoleForEach(GlobalProtocol glob_p) {
 			var rolesetRef = getRolesetRef(glob_p);
@@ -113,7 +156,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 			}
 		}
 		
-		//finish
+
 		@Check
 		public void forEachVariableScope(Model m) {
 			//ottengo tutti i ForEach
@@ -157,8 +200,18 @@ public class MyDslValidator extends AbstractMyDslValidator {
 	
 				}
 			}
-			
-			
+		}
+		
+		
+		@Check
+		public void noNestedFor(ForEach f) {
+			List<ForEach> list = EcoreUtil2.getAllContentsOfType(f, ForEach.class);
+			if(!list.isEmpty()) {
+				error("Nested for are not allowed",
+						list.get(0),
+						MyDslPackage.Literals.FOR_EACH__BRANCH);
+						
+			}
 		}
 		
 		
@@ -172,8 +225,6 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		}
 		
 		
-		//TODO
-		//messages to Roleset must be from referent to that Roleset and out of ForEach loop
 		@Check
 		public void messageToRolesetRef(GlobalProtocol glob_p) {
 			List<Message> messageList = EcoreUtil2.getAllContentsOfType(glob_p, Message.class);

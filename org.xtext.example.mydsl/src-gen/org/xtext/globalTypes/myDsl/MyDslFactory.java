@@ -186,6 +186,15 @@ public interface MyDslFactory extends EFactory
   MessageL createMessageL();
 
   /**
+   * Returns a new object of class '<em>Message Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Message Type</em>'.
+   * @generated
+   */
+  MessageType createMessageType();
+
+  /**
    * Returns a new object of class '<em>Sender L</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

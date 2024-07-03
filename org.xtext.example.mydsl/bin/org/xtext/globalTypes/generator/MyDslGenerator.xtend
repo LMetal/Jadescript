@@ -29,7 +29,6 @@ import org.xtext.globalTypes.myDsl.ChoiceBranch
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 class MyDslGenerator extends AbstractGenerator {
-	boolean commaFlag
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		var model = resource.contents.head as Model;
 		//create projection file(local protocol) for each role
@@ -37,7 +36,6 @@ class MyDslGenerator extends AbstractGenerator {
 			var globalProtocol = model.protocol as GlobalProtocol
 			for(Role r : globalProtocol.getRoles().getRoles()){
 				System.out.println("LOCAL in " + r.getName());
-				commaFlag = false
 				fsa.generateFile('../src/local/local_'+r.getName()+'.jglobal', globalProtocol.project(r))
 				System.out.println("END LOCAL on " + r.getName());		
 			}
@@ -109,7 +107,7 @@ class MyDslGenerator extends AbstractGenerator {
 			«projectOn(each.branch, each.loopRole)»
 		«ENDIF»
 		«IF each.refRole == r»
-			foreach role «each.loopRole.name»:«each.roleset.name»{
+			foreach role «each.loopRole.name»:<«each.roleset.name»,«each.refRole.name»>{
 				«projectOn(each.branch, r)»
 			}
 		«ENDIF»

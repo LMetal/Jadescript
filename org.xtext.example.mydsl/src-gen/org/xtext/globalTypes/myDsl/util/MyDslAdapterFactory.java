@@ -166,6 +166,11 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createMessageLAdapter();
       }
       @Override
+      public Adapter caseMessageType(MessageType object)
+      {
+        return createMessageTypeAdapter();
+      }
+      @Override
       public Adapter caseSenderL(SenderL object)
       {
         return createSenderLAdapter();
@@ -478,6 +483,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMessageLAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.MessageType <em>Message Type</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.globalTypes.myDsl.MessageType
+   * @generated
+   */
+  public Adapter createMessageTypeAdapter()
   {
     return null;
   }

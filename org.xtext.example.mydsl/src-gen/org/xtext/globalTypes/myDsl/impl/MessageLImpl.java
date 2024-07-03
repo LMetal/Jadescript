@@ -3,24 +3,17 @@
  */
 package org.xtext.globalTypes.myDsl.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.xtext.globalTypes.myDsl.MessageL;
+import org.xtext.globalTypes.myDsl.MessageType;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.Payload;
 
@@ -34,7 +27,7 @@ import org.xtext.globalTypes.myDsl.Payload;
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.MessageLImpl#getMessageType <em>Message Type</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.MessageLImpl#getPayload <em>Payload</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.impl.MessageLImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.impl.MessageLImpl#getSendReceive <em>Send Receive</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,14 +65,14 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
   protected Payload payload;
 
   /**
-   * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference list.
+   * The cached value of the '{@link #getSendReceive() <em>Send Receive</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTarget()
+   * @see #getSendReceive()
    * @generated
    * @ordered
    */
-  protected EList<EObject> target;
+  protected MessageType sendReceive;
 
   /**
    * <!-- begin-user-doc -->
@@ -183,13 +176,48 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
    * @generated
    */
   @Override
-  public EList<EObject> getTarget()
+  public MessageType getSendReceive()
   {
-    if (target == null)
+    return sendReceive;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetSendReceive(MessageType newSendReceive, NotificationChain msgs)
+  {
+    MessageType oldSendReceive = sendReceive;
+    sendReceive = newSendReceive;
+    if (eNotificationRequired())
     {
-      target = new EObjectContainmentEList<EObject>(EObject.class, this, MyDslPackage.MESSAGE_L__TARGET);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.MESSAGE_L__SEND_RECEIVE, oldSendReceive, newSendReceive);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return target;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setSendReceive(MessageType newSendReceive)
+  {
+    if (newSendReceive != sendReceive)
+    {
+      NotificationChain msgs = null;
+      if (sendReceive != null)
+        msgs = ((InternalEObject)sendReceive).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.MESSAGE_L__SEND_RECEIVE, null, msgs);
+      if (newSendReceive != null)
+        msgs = ((InternalEObject)newSendReceive).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.MESSAGE_L__SEND_RECEIVE, null, msgs);
+      msgs = basicSetSendReceive(newSendReceive, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MESSAGE_L__SEND_RECEIVE, newSendReceive, newSendReceive));
   }
 
   /**
@@ -204,8 +232,8 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
     {
       case MyDslPackage.MESSAGE_L__PAYLOAD:
         return basicSetPayload(null, msgs);
-      case MyDslPackage.MESSAGE_L__TARGET:
-        return ((InternalEList<?>)getTarget()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.MESSAGE_L__SEND_RECEIVE:
+        return basicSetSendReceive(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -224,8 +252,8 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
         return getMessageType();
       case MyDslPackage.MESSAGE_L__PAYLOAD:
         return getPayload();
-      case MyDslPackage.MESSAGE_L__TARGET:
-        return getTarget();
+      case MyDslPackage.MESSAGE_L__SEND_RECEIVE:
+        return getSendReceive();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -235,7 +263,6 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -247,9 +274,8 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
       case MyDslPackage.MESSAGE_L__PAYLOAD:
         setPayload((Payload)newValue);
         return;
-      case MyDslPackage.MESSAGE_L__TARGET:
-        getTarget().clear();
-        getTarget().addAll((Collection<? extends EObject>)newValue);
+      case MyDslPackage.MESSAGE_L__SEND_RECEIVE:
+        setSendReceive((MessageType)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -271,8 +297,8 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
       case MyDslPackage.MESSAGE_L__PAYLOAD:
         setPayload((Payload)null);
         return;
-      case MyDslPackage.MESSAGE_L__TARGET:
-        getTarget().clear();
+      case MyDslPackage.MESSAGE_L__SEND_RECEIVE:
+        setSendReceive((MessageType)null);
         return;
     }
     super.eUnset(featureID);
@@ -292,8 +318,8 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
         return MESSAGE_TYPE_EDEFAULT == null ? messageType != null : !MESSAGE_TYPE_EDEFAULT.equals(messageType);
       case MyDslPackage.MESSAGE_L__PAYLOAD:
         return payload != null;
-      case MyDslPackage.MESSAGE_L__TARGET:
-        return target != null && !target.isEmpty();
+      case MyDslPackage.MESSAGE_L__SEND_RECEIVE:
+        return sendReceive != null;
     }
     return super.eIsSet(featureID);
   }

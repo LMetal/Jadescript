@@ -87,17 +87,16 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="payload" eType="#//Payload"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sendReceive" eType="#//MessageType"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SenderL">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sender" eType="#//Role"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ReceiverL">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//Role"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ChoiceL">
+  <eClassifiers xsi:type="ecore:EClass" name="MessageType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//Role"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SenderL" eSuperTypes="#//MessageType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReceiverL" eSuperTypes="#//MessageType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChoiceL">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roleMakingChoice" eType="#//Role"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branches" upperBound="-1"
         eType="#//ChoiceBranchL" containment="true"/>
   </eClassifiers>
@@ -110,7 +109,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="ForEachL">
     <eStructuralFeatures xsi:type="ecore:EReference" name="eachRole" eType="#//RoleOne"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//RoleSet"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roleset" eType="#//RoleSet"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refrole" eType="#//RoleOne"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branch" eType="#//ProtocolL"
         containment="true"/>
   </eClassifiers>

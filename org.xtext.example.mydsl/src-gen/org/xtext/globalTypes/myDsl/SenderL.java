@@ -3,46 +3,17 @@
  */
 package org.xtext.globalTypes.myDsl;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Sender L</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.xtext.globalTypes.myDsl.SenderL#getSender <em>Sender</em>}</li>
- * </ul>
  *
  * @see org.xtext.globalTypes.myDsl.MyDslPackage#getSenderL()
  * @model
  * @generated
  */
-public interface SenderL extends EObject
+public interface SenderL extends MessageType
 {
-  /**
-   * Returns the value of the '<em><b>Sender</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Sender</em>' reference.
-   * @see #setSender(Role)
-   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getSenderL_Sender()
-   * @model
-   * @generated
-   */
-  Role getSender();
-
-  /**
-   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.SenderL#getSender <em>Sender</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Sender</em>' reference.
-   * @see #getSender()
-   * @generated
-   */
-  void setSender(Role value);
-
 } // SenderL

@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.globalTypes.myDsl.ChoiceL#getRole <em>Role</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.ChoiceL#getRoleMakingChoice <em>Role Making Choice</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.ChoiceL#getBranches <em>Branches</em>}</li>
  * </ul>
  *
@@ -27,26 +27,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface ChoiceL extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Role</b></em>' reference.
+   * Returns the value of the '<em><b>Role Making Choice</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Role</em>' reference.
-   * @see #setRole(Role)
-   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getChoiceL_Role()
+   * @return the value of the '<em>Role Making Choice</em>' reference.
+   * @see #setRoleMakingChoice(Role)
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getChoiceL_RoleMakingChoice()
    * @model
    * @generated
    */
-  Role getRole();
+  Role getRoleMakingChoice();
 
   /**
-   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ChoiceL#getRole <em>Role</em>}' reference.
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ChoiceL#getRoleMakingChoice <em>Role Making Choice</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Role</em>' reference.
-   * @see #getRole()
+   * @param value the new value of the '<em>Role Making Choice</em>' reference.
+   * @see #getRoleMakingChoice()
    * @generated
    */
-  void setRole(Role value);
+  void setRoleMakingChoice(Role value);
 
   /**
    * Returns the value of the '<em><b>Branches</b></em>' containment reference list.

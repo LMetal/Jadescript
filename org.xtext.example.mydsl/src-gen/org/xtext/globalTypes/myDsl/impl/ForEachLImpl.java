@@ -27,7 +27,8 @@ import org.xtext.globalTypes.myDsl.RoleSet;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachLImpl#getEachRole <em>Each Role</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachLImpl#getRole <em>Role</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachLImpl#getRoleset <em>Roleset</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachLImpl#getRefrole <em>Refrole</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachLImpl#getBranch <em>Branch</em>}</li>
  * </ul>
  *
@@ -46,14 +47,24 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
   protected RoleOne eachRole;
 
   /**
-   * The cached value of the '{@link #getRole() <em>Role</em>}' reference.
+   * The cached value of the '{@link #getRoleset() <em>Roleset</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRole()
+   * @see #getRoleset()
    * @generated
    * @ordered
    */
-  protected RoleSet role;
+  protected RoleSet roleset;
+
+  /**
+   * The cached value of the '{@link #getRefrole() <em>Refrole</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRefrole()
+   * @generated
+   * @ordered
+   */
+  protected RoleOne refrole;
 
   /**
    * The cached value of the '{@link #getBranch() <em>Branch</em>}' containment reference.
@@ -142,19 +153,19 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
    * @generated
    */
   @Override
-  public RoleSet getRole()
+  public RoleSet getRoleset()
   {
-    if (role != null && role.eIsProxy())
+    if (roleset != null && roleset.eIsProxy())
     {
-      InternalEObject oldRole = (InternalEObject)role;
-      role = (RoleSet)eResolveProxy(oldRole);
-      if (role != oldRole)
+      InternalEObject oldRoleset = (InternalEObject)roleset;
+      roleset = (RoleSet)eResolveProxy(oldRoleset);
+      if (roleset != oldRoleset)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.FOR_EACH_L__ROLE, oldRole, role));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.FOR_EACH_L__ROLESET, oldRoleset, roleset));
       }
     }
-    return role;
+    return roleset;
   }
 
   /**
@@ -162,9 +173,9 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
    * <!-- end-user-doc -->
    * @generated
    */
-  public RoleSet basicGetRole()
+  public RoleSet basicGetRoleset()
   {
-    return role;
+    return roleset;
   }
 
   /**
@@ -173,12 +184,57 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
    * @generated
    */
   @Override
-  public void setRole(RoleSet newRole)
+  public void setRoleset(RoleSet newRoleset)
   {
-    RoleSet oldRole = role;
-    role = newRole;
+    RoleSet oldRoleset = roleset;
+    roleset = newRoleset;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH_L__ROLE, oldRole, role));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH_L__ROLESET, oldRoleset, roleset));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public RoleOne getRefrole()
+  {
+    if (refrole != null && refrole.eIsProxy())
+    {
+      InternalEObject oldRefrole = (InternalEObject)refrole;
+      refrole = (RoleOne)eResolveProxy(oldRefrole);
+      if (refrole != oldRefrole)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.FOR_EACH_L__REFROLE, oldRefrole, refrole));
+      }
+    }
+    return refrole;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RoleOne basicGetRefrole()
+  {
+    return refrole;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setRefrole(RoleOne newRefrole)
+  {
+    RoleOne oldRefrole = refrole;
+    refrole = newRefrole;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH_L__REFROLE, oldRefrole, refrole));
   }
 
   /**
@@ -261,9 +317,12 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
     {
       case MyDslPackage.FOR_EACH_L__EACH_ROLE:
         return getEachRole();
-      case MyDslPackage.FOR_EACH_L__ROLE:
-        if (resolve) return getRole();
-        return basicGetRole();
+      case MyDslPackage.FOR_EACH_L__ROLESET:
+        if (resolve) return getRoleset();
+        return basicGetRoleset();
+      case MyDslPackage.FOR_EACH_L__REFROLE:
+        if (resolve) return getRefrole();
+        return basicGetRefrole();
       case MyDslPackage.FOR_EACH_L__BRANCH:
         return getBranch();
     }
@@ -283,8 +342,11 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
       case MyDslPackage.FOR_EACH_L__EACH_ROLE:
         setEachRole((RoleOne)newValue);
         return;
-      case MyDslPackage.FOR_EACH_L__ROLE:
-        setRole((RoleSet)newValue);
+      case MyDslPackage.FOR_EACH_L__ROLESET:
+        setRoleset((RoleSet)newValue);
+        return;
+      case MyDslPackage.FOR_EACH_L__REFROLE:
+        setRefrole((RoleOne)newValue);
         return;
       case MyDslPackage.FOR_EACH_L__BRANCH:
         setBranch((ProtocolL)newValue);
@@ -306,8 +368,11 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
       case MyDslPackage.FOR_EACH_L__EACH_ROLE:
         setEachRole((RoleOne)null);
         return;
-      case MyDslPackage.FOR_EACH_L__ROLE:
-        setRole((RoleSet)null);
+      case MyDslPackage.FOR_EACH_L__ROLESET:
+        setRoleset((RoleSet)null);
+        return;
+      case MyDslPackage.FOR_EACH_L__REFROLE:
+        setRefrole((RoleOne)null);
         return;
       case MyDslPackage.FOR_EACH_L__BRANCH:
         setBranch((ProtocolL)null);
@@ -328,8 +393,10 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
     {
       case MyDslPackage.FOR_EACH_L__EACH_ROLE:
         return eachRole != null;
-      case MyDslPackage.FOR_EACH_L__ROLE:
-        return role != null;
+      case MyDslPackage.FOR_EACH_L__ROLESET:
+        return roleset != null;
+      case MyDslPackage.FOR_EACH_L__REFROLE:
+        return refrole != null;
       case MyDslPackage.FOR_EACH_L__BRANCH:
         return branch != null;
     }

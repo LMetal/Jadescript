@@ -85,19 +85,23 @@ RecursionL:
 ;
 
 MessageL:
-	messageType=ID '(' payload=Payload? ')' ((target+=SenderL) | (target+=ReceiverL)) '.'
+	messageType=ID '(' payload=Payload? ')' (sendReceive=MessageType) '.'
+;
+
+MessageType:
+	SenderL | ReceiverL
 ;
 
 SenderL:
-	'from' sender=[Role | ID]
+	'from' role=[Role | ID]
 ;
 
 ReceiverL:
-	'to' to=[Role | ID]
+	'to' role=[Role | ID]
 ;
 
 ChoiceL:
-	'choice' 'at' role=[Role | ID] '{'
+	'choice' 'at' roleMakingChoice=[Role | ID] '{'
 		branches+=ChoiceBranchL
 	'}' ('or' '{'
 		branches+=ChoiceBranchL
@@ -105,12 +109,12 @@ ChoiceL:
 ;
 
 ChoiceBranchL:
-	message=MessageL
+	{ChoiceBranchL} 'End' | message=MessageL
 	protocol=ProtocolL
 ;
 
 ForEachL:
-	'foreach' eachRole=RoleOne ':' role=[RoleSet | ID] '{'
+	'foreach' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
 		branch=ProtocolL
 	'}'
 ;

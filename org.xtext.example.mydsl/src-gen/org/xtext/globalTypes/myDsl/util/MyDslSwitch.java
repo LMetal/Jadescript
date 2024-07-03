@@ -201,10 +201,18 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MyDslPackage.MESSAGE_TYPE:
+      {
+        MessageType messageType = (MessageType)theEObject;
+        T result = caseMessageType(messageType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MyDslPackage.SENDER_L:
       {
         SenderL senderL = (SenderL)theEObject;
         T result = caseSenderL(senderL);
+        if (result == null) result = caseMessageType(senderL);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -212,6 +220,7 @@ public class MyDslSwitch<T> extends Switch<T>
       {
         ReceiverL receiverL = (ReceiverL)theEObject;
         T result = caseReceiverL(receiverL);
+        if (result == null) result = caseMessageType(receiverL);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -524,6 +533,22 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMessageL(MessageL object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Message Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Message Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMessageType(MessageType object)
   {
     return null;
   }

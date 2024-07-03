@@ -32,7 +32,7 @@ import org.xtext.globalTypes.myDsl.Role;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.globalTypes.myDsl.impl.ChoiceLImpl#getRole <em>Role</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.impl.ChoiceLImpl#getRoleMakingChoice <em>Role Making Choice</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ChoiceLImpl#getBranches <em>Branches</em>}</li>
  * </ul>
  *
@@ -41,14 +41,14 @@ import org.xtext.globalTypes.myDsl.Role;
 public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
 {
   /**
-   * The cached value of the '{@link #getRole() <em>Role</em>}' reference.
+   * The cached value of the '{@link #getRoleMakingChoice() <em>Role Making Choice</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRole()
+   * @see #getRoleMakingChoice()
    * @generated
    * @ordered
    */
-  protected Role role;
+  protected Role roleMakingChoice;
 
   /**
    * The cached value of the '{@link #getBranches() <em>Branches</em>}' containment reference list.
@@ -87,19 +87,19 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
    * @generated
    */
   @Override
-  public Role getRole()
+  public Role getRoleMakingChoice()
   {
-    if (role != null && role.eIsProxy())
+    if (roleMakingChoice != null && roleMakingChoice.eIsProxy())
     {
-      InternalEObject oldRole = (InternalEObject)role;
-      role = (Role)eResolveProxy(oldRole);
-      if (role != oldRole)
+      InternalEObject oldRoleMakingChoice = (InternalEObject)roleMakingChoice;
+      roleMakingChoice = (Role)eResolveProxy(oldRoleMakingChoice);
+      if (roleMakingChoice != oldRoleMakingChoice)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.CHOICE_L__ROLE, oldRole, role));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.CHOICE_L__ROLE_MAKING_CHOICE, oldRoleMakingChoice, roleMakingChoice));
       }
     }
-    return role;
+    return roleMakingChoice;
   }
 
   /**
@@ -107,9 +107,9 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
    * <!-- end-user-doc -->
    * @generated
    */
-  public Role basicGetRole()
+  public Role basicGetRoleMakingChoice()
   {
-    return role;
+    return roleMakingChoice;
   }
 
   /**
@@ -118,12 +118,12 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
    * @generated
    */
   @Override
-  public void setRole(Role newRole)
+  public void setRoleMakingChoice(Role newRoleMakingChoice)
   {
-    Role oldRole = role;
-    role = newRole;
+    Role oldRoleMakingChoice = roleMakingChoice;
+    roleMakingChoice = newRoleMakingChoice;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.CHOICE_L__ROLE, oldRole, role));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.CHOICE_L__ROLE_MAKING_CHOICE, oldRoleMakingChoice, roleMakingChoice));
   }
 
   /**
@@ -167,9 +167,9 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
   {
     switch (featureID)
     {
-      case MyDslPackage.CHOICE_L__ROLE:
-        if (resolve) return getRole();
-        return basicGetRole();
+      case MyDslPackage.CHOICE_L__ROLE_MAKING_CHOICE:
+        if (resolve) return getRoleMakingChoice();
+        return basicGetRoleMakingChoice();
       case MyDslPackage.CHOICE_L__BRANCHES:
         return getBranches();
     }
@@ -187,8 +187,8 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
   {
     switch (featureID)
     {
-      case MyDslPackage.CHOICE_L__ROLE:
-        setRole((Role)newValue);
+      case MyDslPackage.CHOICE_L__ROLE_MAKING_CHOICE:
+        setRoleMakingChoice((Role)newValue);
         return;
       case MyDslPackage.CHOICE_L__BRANCHES:
         getBranches().clear();
@@ -208,8 +208,8 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
   {
     switch (featureID)
     {
-      case MyDslPackage.CHOICE_L__ROLE:
-        setRole((Role)null);
+      case MyDslPackage.CHOICE_L__ROLE_MAKING_CHOICE:
+        setRoleMakingChoice((Role)null);
         return;
       case MyDslPackage.CHOICE_L__BRANCHES:
         getBranches().clear();
@@ -228,8 +228,8 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
   {
     switch (featureID)
     {
-      case MyDslPackage.CHOICE_L__ROLE:
-        return role != null;
+      case MyDslPackage.CHOICE_L__ROLE_MAKING_CHOICE:
+        return roleMakingChoice != null;
       case MyDslPackage.CHOICE_L__BRANCHES:
         return branches != null && !branches.isEmpty();
     }
