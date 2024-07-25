@@ -57,7 +57,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 						System.out.println(m.getSendReceive() instanceof ReceiverL);
 						if(m.getSendReceive() instanceof SenderL) {
 							error(
-								"Must send message when making a choice",
+								"Must send message when making a choice" + c.getRoleMakingChoice().getName() + lp.getProjectedRole().getName(),
 								m,
 								MyDslPackage.Literals.MESSAGE_L__SEND_RECEIVE
 							);
@@ -66,7 +66,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 						//con scelta esterna ricevo messaggio dal ruolo che fa la scelta
 						if(!m.getSendReceive().getRole().equals(c.getRoleMakingChoice())) {
 							error(
-								"Must receive message from role making choice",
+								"Must receive message from role making choice "+ c.getRoleMakingChoice().getName() +" "+ lp.getProjectedRole().getName(),
 								m,
 								MyDslPackage.Literals.MESSAGE_L__SEND_RECEIVE
 							);

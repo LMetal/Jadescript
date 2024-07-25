@@ -67,13 +67,43 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//GlobalProtocol:
+		//    /*
+		//     *     As defined in ICTCS Paper "Global Types for Agent Interaction Protocols"
+		//         global protocol name(p;⟨R, p⟩) = G
+		//        where G is defined by:
+		//        G ::= p → Q { ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼     Choice of Interactions
+		//        | muX.G | X                 Recursion and Variable
+		//        | End                         End of protocol
+		//        | for x:⟨R, q⟩ G1; G2         Protocol for participants in a role set
+		//        | x → q ℓQuit                 Exit from role set
+		//     */
 		//    'global' 'protocol' protocolName=ID '(' roles=Roles '){'protocol=Protocol'}'
 		//    ;
 		@Override public ParserRule getRule() { return rule; }
 		
+		///*
+		// *     As defined in ICTCS Paper "Global Types for Agent Interaction Protocols"
+		//     global protocol name(p;⟨R, p⟩) = G
+		//    where G is defined by:
+		//    G ::= p → Q { ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼     Choice of Interactions
+		//    | muX.G | X                 Recursion and Variable
+		//    | End                         End of protocol
+		//    | for x:⟨R, q⟩ G1; G2         Protocol for participants in a role set
+		//    | x → q ℓQuit                 Exit from role set
+		// */
 		//'global' 'protocol' protocolName=ID '(' roles=Roles '){'protocol=Protocol'}'
 		public Group getGroup() { return cGroup; }
 		
+		///*
+		// *     As defined in ICTCS Paper "Global Types for Agent Interaction Protocols"
+		//     global protocol name(p;⟨R, p⟩) = G
+		//    where G is defined by:
+		//    G ::= p → Q { ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼     Choice of Interactions
+		//    | muX.G | X                 Recursion and Variable
+		//    | End                         End of protocol
+		//    | for x:⟨R, q⟩ G1; G2         Protocol for participants in a role set
+		//    | x → q ℓQuit                 Exit from role set
+		// */
 		//'global'
 		public Keyword getGlobalKeyword_0() { return cGlobalKeyword_0; }
 		
@@ -764,17 +794,21 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Keyword cLeftParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Assignment cRolesAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cRolesRolesParserRuleCall_6_0 = (RuleCall)cRolesAssignment_6.eContents().get(0);
-		private final Keyword cRightParenthesisLeftCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Alternatives cAlternatives_7 = (Alternatives)cGroup.eContents().get(7);
+		private final Keyword cRightParenthesisLeftCurlyBracketKeyword_7_0 = (Keyword)cAlternatives_7.eContents().get(0);
+		private final Group cGroup_7_1 = (Group)cAlternatives_7.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_7_1_0 = (Keyword)cGroup_7_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_7_1_1 = (Keyword)cGroup_7_1.eContents().get(1);
 		private final Assignment cProtocolAssignment_8 = (Assignment)cGroup.eContents().get(8);
 		private final RuleCall cProtocolProtocolLParserRuleCall_8_0 = (RuleCall)cProtocolAssignment_8.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
 		//LocalProtocol:
-		//    'local' 'protocol' protocolName=ID 'at' projectedRole=RoleOne '(' roles=Roles '){'protocol=ProtocolL'}'
+		//    'local' 'protocol' protocolName=ID 'at' projectedRole=RoleOne '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'local' 'protocol' protocolName=ID 'at' projectedRole=RoleOne '(' roles=Roles '){'protocol=ProtocolL'}'
+		//'local' 'protocol' protocolName=ID 'at' projectedRole=RoleOne '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'local'
@@ -807,8 +841,20 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//Roles
 		public RuleCall getRolesRolesParserRuleCall_6_0() { return cRolesRolesParserRuleCall_6_0; }
 		
+		//('){' | ')''{')
+		public Alternatives getAlternatives_7() { return cAlternatives_7; }
+		
 		//'){'
-		public Keyword getRightParenthesisLeftCurlyBracketKeyword_7() { return cRightParenthesisLeftCurlyBracketKeyword_7; }
+		public Keyword getRightParenthesisLeftCurlyBracketKeyword_7_0() { return cRightParenthesisLeftCurlyBracketKeyword_7_0; }
+		
+		//')''{'
+		public Group getGroup_7_1() { return cGroup_7_1; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_7_1_0() { return cRightParenthesisKeyword_7_1_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_7_1_1() { return cLeftCurlyBracketKeyword_7_1_1; }
 		
 		//protocol=ProtocolL
 		public Assignment getProtocolAssignment_8() { return cProtocolAssignment_8; }
@@ -1452,6 +1498,16 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//GlobalProtocol:
+	//    /*
+	//     *     As defined in ICTCS Paper "Global Types for Agent Interaction Protocols"
+	//         global protocol name(p;⟨R, p⟩) = G
+	//        where G is defined by:
+	//        G ::= p → Q { ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼     Choice of Interactions
+	//        | muX.G | X                 Recursion and Variable
+	//        | End                         End of protocol
+	//        | for x:⟨R, q⟩ G1; G2         Protocol for participants in a role set
+	//        | x → q ℓQuit                 Exit from role set
+	//     */
 	//    'global' 'protocol' protocolName=ID '(' roles=Roles '){'protocol=Protocol'}'
 	//    ;
 	public GlobalProtocolElements getGlobalProtocolAccess() {
@@ -1628,7 +1684,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//LocalProtocol:
-	//    'local' 'protocol' protocolName=ID 'at' projectedRole=RoleOne '(' roles=Roles '){'protocol=ProtocolL'}'
+	//    'local' 'protocol' protocolName=ID 'at' projectedRole=RoleOne '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
 	//;
 	public LocalProtocolElements getLocalProtocolAccess() {
 		return pLocalProtocol;

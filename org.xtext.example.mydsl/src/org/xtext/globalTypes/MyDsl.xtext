@@ -7,9 +7,19 @@ Model:
 ;
 
 GlobalProtocol:
+	/*
+	 * 	As defined in ICTCS Paper "Global Types for Agent Interaction Protocols"
+	 	global protocol name(p;⟨R, p⟩) = G
+		where G is defined by:
+		G ::= p → Q { ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼 	Choice of Interactions
+		| muX.G | X 				Recursion and Variable
+		| End 						End of protocol
+		| for x:⟨R, q⟩ G1; G2 		Protocol for participants in a role set
+		| x → q ℓQuit 				Exit from role set
+	 */
 	'global' 'protocol' protocolName=ID '(' roles=Roles '){'protocol=Protocol'}'
 	;
-	
+
 Roles:
 	roles+=Role (',' roles+=Role)*
 ;
@@ -74,7 +84,7 @@ MessageNormal:
 
 
 MessageQuit: //terminale
-	messageType = 'QUIT' '()' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID]
+	messageType = 'QUIT' '()' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] 
 ;
 
 Payload:
@@ -82,7 +92,7 @@ Payload:
 ;
 
 LocalProtocol:
-	'local' 'protocol' protocolName=ID 'at' projectedRole=RoleOne '(' roles=Roles '){'protocol=ProtocolL'}'
+	'local' 'protocol' protocolName=ID 'at' projectedRole=RoleOne '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
 ;
 
 

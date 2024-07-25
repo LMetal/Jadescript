@@ -21,6 +21,9 @@ import org.xtext.globalTypes.myDsl.GlobalProtocol
 import org.xtext.globalTypes.myDsl.LocalProtocol
 import org.xtext.globalTypes.myDsl.RoleOne
 import org.xtext.globalTypes.myDsl.RoleSet
+import org.xtext.globalTypes.myDsl.MessageNormal
+import org.xtext.globalTypes.myDsl.MessageQuit
+import org.xtext.globalTypes.myDsl.EndProtocol
 
 /**
  * Generates code from your model files on save.
@@ -35,7 +38,7 @@ class MyDslGenerator extends AbstractGenerator {
 			var globalProtocol = model.protocol as GlobalProtocol
 			for(Role r : globalProtocol.getRoles().getRoles()){
 				System.out.println("LOCAL in " + r.getName());
-				fsa.generateFile('../src/local/local_'+r.getName()+'.jglobal', '''here''')//globalProtocol.project(r))
+				fsa.generateFile('../src/local/local_'+r.getName()+'.jglobal', globalProtocol.project(r))
 				System.out.println("END LOCAL on " + r.getName());		
 			}
 		} else {
@@ -47,17 +50,14 @@ class MyDslGenerator extends AbstractGenerator {
 		
 	}
 	
-	/*def CharSequence project(GlobalProtocol p, Role role)'''
-		local protocol «p.protocolName» at «role.name»(«projectOn(p.roles, role)») {
+	def CharSequence project(GlobalProtocol p, Role role)'''
+		local protocol «p.protocolName» at role «role.name»(«projectOn(p.roles, role)») {
 			«projectOn(p.protocol, role)»
 		}
 	'''
 	
 	def dispatch projectOn(Protocol protocol, Role role)'''
-		«FOR a : protocol.actions»
-			«projectOn(a, role)»
-		«ENDFOR»
-		«IF protocol.doesEnd == 'End'»End«ENDIF»'''
+		«projectOn(protocol.begin, role)»'''
 	
 	def dispatch projectOn(Roles roles, Role r)
 	'''«FOR role : roles.roles.filter[!name.equals(r.name)] SEPARATOR ', '»«projectOn(role, r)»«ENDFOR»'''
@@ -67,15 +67,34 @@ class MyDslGenerator extends AbstractGenerator {
 		«IF role instanceof RoleOne»role «role.name»«ELSE»roleset «role.name»:«(role as RoleSet).ref.name»«ENDIF»'''
 	
 	
+	/*
+	 * projection of a message on a role with differentiation between normal messages
+	 * and quit messages. In the first case the protocol continues.
+	 * 
+	 * m: Message (superclass of MessageNormal and MessageQuit)
+	 * r: role to project on
+	 */
 	def dispatch projectOn(Message m, Role r)'''
-		«IF m.sender.name == r.name»
-			«m.messageType»(«printPayload(m.payload)») to «m.receiver.name».
+		«IF m instanceof MessageNormal»
+			«IF m.sender.name == r.name»
+				«m.messageType»(«printPayload(m.payload)») to «m.receiver.name».
+			«ELSE»
+				«IF m.receiver.name == r.name»
+					«m.messageType»(«printPayload(m.payload)») from «m.sender.name».
+				«ENDIF»
+			«ENDIF»
+			«projectOn(m.protocol, r)»
 		«ELSE»
-			«IF m.receiver.name == r.name»
-				«m.messageType»(«printPayload(m.payload)») from «m.sender.name».
+			«IF m.sender.name == r.name»
+				QUIT() to «m.receiver.name»
+			«ELSE»
+				«IF m.receiver.name == r.name»
+					QUIT() from «m.sender.name»
+				«ENDIF»
 			«ENDIF»
 		«ENDIF»
 		'''
+
 		
 	
 	def dispatch projectOn(Choice c, Role r)'''
@@ -86,10 +105,6 @@ class MyDslGenerator extends AbstractGenerator {
 		«ENDFOR»
 	'''
 	
-	def dispatch projectOn(ChoiceBranch branch, Role r)'''
-		«projectOn(branch.message, r)»
-		«projectOn(branch.protocol, r)»
-	'''
 	
 	def dispatch projectOn(Recursion rec, Role r)'''
 		rec «rec.name»: {
@@ -103,17 +118,21 @@ class MyDslGenerator extends AbstractGenerator {
 	
 	def dispatch projectOn(ForEach each, Role r)'''
 		«IF each.roleset == r»
-			«projectOn(each.branch, each.loopRole)»
+			«projectOn(each.forBody, each.loopRole)»
 		«ENDIF»
 		«IF each.refRole == r»
 			foreach role «each.loopRole.name»:<«each.roleset.name»,«each.refRole.name»>{
-				«projectOn(each.branch, r)»
-			}
+				«projectOn(each.forBody, r)»
+			};
 		«ENDIF»
-		
+		«projectOn(each.protocol, r)»
+	'''
+	
+	def dispatch projectOn(EndProtocol end, Role r)'''
+		End
 	'''
 	
 	def printPayload(Payload payload)'''
 		«IF payload !== null»
-			«FOR type: payload.types SEPARATOR ', '»«type»«ENDFOR»«ENDIF»'''*/
+			«FOR type: payload.types SEPARATOR ', '»«type»«ENDFOR»«ENDIF»'''
 }

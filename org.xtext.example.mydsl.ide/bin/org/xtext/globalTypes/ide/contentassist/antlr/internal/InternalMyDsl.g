@@ -903,6 +903,27 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__LocalProtocol__Alternatives_7
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getLocalProtocolAccess().getRightParenthesisLeftCurlyBracketKeyword_7_0()); }
+		'){'
+		{ after(grammarAccess.getLocalProtocolAccess().getRightParenthesisLeftCurlyBracketKeyword_7_0()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getLocalProtocolAccess().getGroup_7_1()); }
+		(rule__LocalProtocol__Group_7_1__0)
+		{ after(grammarAccess.getLocalProtocolAccess().getGroup_7_1()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__ProtocolL__BeginAlternatives_0
 	@init {
 		int stackSize = keepStackSize();
@@ -3162,9 +3183,9 @@ rule__LocalProtocol__Group__7__Impl
 	}
 :
 (
-	{ before(grammarAccess.getLocalProtocolAccess().getRightParenthesisLeftCurlyBracketKeyword_7()); }
-	'){'
-	{ after(grammarAccess.getLocalProtocolAccess().getRightParenthesisLeftCurlyBracketKeyword_7()); }
+	{ before(grammarAccess.getLocalProtocolAccess().getAlternatives_7()); }
+	(rule__LocalProtocol__Alternatives_7)
+	{ after(grammarAccess.getLocalProtocolAccess().getAlternatives_7()); }
 )
 ;
 finally {
@@ -3218,6 +3239,60 @@ rule__LocalProtocol__Group__9__Impl
 	{ before(grammarAccess.getLocalProtocolAccess().getRightCurlyBracketKeyword_9()); }
 	'}'
 	{ after(grammarAccess.getLocalProtocolAccess().getRightCurlyBracketKeyword_9()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__LocalProtocol__Group_7_1__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__LocalProtocol__Group_7_1__0__Impl
+	rule__LocalProtocol__Group_7_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__LocalProtocol__Group_7_1__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getLocalProtocolAccess().getRightParenthesisKeyword_7_1_0()); }
+	')'
+	{ after(grammarAccess.getLocalProtocolAccess().getRightParenthesisKeyword_7_1_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__LocalProtocol__Group_7_1__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__LocalProtocol__Group_7_1__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__LocalProtocol__Group_7_1__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getLocalProtocolAccess().getLeftCurlyBracketKeyword_7_1_1()); }
+	'{'
+	{ after(grammarAccess.getLocalProtocolAccess().getLeftCurlyBracketKeyword_7_1_1()); }
 )
 ;
 finally {

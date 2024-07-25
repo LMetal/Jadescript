@@ -36,6 +36,7 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getProtocolAccess().getBeginAlternatives_0(), "rule__Protocol__BeginAlternatives_0");
 			builder.put(grammarAccess.getMessageAccess().getAlternatives(), "rule__Message__Alternatives");
 			builder.put(grammarAccess.getMessageNormalAccess().getAlternatives_1(), "rule__MessageNormal__Alternatives_1");
+			builder.put(grammarAccess.getLocalProtocolAccess().getAlternatives_7(), "rule__LocalProtocol__Alternatives_7");
 			builder.put(grammarAccess.getProtocolLAccess().getBeginAlternatives_0(), "rule__ProtocolL__BeginAlternatives_0");
 			builder.put(grammarAccess.getMessageLAccess().getAlternatives(), "rule__MessageL__Alternatives");
 			builder.put(grammarAccess.getMessageNormalLAccess().getAlternatives_1(), "rule__MessageNormalL__Alternatives_1");
@@ -57,6 +58,7 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getPayloadAccess().getGroup(), "rule__Payload__Group__0");
 			builder.put(grammarAccess.getPayloadAccess().getGroup_1(), "rule__Payload__Group_1__0");
 			builder.put(grammarAccess.getLocalProtocolAccess().getGroup(), "rule__LocalProtocol__Group__0");
+			builder.put(grammarAccess.getLocalProtocolAccess().getGroup_7_1(), "rule__LocalProtocol__Group_7_1__0");
 			builder.put(grammarAccess.getRecursionLAccess().getGroup(), "rule__RecursionL__Group__0");
 			builder.put(grammarAccess.getCloseRecursionLAccess().getGroup(), "rule__CloseRecursionL__Group__0");
 			builder.put(grammarAccess.getMessageNormalLAccess().getGroup(), "rule__MessageNormalL__Group__0");
