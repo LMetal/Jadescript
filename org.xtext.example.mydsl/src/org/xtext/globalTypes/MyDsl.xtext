@@ -28,7 +28,7 @@ RoleSet:
     
 
 Protocol:
-	{Protocol} begin = (Choice | Message | Recursion | ForEach | CloseRecursion | EndProtocol)
+	begin = (Choice | Message | Recursion | ForEach | CloseRecursion | EndProtocol)
 ;
 
 EndProtocol:
@@ -63,18 +63,18 @@ Choice:
 ;
 
 Message:
-	MessageBase |
+	MessageNormal |
 	MessageQuit
 ;
 
-MessageBase:
+MessageNormal:
 	messageType=ID ('(' (payload=Payload)? ')' | '()') 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
 	protocol = Protocol
 ;
 
 
 MessageQuit: //terminale
-	messageType = 'QUIT' '()' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
+	messageType = 'QUIT' '()' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID]
 ;
 
 Payload:
@@ -82,12 +82,12 @@ Payload:
 ;
 
 LocalProtocol:
-	'local' 'protocol' protocolName=ID 'at' projectedRole=ID '(' roles=Roles ')' '{'protocol=ProtocolL'}'
+	'local' 'protocol' protocolName=ID 'at' projectedRole=RoleOne '(' roles=Roles '){'protocol=ProtocolL'}'
 ;
 
 
 ProtocolL:
-	{ProtocolL} (actions+=(MessageL | ChoiceL | ForEachL | RecursionL | CloseRecursion))* ('End')?
+	begin = (MessageL | ChoiceL | ForEachL | RecursionL | CloseRecursionL | EndProtocol)
 ;
 
 RecursionL:
@@ -96,8 +96,22 @@ RecursionL:
 	'}'
 ;
 
+CloseRecursionL: //terminale
+	'loop' recursionVariable=[RecursionL | ID]
+;
+
 MessageL:
-	messageType=ID '(' payload=Payload? ')' (sendReceive=MessageType) '.'
+	MessageNormalL |
+	MessageQuitL
+;
+
+MessageNormalL:
+	messageType=ID ('(' payload=Payload? ')'| '()') (sendReceive=MessageType) '.'
+	protocol = ProtocolL
+;
+
+MessageQuitL:
+	messageType='QUIT' '()' (sendReceive=MessageType)
 ;
 
 MessageType:
@@ -114,21 +128,18 @@ ReceiverL:
 
 ChoiceL:
 	'choice' 'at' roleMakingChoice=[Role | ID] '{'
-		branches+=ChoiceBranchL
+		branches+=MessageL
 	'}' ('or' '{'
-		branches+=ChoiceBranchL
+		branches+=MessageL
 	'}')*
 ;
 
-ChoiceBranchL:
-	{ChoiceBranchL} 'End' | message=MessageL
-	protocol=ProtocolL
-;
 
 ForEachL:
 	'foreach' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
 		branch=ProtocolL
-	'}'
+	'}'';'
+	protocol = ProtocolL
 ;
 
 

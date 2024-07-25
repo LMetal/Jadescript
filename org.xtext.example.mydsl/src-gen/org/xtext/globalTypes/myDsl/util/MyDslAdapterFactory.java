@@ -141,9 +141,9 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createMessageAdapter();
       }
       @Override
-      public Adapter caseMessageBase(MessageBase object)
+      public Adapter caseMessageNormal(MessageNormal object)
       {
-        return createMessageBaseAdapter();
+        return createMessageNormalAdapter();
       }
       @Override
       public Adapter caseMessageQuit(MessageQuit object)
@@ -171,9 +171,24 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createRecursionLAdapter();
       }
       @Override
+      public Adapter caseCloseRecursionL(CloseRecursionL object)
+      {
+        return createCloseRecursionLAdapter();
+      }
+      @Override
       public Adapter caseMessageL(MessageL object)
       {
         return createMessageLAdapter();
+      }
+      @Override
+      public Adapter caseMessageNormalL(MessageNormalL object)
+      {
+        return createMessageNormalLAdapter();
+      }
+      @Override
+      public Adapter caseMessageQuitL(MessageQuitL object)
+      {
+        return createMessageQuitLAdapter();
       }
       @Override
       public Adapter caseMessageType(MessageType object)
@@ -194,11 +209,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseChoiceL(ChoiceL object)
       {
         return createChoiceLAdapter();
-      }
-      @Override
-      public Adapter caseChoiceBranchL(ChoiceBranchL object)
-      {
-        return createChoiceBranchLAdapter();
       }
       @Override
       public Adapter caseForEachL(ForEachL object)
@@ -423,16 +433,16 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.MessageBase <em>Message Base</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.MessageNormal <em>Message Normal</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.globalTypes.myDsl.MessageBase
+   * @see org.xtext.globalTypes.myDsl.MessageNormal
    * @generated
    */
-  public Adapter createMessageBaseAdapter()
+  public Adapter createMessageNormalAdapter()
   {
     return null;
   }
@@ -513,6 +523,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.CloseRecursionL <em>Close Recursion L</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.globalTypes.myDsl.CloseRecursionL
+   * @generated
+   */
+  public Adapter createCloseRecursionLAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.MessageL <em>Message L</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -523,6 +548,36 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMessageLAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.MessageNormalL <em>Message Normal L</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.globalTypes.myDsl.MessageNormalL
+   * @generated
+   */
+  public Adapter createMessageNormalLAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.MessageQuitL <em>Message Quit L</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.globalTypes.myDsl.MessageQuitL
+   * @generated
+   */
+  public Adapter createMessageQuitLAdapter()
   {
     return null;
   }
@@ -583,21 +638,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createChoiceLAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.ChoiceBranchL <em>Choice Branch L</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.globalTypes.myDsl.ChoiceBranchL
-   * @generated
-   */
-  public Adapter createChoiceBranchLAdapter()
   {
     return null;
   }

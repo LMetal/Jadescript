@@ -141,13 +141,13 @@ public interface MyDslFactory extends EFactory
   Message createMessage();
 
   /**
-   * Returns a new object of class '<em>Message Base</em>'.
+   * Returns a new object of class '<em>Message Normal</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Message Base</em>'.
+   * @return a new object of class '<em>Message Normal</em>'.
    * @generated
    */
-  MessageBase createMessageBase();
+  MessageNormal createMessageNormal();
 
   /**
    * Returns a new object of class '<em>Message Quit</em>'.
@@ -195,6 +195,15 @@ public interface MyDslFactory extends EFactory
   RecursionL createRecursionL();
 
   /**
+   * Returns a new object of class '<em>Close Recursion L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Close Recursion L</em>'.
+   * @generated
+   */
+  CloseRecursionL createCloseRecursionL();
+
+  /**
    * Returns a new object of class '<em>Message L</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -202,6 +211,24 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   MessageL createMessageL();
+
+  /**
+   * Returns a new object of class '<em>Message Normal L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Message Normal L</em>'.
+   * @generated
+   */
+  MessageNormalL createMessageNormalL();
+
+  /**
+   * Returns a new object of class '<em>Message Quit L</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Message Quit L</em>'.
+   * @generated
+   */
+  MessageQuitL createMessageQuitL();
 
   /**
    * Returns a new object of class '<em>Message Type</em>'.
@@ -238,15 +265,6 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   ChoiceL createChoiceL();
-
-  /**
-   * Returns a new object of class '<em>Choice Branch L</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Choice Branch L</em>'.
-   * @generated
-   */
-  ChoiceBranchL createChoiceBranchL();
 
   /**
    * Returns a new object of class '<em>For Each L</em>'.

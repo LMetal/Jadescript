@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.xtext.globalTypes.myDsl.ChoiceBranchL;
 import org.xtext.globalTypes.myDsl.ChoiceL;
+import org.xtext.globalTypes.myDsl.MessageL;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.Role;
 
@@ -58,7 +58,7 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
    * @generated
    * @ordered
    */
-  protected EList<ChoiceBranchL> branches;
+  protected EList<MessageL> branches;
 
   /**
    * <!-- begin-user-doc -->
@@ -132,11 +132,11 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
    * @generated
    */
   @Override
-  public EList<ChoiceBranchL> getBranches()
+  public EList<MessageL> getBranches()
   {
     if (branches == null)
     {
-      branches = new EObjectContainmentEList<ChoiceBranchL>(ChoiceBranchL.class, this, MyDslPackage.CHOICE_L__BRANCHES);
+      branches = new EObjectContainmentEList<MessageL>(MessageL.class, this, MyDslPackage.CHOICE_L__BRANCHES);
     }
     return branches;
   }
@@ -192,7 +192,7 @@ public class ChoiceLImpl extends MinimalEObjectImpl.Container implements ChoiceL
         return;
       case MyDslPackage.CHOICE_L__BRANCHES:
         getBranches().clear();
-        getBranches().addAll((Collection<? extends ChoiceBranchL>)newValue);
+        getBranches().addAll((Collection<? extends MessageL>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

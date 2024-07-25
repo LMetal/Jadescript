@@ -15,17 +15,18 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.xtext.globalTypes.myDsl.Choice;
-import org.xtext.globalTypes.myDsl.ChoiceBranchL;
 import org.xtext.globalTypes.myDsl.ChoiceL;
 import org.xtext.globalTypes.myDsl.CloseRecursion;
+import org.xtext.globalTypes.myDsl.CloseRecursionL;
 import org.xtext.globalTypes.myDsl.EndProtocol;
 import org.xtext.globalTypes.myDsl.ForEach;
 import org.xtext.globalTypes.myDsl.ForEachL;
 import org.xtext.globalTypes.myDsl.GlobalProtocol;
 import org.xtext.globalTypes.myDsl.LocalProtocol;
-import org.xtext.globalTypes.myDsl.MessageBase;
-import org.xtext.globalTypes.myDsl.MessageL;
+import org.xtext.globalTypes.myDsl.MessageNormal;
+import org.xtext.globalTypes.myDsl.MessageNormalL;
 import org.xtext.globalTypes.myDsl.MessageQuit;
+import org.xtext.globalTypes.myDsl.MessageQuitL;
 import org.xtext.globalTypes.myDsl.Model;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.Payload;
@@ -57,14 +58,14 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case MyDslPackage.CHOICE:
 				sequence_Choice(context, (Choice) semanticObject); 
 				return; 
-			case MyDslPackage.CHOICE_BRANCH_L:
-				sequence_ChoiceBranchL(context, (ChoiceBranchL) semanticObject); 
-				return; 
 			case MyDslPackage.CHOICE_L:
 				sequence_ChoiceL(context, (ChoiceL) semanticObject); 
 				return; 
 			case MyDslPackage.CLOSE_RECURSION:
 				sequence_CloseRecursion(context, (CloseRecursion) semanticObject); 
+				return; 
+			case MyDslPackage.CLOSE_RECURSION_L:
+				sequence_CloseRecursionL(context, (CloseRecursionL) semanticObject); 
 				return; 
 			case MyDslPackage.END_PROTOCOL:
 				sequence_EndProtocol(context, (EndProtocol) semanticObject); 
@@ -81,14 +82,17 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case MyDslPackage.LOCAL_PROTOCOL:
 				sequence_LocalProtocol(context, (LocalProtocol) semanticObject); 
 				return; 
-			case MyDslPackage.MESSAGE_BASE:
-				sequence_MessageBase(context, (MessageBase) semanticObject); 
+			case MyDslPackage.MESSAGE_NORMAL:
+				sequence_MessageNormal(context, (MessageNormal) semanticObject); 
 				return; 
-			case MyDslPackage.MESSAGE_L:
-				sequence_MessageL(context, (MessageL) semanticObject); 
+			case MyDslPackage.MESSAGE_NORMAL_L:
+				sequence_MessageNormalL(context, (MessageNormalL) semanticObject); 
 				return; 
 			case MyDslPackage.MESSAGE_QUIT:
 				sequence_MessageQuit(context, (MessageQuit) semanticObject); 
+				return; 
+			case MyDslPackage.MESSAGE_QUIT_L:
+				sequence_MessageQuitL(context, (MessageQuitL) semanticObject); 
 				return; 
 			case MyDslPackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
@@ -131,24 +135,10 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ChoiceBranchL returns ChoiceBranchL
-	 *
-	 * Constraint:
-	 *     (message=MessageL protocol=ProtocolL)?
-	 * </pre>
-	 */
-	protected void sequence_ChoiceBranchL(ISerializationContext context, ChoiceBranchL semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
 	 *     ChoiceL returns ChoiceL
 	 *
 	 * Constraint:
-	 *     (roleMakingChoice=[Role|ID] branches+=ChoiceBranchL branches+=ChoiceBranchL*)
+	 *     (roleMakingChoice=[Role|ID] branches+=MessageL branches+=MessageL*)
 	 * </pre>
 	 */
 	protected void sequence_ChoiceL(ISerializationContext context, ChoiceL semanticObject) {
@@ -167,6 +157,26 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 */
 	protected void sequence_Choice(ISerializationContext context, Choice semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     CloseRecursionL returns CloseRecursionL
+	 *
+	 * Constraint:
+	 *     recursionVariable=[RecursionL|ID]
+	 * </pre>
+	 */
+	protected void sequence_CloseRecursionL(ISerializationContext context, CloseRecursionL semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.CLOSE_RECURSION_L__RECURSION_VARIABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.CLOSE_RECURSION_L__RECURSION_VARIABLE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getCloseRecursionLAccess().getRecursionVariableRecursionLIDTerminalRuleCall_1_0_1(), semanticObject.eGet(MyDslPackage.Literals.CLOSE_RECURSION_L__RECURSION_VARIABLE, false));
+		feeder.finish();
 	}
 	
 	
@@ -216,7 +226,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     ForEachL returns ForEachL
 	 *
 	 * Constraint:
-	 *     (eachRole=RoleOne roleset=[RoleSet|ID] refrole=[RoleOne|ID] branch=ProtocolL)
+	 *     (eachRole=RoleOne roleset=[RoleSet|ID] refrole=[RoleOne|ID] branch=ProtocolL protocol=ProtocolL)
 	 * </pre>
 	 */
 	protected void sequence_ForEachL(ISerializationContext context, ForEachL semanticObject) {
@@ -229,12 +239,15 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.FOR_EACH_L__REFROLE));
 			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.FOR_EACH_L__BRANCH) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.FOR_EACH_L__BRANCH));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.FOR_EACH_L__PROTOCOL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.FOR_EACH_L__PROTOCOL));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getForEachLAccess().getEachRoleRoleOneParserRuleCall_1_0(), semanticObject.getEachRole());
 		feeder.accept(grammarAccess.getForEachLAccess().getRolesetRoleSetIDTerminalRuleCall_4_0_1(), semanticObject.eGet(MyDslPackage.Literals.FOR_EACH_L__ROLESET, false));
 		feeder.accept(grammarAccess.getForEachLAccess().getRefroleRoleOneIDTerminalRuleCall_6_0_1(), semanticObject.eGet(MyDslPackage.Literals.FOR_EACH_L__REFROLE, false));
 		feeder.accept(grammarAccess.getForEachLAccess().getBranchProtocolLParserRuleCall_9_0(), semanticObject.getBranch());
+		feeder.accept(grammarAccess.getForEachLAccess().getProtocolProtocolLParserRuleCall_12_0(), semanticObject.getProtocol());
 		feeder.finish();
 	}
 	
@@ -303,7 +316,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     LocalProtocol returns LocalProtocol
 	 *
 	 * Constraint:
-	 *     (protocolName=ID projectedRole=ID roles=Roles protocol=ProtocolL)
+	 *     (protocolName=ID projectedRole=RoleOne roles=Roles protocol=ProtocolL)
 	 * </pre>
 	 */
 	protected void sequence_LocalProtocol(ISerializationContext context, LocalProtocol semanticObject) {
@@ -319,9 +332,9 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getLocalProtocolAccess().getProtocolNameIDTerminalRuleCall_2_0(), semanticObject.getProtocolName());
-		feeder.accept(grammarAccess.getLocalProtocolAccess().getProjectedRoleIDTerminalRuleCall_4_0(), semanticObject.getProjectedRole());
+		feeder.accept(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleOneParserRuleCall_4_0(), semanticObject.getProjectedRole());
 		feeder.accept(grammarAccess.getLocalProtocolAccess().getRolesRolesParserRuleCall_6_0(), semanticObject.getRoles());
-		feeder.accept(grammarAccess.getLocalProtocolAccess().getProtocolProtocolLParserRuleCall_9_0(), semanticObject.getProtocol());
+		feeder.accept(grammarAccess.getLocalProtocolAccess().getProtocolProtocolLParserRuleCall_8_0(), semanticObject.getProtocol());
 		feeder.finish();
 	}
 	
@@ -329,14 +342,14 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Message returns MessageBase
-	 *     MessageBase returns MessageBase
+	 *     MessageL returns MessageNormalL
+	 *     MessageNormalL returns MessageNormalL
 	 *
 	 * Constraint:
-	 *     (messageType=ID payload=Payload? sender=[RoleOne|ID] receiver=[Role|ID] protocol=Protocol)
+	 *     (messageType=ID payload=Payload? sendReceive=MessageType protocol=ProtocolL)
 	 * </pre>
 	 */
-	protected void sequence_MessageBase(ISerializationContext context, MessageBase semanticObject) {
+	protected void sequence_MessageNormalL(ISerializationContext context, MessageNormalL semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -344,14 +357,39 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     MessageL returns MessageL
+	 *     Message returns MessageNormal
+	 *     MessageNormal returns MessageNormal
 	 *
 	 * Constraint:
-	 *     (messageType=ID payload=Payload? sendReceive=MessageType)
+	 *     (messageType=ID payload=Payload? sender=[RoleOne|ID] receiver=[Role|ID] protocol=Protocol)
 	 * </pre>
 	 */
-	protected void sequence_MessageL(ISerializationContext context, MessageL semanticObject) {
+	protected void sequence_MessageNormal(ISerializationContext context, MessageNormal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     MessageL returns MessageQuitL
+	 *     MessageQuitL returns MessageQuitL
+	 *
+	 * Constraint:
+	 *     (messageType='QUIT' sendReceive=MessageType)
+	 * </pre>
+	 */
+	protected void sequence_MessageQuitL(ISerializationContext context, MessageQuitL semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.MESSAGE_L__MESSAGE_TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.MESSAGE_L__MESSAGE_TYPE));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.MESSAGE_L__SEND_RECEIVE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.MESSAGE_L__SEND_RECEIVE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getMessageQuitLAccess().getMessageTypeQUITKeyword_0_0(), semanticObject.getMessageType());
+		feeder.accept(grammarAccess.getMessageQuitLAccess().getSendReceiveMessageTypeParserRuleCall_2_0(), semanticObject.getSendReceive());
+		feeder.finish();
 	}
 	
 	
@@ -416,7 +454,14 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     ProtocolL returns ProtocolL
 	 *
 	 * Constraint:
-	 *     (actions+=MessageL | actions+=ChoiceL | actions+=ForEachL | actions+=RecursionL | actions+=CloseRecursion)*
+	 *     (
+	 *         begin=MessageL | 
+	 *         begin=ChoiceL | 
+	 *         begin=ForEachL | 
+	 *         begin=RecursionL | 
+	 *         begin=CloseRecursionL | 
+	 *         begin=EndProtocol
+	 *     )
 	 * </pre>
 	 */
 	protected void sequence_ProtocolL(ISerializationContext context, ProtocolL semanticObject) {

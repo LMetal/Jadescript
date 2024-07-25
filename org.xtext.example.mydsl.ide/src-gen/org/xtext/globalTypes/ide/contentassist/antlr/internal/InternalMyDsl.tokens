@@ -8,13 +8,13 @@
 ';'=30
 '<'=28
 '>'=29
-'End'=39
+'End'=40
 'QUIT'=41
 'action'=14
 'at'=32
 'choice'=31
 'for'=27
-'foreach'=40
+'foreach'=39
 'from'=34
 'global'=15
 'int'=12

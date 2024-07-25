@@ -15,6 +15,7 @@ import org.xtext.globalTypes.myDsl.GlobalProtocol;
 import org.xtext.globalTypes.myDsl.LocalProtocol;
 import org.xtext.globalTypes.myDsl.Model;
 import org.xtext.globalTypes.myDsl.Role;
+import org.xtext.globalTypes.myDsl.RoleOne;
 
 /**
  * Generates code from your model files on save.
@@ -52,7 +53,7 @@ public class MyDslGenerator extends AbstractGenerator {
       EObject _protocol_2 = model.getProtocol();
       LocalProtocol localProtocol = ((LocalProtocol) _protocol_2);
       System.out.println("JADE");
-      String _projectedRole = localProtocol.getProjectedRole();
+      RoleOne _projectedRole = localProtocol.getProjectedRole();
       String _plus = ("jade/jade" + _projectedRole);
       String _plus_1 = (_plus + ".txt");
       StringConcatenation _builder = new StringConcatenation();

@@ -30,6 +30,7 @@ import org.xtext.globalTypes.myDsl.RoleSet;
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachLImpl#getRoleset <em>Roleset</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachLImpl#getRefrole <em>Refrole</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachLImpl#getBranch <em>Branch</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachLImpl#getProtocol <em>Protocol</em>}</li>
  * </ul>
  *
  * @generated
@@ -75,6 +76,16 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
    * @ordered
    */
   protected ProtocolL branch;
+
+  /**
+   * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getProtocol()
+   * @generated
+   * @ordered
+   */
+  protected ProtocolL protocol;
 
   /**
    * <!-- begin-user-doc -->
@@ -293,6 +304,56 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
    * @generated
    */
   @Override
+  public ProtocolL getProtocol()
+  {
+    return protocol;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetProtocol(ProtocolL newProtocol, NotificationChain msgs)
+  {
+    ProtocolL oldProtocol = protocol;
+    protocol = newProtocol;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH_L__PROTOCOL, oldProtocol, newProtocol);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setProtocol(ProtocolL newProtocol)
+  {
+    if (newProtocol != protocol)
+    {
+      NotificationChain msgs = null;
+      if (protocol != null)
+        msgs = ((InternalEObject)protocol).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FOR_EACH_L__PROTOCOL, null, msgs);
+      if (newProtocol != null)
+        msgs = ((InternalEObject)newProtocol).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FOR_EACH_L__PROTOCOL, null, msgs);
+      msgs = basicSetProtocol(newProtocol, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH_L__PROTOCOL, newProtocol, newProtocol));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -301,6 +362,8 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
         return basicSetEachRole(null, msgs);
       case MyDslPackage.FOR_EACH_L__BRANCH:
         return basicSetBranch(null, msgs);
+      case MyDslPackage.FOR_EACH_L__PROTOCOL:
+        return basicSetProtocol(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -325,6 +388,8 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
         return basicGetRefrole();
       case MyDslPackage.FOR_EACH_L__BRANCH:
         return getBranch();
+      case MyDslPackage.FOR_EACH_L__PROTOCOL:
+        return getProtocol();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -350,6 +415,9 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
         return;
       case MyDslPackage.FOR_EACH_L__BRANCH:
         setBranch((ProtocolL)newValue);
+        return;
+      case MyDslPackage.FOR_EACH_L__PROTOCOL:
+        setProtocol((ProtocolL)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -377,6 +445,9 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
       case MyDslPackage.FOR_EACH_L__BRANCH:
         setBranch((ProtocolL)null);
         return;
+      case MyDslPackage.FOR_EACH_L__PROTOCOL:
+        setProtocol((ProtocolL)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -399,6 +470,8 @@ public class ForEachLImpl extends MinimalEObjectImpl.Container implements ForEac
         return refrole != null;
       case MyDslPackage.FOR_EACH_L__BRANCH:
         return branch != null;
+      case MyDslPackage.FOR_EACH_L__PROTOCOL:
+        return protocol != null;
     }
     return super.eIsSet(featureID);
   }

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEachL#getRoleset <em>Roleset</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEachL#getRefrole <em>Refrole</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEachL#getBranch <em>Branch</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.ForEachL#getProtocol <em>Protocol</em>}</li>
  * </ul>
  *
  * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEachL()
@@ -113,5 +114,27 @@ public interface ForEachL extends EObject
    * @generated
    */
   void setBranch(ProtocolL value);
+
+  /**
+   * Returns the value of the '<em><b>Protocol</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Protocol</em>' containment reference.
+   * @see #setProtocol(ProtocolL)
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEachL_Protocol()
+   * @model containment="true"
+   * @generated
+   */
+  ProtocolL getProtocol();
+
+  /**
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEachL#getProtocol <em>Protocol</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Protocol</em>' containment reference.
+   * @see #getProtocol()
+   * @generated
+   */
+  void setProtocol(ProtocolL value);
 
 } // ForEachL
