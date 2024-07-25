@@ -12,5 +12,8 @@
     <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.ChoiceL"/>
     <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.ChoiceBranch"/>
     <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.ChoiceBranchL"/>
+    <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.LocalProtocol"/>
+    <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.SenderL"/>
     <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.MyDslPackage.Literals"/>
+    <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.ReceiverL"/>
 </qualifiedTypeNameHistroy>
