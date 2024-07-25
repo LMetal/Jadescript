@@ -124,6 +124,13 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MyDslPackage.END_PROTOCOL:
+      {
+        EndProtocol endProtocol = (EndProtocol)theEObject;
+        T result = caseEndProtocol(endProtocol);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MyDslPackage.RECURSION:
       {
         Recursion recursion = (Recursion)theEObject;
@@ -152,17 +159,26 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.CHOICE_BRANCH:
-      {
-        ChoiceBranch choiceBranch = (ChoiceBranch)theEObject;
-        T result = caseChoiceBranch(choiceBranch);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case MyDslPackage.MESSAGE:
       {
         Message message = (Message)theEObject;
         T result = caseMessage(message);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.MESSAGE_BASE:
+      {
+        MessageBase messageBase = (MessageBase)theEObject;
+        T result = caseMessageBase(messageBase);
+        if (result == null) result = caseMessage(messageBase);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.MESSAGE_QUIT:
+      {
+        MessageQuit messageQuit = (MessageQuit)theEObject;
+        T result = caseMessageQuit(messageQuit);
+        if (result == null) result = caseMessage(messageQuit);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -362,6 +378,22 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>End Protocol</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>End Protocol</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEndProtocol(EndProtocol object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Recursion</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -426,22 +458,6 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Choice Branch</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Choice Branch</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseChoiceBranch(ChoiceBranch object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Message</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -453,6 +469,38 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMessage(Message object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Message Base</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Message Base</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMessageBase(MessageBase object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Message Quit</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Message Quit</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMessageQuit(MessageQuit object)
   {
     return null;
   }

@@ -9,6 +9,10 @@ org.antlr.runtime.source,3.2.0.v20230929-1400,file:/C:/Users/leoga/.p2/pool/plug
 org.aopalliance.source,1.0.0.v20230720-0728,file:/C:/Users/leoga/.p2/pool/plugins/org.aopalliance.source_1.0.0.v20230720-0728.jar,-1,false
 org.apache.commons.cli.source,1.6.0,file:/C:/Users/leoga/.p2/pool/plugins/org.apache.commons.cli.source_1.6.0.jar,-1,false
 org.apache.log4j.source,1.2.25,file:/C:/Users/leoga/.p2/pool/plugins/org.apache.log4j.source_1.2.25.jar,-1,false
+org.eclipse.egit.core.source,6.8.0.202311291450-r,file:/C:/Users/leoga/.p2/pool/plugins/org.eclipse.egit.core.source_6.8.0.202311291450-r.jar,-1,false
+org.eclipse.egit.gitflow.source,6.8.0.202311291450-r,file:/C:/Users/leoga/.p2/pool/plugins/org.eclipse.egit.gitflow.source_6.8.0.202311291450-r.jar,-1,false
+org.eclipse.egit.gitflow.ui.source,6.8.0.202311291450-r,file:/C:/Users/leoga/.p2/pool/plugins/org.eclipse.egit.gitflow.ui.source_6.8.0.202311291450-r.jar,-1,false
+org.eclipse.egit.ui.source,6.8.0.202311291450-r,file:/C:/Users/leoga/.p2/pool/plugins/org.eclipse.egit.ui.source_6.8.0.202311291450-r.jar,-1,false
 org.eclipse.emf.ant.source,2.12.0.v20230211-1150,file:/C:/Users/leoga/.p2/pool/plugins/org.eclipse.emf.ant.source_2.12.0.v20230211-1150.jar,-1,false
 org.eclipse.emf.codegen.ecore.source,2.37.0.v20240203-1010,file:/C:/Users/leoga/.p2/pool/plugins/org.eclipse.emf.codegen.ecore.source_2.37.0.v20240203-1010.jar,-1,false
 org.eclipse.emf.codegen.ecore.ui.source,2.37.0.v20231206-0758,file:/C:/Users/leoga/.p2/pool/plugins/org.eclipse.emf.codegen.ecore.ui.source_2.37.0.v20231206-0758.jar,-1,false

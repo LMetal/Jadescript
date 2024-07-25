@@ -29,7 +29,8 @@ import org.xtext.globalTypes.myDsl.RoleSet;
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getLoopRole <em>Loop Role</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getRoleset <em>Roleset</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getRefRole <em>Ref Role</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getBranch <em>Branch</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getForBody <em>For Body</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.impl.ForEachImpl#getProtocol <em>Protocol</em>}</li>
  * </ul>
  *
  * @generated
@@ -67,14 +68,24 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
   protected RoleOne refRole;
 
   /**
-   * The cached value of the '{@link #getBranch() <em>Branch</em>}' containment reference.
+   * The cached value of the '{@link #getForBody() <em>For Body</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getBranch()
+   * @see #getForBody()
    * @generated
    * @ordered
    */
-  protected Protocol branch;
+  protected Protocol forBody;
+
+  /**
+   * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getProtocol()
+   * @generated
+   * @ordered
+   */
+  protected Protocol protocol;
 
   /**
    * <!-- begin-user-doc -->
@@ -243,9 +254,9 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * @generated
    */
   @Override
-  public Protocol getBranch()
+  public Protocol getForBody()
   {
-    return branch;
+    return forBody;
   }
 
   /**
@@ -253,13 +264,13 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetBranch(Protocol newBranch, NotificationChain msgs)
+  public NotificationChain basicSetForBody(Protocol newForBody, NotificationChain msgs)
   {
-    Protocol oldBranch = branch;
-    branch = newBranch;
+    Protocol oldForBody = forBody;
+    forBody = newForBody;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH__BRANCH, oldBranch, newBranch);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH__FOR_BODY, oldForBody, newForBody);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -271,20 +282,70 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
    * @generated
    */
   @Override
-  public void setBranch(Protocol newBranch)
+  public void setForBody(Protocol newForBody)
   {
-    if (newBranch != branch)
+    if (newForBody != forBody)
     {
       NotificationChain msgs = null;
-      if (branch != null)
-        msgs = ((InternalEObject)branch).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FOR_EACH__BRANCH, null, msgs);
-      if (newBranch != null)
-        msgs = ((InternalEObject)newBranch).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FOR_EACH__BRANCH, null, msgs);
-      msgs = basicSetBranch(newBranch, msgs);
+      if (forBody != null)
+        msgs = ((InternalEObject)forBody).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FOR_EACH__FOR_BODY, null, msgs);
+      if (newForBody != null)
+        msgs = ((InternalEObject)newForBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FOR_EACH__FOR_BODY, null, msgs);
+      msgs = basicSetForBody(newForBody, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH__BRANCH, newBranch, newBranch));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH__FOR_BODY, newForBody, newForBody));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Protocol getProtocol()
+  {
+    return protocol;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetProtocol(Protocol newProtocol, NotificationChain msgs)
+  {
+    Protocol oldProtocol = protocol;
+    protocol = newProtocol;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH__PROTOCOL, oldProtocol, newProtocol);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setProtocol(Protocol newProtocol)
+  {
+    if (newProtocol != protocol)
+    {
+      NotificationChain msgs = null;
+      if (protocol != null)
+        msgs = ((InternalEObject)protocol).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FOR_EACH__PROTOCOL, null, msgs);
+      if (newProtocol != null)
+        msgs = ((InternalEObject)newProtocol).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FOR_EACH__PROTOCOL, null, msgs);
+      msgs = basicSetProtocol(newProtocol, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FOR_EACH__PROTOCOL, newProtocol, newProtocol));
   }
 
   /**
@@ -299,8 +360,10 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
     {
       case MyDslPackage.FOR_EACH__LOOP_ROLE:
         return basicSetLoopRole(null, msgs);
-      case MyDslPackage.FOR_EACH__BRANCH:
-        return basicSetBranch(null, msgs);
+      case MyDslPackage.FOR_EACH__FOR_BODY:
+        return basicSetForBody(null, msgs);
+      case MyDslPackage.FOR_EACH__PROTOCOL:
+        return basicSetProtocol(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -323,8 +386,10 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
       case MyDslPackage.FOR_EACH__REF_ROLE:
         if (resolve) return getRefRole();
         return basicGetRefRole();
-      case MyDslPackage.FOR_EACH__BRANCH:
-        return getBranch();
+      case MyDslPackage.FOR_EACH__FOR_BODY:
+        return getForBody();
+      case MyDslPackage.FOR_EACH__PROTOCOL:
+        return getProtocol();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -348,8 +413,11 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
       case MyDslPackage.FOR_EACH__REF_ROLE:
         setRefRole((RoleOne)newValue);
         return;
-      case MyDslPackage.FOR_EACH__BRANCH:
-        setBranch((Protocol)newValue);
+      case MyDslPackage.FOR_EACH__FOR_BODY:
+        setForBody((Protocol)newValue);
+        return;
+      case MyDslPackage.FOR_EACH__PROTOCOL:
+        setProtocol((Protocol)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -374,8 +442,11 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
       case MyDslPackage.FOR_EACH__REF_ROLE:
         setRefRole((RoleOne)null);
         return;
-      case MyDslPackage.FOR_EACH__BRANCH:
-        setBranch((Protocol)null);
+      case MyDslPackage.FOR_EACH__FOR_BODY:
+        setForBody((Protocol)null);
+        return;
+      case MyDslPackage.FOR_EACH__PROTOCOL:
+        setProtocol((Protocol)null);
         return;
     }
     super.eUnset(featureID);
@@ -397,8 +468,10 @@ public class ForEachImpl extends MinimalEObjectImpl.Container implements ForEach
         return roleset != null;
       case MyDslPackage.FOR_EACH__REF_ROLE:
         return refRole != null;
-      case MyDslPackage.FOR_EACH__BRANCH:
-        return branch != null;
+      case MyDslPackage.FOR_EACH__FOR_BODY:
+        return forBody != null;
+      case MyDslPackage.FOR_EACH__PROTOCOL:
+        return protocol != null;
     }
     return super.eIsSet(featureID);
   }

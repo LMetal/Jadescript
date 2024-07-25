@@ -21,7 +21,6 @@ import org.xtext.globalTypes.myDsl.GlobalProtocol
 import org.xtext.globalTypes.myDsl.LocalProtocol
 import org.xtext.globalTypes.myDsl.RoleOne
 import org.xtext.globalTypes.myDsl.RoleSet
-import org.xtext.globalTypes.myDsl.ChoiceBranch
 
 /**
  * Generates code from your model files on save.
@@ -36,7 +35,7 @@ class MyDslGenerator extends AbstractGenerator {
 			var globalProtocol = model.protocol as GlobalProtocol
 			for(Role r : globalProtocol.getRoles().getRoles()){
 				System.out.println("LOCAL in " + r.getName());
-				fsa.generateFile('../src/local/local_'+r.getName()+'.jglobal', globalProtocol.project(r))
+				fsa.generateFile('../src/local/local_'+r.getName()+'.jglobal', '''here''')//globalProtocol.project(r))
 				System.out.println("END LOCAL on " + r.getName());		
 			}
 		} else {
@@ -48,7 +47,7 @@ class MyDslGenerator extends AbstractGenerator {
 		
 	}
 	
-	def CharSequence project(GlobalProtocol p, Role role)'''
+	/*def CharSequence project(GlobalProtocol p, Role role)'''
 		local protocol «p.protocolName» at «role.name»(«projectOn(p.roles, role)») {
 			«projectOn(p.protocol, role)»
 		}
@@ -116,5 +115,5 @@ class MyDslGenerator extends AbstractGenerator {
 	
 	def printPayload(Payload payload)'''
 		«IF payload !== null»
-			«FOR type: payload.types SEPARATOR ', '»«type»«ENDFOR»«ENDIF»'''
+			«FOR type: payload.types SEPARATOR ', '»«type»«ENDFOR»«ENDIF»'''*/
 }

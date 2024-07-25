@@ -10,6 +10,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
@@ -20,11 +22,13 @@ import org.xtext.globalTypes.services.MyDslGrammarAccess;
 public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected MyDslGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_MessageBase_LeftParenthesisRightParenthesisKeyword_1_1_or___LeftParenthesisKeyword_1_0_0_RightParenthesisKeyword_1_0_2__;
 	protected AbstractElementAlias match_ProtocolL_EndKeyword_2_q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (MyDslGrammarAccess) access;
+		match_MessageBase_LeftParenthesisRightParenthesisKeyword_1_1_or___LeftParenthesisKeyword_1_0_0_RightParenthesisKeyword_1_0_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getMessageBaseAccess().getLeftParenthesisKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getMessageBaseAccess().getRightParenthesisKeyword_1_0_2())), new TokenAlias(false, false, grammarAccess.getMessageBaseAccess().getLeftParenthesisRightParenthesisKeyword_1_1()));
 		match_ProtocolL_EndKeyword_2_q = new TokenAlias(false, true, grammarAccess.getProtocolLAccess().getEndKeyword_2());
 	}
 	
@@ -40,12 +44,28 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_ProtocolL_EndKeyword_2_q.equals(syntax))
+			if (match_MessageBase_LeftParenthesisRightParenthesisKeyword_1_1_or___LeftParenthesisKeyword_1_0_0_RightParenthesisKeyword_1_0_2__.equals(syntax))
+				emit_MessageBase_LeftParenthesisRightParenthesisKeyword_1_1_or___LeftParenthesisKeyword_1_0_0_RightParenthesisKeyword_1_0_2__(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ProtocolL_EndKeyword_2_q.equals(syntax))
 				emit_ProtocolL_EndKeyword_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     ('(' ')') | '()'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     messageType=ID (ambiguity) 'from' sender=[RoleOne|ID]
+	 
+	 * </pre>
+	 */
+	protected void emit_MessageBase_LeftParenthesisRightParenthesisKeyword_1_1_or___LeftParenthesisKeyword_1_0_0_RightParenthesisKeyword_1_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 	/**
 	 * <pre>
 	 * Ambiguous syntax:

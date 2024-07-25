@@ -87,6 +87,15 @@ public interface MyDslFactory extends EFactory
   Protocol createProtocol();
 
   /**
+   * Returns a new object of class '<em>End Protocol</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>End Protocol</em>'.
+   * @generated
+   */
+  EndProtocol createEndProtocol();
+
+  /**
    * Returns a new object of class '<em>Recursion</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -123,15 +132,6 @@ public interface MyDslFactory extends EFactory
   Choice createChoice();
 
   /**
-   * Returns a new object of class '<em>Choice Branch</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Choice Branch</em>'.
-   * @generated
-   */
-  ChoiceBranch createChoiceBranch();
-
-  /**
    * Returns a new object of class '<em>Message</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -139,6 +139,24 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   Message createMessage();
+
+  /**
+   * Returns a new object of class '<em>Message Base</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Message Base</em>'.
+   * @generated
+   */
+  MessageBase createMessageBase();
+
+  /**
+   * Returns a new object of class '<em>Message Quit</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Message Quit</em>'.
+   * @generated
+   */
+  MessageQuit createMessageQuit();
 
   /**
    * Returns a new object of class '<em>Payload</em>'.

@@ -24,9 +24,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//RoleOne"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Protocol">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="doesEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="begin" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EndProtocol">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Recursion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -41,27 +43,28 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roleset" eType="#//RoleSet"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refRole" eType="#//RoleOne"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="branch" eType="#//Protocol"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forBody" eType="#//Protocol"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//Protocol"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Choice">
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//RoleOne"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branches" upperBound="-1"
-        eType="#//ChoiceBranch" containment="true"/>
+        eType="#//Message" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ChoiceBranch">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="#//Message"
+  <eClassifiers xsi:type="ecore:EClass" name="Message">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sender" eType="#//RoleOne"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receiver" eType="#//Role"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageBase" eSuperTypes="#//Message">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="payload" eType="#//Payload"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//Protocol"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Message">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="payload" eType="#//Payload"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sender" eType="#//RoleOne"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="receiver" eType="#//Role"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageQuit" eSuperTypes="#//Message"/>
   <eClassifiers xsi:type="ecore:EClass" name="Payload">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="types" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

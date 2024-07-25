@@ -8,17 +8,16 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 import org.xtext.globalTypes.myDsl.Choice;
-import org.xtext.globalTypes.myDsl.ChoiceBranch;
 import org.xtext.globalTypes.myDsl.ChoiceBranchL;
 import org.xtext.globalTypes.myDsl.ChoiceL;
 import org.xtext.globalTypes.myDsl.ForEach;
 import org.xtext.globalTypes.myDsl.GlobalProtocol;
 import org.xtext.globalTypes.myDsl.LocalProtocol;
 import org.xtext.globalTypes.myDsl.Message;
+import org.xtext.globalTypes.myDsl.MessageBase;
 import org.xtext.globalTypes.myDsl.Model;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.ReceiverL;
@@ -37,11 +36,11 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		
 		@Check
 		public void choiceMessageFromChoiceAgent(Choice c) {
-			for(ChoiceBranch b: c.getBranches()) {
-				if(b.getMessage().getSender() != c.getRole()) {
+			for(Message m: c.getBranches()) {
+				if(m.getSender() != c.getRole()) {
 					error(
 						"Sender of message must be role making choice",
-						b.getMessage(),
+						m,
 						MyDslPackage.Literals.MESSAGE__SENDER
 					);
 				}
@@ -79,29 +78,28 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		
 		@Check
 		public void differentMessagesAtChoiceBranch(Choice c) {
-			var messageTypeMap = new HashMap<String, ChoiceBranch>();
+			var messageTypeMap = new HashMap<String, Message>();
 			
-			for(ChoiceBranch b: c.getBranches()) {
-				System.out.println(messageTypeMap);
-				if(messageTypeMap.containsKey(b.getMessage().getMessageType())) {
+			for(Message m: c.getBranches()) {
+				if(messageTypeMap.containsKey(m.getMessageType())) {
 					error("Messages must be different",
-							b,
-							MyDslPackage.Literals.CHOICE_BRANCH__MESSAGE);
+							m,
+							MyDslPackage.Literals.MESSAGE__MESSAGE_TYPE);
 					error("Messages must be different",
-							messageTypeMap.get(b.getMessage().getMessageType()),
-							MyDslPackage.Literals.CHOICE_BRANCH__MESSAGE);
+							messageTypeMap.get(m.getMessageType()),
+							MyDslPackage.Literals.MESSAGE__MESSAGE_TYPE);
 				} else {
-					messageTypeMap.put(b.getMessage().getMessageType(), b);
+					messageTypeMap.put(m.getMessageType(), m);
 				}
 			}
 		}
 		
 		@Check
 		public void noSelfMessage(Model global) {
-			for(Message m: EcoreUtil2.getAllContentsOfType(global, Message.class)) {
+			for(Message m: EcoreUtil2.getAllContentsOfType(global, MessageBase.class)) {
 				if(m.getSender() == m.getReceiver()) {
 				error(
-					"No self-message is allowed",
+					"No self-message is allowed [" + m.getSender() + " "+m.getReceiver() + "]",
 					m,
 					MyDslPackage.Literals.MESSAGE__SENDER
 				);
@@ -205,11 +203,11 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		
 		@Check
 		public void noNestedFor(ForEach f) {
-			List<ForEach> list = EcoreUtil2.getAllContentsOfType(f, ForEach.class);
+			List<ForEach> list = EcoreUtil2.getAllContentsOfType(f.getForBody(), ForEach.class);
 			if(!list.isEmpty()) {
 				error("Nested for are not allowed",
 						list.get(0),
-						MyDslPackage.Literals.FOR_EACH__BRANCH);
+						MyDslPackage.Literals.FOR_EACH__FOR_BODY);
 						
 			}
 		}

@@ -3,8 +3,6 @@
  */
 package org.xtext.globalTypes.myDsl;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -16,8 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.globalTypes.myDsl.Protocol#getActions <em>Actions</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.Protocol#getDoesEnd <em>Does End</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.Protocol#getBegin <em>Begin</em>}</li>
  * </ul>
  *
  * @see org.xtext.globalTypes.myDsl.MyDslPackage#getProtocol()
@@ -27,37 +24,25 @@ import org.eclipse.emf.ecore.EObject;
 public interface Protocol extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Actions</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
+   * Returns the value of the '<em><b>Begin</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Actions</em>' containment reference list.
-   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getProtocol_Actions()
+   * @return the value of the '<em>Begin</em>' containment reference.
+   * @see #setBegin(EObject)
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getProtocol_Begin()
    * @model containment="true"
    * @generated
    */
-  EList<EObject> getActions();
+  EObject getBegin();
 
   /**
-   * Returns the value of the '<em><b>Does End</b></em>' attribute.
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.Protocol#getBegin <em>Begin</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Does End</em>' attribute.
-   * @see #setDoesEnd(String)
-   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getProtocol_DoesEnd()
-   * @model
+   * @param value the new value of the '<em>Begin</em>' containment reference.
+   * @see #getBegin()
    * @generated
    */
-  String getDoesEnd();
-
-  /**
-   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.Protocol#getDoesEnd <em>Does End</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Does End</em>' attribute.
-   * @see #getDoesEnd()
-   * @generated
-   */
-  void setDoesEnd(String value);
+  void setBegin(EObject value);
 
 } // Protocol

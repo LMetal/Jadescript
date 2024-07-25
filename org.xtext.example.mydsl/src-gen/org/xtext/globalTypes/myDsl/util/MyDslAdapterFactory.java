@@ -111,6 +111,11 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createProtocolAdapter();
       }
       @Override
+      public Adapter caseEndProtocol(EndProtocol object)
+      {
+        return createEndProtocolAdapter();
+      }
+      @Override
       public Adapter caseRecursion(Recursion object)
       {
         return createRecursionAdapter();
@@ -131,14 +136,19 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createChoiceAdapter();
       }
       @Override
-      public Adapter caseChoiceBranch(ChoiceBranch object)
-      {
-        return createChoiceBranchAdapter();
-      }
-      @Override
       public Adapter caseMessage(Message object)
       {
         return createMessageAdapter();
+      }
+      @Override
+      public Adapter caseMessageBase(MessageBase object)
+      {
+        return createMessageBaseAdapter();
+      }
+      @Override
+      public Adapter caseMessageQuit(MessageQuit object)
+      {
+        return createMessageQuitAdapter();
       }
       @Override
       public Adapter casePayload(Payload object)
@@ -323,6 +333,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.EndProtocol <em>End Protocol</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.globalTypes.myDsl.EndProtocol
+   * @generated
+   */
+  public Adapter createEndProtocolAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.Recursion <em>Recursion</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -383,21 +408,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.ChoiceBranch <em>Choice Branch</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.globalTypes.myDsl.ChoiceBranch
-   * @generated
-   */
-  public Adapter createChoiceBranchAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.Message <em>Message</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -408,6 +418,36 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMessageAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.MessageBase <em>Message Base</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.globalTypes.myDsl.MessageBase
+   * @generated
+   */
+  public Adapter createMessageBaseAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.MessageQuit <em>Message Quit</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.globalTypes.myDsl.MessageQuit
+   * @generated
+   */
+  public Adapter createMessageQuitAdapter()
   {
     return null;
   }

@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.Message#getMessageType <em>Message Type</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.Message#getPayload <em>Payload</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.Message#getSender <em>Sender</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.Message#getReceiver <em>Receiver</em>}</li>
  * </ul>
@@ -47,28 +46,6 @@ public interface Message extends EObject
    * @generated
    */
   void setMessageType(String value);
-
-  /**
-   * Returns the value of the '<em><b>Payload</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Payload</em>' containment reference.
-   * @see #setPayload(Payload)
-   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getMessage_Payload()
-   * @model containment="true"
-   * @generated
-   */
-  Payload getPayload();
-
-  /**
-   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.Message#getPayload <em>Payload</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Payload</em>' containment reference.
-   * @see #getPayload()
-   * @generated
-   */
-  void setPayload(Payload value);
 
   /**
    * Returns the value of the '<em><b>Sender</b></em>' reference.

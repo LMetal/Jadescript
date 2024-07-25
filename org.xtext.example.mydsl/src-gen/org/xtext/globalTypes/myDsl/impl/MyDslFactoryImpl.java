@@ -72,12 +72,14 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.ROLE_ONE: return createRoleOne();
       case MyDslPackage.ROLE_SET: return createRoleSet();
       case MyDslPackage.PROTOCOL: return createProtocol();
+      case MyDslPackage.END_PROTOCOL: return createEndProtocol();
       case MyDslPackage.RECURSION: return createRecursion();
       case MyDslPackage.CLOSE_RECURSION: return createCloseRecursion();
       case MyDslPackage.FOR_EACH: return createForEach();
       case MyDslPackage.CHOICE: return createChoice();
-      case MyDslPackage.CHOICE_BRANCH: return createChoiceBranch();
       case MyDslPackage.MESSAGE: return createMessage();
+      case MyDslPackage.MESSAGE_BASE: return createMessageBase();
+      case MyDslPackage.MESSAGE_QUIT: return createMessageQuit();
       case MyDslPackage.PAYLOAD: return createPayload();
       case MyDslPackage.LOCAL_PROTOCOL: return createLocalProtocol();
       case MyDslPackage.PROTOCOL_L: return createProtocolL();
@@ -184,6 +186,18 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
+  public EndProtocol createEndProtocol()
+  {
+    EndProtocolImpl endProtocol = new EndProtocolImpl();
+    return endProtocol;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Recursion createRecursion()
   {
     RecursionImpl recursion = new RecursionImpl();
@@ -232,10 +246,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public ChoiceBranch createChoiceBranch()
+  public Message createMessage()
   {
-    ChoiceBranchImpl choiceBranch = new ChoiceBranchImpl();
-    return choiceBranch;
+    MessageImpl message = new MessageImpl();
+    return message;
   }
 
   /**
@@ -244,10 +258,22 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public Message createMessage()
+  public MessageBase createMessageBase()
   {
-    MessageImpl message = new MessageImpl();
-    return message;
+    MessageBaseImpl messageBase = new MessageBaseImpl();
+    return messageBase;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public MessageQuit createMessageQuit()
+  {
+    MessageQuitImpl messageQuit = new MessageQuitImpl();
+    return messageQuit;
   }
 
   /**

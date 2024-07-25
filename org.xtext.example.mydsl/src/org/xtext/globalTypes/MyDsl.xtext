@@ -28,8 +28,13 @@ RoleSet:
     
 
 Protocol:
-	{Protocol} (actions+=(Message | Choice | Recursion | ForEach))* (doesEnd='End')? | actions+=(CloseRecursion)
+	{Protocol} begin = (Choice | Message | Recursion | ForEach | CloseRecursion | EndProtocol)
 ;
+
+EndProtocol:
+	end='End'
+;
+
 
 Recursion:
 	'rec' name=ID ':''{'
@@ -37,36 +42,43 @@ Recursion:
 	'}'
 ;
 
-CloseRecursion:
+CloseRecursion: //terminale
 	'loop' recursionVariable=[Recursion | ID]
 ;
 
 ForEach:
 
 	'for' loopRole=RoleOne ':' '<'roleset=[RoleSet | ID] ',' refRole = [RoleOne | ID] '>' '{'
-		branch=Protocol
+		forBody=Protocol
 	'}'';'
+	protocol = Protocol
 ;
 
 Choice:
 	'choice' 'at' role=[RoleOne | ID] '{'
-		branches+=ChoiceBranch
+		branches+=Message
 	'}' ('or' '{'
-		branches+=ChoiceBranch
+		branches+=Message
 	'}')*
 ;
 
-ChoiceBranch:
-	message=Message
-	protocol=Protocol
+Message:
+	MessageBase |
+	MessageQuit
 ;
 
-Message:
-	messageType=ID '(' payload=Payload? ')' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
+MessageBase:
+	messageType=ID ('(' (payload=Payload)? ')' | '()') 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
+	protocol = Protocol
+;
+
+
+MessageQuit: //terminale
+	messageType = 'QUIT' '()' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
 ;
 
 Payload:
-	{Payload} (types+=Type (','types+=Type)*) | types+=ID
+	types+=Type (','types+=Type)*
 ;
 
 LocalProtocol:

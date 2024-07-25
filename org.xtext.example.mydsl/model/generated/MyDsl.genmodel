@@ -25,8 +25,10 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//RoleSet/ref"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Protocol">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Protocol/actions"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Protocol/doesEnd"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Protocol/begin"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//EndProtocol">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//EndProtocol/end"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Recursion">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Recursion/name"/>
@@ -39,22 +41,23 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ForEach/loopRole"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ForEach/roleset"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ForEach/refRole"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ForEach/branch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ForEach/forBody"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ForEach/protocol"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Choice">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Choice/role"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Choice/branches"/>
     </genClasses>
-    <genClasses ecoreClass="MyDsl.ecore#//ChoiceBranch">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ChoiceBranch/message"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ChoiceBranch/protocol"/>
-    </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Message">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Message/messageType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Message/payload"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Message/sender"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Message/receiver"/>
     </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//MessageBase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//MessageBase/payload"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//MessageBase/protocol"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//MessageQuit"/>
     <genClasses ecoreClass="MyDsl.ecore#//Payload">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Payload/types"/>
     </genClasses>

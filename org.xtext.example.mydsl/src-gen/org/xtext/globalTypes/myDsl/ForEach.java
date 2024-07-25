@@ -17,7 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getLoopRole <em>Loop Role</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getRoleset <em>Roleset</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getRefRole <em>Ref Role</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getBranch <em>Branch</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getForBody <em>For Body</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.ForEach#getProtocol <em>Protocol</em>}</li>
  * </ul>
  *
  * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEach()
@@ -93,25 +94,47 @@ public interface ForEach extends EObject
   void setRefRole(RoleOne value);
 
   /**
-   * Returns the value of the '<em><b>Branch</b></em>' containment reference.
+   * Returns the value of the '<em><b>For Body</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Branch</em>' containment reference.
-   * @see #setBranch(Protocol)
-   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEach_Branch()
+   * @return the value of the '<em>For Body</em>' containment reference.
+   * @see #setForBody(Protocol)
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEach_ForBody()
    * @model containment="true"
    * @generated
    */
-  Protocol getBranch();
+  Protocol getForBody();
 
   /**
-   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEach#getBranch <em>Branch</em>}' containment reference.
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEach#getForBody <em>For Body</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Branch</em>' containment reference.
-   * @see #getBranch()
+   * @param value the new value of the '<em>For Body</em>' containment reference.
+   * @see #getForBody()
    * @generated
    */
-  void setBranch(Protocol value);
+  void setForBody(Protocol value);
+
+  /**
+   * Returns the value of the '<em><b>Protocol</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Protocol</em>' containment reference.
+   * @see #setProtocol(Protocol)
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getForEach_Protocol()
+   * @model containment="true"
+   * @generated
+   */
+  Protocol getProtocol();
+
+  /**
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.ForEach#getProtocol <em>Protocol</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Protocol</em>' containment reference.
+   * @see #getProtocol()
+   * @generated
+   */
+  void setProtocol(Protocol value);
 
 } // ForEach
