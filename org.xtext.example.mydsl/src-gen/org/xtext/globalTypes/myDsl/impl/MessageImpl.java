@@ -4,7 +4,6 @@
 package org.xtext.globalTypes.myDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -14,7 +13,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.globalTypes.myDsl.Message;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
-import org.xtext.globalTypes.myDsl.Payload;
 import org.xtext.globalTypes.myDsl.Role;
 import org.xtext.globalTypes.myDsl.RoleOne;
 
@@ -27,7 +25,6 @@ import org.xtext.globalTypes.myDsl.RoleOne;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.MessageImpl#getMessageType <em>Message Type</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.impl.MessageImpl#getPayload <em>Payload</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.MessageImpl#getSender <em>Sender</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.MessageImpl#getReceiver <em>Receiver</em>}</li>
  * </ul>
@@ -55,16 +52,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * @ordered
    */
   protected String messageType = MESSAGE_TYPE_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getPayload() <em>Payload</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPayload()
-   * @generated
-   * @ordered
-   */
-  protected Payload payload;
 
   /**
    * The cached value of the '{@link #getSender() <em>Sender</em>}' reference.
@@ -130,56 +117,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
     messageType = newMessageType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MESSAGE__MESSAGE_TYPE, oldMessageType, messageType));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Payload getPayload()
-  {
-    return payload;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetPayload(Payload newPayload, NotificationChain msgs)
-  {
-    Payload oldPayload = payload;
-    payload = newPayload;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.MESSAGE__PAYLOAD, oldPayload, newPayload);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setPayload(Payload newPayload)
-  {
-    if (newPayload != payload)
-    {
-      NotificationChain msgs = null;
-      if (payload != null)
-        msgs = ((InternalEObject)payload).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.MESSAGE__PAYLOAD, null, msgs);
-      if (newPayload != null)
-        msgs = ((InternalEObject)newPayload).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.MESSAGE__PAYLOAD, null, msgs);
-      msgs = basicSetPayload(newPayload, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MESSAGE__PAYLOAD, newPayload, newPayload));
   }
 
   /**
@@ -278,30 +215,12 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case MyDslPackage.MESSAGE__PAYLOAD:
-        return basicSetPayload(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
       case MyDslPackage.MESSAGE__MESSAGE_TYPE:
         return getMessageType();
-      case MyDslPackage.MESSAGE__PAYLOAD:
-        return getPayload();
       case MyDslPackage.MESSAGE__SENDER:
         if (resolve) return getSender();
         return basicGetSender();
@@ -324,9 +243,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
     {
       case MyDslPackage.MESSAGE__MESSAGE_TYPE:
         setMessageType((String)newValue);
-        return;
-      case MyDslPackage.MESSAGE__PAYLOAD:
-        setPayload((Payload)newValue);
         return;
       case MyDslPackage.MESSAGE__SENDER:
         setSender((RoleOne)newValue);
@@ -351,9 +267,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
       case MyDslPackage.MESSAGE__MESSAGE_TYPE:
         setMessageType(MESSAGE_TYPE_EDEFAULT);
         return;
-      case MyDslPackage.MESSAGE__PAYLOAD:
-        setPayload((Payload)null);
-        return;
       case MyDslPackage.MESSAGE__SENDER:
         setSender((RoleOne)null);
         return;
@@ -376,8 +289,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
     {
       case MyDslPackage.MESSAGE__MESSAGE_TYPE:
         return MESSAGE_TYPE_EDEFAULT == null ? messageType != null : !MESSAGE_TYPE_EDEFAULT.equals(messageType);
-      case MyDslPackage.MESSAGE__PAYLOAD:
-        return payload != null;
       case MyDslPackage.MESSAGE__SENDER:
         return sender != null;
       case MyDslPackage.MESSAGE__RECEIVER:

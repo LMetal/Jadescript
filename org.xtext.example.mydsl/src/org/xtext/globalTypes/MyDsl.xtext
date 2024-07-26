@@ -7,9 +7,19 @@ Model:
 ;
 
 GlobalProtocol:
+	/*
+	 * 	As defined in ICTCS Paper "Global Types for Agent Interaction Protocols"
+	 	global protocol name(p;⟨R, p⟩) = G
+		where G is defined by:
+		G ::= p → Q { ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼 	Choice of Interactions
+		| muX.G | X 				Recursion and Variable
+		| End 						End of protocol
+		| for x:⟨R, q⟩ G1; G2 		Protocol for participants in a role set
+		| x → q ℓQuit 				Exit from role set
+	 */
 	'global' 'protocol' protocolName=ID '(' roles=Roles '){'protocol=Protocol'}'
 	;
-	
+
 Roles:
 	roles+=Role (',' roles+=Role)*
 ;
@@ -28,8 +38,13 @@ RoleSet:
     
 
 Protocol:
-	{Protocol} (actions+=(Message | Choice | Recursion | ForEach))* (doesEnd='End')? | actions+=(CloseRecursion)
+	begin = (Choice | Message | Recursion | ForEach | CloseRecursion | EndProtocol)
 ;
+
+EndProtocol:
+	end='End'
+;
+
 
 Recursion:
 	'rec' name=ID ':''{'
@@ -37,45 +52,52 @@ Recursion:
 	'}'
 ;
 
-CloseRecursion:
+CloseRecursion: //terminale
 	'loop' recursionVariable=[Recursion | ID]
 ;
 
 ForEach:
 
 	'for' loopRole=RoleOne ':' '<'roleset=[RoleSet | ID] ',' refRole = [RoleOne | ID] '>' '{'
-		branch=Protocol
+		forBody=Protocol
 	'}'';'
+	protocol = Protocol
 ;
 
 Choice:
 	'choice' 'at' role=[RoleOne | ID] '{'
-		branches+=ChoiceBranch
+		branches+=Message
 	'}' ('or' '{'
-		branches+=ChoiceBranch
+		branches+=Message
 	'}')*
 ;
 
-ChoiceBranch:
-	message=Message
-	protocol=Protocol
+Message:
+	MessageNormal |
+	MessageQuit
 ;
 
-Message:
-	messageType=ID '(' payload=Payload? ')' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
+MessageNormal:
+	messageType=ID ('(' (payload=Payload)? ')' | '()') 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
+	protocol = Protocol
+;
+
+
+MessageQuit: //terminale
+	messageType = 'QUIT' '()' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] 
 ;
 
 Payload:
-	{Payload} (types+=Type (','types+=Type)*) | types+=ID
+	types+=Type (','types+=Type)*
 ;
 
 LocalProtocol:
-	'local' 'protocol' protocolName=ID 'at' projectedRole=ID '(' roles=Roles ')' '{'protocol=ProtocolL'}'
+	'local' 'protocol' protocolName=ID 'at' projectedRole=Role '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
 ;
 
 
 ProtocolL:
-	{ProtocolL} (actions+=(MessageL | ChoiceL | ForEachL | RecursionL | CloseRecursion))* ('End')?
+	begin = (MessageL | ChoiceL | ForEachL | RecursionL | CloseRecursionL | EndProtocol)
 ;
 
 RecursionL:
@@ -84,8 +106,22 @@ RecursionL:
 	'}'
 ;
 
+CloseRecursionL: //terminale
+	'loop' recursionVariable=[RecursionL | ID]
+;
+
 MessageL:
-	messageType=ID '(' payload=Payload? ')' (sendReceive=MessageType) '.'
+	MessageNormalL |
+	MessageQuitL
+;
+
+MessageNormalL:
+	messageType=ID ('(' payload=Payload? ')'| '()') (sendReceive=MessageType) '.'
+	protocol = ProtocolL
+;
+
+MessageQuitL:
+	messageType='QUIT' '()' (sendReceive=MessageType)
 ;
 
 MessageType:
@@ -102,21 +138,18 @@ ReceiverL:
 
 ChoiceL:
 	'choice' 'at' roleMakingChoice=[Role | ID] '{'
-		branches+=ChoiceBranchL
+		branches+=MessageL
 	'}' ('or' '{'
-		branches+=ChoiceBranchL
+		branches+=MessageL
 	'}')*
 ;
 
-ChoiceBranchL:
-	{ChoiceBranchL} 'End' | message=MessageL
-	protocol=ProtocolL
-;
 
 ForEachL:
 	'foreach' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
 		branch=ProtocolL
-	'}'
+	'}'';'
+	protocol = ProtocolL
 ;
 
 

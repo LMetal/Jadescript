@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.xtext.globalTypes.myDsl.MessageL;
 import org.xtext.globalTypes.myDsl.MessageType;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
-import org.xtext.globalTypes.myDsl.Payload;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +25,6 @@ import org.xtext.globalTypes.myDsl.Payload;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.MessageLImpl#getMessageType <em>Message Type</em>}</li>
- *   <li>{@link org.xtext.globalTypes.myDsl.impl.MessageLImpl#getPayload <em>Payload</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.MessageLImpl#getSendReceive <em>Send Receive</em>}</li>
  * </ul>
  *
@@ -53,16 +51,6 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
    * @ordered
    */
   protected String messageType = MESSAGE_TYPE_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getPayload() <em>Payload</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPayload()
-   * @generated
-   * @ordered
-   */
-  protected Payload payload;
 
   /**
    * The cached value of the '{@link #getSendReceive() <em>Send Receive</em>}' containment reference.
@@ -126,56 +114,6 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
    * @generated
    */
   @Override
-  public Payload getPayload()
-  {
-    return payload;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetPayload(Payload newPayload, NotificationChain msgs)
-  {
-    Payload oldPayload = payload;
-    payload = newPayload;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.MESSAGE_L__PAYLOAD, oldPayload, newPayload);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setPayload(Payload newPayload)
-  {
-    if (newPayload != payload)
-    {
-      NotificationChain msgs = null;
-      if (payload != null)
-        msgs = ((InternalEObject)payload).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.MESSAGE_L__PAYLOAD, null, msgs);
-      if (newPayload != null)
-        msgs = ((InternalEObject)newPayload).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.MESSAGE_L__PAYLOAD, null, msgs);
-      msgs = basicSetPayload(newPayload, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MESSAGE_L__PAYLOAD, newPayload, newPayload));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public MessageType getSendReceive()
   {
     return sendReceive;
@@ -230,8 +168,6 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
   {
     switch (featureID)
     {
-      case MyDslPackage.MESSAGE_L__PAYLOAD:
-        return basicSetPayload(null, msgs);
       case MyDslPackage.MESSAGE_L__SEND_RECEIVE:
         return basicSetSendReceive(null, msgs);
     }
@@ -250,8 +186,6 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
     {
       case MyDslPackage.MESSAGE_L__MESSAGE_TYPE:
         return getMessageType();
-      case MyDslPackage.MESSAGE_L__PAYLOAD:
-        return getPayload();
       case MyDslPackage.MESSAGE_L__SEND_RECEIVE:
         return getSendReceive();
     }
@@ -270,9 +204,6 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
     {
       case MyDslPackage.MESSAGE_L__MESSAGE_TYPE:
         setMessageType((String)newValue);
-        return;
-      case MyDslPackage.MESSAGE_L__PAYLOAD:
-        setPayload((Payload)newValue);
         return;
       case MyDslPackage.MESSAGE_L__SEND_RECEIVE:
         setSendReceive((MessageType)newValue);
@@ -294,9 +225,6 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
       case MyDslPackage.MESSAGE_L__MESSAGE_TYPE:
         setMessageType(MESSAGE_TYPE_EDEFAULT);
         return;
-      case MyDslPackage.MESSAGE_L__PAYLOAD:
-        setPayload((Payload)null);
-        return;
       case MyDslPackage.MESSAGE_L__SEND_RECEIVE:
         setSendReceive((MessageType)null);
         return;
@@ -316,8 +244,6 @@ public class MessageLImpl extends MinimalEObjectImpl.Container implements Messag
     {
       case MyDslPackage.MESSAGE_L__MESSAGE_TYPE:
         return MESSAGE_TYPE_EDEFAULT == null ? messageType != null : !MESSAGE_TYPE_EDEFAULT.equals(messageType);
-      case MyDslPackage.MESSAGE_L__PAYLOAD:
-        return payload != null;
       case MyDslPackage.MESSAGE_L__SEND_RECEIVE:
         return sendReceive != null;
     }

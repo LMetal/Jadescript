@@ -3,20 +3,15 @@
  */
 package org.xtext.globalTypes.myDsl.impl;
 
-import java.util.Collection;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.ProtocolL;
@@ -29,7 +24,7 @@ import org.xtext.globalTypes.myDsl.ProtocolL;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.globalTypes.myDsl.impl.ProtocolLImpl#getActions <em>Actions</em>}</li>
+ *   <li>{@link org.xtext.globalTypes.myDsl.impl.ProtocolLImpl#getBegin <em>Begin</em>}</li>
  * </ul>
  *
  * @generated
@@ -37,14 +32,14 @@ import org.xtext.globalTypes.myDsl.ProtocolL;
 public class ProtocolLImpl extends MinimalEObjectImpl.Container implements ProtocolL
 {
   /**
-   * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
+   * The cached value of the '{@link #getBegin() <em>Begin</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getActions()
+   * @see #getBegin()
    * @generated
    * @ordered
    */
-  protected EList<EObject> actions;
+  protected EObject begin;
 
   /**
    * <!-- begin-user-doc -->
@@ -73,13 +68,48 @@ public class ProtocolLImpl extends MinimalEObjectImpl.Container implements Proto
    * @generated
    */
   @Override
-  public EList<EObject> getActions()
+  public EObject getBegin()
   {
-    if (actions == null)
+    return begin;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetBegin(EObject newBegin, NotificationChain msgs)
+  {
+    EObject oldBegin = begin;
+    begin = newBegin;
+    if (eNotificationRequired())
     {
-      actions = new EObjectContainmentEList<EObject>(EObject.class, this, MyDslPackage.PROTOCOL_L__ACTIONS);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.PROTOCOL_L__BEGIN, oldBegin, newBegin);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return actions;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setBegin(EObject newBegin)
+  {
+    if (newBegin != begin)
+    {
+      NotificationChain msgs = null;
+      if (begin != null)
+        msgs = ((InternalEObject)begin).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.PROTOCOL_L__BEGIN, null, msgs);
+      if (newBegin != null)
+        msgs = ((InternalEObject)newBegin).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.PROTOCOL_L__BEGIN, null, msgs);
+      msgs = basicSetBegin(newBegin, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.PROTOCOL_L__BEGIN, newBegin, newBegin));
   }
 
   /**
@@ -92,8 +122,8 @@ public class ProtocolLImpl extends MinimalEObjectImpl.Container implements Proto
   {
     switch (featureID)
     {
-      case MyDslPackage.PROTOCOL_L__ACTIONS:
-        return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.PROTOCOL_L__BEGIN:
+        return basicSetBegin(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,8 +138,8 @@ public class ProtocolLImpl extends MinimalEObjectImpl.Container implements Proto
   {
     switch (featureID)
     {
-      case MyDslPackage.PROTOCOL_L__ACTIONS:
-        return getActions();
+      case MyDslPackage.PROTOCOL_L__BEGIN:
+        return getBegin();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,15 +149,13 @@ public class ProtocolLImpl extends MinimalEObjectImpl.Container implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case MyDslPackage.PROTOCOL_L__ACTIONS:
-        getActions().clear();
-        getActions().addAll((Collection<? extends EObject>)newValue);
+      case MyDslPackage.PROTOCOL_L__BEGIN:
+        setBegin((EObject)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +171,8 @@ public class ProtocolLImpl extends MinimalEObjectImpl.Container implements Proto
   {
     switch (featureID)
     {
-      case MyDslPackage.PROTOCOL_L__ACTIONS:
-        getActions().clear();
+      case MyDslPackage.PROTOCOL_L__BEGIN:
+        setBegin((EObject)null);
         return;
     }
     super.eUnset(featureID);
@@ -160,8 +188,8 @@ public class ProtocolLImpl extends MinimalEObjectImpl.Container implements Proto
   {
     switch (featureID)
     {
-      case MyDslPackage.PROTOCOL_L__ACTIONS:
-        return actions != null && !actions.isEmpty();
+      case MyDslPackage.PROTOCOL_L__BEGIN:
+        return begin != null;
     }
     return super.eIsSet(featureID);
   }

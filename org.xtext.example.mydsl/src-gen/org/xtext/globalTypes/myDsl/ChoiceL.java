@@ -50,7 +50,7 @@ public interface ChoiceL extends EObject
 
   /**
    * Returns the value of the '<em><b>Branches</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.globalTypes.myDsl.ChoiceBranchL}.
+   * The list contents are of type {@link org.xtext.globalTypes.myDsl.MessageL}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Branches</em>' containment reference list.
@@ -58,6 +58,6 @@ public interface ChoiceL extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<ChoiceBranchL> getBranches();
+  EList<MessageL> getBranches();
 
 } // ChoiceL

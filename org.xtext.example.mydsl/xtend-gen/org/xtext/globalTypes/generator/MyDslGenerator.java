@@ -17,12 +17,13 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.xtext.globalTypes.myDsl.Choice;
-import org.xtext.globalTypes.myDsl.ChoiceBranch;
 import org.xtext.globalTypes.myDsl.CloseRecursion;
+import org.xtext.globalTypes.myDsl.EndProtocol;
 import org.xtext.globalTypes.myDsl.ForEach;
 import org.xtext.globalTypes.myDsl.GlobalProtocol;
 import org.xtext.globalTypes.myDsl.LocalProtocol;
 import org.xtext.globalTypes.myDsl.Message;
+import org.xtext.globalTypes.myDsl.MessageNormal;
 import org.xtext.globalTypes.myDsl.Model;
 import org.xtext.globalTypes.myDsl.Payload;
 import org.xtext.globalTypes.myDsl.Protocol;
@@ -66,7 +67,7 @@ public class MyDslGenerator extends AbstractGenerator {
       EObject _protocol_2 = model.getProtocol();
       LocalProtocol localProtocol = ((LocalProtocol) _protocol_2);
       System.out.println("JADE");
-      String _projectedRole = localProtocol.getProjectedRole();
+      Role _projectedRole = localProtocol.getProjectedRole();
       String _plus = ("jade/jade" + _projectedRole);
       String _plus_1 = (_plus + ".txt");
       StringConcatenation _builder = new StringConcatenation();
@@ -81,16 +82,16 @@ public class MyDslGenerator extends AbstractGenerator {
     String _protocolName = p.getProtocolName();
     _builder.append(_protocolName);
     _builder.append(" at ");
-    String _name = role.getName();
-    _builder.append(_name);
-    _builder.append("(");
-    CharSequence _projectOn = this.projectOn(p.getRoles(), role);
+    CharSequence _projectOn = this.projectOn(role, role);
     _builder.append(_projectOn);
+    _builder.append("(");
+    CharSequence _projectOn_1 = this.projectOn(p.getRoles(), role);
+    _builder.append(_projectOn_1);
     _builder.append(") {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    CharSequence _projectOn_1 = this.projectOn(p.getProtocol(), role);
-    _builder.append(_projectOn_1, "\t");
+    CharSequence _projectOn_2 = this.projectOn(p.getProtocol(), role);
+    _builder.append(_projectOn_2, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
@@ -99,21 +100,12 @@ public class MyDslGenerator extends AbstractGenerator {
 
   protected CharSequence _projectOn(final Protocol protocol, final Role role) {
     StringConcatenation _builder = new StringConcatenation();
-    {
-      EList<EObject> _actions = protocol.getActions();
-      for(final EObject a : _actions) {
-        Object _projectOn = this.projectOn(a, role);
-        _builder.append(_projectOn);
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      String _doesEnd = protocol.getDoesEnd();
-      boolean _equals = Objects.equal(_doesEnd, "End");
-      if (_equals) {
-        _builder.append("End");
-      }
-    }
+    String _name = role.getName();
+    String _plus = ("Project on here " + _name);
+    System.out.println(_plus);
+    _builder.newLineIfNotEmpty();
+    Object _projectOn = this.projectOn(protocol.getBegin(), role);
+    _builder.append(_projectOn);
     return _builder;
   }
 
@@ -158,39 +150,77 @@ public class MyDslGenerator extends AbstractGenerator {
     return _builder;
   }
 
+  /**
+   * projection of a message on a role with differentiation between normal messages
+   * and quit messages. In the first case the protocol continues.
+   * 
+   * m: Message (superclass of MessageNormal and MessageQuit)
+   * r: role to project on
+   */
   protected CharSequence _projectOn(final Message m, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      String _name = m.getSender().getName();
-      String _name_1 = r.getName();
-      boolean _equals = Objects.equal(_name, _name_1);
-      if (_equals) {
-        String _messageType = m.getMessageType();
-        _builder.append(_messageType);
-        _builder.append("(");
-        CharSequence _printPayload = this.printPayload(m.getPayload());
-        _builder.append(_printPayload);
-        _builder.append(") to ");
-        String _name_2 = m.getReceiver().getName();
-        _builder.append(_name_2);
-        _builder.append(".");
+      if ((m instanceof MessageNormal)) {
+        {
+          String _name = ((MessageNormal)m).getSender().getName();
+          String _name_1 = r.getName();
+          boolean _equals = Objects.equal(_name, _name_1);
+          if (_equals) {
+            String _messageType = ((MessageNormal)m).getMessageType();
+            _builder.append(_messageType);
+            _builder.append("(");
+            CharSequence _printPayload = this.printPayload(((MessageNormal)m).getPayload());
+            _builder.append(_printPayload);
+            _builder.append(") to ");
+            String _name_2 = ((MessageNormal)m).getReceiver().getName();
+            _builder.append(_name_2);
+            _builder.append(".");
+            _builder.newLineIfNotEmpty();
+          } else {
+            {
+              String _name_3 = ((MessageNormal)m).getReceiver().getName();
+              String _name_4 = r.getName();
+              boolean _equals_1 = Objects.equal(_name_3, _name_4);
+              if (_equals_1) {
+                String _messageType_1 = ((MessageNormal)m).getMessageType();
+                _builder.append(_messageType_1);
+                _builder.append("(");
+                CharSequence _printPayload_1 = this.printPayload(((MessageNormal)m).getPayload());
+                _builder.append(_printPayload_1);
+                _builder.append(") from ");
+                String _name_5 = ((MessageNormal)m).getSender().getName();
+                _builder.append(_name_5);
+                _builder.append(".");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
+        Object _projectOn = this.projectOn(((MessageNormal)m).getProtocol(), r);
+        _builder.append(_projectOn);
         _builder.newLineIfNotEmpty();
       } else {
         {
-          String _name_3 = m.getReceiver().getName();
-          String _name_4 = r.getName();
-          boolean _equals_1 = Objects.equal(_name_3, _name_4);
-          if (_equals_1) {
-            String _messageType_1 = m.getMessageType();
-            _builder.append(_messageType_1);
-            _builder.append("(");
-            CharSequence _printPayload_1 = this.printPayload(m.getPayload());
-            _builder.append(_printPayload_1);
-            _builder.append(") from ");
-            String _name_5 = m.getSender().getName();
-            _builder.append(_name_5);
-            _builder.append(".");
+          String _name_6 = m.getSender().getName();
+          String _name_7 = r.getName();
+          boolean _equals_2 = Objects.equal(_name_6, _name_7);
+          if (_equals_2) {
+            _builder.append("QUIT() to ");
+            String _name_8 = m.getReceiver().getName();
+            _builder.append(_name_8);
             _builder.newLineIfNotEmpty();
+          } else {
+            {
+              String _name_9 = m.getReceiver().getName();
+              String _name_10 = r.getName();
+              boolean _equals_3 = Objects.equal(_name_9, _name_10);
+              if (_equals_3) {
+                _builder.append("QUIT() from ");
+                String _name_11 = m.getSender().getName();
+                _builder.append(_name_11);
+                _builder.newLineIfNotEmpty();
+              }
+            }
           }
         }
       }
@@ -227,17 +257,6 @@ public class MyDslGenerator extends AbstractGenerator {
     return _builder;
   }
 
-  protected CharSequence _projectOn(final ChoiceBranch branch, final Role r) {
-    StringConcatenation _builder = new StringConcatenation();
-    Object _projectOn = this.projectOn(branch.getMessage(), r);
-    _builder.append(_projectOn);
-    _builder.newLineIfNotEmpty();
-    Object _projectOn_1 = this.projectOn(branch.getProtocol(), r);
-    _builder.append(_projectOn_1);
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-
   protected CharSequence _projectOn(final Recursion rec, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("rec ");
@@ -269,8 +288,10 @@ public class MyDslGenerator extends AbstractGenerator {
       RoleSet _roleset = each.getRoleset();
       boolean _equals = Objects.equal(_roleset, r);
       if (_equals) {
-        Object _projectOn = this.projectOn(each.getBranch(), each.getLoopRole());
-        _builder.append(_projectOn);
+        System.out.println("seq foreach start");
+        _builder.newLineIfNotEmpty();
+        CharSequence _seqOn = this.seqOn(each.getForBody(), each.getLoopRole(), each.getRoleset(), each.getProtocol());
+        _builder.append(_seqOn);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -278,6 +299,8 @@ public class MyDslGenerator extends AbstractGenerator {
       RoleOne _refRole = each.getRefRole();
       boolean _equals_1 = Objects.equal(_refRole, r);
       if (_equals_1) {
+        System.out.println("project foreach start");
+        _builder.newLineIfNotEmpty();
         _builder.append("foreach role ");
         String _name = each.getLoopRole().getName();
         _builder.append(_name);
@@ -290,14 +313,182 @@ public class MyDslGenerator extends AbstractGenerator {
         _builder.append(">{");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        Object _projectOn_1 = this.projectOn(each.getBranch(), r);
-        _builder.append(_projectOn_1, "\t");
+        Object _projectOn = this.projectOn(each.getForBody(), r);
+        _builder.append(_projectOn, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("};");
+        _builder.newLine();
+        Object _projectOn_1 = this.projectOn(each.getProtocol(), r);
+        _builder.append(_projectOn_1);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+
+  protected CharSequence _projectOn(final EndProtocol end, final Role r) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("End");
+    _builder.newLine();
+    return _builder;
+  }
+
+  protected CharSequence _seqOn(final Protocol protocol, final Role role, final Role roleset, final Protocol p) {
+    StringConcatenation _builder = new StringConcatenation();
+    Object _seqOn = this.seqOn(protocol.getBegin(), role, roleset, p);
+    _builder.append(_seqOn);
+    return _builder;
+  }
+
+  protected CharSequence _seqOn(final Message m, final Role r, final Role rs, final Protocol p) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _messageType = m.getMessageType();
+    String _plus = ("seq message " + _messageType);
+    System.out.println(_plus);
+    _builder.newLineIfNotEmpty();
+    {
+      if ((m instanceof MessageNormal)) {
+        {
+          String _name = ((MessageNormal)m).getSender().getName();
+          String _name_1 = r.getName();
+          boolean _equals = Objects.equal(_name, _name_1);
+          if (_equals) {
+            String _messageType_1 = ((MessageNormal)m).getMessageType();
+            _builder.append(_messageType_1);
+            _builder.append("(");
+            CharSequence _printPayload = this.printPayload(((MessageNormal)m).getPayload());
+            _builder.append(_printPayload);
+            _builder.append(") to ");
+            String _name_2 = ((MessageNormal)m).getReceiver().getName();
+            _builder.append(_name_2);
+            _builder.append(".");
+            _builder.newLineIfNotEmpty();
+          } else {
+            {
+              String _name_3 = ((MessageNormal)m).getReceiver().getName();
+              String _name_4 = r.getName();
+              boolean _equals_1 = Objects.equal(_name_3, _name_4);
+              if (_equals_1) {
+                String _messageType_2 = ((MessageNormal)m).getMessageType();
+                _builder.append(_messageType_2);
+                _builder.append("(");
+                CharSequence _printPayload_1 = this.printPayload(((MessageNormal)m).getPayload());
+                _builder.append(_printPayload_1);
+                _builder.append(") from ");
+                String _name_5 = ((MessageNormal)m).getSender().getName();
+                _builder.append(_name_5);
+                _builder.append(".");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
+        Object _seqOn = this.seqOn(((MessageNormal)m).getProtocol(), r, rs, p);
+        _builder.append(_seqOn);
+        _builder.newLineIfNotEmpty();
+      } else {
+        {
+          String _name_6 = m.getSender().getName();
+          String _name_7 = r.getName();
+          boolean _equals_2 = Objects.equal(_name_6, _name_7);
+          if (_equals_2) {
+            _builder.append("QUIT() to ");
+            String _name_8 = m.getReceiver().getName();
+            _builder.append(_name_8);
+            _builder.newLineIfNotEmpty();
+          } else {
+            {
+              String _name_9 = m.getReceiver().getName();
+              String _name_10 = r.getName();
+              boolean _equals_3 = Objects.equal(_name_9, _name_10);
+              if (_equals_3) {
+                _builder.append("QUIT() from ");
+                String _name_11 = m.getSender().getName();
+                _builder.append(_name_11);
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
+      }
+    }
+    return _builder;
+  }
+
+  protected CharSequence _seqOn(final Choice c, final Role r, final Role rs, final Protocol p) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("choice at ");
+    String _name = c.getRole().getName();
+    _builder.append(_name);
+    _builder.append("{");
+    _builder.newLineIfNotEmpty();
+    {
+      int _length = ((Object[])Conversions.unwrapArray(c.getBranches(), Object.class)).length;
+      int _minus = (_length - 1);
+      IntegerRange _upTo = new IntegerRange(0, _minus);
+      boolean _hasElements = false;
+      for(final int i : _upTo) {
+        if (!_hasElements) {
+          _hasElements = true;
+        } else {
+          _builder.appendImmediate(" or {", "");
+        }
+        _builder.append("\t");
+        Object _seqOn = this.seqOn(c.getBranches().get(i), r, rs, p);
+        _builder.append(_seqOn, "\t");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
         _builder.newLine();
       }
     }
+    return _builder;
+  }
+
+  protected CharSequence _seqOn(final Recursion rec, final Role r, final Role rs, final Protocol p) {
+    StringConcatenation _builder = new StringConcatenation();
+    System.out.println("seq rec");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("rec ");
+    String _name = rec.getName();
+    _builder.append(_name, "\t");
+    _builder.append(": {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    Object _seqOn = this.seqOn(rec.getRecProtocol(), r, rs, p);
+    _builder.append(_seqOn, "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
     _builder.newLine();
+    return _builder;
+  }
+
+  protected CharSequence _seqOn(final ForEach f, final Role r, final Role rs, final Protocol p) {
+    StringConcatenation _builder = new StringConcatenation();
+    System.out.println("seq for");
+    _builder.newLineIfNotEmpty();
+    Object _projectOn = this.projectOn(f, rs);
+    _builder.append(_projectOn);
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+
+  protected CharSequence _seqOn(final CloseRecursion close, final Role r, final Role rs, final Protocol p) {
+    StringConcatenation _builder = new StringConcatenation();
+    Object _projectOn = this.projectOn(close, r);
+    _builder.append(_projectOn);
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+
+  protected CharSequence _seqOn(final EndProtocol end, final Role r, final Role rs, final Protocol p) {
+    StringConcatenation _builder = new StringConcatenation();
+    System.out.println("seq end");
+    _builder.newLineIfNotEmpty();
+    Object _projectOn = this.projectOn(p, rs);
+    _builder.append(_projectOn);
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
 
@@ -325,10 +516,10 @@ public class MyDslGenerator extends AbstractGenerator {
   public CharSequence projectOn(final EObject c, final Role r) {
     if (c instanceof Choice) {
       return _projectOn((Choice)c, r);
-    } else if (c instanceof ChoiceBranch) {
-      return _projectOn((ChoiceBranch)c, r);
     } else if (c instanceof CloseRecursion) {
       return _projectOn((CloseRecursion)c, r);
+    } else if (c instanceof EndProtocol) {
+      return _projectOn((EndProtocol)c, r);
     } else if (c instanceof ForEach) {
       return _projectOn((ForEach)c, r);
     } else if (c instanceof Message) {
@@ -344,6 +535,27 @@ public class MyDslGenerator extends AbstractGenerator {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(c, r).toString());
+    }
+  }
+
+  public CharSequence seqOn(final EObject c, final Role r, final Role rs, final Protocol p) {
+    if (c instanceof Choice) {
+      return _seqOn((Choice)c, r, rs, p);
+    } else if (c instanceof CloseRecursion) {
+      return _seqOn((CloseRecursion)c, r, rs, p);
+    } else if (c instanceof EndProtocol) {
+      return _seqOn((EndProtocol)c, r, rs, p);
+    } else if (c instanceof ForEach) {
+      return _seqOn((ForEach)c, r, rs, p);
+    } else if (c instanceof Message) {
+      return _seqOn((Message)c, r, rs, p);
+    } else if (c instanceof Protocol) {
+      return _seqOn((Protocol)c, r, rs, p);
+    } else if (c instanceof Recursion) {
+      return _seqOn((Recursion)c, r, rs, p);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(c, r, rs, p).toString());
     }
   }
 }

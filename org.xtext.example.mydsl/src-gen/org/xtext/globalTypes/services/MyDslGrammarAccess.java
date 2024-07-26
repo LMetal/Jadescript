@@ -6,7 +6,6 @@ package org.xtext.globalTypes.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
-import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -68,13 +67,43 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//GlobalProtocol:
+		//    /*
+		//     *     As defined in ICTCS Paper "Global Types for Agent Interaction Protocols"
+		//         global protocol name(p;⟨R, p⟩) = G
+		//        where G is defined by:
+		//        G ::= p → Q { ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼     Choice of Interactions
+		//        | muX.G | X                 Recursion and Variable
+		//        | End                         End of protocol
+		//        | for x:⟨R, q⟩ G1; G2         Protocol for participants in a role set
+		//        | x → q ℓQuit                 Exit from role set
+		//     */
 		//    'global' 'protocol' protocolName=ID '(' roles=Roles '){'protocol=Protocol'}'
 		//    ;
 		@Override public ParserRule getRule() { return rule; }
 		
+		///*
+		// *     As defined in ICTCS Paper "Global Types for Agent Interaction Protocols"
+		//     global protocol name(p;⟨R, p⟩) = G
+		//    where G is defined by:
+		//    G ::= p → Q { ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼     Choice of Interactions
+		//    | muX.G | X                 Recursion and Variable
+		//    | End                         End of protocol
+		//    | for x:⟨R, q⟩ G1; G2         Protocol for participants in a role set
+		//    | x → q ℓQuit                 Exit from role set
+		// */
 		//'global' 'protocol' protocolName=ID '(' roles=Roles '){'protocol=Protocol'}'
 		public Group getGroup() { return cGroup; }
 		
+		///*
+		// *     As defined in ICTCS Paper "Global Types for Agent Interaction Protocols"
+		//     global protocol name(p;⟨R, p⟩) = G
+		//    where G is defined by:
+		//    G ::= p → Q { ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼     Choice of Interactions
+		//    | muX.G | X                 Recursion and Variable
+		//    | End                         End of protocol
+		//    | for x:⟨R, q⟩ G1; G2         Protocol for participants in a role set
+		//    | x → q ℓQuit                 Exit from role set
+		// */
 		//'global'
 		public Keyword getGlobalKeyword_0() { return cGlobalKeyword_0; }
 		
@@ -230,63 +259,59 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	public class ProtocolElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.Protocol");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Action cProtocolAction_0_0 = (Action)cGroup_0.eContents().get(0);
-		private final Assignment cActionsAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final Alternatives cActionsAlternatives_0_1_0 = (Alternatives)cActionsAssignment_0_1.eContents().get(0);
-		private final RuleCall cActionsMessageParserRuleCall_0_1_0_0 = (RuleCall)cActionsAlternatives_0_1_0.eContents().get(0);
-		private final RuleCall cActionsChoiceParserRuleCall_0_1_0_1 = (RuleCall)cActionsAlternatives_0_1_0.eContents().get(1);
-		private final RuleCall cActionsRecursionParserRuleCall_0_1_0_2 = (RuleCall)cActionsAlternatives_0_1_0.eContents().get(2);
-		private final RuleCall cActionsForEachParserRuleCall_0_1_0_3 = (RuleCall)cActionsAlternatives_0_1_0.eContents().get(3);
-		private final Assignment cDoesEndAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
-		private final Keyword cDoesEndEndKeyword_0_2_0 = (Keyword)cDoesEndAssignment_0_2.eContents().get(0);
-		private final Assignment cActionsAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
-		private final RuleCall cActionsCloseRecursionParserRuleCall_1_0 = (RuleCall)cActionsAssignment_1.eContents().get(0);
+		private final Assignment cBeginAssignment = (Assignment)rule.eContents().get(1);
+		private final Alternatives cBeginAlternatives_0 = (Alternatives)cBeginAssignment.eContents().get(0);
+		private final RuleCall cBeginChoiceParserRuleCall_0_0 = (RuleCall)cBeginAlternatives_0.eContents().get(0);
+		private final RuleCall cBeginMessageParserRuleCall_0_1 = (RuleCall)cBeginAlternatives_0.eContents().get(1);
+		private final RuleCall cBeginRecursionParserRuleCall_0_2 = (RuleCall)cBeginAlternatives_0.eContents().get(2);
+		private final RuleCall cBeginForEachParserRuleCall_0_3 = (RuleCall)cBeginAlternatives_0.eContents().get(3);
+		private final RuleCall cBeginCloseRecursionParserRuleCall_0_4 = (RuleCall)cBeginAlternatives_0.eContents().get(4);
+		private final RuleCall cBeginEndProtocolParserRuleCall_0_5 = (RuleCall)cBeginAlternatives_0.eContents().get(5);
 		
 		//Protocol:
-		//    {Protocol} (actions+=(Message | Choice | Recursion | ForEach))* (doesEnd='End')? | actions+=(CloseRecursion)
+		//    begin = (Choice | Message | Recursion | ForEach | CloseRecursion | EndProtocol)
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Protocol} (actions+=(Message | Choice | Recursion | ForEach))* (doesEnd='End')? | actions+=(CloseRecursion)
-		public Alternatives getAlternatives() { return cAlternatives; }
+		//begin = (Choice | Message | Recursion | ForEach | CloseRecursion | EndProtocol)
+		public Assignment getBeginAssignment() { return cBeginAssignment; }
 		
-		//{Protocol} (actions+=(Message | Choice | Recursion | ForEach))* (doesEnd='End')?
-		public Group getGroup_0() { return cGroup_0; }
-		
-		//{Protocol}
-		public Action getProtocolAction_0_0() { return cProtocolAction_0_0; }
-		
-		//(actions+=(Message | Choice | Recursion | ForEach))*
-		public Assignment getActionsAssignment_0_1() { return cActionsAssignment_0_1; }
-		
-		//(Message | Choice | Recursion | ForEach)
-		public Alternatives getActionsAlternatives_0_1_0() { return cActionsAlternatives_0_1_0; }
-		
-		//Message
-		public RuleCall getActionsMessageParserRuleCall_0_1_0_0() { return cActionsMessageParserRuleCall_0_1_0_0; }
+		//(Choice | Message | Recursion | ForEach | CloseRecursion | EndProtocol)
+		public Alternatives getBeginAlternatives_0() { return cBeginAlternatives_0; }
 		
 		//Choice
-		public RuleCall getActionsChoiceParserRuleCall_0_1_0_1() { return cActionsChoiceParserRuleCall_0_1_0_1; }
+		public RuleCall getBeginChoiceParserRuleCall_0_0() { return cBeginChoiceParserRuleCall_0_0; }
+		
+		//Message
+		public RuleCall getBeginMessageParserRuleCall_0_1() { return cBeginMessageParserRuleCall_0_1; }
 		
 		//Recursion
-		public RuleCall getActionsRecursionParserRuleCall_0_1_0_2() { return cActionsRecursionParserRuleCall_0_1_0_2; }
+		public RuleCall getBeginRecursionParserRuleCall_0_2() { return cBeginRecursionParserRuleCall_0_2; }
 		
 		//ForEach
-		public RuleCall getActionsForEachParserRuleCall_0_1_0_3() { return cActionsForEachParserRuleCall_0_1_0_3; }
+		public RuleCall getBeginForEachParserRuleCall_0_3() { return cBeginForEachParserRuleCall_0_3; }
 		
-		//(doesEnd='End')?
-		public Assignment getDoesEndAssignment_0_2() { return cDoesEndAssignment_0_2; }
+		//CloseRecursion
+		public RuleCall getBeginCloseRecursionParserRuleCall_0_4() { return cBeginCloseRecursionParserRuleCall_0_4; }
+		
+		//EndProtocol
+		public RuleCall getBeginEndProtocolParserRuleCall_0_5() { return cBeginEndProtocolParserRuleCall_0_5; }
+	}
+	public class EndProtocolElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.EndProtocol");
+		private final Assignment cEndAssignment = (Assignment)rule.eContents().get(1);
+		private final Keyword cEndEndKeyword_0 = (Keyword)cEndAssignment.eContents().get(0);
+		
+		//EndProtocol:
+		//    end='End'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//end='End'
+		public Assignment getEndAssignment() { return cEndAssignment; }
 		
 		//'End'
-		public Keyword getDoesEndEndKeyword_0_2_0() { return cDoesEndEndKeyword_0_2_0; }
-		
-		//actions+=(CloseRecursion)
-		public Assignment getActionsAssignment_1() { return cActionsAssignment_1; }
-		
-		//(CloseRecursion)
-		public RuleCall getActionsCloseRecursionParserRuleCall_1_0() { return cActionsCloseRecursionParserRuleCall_1_0; }
+		public Keyword getEndEndKeyword_0() { return cEndEndKeyword_0; }
 	}
 	public class RecursionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.Recursion");
@@ -344,15 +369,17 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final CrossReference cRecursionVariableRecursionCrossReference_1_0 = (CrossReference)cRecursionVariableAssignment_1.eContents().get(0);
 		private final RuleCall cRecursionVariableRecursionIDTerminalRuleCall_1_0_1 = (RuleCall)cRecursionVariableRecursionCrossReference_1_0.eContents().get(1);
 		
-		//CloseRecursion:
+		//CloseRecursion: //terminale
 		//    'loop' recursionVariable=[Recursion | ID]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'loop' recursionVariable=[Recursion | ID]
+		////terminale
+		//   'loop' recursionVariable=[Recursion | ID]
 		public Group getGroup() { return cGroup; }
 		
-		//'loop'
+		////terminale
+		//   'loop'
 		public Keyword getLoopKeyword_0() { return cLoopKeyword_0; }
 		
 		//recursionVariable=[Recursion | ID]
@@ -381,21 +408,25 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final RuleCall cRefRoleRoleOneIDTerminalRuleCall_6_0_1 = (RuleCall)cRefRoleRoleOneCrossReference_6_0.eContents().get(1);
 		private final Keyword cGreaterThanSignKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		private final Keyword cLeftCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cBranchAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cBranchProtocolParserRuleCall_9_0 = (RuleCall)cBranchAssignment_9.eContents().get(0);
+		private final Assignment cForBodyAssignment_9 = (Assignment)cGroup.eContents().get(9);
+		private final RuleCall cForBodyProtocolParserRuleCall_9_0 = (RuleCall)cForBodyAssignment_9.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		private final Keyword cSemicolonKeyword_11 = (Keyword)cGroup.eContents().get(11);
+		private final Assignment cProtocolAssignment_12 = (Assignment)cGroup.eContents().get(12);
+		private final RuleCall cProtocolProtocolParserRuleCall_12_0 = (RuleCall)cProtocolAssignment_12.eContents().get(0);
 		
 		//ForEach:
 		//    'for' loopRole=RoleOne ':' '<'roleset=[RoleSet | ID] ',' refRole = [RoleOne | ID] '>' '{'
-		//        branch=Protocol
+		//        forBody=Protocol
 		//    '}'';'
+		//    protocol = Protocol
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'for' loopRole=RoleOne ':' '<'roleset=[RoleSet | ID] ',' refRole = [RoleOne | ID] '>' '{'
-		//    branch=Protocol
+		//    forBody=Protocol
 		//'}'';'
+		//protocol = Protocol
 		public Group getGroup() { return cGroup; }
 		
 		//'for'
@@ -440,17 +471,23 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_8() { return cLeftCurlyBracketKeyword_8; }
 		
-		//branch=Protocol
-		public Assignment getBranchAssignment_9() { return cBranchAssignment_9; }
+		//forBody=Protocol
+		public Assignment getForBodyAssignment_9() { return cForBodyAssignment_9; }
 		
 		//Protocol
-		public RuleCall getBranchProtocolParserRuleCall_9_0() { return cBranchProtocolParserRuleCall_9_0; }
+		public RuleCall getForBodyProtocolParserRuleCall_9_0() { return cForBodyProtocolParserRuleCall_9_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_10() { return cRightCurlyBracketKeyword_10; }
 		
 		//';'
 		public Keyword getSemicolonKeyword_11() { return cSemicolonKeyword_11; }
+		
+		//protocol = Protocol
+		public Assignment getProtocolAssignment_12() { return cProtocolAssignment_12; }
+		
+		//Protocol
+		public RuleCall getProtocolProtocolParserRuleCall_12_0() { return cProtocolProtocolParserRuleCall_12_0; }
 	}
 	public class ChoiceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.Choice");
@@ -462,28 +499,28 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final RuleCall cRoleRoleOneIDTerminalRuleCall_2_0_1 = (RuleCall)cRoleRoleOneCrossReference_2_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cBranchesAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cBranchesChoiceBranchParserRuleCall_4_0 = (RuleCall)cBranchesAssignment_4.eContents().get(0);
+		private final RuleCall cBranchesMessageParserRuleCall_4_0 = (RuleCall)cBranchesAssignment_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cOrKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
 		private final Assignment cBranchesAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
-		private final RuleCall cBranchesChoiceBranchParserRuleCall_6_2_0 = (RuleCall)cBranchesAssignment_6_2.eContents().get(0);
+		private final RuleCall cBranchesMessageParserRuleCall_6_2_0 = (RuleCall)cBranchesAssignment_6_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6_3 = (Keyword)cGroup_6.eContents().get(3);
 		
 		//Choice:
 		//    'choice' 'at' role=[RoleOne | ID] '{'
-		//        branches+=ChoiceBranch
+		//        branches+=Message
 		//    '}' ('or' '{'
-		//        branches+=ChoiceBranch
+		//        branches+=Message
 		//    '}')*
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'choice' 'at' role=[RoleOne | ID] '{'
-		//    branches+=ChoiceBranch
+		//    branches+=Message
 		//'}' ('or' '{'
-		//    branches+=ChoiceBranch
+		//    branches+=Message
 		//'}')*
 		public Group getGroup() { return cGroup; }
 		
@@ -505,17 +542,17 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//branches+=ChoiceBranch
+		//branches+=Message
 		public Assignment getBranchesAssignment_4() { return cBranchesAssignment_4; }
 		
-		//ChoiceBranch
-		public RuleCall getBranchesChoiceBranchParserRuleCall_4_0() { return cBranchesChoiceBranchParserRuleCall_4_0; }
+		//Message
+		public RuleCall getBranchesMessageParserRuleCall_4_0() { return cBranchesMessageParserRuleCall_4_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 		
 		//('or' '{'
-		//       branches+=ChoiceBranch
+		//       branches+=Message
 		//   '}')*
 		public Group getGroup_6() { return cGroup_6; }
 		
@@ -525,70 +562,69 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_6_1() { return cLeftCurlyBracketKeyword_6_1; }
 		
-		//branches+=ChoiceBranch
+		//branches+=Message
 		public Assignment getBranchesAssignment_6_2() { return cBranchesAssignment_6_2; }
 		
-		//ChoiceBranch
-		public RuleCall getBranchesChoiceBranchParserRuleCall_6_2_0() { return cBranchesChoiceBranchParserRuleCall_6_2_0; }
+		//Message
+		public RuleCall getBranchesMessageParserRuleCall_6_2_0() { return cBranchesMessageParserRuleCall_6_2_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_6_3() { return cRightCurlyBracketKeyword_6_3; }
 	}
-	public class ChoiceBranchElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.ChoiceBranch");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cMessageAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cMessageMessageParserRuleCall_0_0 = (RuleCall)cMessageAssignment_0.eContents().get(0);
-		private final Assignment cProtocolAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cProtocolProtocolParserRuleCall_1_0 = (RuleCall)cProtocolAssignment_1.eContents().get(0);
+	public class MessageElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.Message");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cMessageNormalParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cMessageQuitParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//ChoiceBranch:
-		//    message=Message
-		//    protocol=Protocol
+		//Message:
+		//    MessageNormal |
+		//    MessageQuit
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//message=Message
-		//protocol=Protocol
-		public Group getGroup() { return cGroup; }
+		//MessageNormal |
+		//MessageQuit
+		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//message=Message
-		public Assignment getMessageAssignment_0() { return cMessageAssignment_0; }
+		//MessageNormal
+		public RuleCall getMessageNormalParserRuleCall_0() { return cMessageNormalParserRuleCall_0; }
 		
-		//Message
-		public RuleCall getMessageMessageParserRuleCall_0_0() { return cMessageMessageParserRuleCall_0_0; }
-		
-		//protocol=Protocol
-		public Assignment getProtocolAssignment_1() { return cProtocolAssignment_1; }
-		
-		//Protocol
-		public RuleCall getProtocolProtocolParserRuleCall_1_0() { return cProtocolProtocolParserRuleCall_1_0; }
+		//MessageQuit
+		public RuleCall getMessageQuitParserRuleCall_1() { return cMessageQuitParserRuleCall_1; }
 	}
-	public class MessageElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.Message");
+	public class MessageNormalElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.MessageNormal");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cMessageTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cMessageTypeIDTerminalRuleCall_0_0 = (RuleCall)cMessageTypeAssignment_0.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cPayloadAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cPayloadPayloadParserRuleCall_2_0 = (RuleCall)cPayloadAssignment_2.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Keyword cFromKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cSenderAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference cSenderRoleOneCrossReference_5_0 = (CrossReference)cSenderAssignment_5.eContents().get(0);
-		private final RuleCall cSenderRoleOneIDTerminalRuleCall_5_0_1 = (RuleCall)cSenderRoleOneCrossReference_5_0.eContents().get(1);
-		private final Keyword cToKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cReceiverAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final CrossReference cReceiverRoleCrossReference_7_0 = (CrossReference)cReceiverAssignment_7.eContents().get(0);
-		private final RuleCall cReceiverRoleIDTerminalRuleCall_7_0_1 = (RuleCall)cReceiverRoleCrossReference_7_0.eContents().get(1);
-		private final Keyword cFullStopKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final Assignment cPayloadAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cPayloadPayloadParserRuleCall_1_0_1_0 = (RuleCall)cPayloadAssignment_1_0_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_1_0_2 = (Keyword)cGroup_1_0.eContents().get(2);
+		private final Keyword cLeftParenthesisRightParenthesisKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
+		private final Keyword cFromKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cSenderAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cSenderRoleOneCrossReference_3_0 = (CrossReference)cSenderAssignment_3.eContents().get(0);
+		private final RuleCall cSenderRoleOneIDTerminalRuleCall_3_0_1 = (RuleCall)cSenderRoleOneCrossReference_3_0.eContents().get(1);
+		private final Keyword cToKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cReceiverAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final CrossReference cReceiverRoleCrossReference_5_0 = (CrossReference)cReceiverAssignment_5.eContents().get(0);
+		private final RuleCall cReceiverRoleIDTerminalRuleCall_5_0_1 = (RuleCall)cReceiverRoleCrossReference_5_0.eContents().get(1);
+		private final Keyword cFullStopKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cProtocolAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cProtocolProtocolParserRuleCall_7_0 = (RuleCall)cProtocolAssignment_7.eContents().get(0);
 		
-		//Message:
-		//    messageType=ID '(' payload=Payload? ')' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
+		//MessageNormal:
+		//    messageType=ID ('(' (payload=Payload)? ')' | '()') 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
+		//    protocol = Protocol
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//messageType=ID '(' payload=Payload? ')' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
+		//messageType=ID ('(' (payload=Payload)? ')' | '()') 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
+		//protocol = Protocol
 		public Group getGroup() { return cGroup; }
 		
 		//messageType=ID
@@ -597,100 +633,153 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//ID
 		public RuleCall getMessageTypeIDTerminalRuleCall_0_0() { return cMessageTypeIDTerminalRuleCall_0_0; }
 		
-		//'('
-		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		//('(' (payload=Payload)? ')' | '()')
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//payload=Payload?
-		public Assignment getPayloadAssignment_2() { return cPayloadAssignment_2; }
+		//'(' (payload=Payload)? ')'
+		public Group getGroup_1_0() { return cGroup_1_0; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_1_0_0() { return cLeftParenthesisKeyword_1_0_0; }
+		
+		//(payload=Payload)?
+		public Assignment getPayloadAssignment_1_0_1() { return cPayloadAssignment_1_0_1; }
 		
 		//Payload
-		public RuleCall getPayloadPayloadParserRuleCall_2_0() { return cPayloadPayloadParserRuleCall_2_0; }
+		public RuleCall getPayloadPayloadParserRuleCall_1_0_1_0() { return cPayloadPayloadParserRuleCall_1_0_1_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+		public Keyword getRightParenthesisKeyword_1_0_2() { return cRightParenthesisKeyword_1_0_2; }
+		
+		//'()'
+		public Keyword getLeftParenthesisRightParenthesisKeyword_1_1() { return cLeftParenthesisRightParenthesisKeyword_1_1; }
 		
 		//'from'
-		public Keyword getFromKeyword_4() { return cFromKeyword_4; }
+		public Keyword getFromKeyword_2() { return cFromKeyword_2; }
 		
 		//sender=[RoleOne | ID]
-		public Assignment getSenderAssignment_5() { return cSenderAssignment_5; }
+		public Assignment getSenderAssignment_3() { return cSenderAssignment_3; }
 		
 		//[RoleOne | ID]
-		public CrossReference getSenderRoleOneCrossReference_5_0() { return cSenderRoleOneCrossReference_5_0; }
+		public CrossReference getSenderRoleOneCrossReference_3_0() { return cSenderRoleOneCrossReference_3_0; }
 		
 		//ID
-		public RuleCall getSenderRoleOneIDTerminalRuleCall_5_0_1() { return cSenderRoleOneIDTerminalRuleCall_5_0_1; }
+		public RuleCall getSenderRoleOneIDTerminalRuleCall_3_0_1() { return cSenderRoleOneIDTerminalRuleCall_3_0_1; }
 		
 		//'to'
-		public Keyword getToKeyword_6() { return cToKeyword_6; }
+		public Keyword getToKeyword_4() { return cToKeyword_4; }
 		
 		//receiver=[Role | ID]
-		public Assignment getReceiverAssignment_7() { return cReceiverAssignment_7; }
+		public Assignment getReceiverAssignment_5() { return cReceiverAssignment_5; }
 		
 		//[Role | ID]
-		public CrossReference getReceiverRoleCrossReference_7_0() { return cReceiverRoleCrossReference_7_0; }
+		public CrossReference getReceiverRoleCrossReference_5_0() { return cReceiverRoleCrossReference_5_0; }
 		
 		//ID
-		public RuleCall getReceiverRoleIDTerminalRuleCall_7_0_1() { return cReceiverRoleIDTerminalRuleCall_7_0_1; }
+		public RuleCall getReceiverRoleIDTerminalRuleCall_5_0_1() { return cReceiverRoleIDTerminalRuleCall_5_0_1; }
 		
 		//'.'
-		public Keyword getFullStopKeyword_8() { return cFullStopKeyword_8; }
-	}
-	public class PayloadElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.Payload");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Action cPayloadAction_0_0 = (Action)cGroup_0.eContents().get(0);
-		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
-		private final Assignment cTypesAssignment_0_1_0 = (Assignment)cGroup_0_1.eContents().get(0);
-		private final RuleCall cTypesTypeParserRuleCall_0_1_0_0 = (RuleCall)cTypesAssignment_0_1_0.eContents().get(0);
-		private final Group cGroup_0_1_1 = (Group)cGroup_0_1.eContents().get(1);
-		private final Keyword cCommaKeyword_0_1_1_0 = (Keyword)cGroup_0_1_1.eContents().get(0);
-		private final Assignment cTypesAssignment_0_1_1_1 = (Assignment)cGroup_0_1_1.eContents().get(1);
-		private final RuleCall cTypesTypeParserRuleCall_0_1_1_1_0 = (RuleCall)cTypesAssignment_0_1_1_1.eContents().get(0);
-		private final Assignment cTypesAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
-		private final RuleCall cTypesIDTerminalRuleCall_1_0 = (RuleCall)cTypesAssignment_1.eContents().get(0);
+		public Keyword getFullStopKeyword_6() { return cFullStopKeyword_6; }
 		
-		//Payload:
-		//    {Payload} (types+=Type (','types+=Type)*) | types+=ID
+		//protocol = Protocol
+		public Assignment getProtocolAssignment_7() { return cProtocolAssignment_7; }
+		
+		//Protocol
+		public RuleCall getProtocolProtocolParserRuleCall_7_0() { return cProtocolProtocolParserRuleCall_7_0; }
+	}
+	public class MessageQuitElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.MessageQuit");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cMessageTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cMessageTypeQUITKeyword_0_0 = (Keyword)cMessageTypeAssignment_0.eContents().get(0);
+		private final Keyword cLeftParenthesisRightParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cFromKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cSenderAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cSenderRoleOneCrossReference_3_0 = (CrossReference)cSenderAssignment_3.eContents().get(0);
+		private final RuleCall cSenderRoleOneIDTerminalRuleCall_3_0_1 = (RuleCall)cSenderRoleOneCrossReference_3_0.eContents().get(1);
+		private final Keyword cToKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cReceiverAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final CrossReference cReceiverRoleCrossReference_5_0 = (CrossReference)cReceiverAssignment_5.eContents().get(0);
+		private final RuleCall cReceiverRoleIDTerminalRuleCall_5_0_1 = (RuleCall)cReceiverRoleCrossReference_5_0.eContents().get(1);
+		
+		//MessageQuit: //terminale
+		//    messageType = 'QUIT' '()' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Payload} (types+=Type (','types+=Type)*) | types+=ID
-		public Alternatives getAlternatives() { return cAlternatives; }
+		////terminale
+		//   messageType = 'QUIT' '()' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID]
+		public Group getGroup() { return cGroup; }
 		
-		//{Payload} (types+=Type (','types+=Type)*)
-		public Group getGroup_0() { return cGroup_0; }
+		////terminale
+		//   messageType = 'QUIT'
+		public Assignment getMessageTypeAssignment_0() { return cMessageTypeAssignment_0; }
 		
-		//{Payload}
-		public Action getPayloadAction_0_0() { return cPayloadAction_0_0; }
+		//'QUIT'
+		public Keyword getMessageTypeQUITKeyword_0_0() { return cMessageTypeQUITKeyword_0_0; }
 		
-		//(types+=Type (','types+=Type)*)
-		public Group getGroup_0_1() { return cGroup_0_1; }
+		//'()'
+		public Keyword getLeftParenthesisRightParenthesisKeyword_1() { return cLeftParenthesisRightParenthesisKeyword_1; }
 		
-		//types+=Type
-		public Assignment getTypesAssignment_0_1_0() { return cTypesAssignment_0_1_0; }
+		//'from'
+		public Keyword getFromKeyword_2() { return cFromKeyword_2; }
 		
-		//Type
-		public RuleCall getTypesTypeParserRuleCall_0_1_0_0() { return cTypesTypeParserRuleCall_0_1_0_0; }
+		//sender=[RoleOne | ID]
+		public Assignment getSenderAssignment_3() { return cSenderAssignment_3; }
 		
-		//(','types+=Type)*
-		public Group getGroup_0_1_1() { return cGroup_0_1_1; }
-		
-		//','
-		public Keyword getCommaKeyword_0_1_1_0() { return cCommaKeyword_0_1_1_0; }
-		
-		//types+=Type
-		public Assignment getTypesAssignment_0_1_1_1() { return cTypesAssignment_0_1_1_1; }
-		
-		//Type
-		public RuleCall getTypesTypeParserRuleCall_0_1_1_1_0() { return cTypesTypeParserRuleCall_0_1_1_1_0; }
-		
-		//types+=ID
-		public Assignment getTypesAssignment_1() { return cTypesAssignment_1; }
+		//[RoleOne | ID]
+		public CrossReference getSenderRoleOneCrossReference_3_0() { return cSenderRoleOneCrossReference_3_0; }
 		
 		//ID
-		public RuleCall getTypesIDTerminalRuleCall_1_0() { return cTypesIDTerminalRuleCall_1_0; }
+		public RuleCall getSenderRoleOneIDTerminalRuleCall_3_0_1() { return cSenderRoleOneIDTerminalRuleCall_3_0_1; }
+		
+		//'to'
+		public Keyword getToKeyword_4() { return cToKeyword_4; }
+		
+		//receiver=[Role | ID]
+		public Assignment getReceiverAssignment_5() { return cReceiverAssignment_5; }
+		
+		//[Role | ID]
+		public CrossReference getReceiverRoleCrossReference_5_0() { return cReceiverRoleCrossReference_5_0; }
+		
+		//ID
+		public RuleCall getReceiverRoleIDTerminalRuleCall_5_0_1() { return cReceiverRoleIDTerminalRuleCall_5_0_1; }
+	}
+	public class PayloadElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.Payload");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cTypesAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cTypesTypeParserRuleCall_0_0 = (RuleCall)cTypesAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cTypesAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cTypesTypeParserRuleCall_1_1_0 = (RuleCall)cTypesAssignment_1_1.eContents().get(0);
+		
+		//Payload:
+		//    types+=Type (','types+=Type)*
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//types+=Type (','types+=Type)*
+		public Group getGroup() { return cGroup; }
+		
+		//types+=Type
+		public Assignment getTypesAssignment_0() { return cTypesAssignment_0; }
+		
+		//Type
+		public RuleCall getTypesTypeParserRuleCall_0_0() { return cTypesTypeParserRuleCall_0_0; }
+		
+		//(','types+=Type)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//','
+		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
+		
+		//types+=Type
+		public Assignment getTypesAssignment_1_1() { return cTypesAssignment_1_1; }
+		
+		//Type
+		public RuleCall getTypesTypeParserRuleCall_1_1_0() { return cTypesTypeParserRuleCall_1_1_0; }
 	}
 	public class LocalProtocolElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.LocalProtocol");
@@ -701,22 +790,25 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final RuleCall cProtocolNameIDTerminalRuleCall_2_0 = (RuleCall)cProtocolNameAssignment_2.eContents().get(0);
 		private final Keyword cAtKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cProjectedRoleAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cProjectedRoleIDTerminalRuleCall_4_0 = (RuleCall)cProjectedRoleAssignment_4.eContents().get(0);
+		private final RuleCall cProjectedRoleRoleParserRuleCall_4_0 = (RuleCall)cProjectedRoleAssignment_4.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Assignment cRolesAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cRolesRolesParserRuleCall_6_0 = (RuleCall)cRolesAssignment_6.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		private final Keyword cLeftCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cProtocolAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cProtocolProtocolLParserRuleCall_9_0 = (RuleCall)cProtocolAssignment_9.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final Alternatives cAlternatives_7 = (Alternatives)cGroup.eContents().get(7);
+		private final Keyword cRightParenthesisLeftCurlyBracketKeyword_7_0 = (Keyword)cAlternatives_7.eContents().get(0);
+		private final Group cGroup_7_1 = (Group)cAlternatives_7.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_7_1_0 = (Keyword)cGroup_7_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_7_1_1 = (Keyword)cGroup_7_1.eContents().get(1);
+		private final Assignment cProtocolAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cProtocolProtocolLParserRuleCall_8_0 = (RuleCall)cProtocolAssignment_8.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
 		//LocalProtocol:
-		//    'local' 'protocol' protocolName=ID 'at' projectedRole=ID '(' roles=Roles ')' '{'protocol=ProtocolL'}'
+		//    'local' 'protocol' protocolName=ID 'at' projectedRole=Role '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'local' 'protocol' protocolName=ID 'at' projectedRole=ID '(' roles=Roles ')' '{'protocol=ProtocolL'}'
+		//'local' 'protocol' protocolName=ID 'at' projectedRole=Role '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'local'
@@ -734,11 +826,11 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'at'
 		public Keyword getAtKeyword_3() { return cAtKeyword_3; }
 		
-		//projectedRole=ID
+		//projectedRole=Role
 		public Assignment getProjectedRoleAssignment_4() { return cProjectedRoleAssignment_4; }
 		
-		//ID
-		public RuleCall getProjectedRoleIDTerminalRuleCall_4_0() { return cProjectedRoleIDTerminalRuleCall_4_0; }
+		//Role
+		public RuleCall getProjectedRoleRoleParserRuleCall_4_0() { return cProjectedRoleRoleParserRuleCall_4_0; }
 		
 		//'('
 		public Keyword getLeftParenthesisKeyword_5() { return cLeftParenthesisKeyword_5; }
@@ -749,68 +841,69 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//Roles
 		public RuleCall getRolesRolesParserRuleCall_6_0() { return cRolesRolesParserRuleCall_6_0; }
 		
+		//('){' | ')''{')
+		public Alternatives getAlternatives_7() { return cAlternatives_7; }
+		
+		//'){'
+		public Keyword getRightParenthesisLeftCurlyBracketKeyword_7_0() { return cRightParenthesisLeftCurlyBracketKeyword_7_0; }
+		
+		//')''{'
+		public Group getGroup_7_1() { return cGroup_7_1; }
+		
 		//')'
-		public Keyword getRightParenthesisKeyword_7() { return cRightParenthesisKeyword_7; }
+		public Keyword getRightParenthesisKeyword_7_1_0() { return cRightParenthesisKeyword_7_1_0; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_8() { return cLeftCurlyBracketKeyword_8; }
+		public Keyword getLeftCurlyBracketKeyword_7_1_1() { return cLeftCurlyBracketKeyword_7_1_1; }
 		
 		//protocol=ProtocolL
-		public Assignment getProtocolAssignment_9() { return cProtocolAssignment_9; }
+		public Assignment getProtocolAssignment_8() { return cProtocolAssignment_8; }
 		
 		//ProtocolL
-		public RuleCall getProtocolProtocolLParserRuleCall_9_0() { return cProtocolProtocolLParserRuleCall_9_0; }
+		public RuleCall getProtocolProtocolLParserRuleCall_8_0() { return cProtocolProtocolLParserRuleCall_8_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_10() { return cRightCurlyBracketKeyword_10; }
+		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
 	}
 	public class ProtocolLElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.ProtocolL");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cProtocolLAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cActionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Alternatives cActionsAlternatives_1_0 = (Alternatives)cActionsAssignment_1.eContents().get(0);
-		private final RuleCall cActionsMessageLParserRuleCall_1_0_0 = (RuleCall)cActionsAlternatives_1_0.eContents().get(0);
-		private final RuleCall cActionsChoiceLParserRuleCall_1_0_1 = (RuleCall)cActionsAlternatives_1_0.eContents().get(1);
-		private final RuleCall cActionsForEachLParserRuleCall_1_0_2 = (RuleCall)cActionsAlternatives_1_0.eContents().get(2);
-		private final RuleCall cActionsRecursionLParserRuleCall_1_0_3 = (RuleCall)cActionsAlternatives_1_0.eContents().get(3);
-		private final RuleCall cActionsCloseRecursionParserRuleCall_1_0_4 = (RuleCall)cActionsAlternatives_1_0.eContents().get(4);
-		private final Keyword cEndKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cBeginAssignment = (Assignment)rule.eContents().get(1);
+		private final Alternatives cBeginAlternatives_0 = (Alternatives)cBeginAssignment.eContents().get(0);
+		private final RuleCall cBeginMessageLParserRuleCall_0_0 = (RuleCall)cBeginAlternatives_0.eContents().get(0);
+		private final RuleCall cBeginChoiceLParserRuleCall_0_1 = (RuleCall)cBeginAlternatives_0.eContents().get(1);
+		private final RuleCall cBeginForEachLParserRuleCall_0_2 = (RuleCall)cBeginAlternatives_0.eContents().get(2);
+		private final RuleCall cBeginRecursionLParserRuleCall_0_3 = (RuleCall)cBeginAlternatives_0.eContents().get(3);
+		private final RuleCall cBeginCloseRecursionLParserRuleCall_0_4 = (RuleCall)cBeginAlternatives_0.eContents().get(4);
+		private final RuleCall cBeginEndProtocolParserRuleCall_0_5 = (RuleCall)cBeginAlternatives_0.eContents().get(5);
 		
 		//ProtocolL:
-		//    {ProtocolL} (actions+=(MessageL | ChoiceL | ForEachL | RecursionL | CloseRecursion))* ('End')?
+		//    begin = (MessageL | ChoiceL | ForEachL | RecursionL | CloseRecursionL | EndProtocol)
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ProtocolL} (actions+=(MessageL | ChoiceL | ForEachL | RecursionL | CloseRecursion))* ('End')?
-		public Group getGroup() { return cGroup; }
+		//begin = (MessageL | ChoiceL | ForEachL | RecursionL | CloseRecursionL | EndProtocol)
+		public Assignment getBeginAssignment() { return cBeginAssignment; }
 		
-		//{ProtocolL}
-		public Action getProtocolLAction_0() { return cProtocolLAction_0; }
-		
-		//(actions+=(MessageL | ChoiceL | ForEachL | RecursionL | CloseRecursion))*
-		public Assignment getActionsAssignment_1() { return cActionsAssignment_1; }
-		
-		//(MessageL | ChoiceL | ForEachL | RecursionL | CloseRecursion)
-		public Alternatives getActionsAlternatives_1_0() { return cActionsAlternatives_1_0; }
+		//(MessageL | ChoiceL | ForEachL | RecursionL | CloseRecursionL | EndProtocol)
+		public Alternatives getBeginAlternatives_0() { return cBeginAlternatives_0; }
 		
 		//MessageL
-		public RuleCall getActionsMessageLParserRuleCall_1_0_0() { return cActionsMessageLParserRuleCall_1_0_0; }
+		public RuleCall getBeginMessageLParserRuleCall_0_0() { return cBeginMessageLParserRuleCall_0_0; }
 		
 		//ChoiceL
-		public RuleCall getActionsChoiceLParserRuleCall_1_0_1() { return cActionsChoiceLParserRuleCall_1_0_1; }
+		public RuleCall getBeginChoiceLParserRuleCall_0_1() { return cBeginChoiceLParserRuleCall_0_1; }
 		
 		//ForEachL
-		public RuleCall getActionsForEachLParserRuleCall_1_0_2() { return cActionsForEachLParserRuleCall_1_0_2; }
+		public RuleCall getBeginForEachLParserRuleCall_0_2() { return cBeginForEachLParserRuleCall_0_2; }
 		
 		//RecursionL
-		public RuleCall getActionsRecursionLParserRuleCall_1_0_3() { return cActionsRecursionLParserRuleCall_1_0_3; }
+		public RuleCall getBeginRecursionLParserRuleCall_0_3() { return cBeginRecursionLParserRuleCall_0_3; }
 		
-		//CloseRecursion
-		public RuleCall getActionsCloseRecursionParserRuleCall_1_0_4() { return cActionsCloseRecursionParserRuleCall_1_0_4; }
+		//CloseRecursionL
+		public RuleCall getBeginCloseRecursionLParserRuleCall_0_4() { return cBeginCloseRecursionLParserRuleCall_0_4; }
 		
-		//('End')?
-		public Keyword getEndKeyword_2() { return cEndKeyword_2; }
+		//EndProtocol
+		public RuleCall getBeginEndProtocolParserRuleCall_0_5() { return cBeginEndProtocolParserRuleCall_0_5; }
 	}
 	public class RecursionLElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.RecursionL");
@@ -860,25 +953,84 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
-	public class MessageLElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.MessageL");
+	public class CloseRecursionLElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.CloseRecursionL");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cMessageTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cMessageTypeIDTerminalRuleCall_0_0 = (RuleCall)cMessageTypeAssignment_0.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cPayloadAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cPayloadPayloadParserRuleCall_2_0 = (RuleCall)cPayloadAssignment_2.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cSendReceiveAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cSendReceiveMessageTypeParserRuleCall_4_0 = (RuleCall)cSendReceiveAssignment_4.eContents().get(0);
-		private final Keyword cFullStopKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cLoopKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cRecursionVariableAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cRecursionVariableRecursionLCrossReference_1_0 = (CrossReference)cRecursionVariableAssignment_1.eContents().get(0);
+		private final RuleCall cRecursionVariableRecursionLIDTerminalRuleCall_1_0_1 = (RuleCall)cRecursionVariableRecursionLCrossReference_1_0.eContents().get(1);
 		
-		//MessageL:
-		//    messageType=ID '(' payload=Payload? ')' (sendReceive=MessageType) '.'
+		//CloseRecursionL: //terminale
+		//    'loop' recursionVariable=[RecursionL | ID]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//messageType=ID '(' payload=Payload? ')' (sendReceive=MessageType) '.'
+		////terminale
+		//   'loop' recursionVariable=[RecursionL | ID]
+		public Group getGroup() { return cGroup; }
+		
+		////terminale
+		//   'loop'
+		public Keyword getLoopKeyword_0() { return cLoopKeyword_0; }
+		
+		//recursionVariable=[RecursionL | ID]
+		public Assignment getRecursionVariableAssignment_1() { return cRecursionVariableAssignment_1; }
+		
+		//[RecursionL | ID]
+		public CrossReference getRecursionVariableRecursionLCrossReference_1_0() { return cRecursionVariableRecursionLCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getRecursionVariableRecursionLIDTerminalRuleCall_1_0_1() { return cRecursionVariableRecursionLIDTerminalRuleCall_1_0_1; }
+	}
+	public class MessageLElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.MessageL");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cMessageNormalLParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cMessageQuitLParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//MessageL:
+		//    MessageNormalL |
+		//    MessageQuitL
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//MessageNormalL |
+		//MessageQuitL
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//MessageNormalL
+		public RuleCall getMessageNormalLParserRuleCall_0() { return cMessageNormalLParserRuleCall_0; }
+		
+		//MessageQuitL
+		public RuleCall getMessageQuitLParserRuleCall_1() { return cMessageQuitLParserRuleCall_1; }
+	}
+	public class MessageNormalLElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.MessageNormalL");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cMessageTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cMessageTypeIDTerminalRuleCall_0_0 = (RuleCall)cMessageTypeAssignment_0.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final Assignment cPayloadAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cPayloadPayloadParserRuleCall_1_0_1_0 = (RuleCall)cPayloadAssignment_1_0_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_1_0_2 = (Keyword)cGroup_1_0.eContents().get(2);
+		private final Keyword cLeftParenthesisRightParenthesisKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
+		private final Assignment cSendReceiveAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cSendReceiveMessageTypeParserRuleCall_2_0 = (RuleCall)cSendReceiveAssignment_2.eContents().get(0);
+		private final Keyword cFullStopKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cProtocolAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cProtocolProtocolLParserRuleCall_4_0 = (RuleCall)cProtocolAssignment_4.eContents().get(0);
+		
+		//MessageNormalL:
+		//    messageType=ID ('(' payload=Payload? ')'| '()') (sendReceive=MessageType) '.'
+		//    protocol = ProtocolL
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//messageType=ID ('(' payload=Payload? ')'| '()') (sendReceive=MessageType) '.'
+		//protocol = ProtocolL
 		public Group getGroup() { return cGroup; }
 		
 		//messageType=ID
@@ -887,26 +1039,73 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//ID
 		public RuleCall getMessageTypeIDTerminalRuleCall_0_0() { return cMessageTypeIDTerminalRuleCall_0_0; }
 		
+		//('(' payload=Payload? ')'| '()')
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+		
+		//'(' payload=Payload? ')'
+		public Group getGroup_1_0() { return cGroup_1_0; }
+		
 		//'('
-		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		public Keyword getLeftParenthesisKeyword_1_0_0() { return cLeftParenthesisKeyword_1_0_0; }
 		
 		//payload=Payload?
-		public Assignment getPayloadAssignment_2() { return cPayloadAssignment_2; }
+		public Assignment getPayloadAssignment_1_0_1() { return cPayloadAssignment_1_0_1; }
 		
 		//Payload
-		public RuleCall getPayloadPayloadParserRuleCall_2_0() { return cPayloadPayloadParserRuleCall_2_0; }
+		public RuleCall getPayloadPayloadParserRuleCall_1_0_1_0() { return cPayloadPayloadParserRuleCall_1_0_1_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+		public Keyword getRightParenthesisKeyword_1_0_2() { return cRightParenthesisKeyword_1_0_2; }
+		
+		//'()'
+		public Keyword getLeftParenthesisRightParenthesisKeyword_1_1() { return cLeftParenthesisRightParenthesisKeyword_1_1; }
 		
 		//(sendReceive=MessageType)
-		public Assignment getSendReceiveAssignment_4() { return cSendReceiveAssignment_4; }
+		public Assignment getSendReceiveAssignment_2() { return cSendReceiveAssignment_2; }
 		
 		//MessageType
-		public RuleCall getSendReceiveMessageTypeParserRuleCall_4_0() { return cSendReceiveMessageTypeParserRuleCall_4_0; }
+		public RuleCall getSendReceiveMessageTypeParserRuleCall_2_0() { return cSendReceiveMessageTypeParserRuleCall_2_0; }
 		
 		//'.'
-		public Keyword getFullStopKeyword_5() { return cFullStopKeyword_5; }
+		public Keyword getFullStopKeyword_3() { return cFullStopKeyword_3; }
+		
+		//protocol = ProtocolL
+		public Assignment getProtocolAssignment_4() { return cProtocolAssignment_4; }
+		
+		//ProtocolL
+		public RuleCall getProtocolProtocolLParserRuleCall_4_0() { return cProtocolProtocolLParserRuleCall_4_0; }
+	}
+	public class MessageQuitLElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.MessageQuitL");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cMessageTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cMessageTypeQUITKeyword_0_0 = (Keyword)cMessageTypeAssignment_0.eContents().get(0);
+		private final Keyword cLeftParenthesisRightParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cSendReceiveAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cSendReceiveMessageTypeParserRuleCall_2_0 = (RuleCall)cSendReceiveAssignment_2.eContents().get(0);
+		
+		//MessageQuitL:
+		//    messageType='QUIT' '()' (sendReceive=MessageType)
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//messageType='QUIT' '()' (sendReceive=MessageType)
+		public Group getGroup() { return cGroup; }
+		
+		//messageType='QUIT'
+		public Assignment getMessageTypeAssignment_0() { return cMessageTypeAssignment_0; }
+		
+		//'QUIT'
+		public Keyword getMessageTypeQUITKeyword_0_0() { return cMessageTypeQUITKeyword_0_0; }
+		
+		//'()'
+		public Keyword getLeftParenthesisRightParenthesisKeyword_1() { return cLeftParenthesisRightParenthesisKeyword_1; }
+		
+		//(sendReceive=MessageType)
+		public Assignment getSendReceiveAssignment_2() { return cSendReceiveAssignment_2; }
+		
+		//MessageType
+		public RuleCall getSendReceiveMessageTypeParserRuleCall_2_0() { return cSendReceiveMessageTypeParserRuleCall_2_0; }
 	}
 	public class MessageTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.MessageType");
@@ -994,28 +1193,28 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final RuleCall cRoleMakingChoiceRoleIDTerminalRuleCall_2_0_1 = (RuleCall)cRoleMakingChoiceRoleCrossReference_2_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cBranchesAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cBranchesChoiceBranchLParserRuleCall_4_0 = (RuleCall)cBranchesAssignment_4.eContents().get(0);
+		private final RuleCall cBranchesMessageLParserRuleCall_4_0 = (RuleCall)cBranchesAssignment_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cOrKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
 		private final Assignment cBranchesAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
-		private final RuleCall cBranchesChoiceBranchLParserRuleCall_6_2_0 = (RuleCall)cBranchesAssignment_6_2.eContents().get(0);
+		private final RuleCall cBranchesMessageLParserRuleCall_6_2_0 = (RuleCall)cBranchesAssignment_6_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6_3 = (Keyword)cGroup_6.eContents().get(3);
 		
 		//ChoiceL:
 		//    'choice' 'at' roleMakingChoice=[Role | ID] '{'
-		//        branches+=ChoiceBranchL
+		//        branches+=MessageL
 		//    '}' ('or' '{'
-		//        branches+=ChoiceBranchL
+		//        branches+=MessageL
 		//    '}')*
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'choice' 'at' roleMakingChoice=[Role | ID] '{'
-		//    branches+=ChoiceBranchL
+		//    branches+=MessageL
 		//'}' ('or' '{'
-		//    branches+=ChoiceBranchL
+		//    branches+=MessageL
 		//'}')*
 		public Group getGroup() { return cGroup; }
 		
@@ -1037,17 +1236,17 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//branches+=ChoiceBranchL
+		//branches+=MessageL
 		public Assignment getBranchesAssignment_4() { return cBranchesAssignment_4; }
 		
-		//ChoiceBranchL
-		public RuleCall getBranchesChoiceBranchLParserRuleCall_4_0() { return cBranchesChoiceBranchLParserRuleCall_4_0; }
+		//MessageL
+		public RuleCall getBranchesMessageLParserRuleCall_4_0() { return cBranchesMessageLParserRuleCall_4_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 		
 		//('or' '{'
-		//       branches+=ChoiceBranchL
+		//       branches+=MessageL
 		//   '}')*
 		public Group getGroup_6() { return cGroup_6; }
 		
@@ -1057,61 +1256,14 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_6_1() { return cLeftCurlyBracketKeyword_6_1; }
 		
-		//branches+=ChoiceBranchL
+		//branches+=MessageL
 		public Assignment getBranchesAssignment_6_2() { return cBranchesAssignment_6_2; }
 		
-		//ChoiceBranchL
-		public RuleCall getBranchesChoiceBranchLParserRuleCall_6_2_0() { return cBranchesChoiceBranchLParserRuleCall_6_2_0; }
+		//MessageL
+		public RuleCall getBranchesMessageLParserRuleCall_6_2_0() { return cBranchesMessageLParserRuleCall_6_2_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_6_3() { return cRightCurlyBracketKeyword_6_3; }
-	}
-	public class ChoiceBranchLElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.ChoiceBranchL");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Action cChoiceBranchLAction_0_0 = (Action)cGroup_0.eContents().get(0);
-		private final Keyword cEndKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Assignment cMessageAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final RuleCall cMessageMessageLParserRuleCall_1_0_0 = (RuleCall)cMessageAssignment_1_0.eContents().get(0);
-		private final Assignment cProtocolAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cProtocolProtocolLParserRuleCall_1_1_0 = (RuleCall)cProtocolAssignment_1_1.eContents().get(0);
-		
-		//ChoiceBranchL:
-		//    {ChoiceBranchL} 'End' | message=MessageL
-		//    protocol=ProtocolL
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{ChoiceBranchL} 'End' | message=MessageL
-		//protocol=ProtocolL
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//{ChoiceBranchL} 'End'
-		public Group getGroup_0() { return cGroup_0; }
-		
-		//{ChoiceBranchL}
-		public Action getChoiceBranchLAction_0_0() { return cChoiceBranchLAction_0_0; }
-		
-		//'End'
-		public Keyword getEndKeyword_0_1() { return cEndKeyword_0_1; }
-		
-		//message=MessageL
-		//   protocol=ProtocolL
-		public Group getGroup_1() { return cGroup_1; }
-		
-		//message=MessageL
-		public Assignment getMessageAssignment_1_0() { return cMessageAssignment_1_0; }
-		
-		//MessageL
-		public RuleCall getMessageMessageLParserRuleCall_1_0_0() { return cMessageMessageLParserRuleCall_1_0_0; }
-		
-		//protocol=ProtocolL
-		public Assignment getProtocolAssignment_1_1() { return cProtocolAssignment_1_1; }
-		
-		//ProtocolL
-		public RuleCall getProtocolProtocolLParserRuleCall_1_1_0() { return cProtocolProtocolLParserRuleCall_1_1_0; }
 	}
 	public class ForEachLElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.ForEachL");
@@ -1133,17 +1285,22 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Assignment cBranchAssignment_9 = (Assignment)cGroup.eContents().get(9);
 		private final RuleCall cBranchProtocolLParserRuleCall_9_0 = (RuleCall)cBranchAssignment_9.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final Keyword cSemicolonKeyword_11 = (Keyword)cGroup.eContents().get(11);
+		private final Assignment cProtocolAssignment_12 = (Assignment)cGroup.eContents().get(12);
+		private final RuleCall cProtocolProtocolLParserRuleCall_12_0 = (RuleCall)cProtocolAssignment_12.eContents().get(0);
 		
 		//ForEachL:
 		//    'foreach' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
 		//        branch=ProtocolL
-		//    '}'
+		//    '}'';'
+		//    protocol = ProtocolL
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'foreach' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
 		//    branch=ProtocolL
-		//'}'
+		//'}'';'
+		//protocol = ProtocolL
 		public Group getGroup() { return cGroup; }
 		
 		//'foreach'
@@ -1196,6 +1353,15 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_10() { return cRightCurlyBracketKeyword_10; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_11() { return cSemicolonKeyword_11; }
+		
+		//protocol = ProtocolL
+		public Assignment getProtocolAssignment_12() { return cProtocolAssignment_12; }
+		
+		//ProtocolL
+		public RuleCall getProtocolProtocolLParserRuleCall_12_0() { return cProtocolProtocolLParserRuleCall_12_0; }
 	}
 	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.Type");
@@ -1230,22 +1396,26 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	private final RoleOneElements pRoleOne;
 	private final RoleSetElements pRoleSet;
 	private final ProtocolElements pProtocol;
+	private final EndProtocolElements pEndProtocol;
 	private final RecursionElements pRecursion;
 	private final CloseRecursionElements pCloseRecursion;
 	private final ForEachElements pForEach;
 	private final ChoiceElements pChoice;
-	private final ChoiceBranchElements pChoiceBranch;
 	private final MessageElements pMessage;
+	private final MessageNormalElements pMessageNormal;
+	private final MessageQuitElements pMessageQuit;
 	private final PayloadElements pPayload;
 	private final LocalProtocolElements pLocalProtocol;
 	private final ProtocolLElements pProtocolL;
 	private final RecursionLElements pRecursionL;
+	private final CloseRecursionLElements pCloseRecursionL;
 	private final MessageLElements pMessageL;
+	private final MessageNormalLElements pMessageNormalL;
+	private final MessageQuitLElements pMessageQuitL;
 	private final MessageTypeElements pMessageType;
 	private final SenderLElements pSenderL;
 	private final ReceiverLElements pReceiverL;
 	private final ChoiceLElements pChoiceL;
-	private final ChoiceBranchLElements pChoiceBranchL;
 	private final ForEachLElements pForEachL;
 	private final TypeElements pType;
 	
@@ -1265,22 +1435,26 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		this.pRoleOne = new RoleOneElements();
 		this.pRoleSet = new RoleSetElements();
 		this.pProtocol = new ProtocolElements();
+		this.pEndProtocol = new EndProtocolElements();
 		this.pRecursion = new RecursionElements();
 		this.pCloseRecursion = new CloseRecursionElements();
 		this.pForEach = new ForEachElements();
 		this.pChoice = new ChoiceElements();
-		this.pChoiceBranch = new ChoiceBranchElements();
 		this.pMessage = new MessageElements();
+		this.pMessageNormal = new MessageNormalElements();
+		this.pMessageQuit = new MessageQuitElements();
 		this.pPayload = new PayloadElements();
 		this.pLocalProtocol = new LocalProtocolElements();
 		this.pProtocolL = new ProtocolLElements();
 		this.pRecursionL = new RecursionLElements();
+		this.pCloseRecursionL = new CloseRecursionLElements();
 		this.pMessageL = new MessageLElements();
+		this.pMessageNormalL = new MessageNormalLElements();
+		this.pMessageQuitL = new MessageQuitLElements();
 		this.pMessageType = new MessageTypeElements();
 		this.pSenderL = new SenderLElements();
 		this.pReceiverL = new ReceiverLElements();
 		this.pChoiceL = new ChoiceLElements();
-		this.pChoiceBranchL = new ChoiceBranchLElements();
 		this.pForEachL = new ForEachLElements();
 		this.pType = new TypeElements();
 	}
@@ -1324,6 +1498,16 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//GlobalProtocol:
+	//    /*
+	//     *     As defined in ICTCS Paper "Global Types for Agent Interaction Protocols"
+	//         global protocol name(p;⟨R, p⟩) = G
+	//        where G is defined by:
+	//        G ::= p → Q { ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼     Choice of Interactions
+	//        | muX.G | X                 Recursion and Variable
+	//        | End                         End of protocol
+	//        | for x:⟨R, q⟩ G1; G2         Protocol for participants in a role set
+	//        | x → q ℓQuit                 Exit from role set
+	//     */
 	//    'global' 'protocol' protocolName=ID '(' roles=Roles '){'protocol=Protocol'}'
 	//    ;
 	public GlobalProtocolElements getGlobalProtocolAccess() {
@@ -1379,7 +1563,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//Protocol:
-	//    {Protocol} (actions+=(Message | Choice | Recursion | ForEach))* (doesEnd='End')? | actions+=(CloseRecursion)
+	//    begin = (Choice | Message | Recursion | ForEach | CloseRecursion | EndProtocol)
 	//;
 	public ProtocolElements getProtocolAccess() {
 		return pProtocol;
@@ -1387,6 +1571,17 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 	public ParserRule getProtocolRule() {
 		return getProtocolAccess().getRule();
+	}
+	
+	//EndProtocol:
+	//    end='End'
+	//;
+	public EndProtocolElements getEndProtocolAccess() {
+		return pEndProtocol;
+	}
+	
+	public ParserRule getEndProtocolRule() {
+		return getEndProtocolAccess().getRule();
 	}
 	
 	//Recursion:
@@ -1402,7 +1597,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		return getRecursionAccess().getRule();
 	}
 	
-	//CloseRecursion:
+	//CloseRecursion: //terminale
 	//    'loop' recursionVariable=[Recursion | ID]
 	//;
 	public CloseRecursionElements getCloseRecursionAccess() {
@@ -1415,8 +1610,9 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 	//ForEach:
 	//    'for' loopRole=RoleOne ':' '<'roleset=[RoleSet | ID] ',' refRole = [RoleOne | ID] '>' '{'
-	//        branch=Protocol
+	//        forBody=Protocol
 	//    '}'';'
+	//    protocol = Protocol
 	//;
 	public ForEachElements getForEachAccess() {
 		return pForEach;
@@ -1428,9 +1624,9 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 	//Choice:
 	//    'choice' 'at' role=[RoleOne | ID] '{'
-	//        branches+=ChoiceBranch
+	//        branches+=Message
 	//    '}' ('or' '{'
-	//        branches+=ChoiceBranch
+	//        branches+=Message
 	//    '}')*
 	//;
 	public ChoiceElements getChoiceAccess() {
@@ -1441,20 +1637,9 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		return getChoiceAccess().getRule();
 	}
 	
-	//ChoiceBranch:
-	//    message=Message
-	//    protocol=Protocol
-	//;
-	public ChoiceBranchElements getChoiceBranchAccess() {
-		return pChoiceBranch;
-	}
-	
-	public ParserRule getChoiceBranchRule() {
-		return getChoiceBranchAccess().getRule();
-	}
-	
 	//Message:
-	//    messageType=ID '(' payload=Payload? ')' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
+	//    MessageNormal |
+	//    MessageQuit
 	//;
 	public MessageElements getMessageAccess() {
 		return pMessage;
@@ -1464,8 +1649,31 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		return getMessageAccess().getRule();
 	}
 	
+	//MessageNormal:
+	//    messageType=ID ('(' (payload=Payload)? ')' | '()') 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
+	//    protocol = Protocol
+	//;
+	public MessageNormalElements getMessageNormalAccess() {
+		return pMessageNormal;
+	}
+	
+	public ParserRule getMessageNormalRule() {
+		return getMessageNormalAccess().getRule();
+	}
+	
+	//MessageQuit: //terminale
+	//    messageType = 'QUIT' '()' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID]
+	//;
+	public MessageQuitElements getMessageQuitAccess() {
+		return pMessageQuit;
+	}
+	
+	public ParserRule getMessageQuitRule() {
+		return getMessageQuitAccess().getRule();
+	}
+	
 	//Payload:
-	//    {Payload} (types+=Type (','types+=Type)*) | types+=ID
+	//    types+=Type (','types+=Type)*
 	//;
 	public PayloadElements getPayloadAccess() {
 		return pPayload;
@@ -1476,7 +1684,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//LocalProtocol:
-	//    'local' 'protocol' protocolName=ID 'at' projectedRole=ID '(' roles=Roles ')' '{'protocol=ProtocolL'}'
+	//    'local' 'protocol' protocolName=ID 'at' projectedRole=Role '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
 	//;
 	public LocalProtocolElements getLocalProtocolAccess() {
 		return pLocalProtocol;
@@ -1487,7 +1695,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//ProtocolL:
-	//    {ProtocolL} (actions+=(MessageL | ChoiceL | ForEachL | RecursionL | CloseRecursion))* ('End')?
+	//    begin = (MessageL | ChoiceL | ForEachL | RecursionL | CloseRecursionL | EndProtocol)
 	//;
 	public ProtocolLElements getProtocolLAccess() {
 		return pProtocolL;
@@ -1510,8 +1718,20 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		return getRecursionLAccess().getRule();
 	}
 	
+	//CloseRecursionL: //terminale
+	//    'loop' recursionVariable=[RecursionL | ID]
+	//;
+	public CloseRecursionLElements getCloseRecursionLAccess() {
+		return pCloseRecursionL;
+	}
+	
+	public ParserRule getCloseRecursionLRule() {
+		return getCloseRecursionLAccess().getRule();
+	}
+	
 	//MessageL:
-	//    messageType=ID '(' payload=Payload? ')' (sendReceive=MessageType) '.'
+	//    MessageNormalL |
+	//    MessageQuitL
 	//;
 	public MessageLElements getMessageLAccess() {
 		return pMessageL;
@@ -1519,6 +1739,29 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 	public ParserRule getMessageLRule() {
 		return getMessageLAccess().getRule();
+	}
+	
+	//MessageNormalL:
+	//    messageType=ID ('(' payload=Payload? ')'| '()') (sendReceive=MessageType) '.'
+	//    protocol = ProtocolL
+	//;
+	public MessageNormalLElements getMessageNormalLAccess() {
+		return pMessageNormalL;
+	}
+	
+	public ParserRule getMessageNormalLRule() {
+		return getMessageNormalLAccess().getRule();
+	}
+	
+	//MessageQuitL:
+	//    messageType='QUIT' '()' (sendReceive=MessageType)
+	//;
+	public MessageQuitLElements getMessageQuitLAccess() {
+		return pMessageQuitL;
+	}
+	
+	public ParserRule getMessageQuitLRule() {
+		return getMessageQuitLAccess().getRule();
 	}
 	
 	//MessageType:
@@ -1556,9 +1799,9 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 	//ChoiceL:
 	//    'choice' 'at' roleMakingChoice=[Role | ID] '{'
-	//        branches+=ChoiceBranchL
+	//        branches+=MessageL
 	//    '}' ('or' '{'
-	//        branches+=ChoiceBranchL
+	//        branches+=MessageL
 	//    '}')*
 	//;
 	public ChoiceLElements getChoiceLAccess() {
@@ -1569,22 +1812,11 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		return getChoiceLAccess().getRule();
 	}
 	
-	//ChoiceBranchL:
-	//    {ChoiceBranchL} 'End' | message=MessageL
-	//    protocol=ProtocolL
-	//;
-	public ChoiceBranchLElements getChoiceBranchLAccess() {
-		return pChoiceBranchL;
-	}
-	
-	public ParserRule getChoiceBranchLRule() {
-		return getChoiceBranchLAccess().getRule();
-	}
-	
 	//ForEachL:
 	//    'foreach' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
 	//        branch=ProtocolL
-	//    '}'
+	//    '}'';'
+	//    protocol = ProtocolL
 	//;
 	public ForEachLElements getForEachLAccess() {
 		return pForEachL;

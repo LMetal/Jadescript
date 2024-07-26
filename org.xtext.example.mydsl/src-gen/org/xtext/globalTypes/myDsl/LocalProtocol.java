@@ -49,26 +49,26 @@ public interface LocalProtocol extends EObject
   void setProtocolName(String value);
 
   /**
-   * Returns the value of the '<em><b>Projected Role</b></em>' attribute.
+   * Returns the value of the '<em><b>Projected Role</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Projected Role</em>' attribute.
-   * @see #setProjectedRole(String)
+   * @return the value of the '<em>Projected Role</em>' containment reference.
+   * @see #setProjectedRole(Role)
    * @see org.xtext.globalTypes.myDsl.MyDslPackage#getLocalProtocol_ProjectedRole()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getProjectedRole();
+  Role getProjectedRole();
 
   /**
-   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.LocalProtocol#getProjectedRole <em>Projected Role</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.LocalProtocol#getProjectedRole <em>Projected Role</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Projected Role</em>' attribute.
+   * @param value the new value of the '<em>Projected Role</em>' containment reference.
    * @see #getProjectedRole()
    * @generated
    */
-  void setProjectedRole(String value);
+  void setProjectedRole(Role value);
 
   /**
    * Returns the value of the '<em><b>Roles</b></em>' containment reference.
