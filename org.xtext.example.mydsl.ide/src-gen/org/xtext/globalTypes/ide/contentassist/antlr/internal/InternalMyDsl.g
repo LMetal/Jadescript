@@ -5129,9 +5129,9 @@ rule__LocalProtocol__ProjectedRoleAssignment_4
 	}
 :
 	(
-		{ before(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleOneParserRuleCall_4_0()); }
-		ruleRoleOne
-		{ after(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleOneParserRuleCall_4_0()); }
+		{ before(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleParserRuleCall_4_0()); }
+		ruleRole
+		{ after(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleParserRuleCall_4_0()); }
 	)
 ;
 finally {

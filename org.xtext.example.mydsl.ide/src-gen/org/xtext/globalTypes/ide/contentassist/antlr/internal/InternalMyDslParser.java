@@ -9327,7 +9327,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:3064:1: ( rule__LocalProtocol__Group__3__Impl rule__LocalProtocol__Group__4 )
             // InternalMyDsl.g:3065:2: rule__LocalProtocol__Group__3__Impl rule__LocalProtocol__Group__4
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_6);
             rule__LocalProtocol__Group__3__Impl();
 
             state._fsp--;
@@ -15157,25 +15157,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LocalProtocol__ProjectedRoleAssignment_4"
-    // InternalMyDsl.g:5126:1: rule__LocalProtocol__ProjectedRoleAssignment_4 : ( ruleRoleOne ) ;
+    // InternalMyDsl.g:5126:1: rule__LocalProtocol__ProjectedRoleAssignment_4 : ( ruleRole ) ;
     public final void rule__LocalProtocol__ProjectedRoleAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMyDsl.g:5130:1: ( ( ruleRoleOne ) )
-            // InternalMyDsl.g:5131:2: ( ruleRoleOne )
+            // InternalMyDsl.g:5130:1: ( ( ruleRole ) )
+            // InternalMyDsl.g:5131:2: ( ruleRole )
             {
-            // InternalMyDsl.g:5131:2: ( ruleRoleOne )
-            // InternalMyDsl.g:5132:3: ruleRoleOne
+            // InternalMyDsl.g:5131:2: ( ruleRole )
+            // InternalMyDsl.g:5132:3: ruleRole
             {
-             before(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleOneParserRuleCall_4_0()); 
+             before(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
-            ruleRoleOne();
+            ruleRole();
 
             state._fsp--;
 
-             after(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleOneParserRuleCall_4_0()); 
+             after(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleParserRuleCall_4_0()); 
 
             }
 

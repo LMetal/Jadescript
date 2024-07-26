@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.xtext.globalTypes.myDsl.LocalProtocol;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.ProtocolL;
-import org.xtext.globalTypes.myDsl.RoleOne;
+import org.xtext.globalTypes.myDsl.Role;
 import org.xtext.globalTypes.myDsl.Roles;
 
 /**
@@ -64,7 +64,7 @@ public class LocalProtocolImpl extends MinimalEObjectImpl.Container implements L
    * @generated
    * @ordered
    */
-  protected RoleOne projectedRole;
+  protected Role projectedRole;
 
   /**
    * The cached value of the '{@link #getRoles() <em>Roles</em>}' containment reference.
@@ -138,7 +138,7 @@ public class LocalProtocolImpl extends MinimalEObjectImpl.Container implements L
    * @generated
    */
   @Override
-  public RoleOne getProjectedRole()
+  public Role getProjectedRole()
   {
     return projectedRole;
   }
@@ -148,9 +148,9 @@ public class LocalProtocolImpl extends MinimalEObjectImpl.Container implements L
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetProjectedRole(RoleOne newProjectedRole, NotificationChain msgs)
+  public NotificationChain basicSetProjectedRole(Role newProjectedRole, NotificationChain msgs)
   {
-    RoleOne oldProjectedRole = projectedRole;
+    Role oldProjectedRole = projectedRole;
     projectedRole = newProjectedRole;
     if (eNotificationRequired())
     {
@@ -166,7 +166,7 @@ public class LocalProtocolImpl extends MinimalEObjectImpl.Container implements L
    * @generated
    */
   @Override
-  public void setProjectedRole(RoleOne newProjectedRole)
+  public void setProjectedRole(Role newProjectedRole)
   {
     if (newProjectedRole != projectedRole)
     {
@@ -338,7 +338,7 @@ public class LocalProtocolImpl extends MinimalEObjectImpl.Container implements L
         setProtocolName((String)newValue);
         return;
       case MyDslPackage.LOCAL_PROTOCOL__PROJECTED_ROLE:
-        setProjectedRole((RoleOne)newValue);
+        setProjectedRole((Role)newValue);
         return;
       case MyDslPackage.LOCAL_PROTOCOL__ROLES:
         setRoles((Roles)newValue);
@@ -364,7 +364,7 @@ public class LocalProtocolImpl extends MinimalEObjectImpl.Container implements L
         setProtocolName(PROTOCOL_NAME_EDEFAULT);
         return;
       case MyDslPackage.LOCAL_PROTOCOL__PROJECTED_ROLE:
-        setProjectedRole((RoleOne)null);
+        setProjectedRole((Role)null);
         return;
       case MyDslPackage.LOCAL_PROTOCOL__ROLES:
         setRoles((Roles)null);

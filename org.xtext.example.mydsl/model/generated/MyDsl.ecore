@@ -71,7 +71,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LocalProtocol">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="protocolName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="projectedRole" eType="#//RoleOne"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="projectedRole" eType="#//Role"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roles" eType="#//Roles"
         containment="true"/>

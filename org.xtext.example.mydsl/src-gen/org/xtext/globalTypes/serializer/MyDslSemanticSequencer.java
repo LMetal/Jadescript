@@ -316,7 +316,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     LocalProtocol returns LocalProtocol
 	 *
 	 * Constraint:
-	 *     (protocolName=ID projectedRole=RoleOne roles=Roles protocol=ProtocolL)
+	 *     (protocolName=ID projectedRole=Role roles=Roles protocol=ProtocolL)
 	 * </pre>
 	 */
 	protected void sequence_LocalProtocol(ISerializationContext context, LocalProtocol semanticObject) {
@@ -332,7 +332,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getLocalProtocolAccess().getProtocolNameIDTerminalRuleCall_2_0(), semanticObject.getProtocolName());
-		feeder.accept(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleOneParserRuleCall_4_0(), semanticObject.getProjectedRole());
+		feeder.accept(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleParserRuleCall_4_0(), semanticObject.getProjectedRole());
 		feeder.accept(grammarAccess.getLocalProtocolAccess().getRolesRolesParserRuleCall_6_0(), semanticObject.getRoles());
 		feeder.accept(grammarAccess.getLocalProtocolAccess().getProtocolProtocolLParserRuleCall_8_0(), semanticObject.getProtocol());
 		feeder.finish();

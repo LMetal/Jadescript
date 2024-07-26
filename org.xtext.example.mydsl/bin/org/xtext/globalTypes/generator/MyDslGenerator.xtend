@@ -51,12 +51,13 @@ class MyDslGenerator extends AbstractGenerator {
 	}
 	
 	def CharSequence project(GlobalProtocol p, Role role)'''
-		local protocol «p.protocolName» at role «role.name»(«projectOn(p.roles, role)») {
+		local protocol «p.protocolName» at «projectOn(role, role)»(«projectOn(p.roles, role)») {
 			«projectOn(p.protocol, role)»
 		}
 	'''
 	
 	def dispatch projectOn(Protocol protocol, Role role)'''
+		«System.out.println("Project on here " + role.name)»
 		«projectOn(protocol.begin, role)»'''
 	
 	def dispatch projectOn(Roles roles, Role r)
@@ -118,18 +119,74 @@ class MyDslGenerator extends AbstractGenerator {
 	
 	def dispatch projectOn(ForEach each, Role r)'''
 		«IF each.roleset == r»
-			«projectOn(each.forBody, each.loopRole)»
+			«System.out.println("seq foreach start")»
+			«seqOn(each.forBody, each.loopRole, each.roleset, each.protocol)»
 		«ENDIF»
 		«IF each.refRole == r»
+			«System.out.println("project foreach start")»
 			foreach role «each.loopRole.name»:<«each.roleset.name»,«each.refRole.name»>{
 				«projectOn(each.forBody, r)»
 			};
+			«projectOn(each.protocol, r)»
 		«ENDIF»
-		«projectOn(each.protocol, r)»
 	'''
 	
 	def dispatch projectOn(EndProtocol end, Role r)'''
 		End
+	'''
+	
+	def dispatch seqOn(Protocol protocol, Role role, Role roleset, Protocol p)'''
+		«seqOn(protocol.begin, role, roleset, p)»'''
+	
+	def dispatch seqOn(Message m, Role r, Role rs, Protocol p)'''
+		«System.out.println("seq message "+m.messageType)»
+		«IF m instanceof MessageNormal»
+			«IF m.sender.name == r.name»
+				«m.messageType»(«printPayload(m.payload)») to «m.receiver.name».
+			«ELSE»
+				«IF m.receiver.name == r.name»
+					«m.messageType»(«printPayload(m.payload)») from «m.sender.name».
+				«ENDIF»
+			«ENDIF»
+			«seqOn(m.protocol, r, rs, p)»
+		«ELSE»
+			«IF m.sender.name == r.name»
+				QUIT() to «m.receiver.name»
+			«ELSE»
+				«IF m.receiver.name == r.name»
+					QUIT() from «m.sender.name»
+				«ENDIF»
+			«ENDIF»
+		«ENDIF»
+	'''
+	
+	def dispatch seqOn(Choice c, Role r, Role rs, Protocol p)'''
+		choice at «c.role.name»{
+		«FOR int i: 0..c.branches.length-1 SEPARATOR ' or {'»
+				«seqOn(c.branches.get(i), r, rs, p)»
+			}
+		«ENDFOR»
+	'''
+
+	def dispatch seqOn(Recursion rec, Role r, Role rs, Protocol p)'''
+	«System.out.println("seq rec")»
+		rec «rec.name»: {
+			«seqOn(rec.recProtocol, r, rs, p)»
+		}
+	'''
+	
+	def dispatch seqOn(ForEach f, Role r, Role rs, Protocol p)'''
+		«System.out.println("seq for")»
+		«projectOn(f, rs)»
+	'''
+	
+	def dispatch seqOn(CloseRecursion close, Role r, Role rs, Protocol p)'''
+		«projectOn(close, r)»
+	'''
+	
+	def dispatch seqOn(EndProtocol end, Role r, Role rs, Protocol p)'''
+		«System.out.println("seq end")»
+		«projectOn(p, rs)»
 	'''
 	
 	def printPayload(Payload payload)'''

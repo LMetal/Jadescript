@@ -92,7 +92,7 @@ Payload:
 ;
 
 LocalProtocol:
-	'local' 'protocol' protocolName=ID 'at' projectedRole=RoleOne '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
+	'local' 'protocol' protocolName=ID 'at' projectedRole=Role '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
 ;
 
 

@@ -1341,7 +1341,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(localProtocolEClass, LocalProtocol.class, "LocalProtocol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getLocalProtocol_ProtocolName(), ecorePackage.getEString(), "protocolName", null, 0, 1, LocalProtocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getLocalProtocol_ProjectedRole(), this.getRoleOne(), null, "projectedRole", null, 0, 1, LocalProtocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getLocalProtocol_ProjectedRole(), this.getRole(), null, "projectedRole", null, 0, 1, LocalProtocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLocalProtocol_Roles(), this.getRoles(), null, "roles", null, 0, 1, LocalProtocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLocalProtocol_Protocol(), this.getProtocolL(), null, "protocol", null, 0, 1, LocalProtocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

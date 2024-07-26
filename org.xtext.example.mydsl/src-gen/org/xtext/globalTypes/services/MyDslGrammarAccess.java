@@ -790,7 +790,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final RuleCall cProtocolNameIDTerminalRuleCall_2_0 = (RuleCall)cProtocolNameAssignment_2.eContents().get(0);
 		private final Keyword cAtKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cProjectedRoleAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cProjectedRoleRoleOneParserRuleCall_4_0 = (RuleCall)cProjectedRoleAssignment_4.eContents().get(0);
+		private final RuleCall cProjectedRoleRoleParserRuleCall_4_0 = (RuleCall)cProjectedRoleAssignment_4.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Assignment cRolesAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cRolesRolesParserRuleCall_6_0 = (RuleCall)cRolesAssignment_6.eContents().get(0);
@@ -804,11 +804,11 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
 		//LocalProtocol:
-		//    'local' 'protocol' protocolName=ID 'at' projectedRole=RoleOne '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
+		//    'local' 'protocol' protocolName=ID 'at' projectedRole=Role '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'local' 'protocol' protocolName=ID 'at' projectedRole=RoleOne '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
+		//'local' 'protocol' protocolName=ID 'at' projectedRole=Role '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
 		public Group getGroup() { return cGroup; }
 		
 		//'local'
@@ -826,11 +826,11 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'at'
 		public Keyword getAtKeyword_3() { return cAtKeyword_3; }
 		
-		//projectedRole=RoleOne
+		//projectedRole=Role
 		public Assignment getProjectedRoleAssignment_4() { return cProjectedRoleAssignment_4; }
 		
-		//RoleOne
-		public RuleCall getProjectedRoleRoleOneParserRuleCall_4_0() { return cProjectedRoleRoleOneParserRuleCall_4_0; }
+		//Role
+		public RuleCall getProjectedRoleRoleParserRuleCall_4_0() { return cProjectedRoleRoleParserRuleCall_4_0; }
 		
 		//'('
 		public Keyword getLeftParenthesisKeyword_5() { return cLeftParenthesisKeyword_5; }
@@ -1684,7 +1684,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//LocalProtocol:
-	//    'local' 'protocol' protocolName=ID 'at' projectedRole=RoleOne '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
+	//    'local' 'protocol' protocolName=ID 'at' projectedRole=Role '(' roles=Roles ('){' | ')''{')protocol=ProtocolL'}'
 	//;
 	public LocalProtocolElements getLocalProtocolAccess() {
 		return pLocalProtocol;

@@ -2887,7 +2887,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLocalProtocol"
-    // InternalMyDsl.g:1213:1: ruleLocalProtocol returns [EObject current=null] : (otherlv_0= 'local' otherlv_1= 'protocol' ( (lv_protocolName_2_0= RULE_ID ) ) otherlv_3= 'at' ( (lv_projectedRole_4_0= ruleRoleOne ) ) otherlv_5= '(' ( (lv_roles_6_0= ruleRoles ) ) (otherlv_7= '){' | (otherlv_8= ')' otherlv_9= '{' ) ) ( (lv_protocol_10_0= ruleProtocolL ) ) otherlv_11= '}' ) ;
+    // InternalMyDsl.g:1213:1: ruleLocalProtocol returns [EObject current=null] : (otherlv_0= 'local' otherlv_1= 'protocol' ( (lv_protocolName_2_0= RULE_ID ) ) otherlv_3= 'at' ( (lv_projectedRole_4_0= ruleRole ) ) otherlv_5= '(' ( (lv_roles_6_0= ruleRoles ) ) (otherlv_7= '){' | (otherlv_8= ')' otherlv_9= '{' ) ) ( (lv_protocol_10_0= ruleProtocolL ) ) otherlv_11= '}' ) ;
     public final EObject ruleLocalProtocol() throws RecognitionException {
         EObject current = null;
 
@@ -2911,11 +2911,11 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalMyDsl.g:1219:2: ( (otherlv_0= 'local' otherlv_1= 'protocol' ( (lv_protocolName_2_0= RULE_ID ) ) otherlv_3= 'at' ( (lv_projectedRole_4_0= ruleRoleOne ) ) otherlv_5= '(' ( (lv_roles_6_0= ruleRoles ) ) (otherlv_7= '){' | (otherlv_8= ')' otherlv_9= '{' ) ) ( (lv_protocol_10_0= ruleProtocolL ) ) otherlv_11= '}' ) )
-            // InternalMyDsl.g:1220:2: (otherlv_0= 'local' otherlv_1= 'protocol' ( (lv_protocolName_2_0= RULE_ID ) ) otherlv_3= 'at' ( (lv_projectedRole_4_0= ruleRoleOne ) ) otherlv_5= '(' ( (lv_roles_6_0= ruleRoles ) ) (otherlv_7= '){' | (otherlv_8= ')' otherlv_9= '{' ) ) ( (lv_protocol_10_0= ruleProtocolL ) ) otherlv_11= '}' )
+            // InternalMyDsl.g:1219:2: ( (otherlv_0= 'local' otherlv_1= 'protocol' ( (lv_protocolName_2_0= RULE_ID ) ) otherlv_3= 'at' ( (lv_projectedRole_4_0= ruleRole ) ) otherlv_5= '(' ( (lv_roles_6_0= ruleRoles ) ) (otherlv_7= '){' | (otherlv_8= ')' otherlv_9= '{' ) ) ( (lv_protocol_10_0= ruleProtocolL ) ) otherlv_11= '}' ) )
+            // InternalMyDsl.g:1220:2: (otherlv_0= 'local' otherlv_1= 'protocol' ( (lv_protocolName_2_0= RULE_ID ) ) otherlv_3= 'at' ( (lv_projectedRole_4_0= ruleRole ) ) otherlv_5= '(' ( (lv_roles_6_0= ruleRoles ) ) (otherlv_7= '){' | (otherlv_8= ')' otherlv_9= '{' ) ) ( (lv_protocol_10_0= ruleProtocolL ) ) otherlv_11= '}' )
             {
-            // InternalMyDsl.g:1220:2: (otherlv_0= 'local' otherlv_1= 'protocol' ( (lv_protocolName_2_0= RULE_ID ) ) otherlv_3= 'at' ( (lv_projectedRole_4_0= ruleRoleOne ) ) otherlv_5= '(' ( (lv_roles_6_0= ruleRoles ) ) (otherlv_7= '){' | (otherlv_8= ')' otherlv_9= '{' ) ) ( (lv_protocol_10_0= ruleProtocolL ) ) otherlv_11= '}' )
-            // InternalMyDsl.g:1221:3: otherlv_0= 'local' otherlv_1= 'protocol' ( (lv_protocolName_2_0= RULE_ID ) ) otherlv_3= 'at' ( (lv_projectedRole_4_0= ruleRoleOne ) ) otherlv_5= '(' ( (lv_roles_6_0= ruleRoles ) ) (otherlv_7= '){' | (otherlv_8= ')' otherlv_9= '{' ) ) ( (lv_protocol_10_0= ruleProtocolL ) ) otherlv_11= '}'
+            // InternalMyDsl.g:1220:2: (otherlv_0= 'local' otherlv_1= 'protocol' ( (lv_protocolName_2_0= RULE_ID ) ) otherlv_3= 'at' ( (lv_projectedRole_4_0= ruleRole ) ) otherlv_5= '(' ( (lv_roles_6_0= ruleRoles ) ) (otherlv_7= '){' | (otherlv_8= ')' otherlv_9= '{' ) ) ( (lv_protocol_10_0= ruleProtocolL ) ) otherlv_11= '}' )
+            // InternalMyDsl.g:1221:3: otherlv_0= 'local' otherlv_1= 'protocol' ( (lv_protocolName_2_0= RULE_ID ) ) otherlv_3= 'at' ( (lv_projectedRole_4_0= ruleRole ) ) otherlv_5= '(' ( (lv_roles_6_0= ruleRoles ) ) (otherlv_7= '){' | (otherlv_8= ')' otherlv_9= '{' ) ) ( (lv_protocol_10_0= ruleProtocolL ) ) otherlv_11= '}'
             {
             otherlv_0=(Token)match(input,37,FOLLOW_3); 
 
@@ -2951,21 +2951,21 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,29,FOLLOW_13); 
+            otherlv_3=(Token)match(input,29,FOLLOW_6); 
 
             			newLeafNode(otherlv_3, grammarAccess.getLocalProtocolAccess().getAtKeyword_3());
             		
-            // InternalMyDsl.g:1251:3: ( (lv_projectedRole_4_0= ruleRoleOne ) )
-            // InternalMyDsl.g:1252:4: (lv_projectedRole_4_0= ruleRoleOne )
+            // InternalMyDsl.g:1251:3: ( (lv_projectedRole_4_0= ruleRole ) )
+            // InternalMyDsl.g:1252:4: (lv_projectedRole_4_0= ruleRole )
             {
-            // InternalMyDsl.g:1252:4: (lv_projectedRole_4_0= ruleRoleOne )
-            // InternalMyDsl.g:1253:5: lv_projectedRole_4_0= ruleRoleOne
+            // InternalMyDsl.g:1252:4: (lv_projectedRole_4_0= ruleRole )
+            // InternalMyDsl.g:1253:5: lv_projectedRole_4_0= ruleRole
             {
 
-            					newCompositeNode(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleOneParserRuleCall_4_0());
+            					newCompositeNode(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleParserRuleCall_4_0());
             				
             pushFollow(FOLLOW_5);
-            lv_projectedRole_4_0=ruleRoleOne();
+            lv_projectedRole_4_0=ruleRole();
 
             state._fsp--;
 
@@ -2977,7 +2977,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             						current,
             						"projectedRole",
             						lv_projectedRole_4_0,
-            						"org.xtext.globalTypes.MyDsl.RoleOne");
+            						"org.xtext.globalTypes.MyDsl.Role");
             					afterParserOrEnumRuleCall();
             				
 

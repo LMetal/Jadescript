@@ -1251,9 +1251,9 @@ ruleLocalProtocol returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleOneParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getLocalProtocolAccess().getProjectedRoleRoleParserRuleCall_4_0());
 				}
-				lv_projectedRole_4_0=ruleRoleOne
+				lv_projectedRole_4_0=ruleRole
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getLocalProtocolRule());
@@ -1262,7 +1262,7 @@ ruleLocalProtocol returns [EObject current=null]
 						$current,
 						"projectedRole",
 						lv_projectedRole_4_0,
-						"org.xtext.globalTypes.MyDsl.RoleOne");
+						"org.xtext.globalTypes.MyDsl.Role");
 					afterParserOrEnumRuleCall();
 				}
 			)
