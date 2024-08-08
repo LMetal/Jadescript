@@ -31,7 +31,8 @@ public class MyDslParser extends AbstractContentAssistParser {
 		}
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, MyDslGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getModelAccess().getAlternatives(), "rule__Model__Alternatives");
+			builder.put(grammarAccess.getModelAccess().getAlternatives_2(), "rule__Model__Alternatives_2");
+			builder.put(grammarAccess.getDefinitionAccess().getAlternatives(), "rule__Definition__Alternatives");
 			builder.put(grammarAccess.getRoleAccess().getAlternatives(), "rule__Role__Alternatives");
 			builder.put(grammarAccess.getProtocolAccess().getBeginAlternatives_0(), "rule__Protocol__BeginAlternatives_0");
 			builder.put(grammarAccess.getMessageAccess().getAlternatives(), "rule__Message__Alternatives");
@@ -42,7 +43,15 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getMessageNormalLAccess().getAlternatives_1(), "rule__MessageNormalL__Alternatives_1");
 			builder.put(grammarAccess.getMessageTypeAccess().getAlternatives(), "rule__MessageType__Alternatives");
 			builder.put(grammarAccess.getTypeAccess().getAlternatives(), "rule__Type__Alternatives");
+			builder.put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
 			builder.put(grammarAccess.getGlobalProtocolAccess().getGroup(), "rule__GlobalProtocol__Group__0");
+			builder.put(grammarAccess.getDefinitionAccess().getGroup_0(), "rule__Definition__Group_0__0");
+			builder.put(grammarAccess.getDefinitionAccess().getGroup_1(), "rule__Definition__Group_1__0");
+			builder.put(grammarAccess.getDefinitionAccess().getGroup_1_2(), "rule__Definition__Group_1_2__0");
+			builder.put(grammarAccess.getDefinitionAccess().getGroup_1_2_2(), "rule__Definition__Group_1_2_2__0");
+			builder.put(grammarAccess.getDefinitionAccess().getGroup_2(), "rule__Definition__Group_2__0");
+			builder.put(grammarAccess.getDefinitionAccess().getGroup_2_4(), "rule__Definition__Group_2_4__0");
+			builder.put(grammarAccess.getQuitDefinitionAccess().getGroup(), "rule__QuitDefinition__Group__0");
 			builder.put(grammarAccess.getRolesAccess().getGroup(), "rule__Roles__Group__0");
 			builder.put(grammarAccess.getRolesAccess().getGroup_1(), "rule__Roles__Group_1__0");
 			builder.put(grammarAccess.getRoleOneAccess().getGroup(), "rule__RoleOne__Group__0");
@@ -69,11 +78,25 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getChoiceLAccess().getGroup(), "rule__ChoiceL__Group__0");
 			builder.put(grammarAccess.getChoiceLAccess().getGroup_6(), "rule__ChoiceL__Group_6__0");
 			builder.put(grammarAccess.getForEachLAccess().getGroup(), "rule__ForEachL__Group__0");
-			builder.put(grammarAccess.getModelAccess().getProtocolAssignment_0(), "rule__Model__ProtocolAssignment_0");
-			builder.put(grammarAccess.getModelAccess().getProtocolAssignment_1(), "rule__Model__ProtocolAssignment_1");
+			builder.put(grammarAccess.getModelAccess().getDefinitionsAssignment_0(), "rule__Model__DefinitionsAssignment_0");
+			builder.put(grammarAccess.getModelAccess().getDefinitionsAssignment_1(), "rule__Model__DefinitionsAssignment_1");
+			builder.put(grammarAccess.getModelAccess().getProtocolAssignment_2_0(), "rule__Model__ProtocolAssignment_2_0");
+			builder.put(grammarAccess.getModelAccess().getProtocolAssignment_2_1(), "rule__Model__ProtocolAssignment_2_1");
 			builder.put(grammarAccess.getGlobalProtocolAccess().getProtocolNameAssignment_2(), "rule__GlobalProtocol__ProtocolNameAssignment_2");
 			builder.put(grammarAccess.getGlobalProtocolAccess().getRolesAssignment_4(), "rule__GlobalProtocol__RolesAssignment_4");
 			builder.put(grammarAccess.getGlobalProtocolAccess().getProtocolAssignment_6(), "rule__GlobalProtocol__ProtocolAssignment_6");
+			builder.put(grammarAccess.getDefinitionAccess().getTypeAssignment_0_0(), "rule__Definition__TypeAssignment_0_0");
+			builder.put(grammarAccess.getDefinitionAccess().getNameAssignment_0_1(), "rule__Definition__NameAssignment_0_1");
+			builder.put(grammarAccess.getDefinitionAccess().getTypeAssignment_1_0(), "rule__Definition__TypeAssignment_1_0");
+			builder.put(grammarAccess.getDefinitionAccess().getNameAssignment_1_1(), "rule__Definition__NameAssignment_1_1");
+			builder.put(grammarAccess.getDefinitionAccess().getTypesAssignment_1_2_1(), "rule__Definition__TypesAssignment_1_2_1");
+			builder.put(grammarAccess.getDefinitionAccess().getTypesAssignment_1_2_2_1(), "rule__Definition__TypesAssignment_1_2_2_1");
+			builder.put(grammarAccess.getDefinitionAccess().getTypeAssignment_2_0(), "rule__Definition__TypeAssignment_2_0");
+			builder.put(grammarAccess.getDefinitionAccess().getNameAssignment_2_1(), "rule__Definition__NameAssignment_2_1");
+			builder.put(grammarAccess.getDefinitionAccess().getTypesAssignment_2_3(), "rule__Definition__TypesAssignment_2_3");
+			builder.put(grammarAccess.getDefinitionAccess().getTypesAssignment_2_4_1(), "rule__Definition__TypesAssignment_2_4_1");
+			builder.put(grammarAccess.getQuitDefinitionAccess().getTypeAssignment_0(), "rule__QuitDefinition__TypeAssignment_0");
+			builder.put(grammarAccess.getQuitDefinitionAccess().getNameAssignment_1(), "rule__QuitDefinition__NameAssignment_1");
 			builder.put(grammarAccess.getRolesAccess().getRolesAssignment_0(), "rule__Roles__RolesAssignment_0");
 			builder.put(grammarAccess.getRolesAccess().getRolesAssignment_1_1(), "rule__Roles__RolesAssignment_1_1");
 			builder.put(grammarAccess.getRoleOneAccess().getNameAssignment_1(), "rule__RoleOne__NameAssignment_1");

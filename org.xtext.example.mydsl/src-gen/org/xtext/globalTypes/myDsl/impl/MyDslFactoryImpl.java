@@ -67,6 +67,8 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
     {
       case MyDslPackage.MODEL: return createModel();
       case MyDslPackage.GLOBAL_PROTOCOL: return createGlobalProtocol();
+      case MyDslPackage.DEFINITION: return createDefinition();
+      case MyDslPackage.QUIT_DEFINITION: return createQuitDefinition();
       case MyDslPackage.ROLES: return createRoles();
       case MyDslPackage.ROLE: return createRole();
       case MyDslPackage.ROLE_ONE: return createRoleOne();
@@ -120,6 +122,30 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     GlobalProtocolImpl globalProtocol = new GlobalProtocolImpl();
     return globalProtocol;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Definition createDefinition()
+  {
+    DefinitionImpl definition = new DefinitionImpl();
+    return definition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public QuitDefinition createQuitDefinition()
+  {
+    QuitDefinitionImpl quitDefinition = new QuitDefinitionImpl();
+    return quitDefinition;
   }
 
   /**

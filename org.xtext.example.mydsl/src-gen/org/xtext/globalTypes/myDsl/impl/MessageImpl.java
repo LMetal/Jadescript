@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.xtext.globalTypes.myDsl.Definition;
 import org.xtext.globalTypes.myDsl.Message;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.Role;
@@ -34,24 +35,14 @@ import org.xtext.globalTypes.myDsl.RoleOne;
 public class MessageImpl extends MinimalEObjectImpl.Container implements Message
 {
   /**
-   * The default value of the '{@link #getMessageType() <em>Message Type</em>}' attribute.
+   * The cached value of the '{@link #getMessageType() <em>Message Type</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getMessageType()
    * @generated
    * @ordered
    */
-  protected static final String MESSAGE_TYPE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getMessageType() <em>Message Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getMessageType()
-   * @generated
-   * @ordered
-   */
-  protected String messageType = MESSAGE_TYPE_EDEFAULT;
+  protected Definition messageType;
 
   /**
    * The cached value of the '{@link #getSender() <em>Sender</em>}' reference.
@@ -100,7 +91,27 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * @generated
    */
   @Override
-  public String getMessageType()
+  public Definition getMessageType()
+  {
+    if (messageType != null && messageType.eIsProxy())
+    {
+      InternalEObject oldMessageType = (InternalEObject)messageType;
+      messageType = (Definition)eResolveProxy(oldMessageType);
+      if (messageType != oldMessageType)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.MESSAGE__MESSAGE_TYPE, oldMessageType, messageType));
+      }
+    }
+    return messageType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Definition basicGetMessageType()
   {
     return messageType;
   }
@@ -111,9 +122,9 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * @generated
    */
   @Override
-  public void setMessageType(String newMessageType)
+  public void setMessageType(Definition newMessageType)
   {
-    String oldMessageType = messageType;
+    Definition oldMessageType = messageType;
     messageType = newMessageType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MESSAGE__MESSAGE_TYPE, oldMessageType, messageType));
@@ -220,7 +231,8 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
     switch (featureID)
     {
       case MyDslPackage.MESSAGE__MESSAGE_TYPE:
-        return getMessageType();
+        if (resolve) return getMessageType();
+        return basicGetMessageType();
       case MyDslPackage.MESSAGE__SENDER:
         if (resolve) return getSender();
         return basicGetSender();
@@ -242,7 +254,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
     switch (featureID)
     {
       case MyDslPackage.MESSAGE__MESSAGE_TYPE:
-        setMessageType((String)newValue);
+        setMessageType((Definition)newValue);
         return;
       case MyDslPackage.MESSAGE__SENDER:
         setSender((RoleOne)newValue);
@@ -265,7 +277,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
     switch (featureID)
     {
       case MyDslPackage.MESSAGE__MESSAGE_TYPE:
-        setMessageType(MESSAGE_TYPE_EDEFAULT);
+        setMessageType((Definition)null);
         return;
       case MyDslPackage.MESSAGE__SENDER:
         setSender((RoleOne)null);
@@ -288,30 +300,13 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
     switch (featureID)
     {
       case MyDslPackage.MESSAGE__MESSAGE_TYPE:
-        return MESSAGE_TYPE_EDEFAULT == null ? messageType != null : !MESSAGE_TYPE_EDEFAULT.equals(messageType);
+        return messageType != null;
       case MyDslPackage.MESSAGE__SENDER:
         return sender != null;
       case MyDslPackage.MESSAGE__RECEIVER:
         return receiver != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (messageType: ");
-    result.append(messageType);
-    result.append(')');
-    return result.toString();
   }
 
 } //MessageImpl

@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.xtext.globalTypes.myDsl.Choice;
 import org.xtext.globalTypes.myDsl.CloseRecursion;
+import org.xtext.globalTypes.myDsl.Definition;
 import org.xtext.globalTypes.myDsl.EndProtocol;
 import org.xtext.globalTypes.myDsl.ForEach;
 import org.xtext.globalTypes.myDsl.GlobalProtocol;
@@ -57,7 +58,7 @@ public class MyDslGenerator extends AbstractGenerator {
           String _name_1 = r.getName();
           String _plus_1 = ("../src/local/local_" + _name_1);
           String _plus_2 = (_plus_1 + ".jglobal");
-          fsa.generateFile(_plus_2, this.project(globalProtocol, r));
+          fsa.generateFile(_plus_2, this.project(globalProtocol, model.getDefinitions(), r));
           String _name_2 = r.getName();
           String _plus_3 = ("END LOCAL on " + _name_2);
           System.out.println(_plus_3);
@@ -76,8 +77,90 @@ public class MyDslGenerator extends AbstractGenerator {
     }
   }
 
-  public CharSequence project(final GlobalProtocol p, final Role role) {
+  public CharSequence project(final GlobalProtocol p, final EList<Definition> definitions, final Role role) {
     StringConcatenation _builder = new StringConcatenation();
+    {
+      for(final Definition d : definitions) {
+        {
+          String _type = d.getType();
+          boolean _equals = Objects.equal(_type, "@proposition");
+          if (_equals) {
+            String _type_1 = d.getType();
+            _builder.append(_type_1);
+            _builder.append(" ");
+            String _name = d.getName();
+            _builder.append(_name);
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _type_2 = d.getType();
+          boolean _equals_1 = Objects.equal(_type_2, "@predicate");
+          if (_equals_1) {
+            String _type_3 = d.getType();
+            _builder.append(_type_3);
+            _builder.append(" ");
+            String _name_1 = d.getName();
+            _builder.append(_name_1);
+            _builder.append("(");
+            {
+              EList<String> _types = d.getTypes();
+              boolean _hasElements = false;
+              for(final String t : _types) {
+                if (!_hasElements) {
+                  _hasElements = true;
+                } else {
+                  _builder.appendImmediate(", ", "");
+                }
+                _builder.append(t);
+              }
+            }
+            _builder.append(")");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _type_4 = d.getType();
+          boolean _equals_2 = Objects.equal(_type_4, "@action");
+          if (_equals_2) {
+            {
+              int _length = ((Object[])Conversions.unwrapArray(d.getTypes(), Object.class)).length;
+              boolean _notEquals = (_length != 0);
+              if (_notEquals) {
+                String _type_5 = d.getType();
+                _builder.append(_type_5);
+                _builder.append(" ");
+                String _name_2 = d.getName();
+                _builder.append(_name_2);
+                _builder.append("(");
+                {
+                  EList<String> _types_1 = d.getTypes();
+                  boolean _hasElements_1 = false;
+                  for(final String t_1 : _types_1) {
+                    if (!_hasElements_1) {
+                      _hasElements_1 = true;
+                    } else {
+                      _builder.appendImmediate(", ", "");
+                    }
+                    _builder.append(t_1);
+                  }
+                }
+                _builder.append(")");
+                _builder.newLineIfNotEmpty();
+              } else {
+                String _type_6 = d.getType();
+                _builder.append(_type_6);
+                _builder.append(" ");
+                String _name_3 = d.getName();
+                _builder.append(_name_3);
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
+      }
+    }
+    _builder.newLine();
     _builder.append("local protocol ");
     String _protocolName = p.getProtocolName();
     _builder.append(_protocolName);
@@ -166,30 +249,30 @@ public class MyDslGenerator extends AbstractGenerator {
           String _name_1 = r.getName();
           boolean _equals = Objects.equal(_name, _name_1);
           if (_equals) {
-            String _messageType = ((MessageNormal)m).getMessageType();
-            _builder.append(_messageType);
+            String _name_2 = ((MessageNormal)m).getMessageType().getName();
+            _builder.append(_name_2);
             _builder.append("(");
             CharSequence _printPayload = this.printPayload(((MessageNormal)m).getPayload());
             _builder.append(_printPayload);
             _builder.append(") to ");
-            String _name_2 = ((MessageNormal)m).getReceiver().getName();
-            _builder.append(_name_2);
+            String _name_3 = ((MessageNormal)m).getReceiver().getName();
+            _builder.append(_name_3);
             _builder.append(".");
             _builder.newLineIfNotEmpty();
           } else {
             {
-              String _name_3 = ((MessageNormal)m).getReceiver().getName();
-              String _name_4 = r.getName();
-              boolean _equals_1 = Objects.equal(_name_3, _name_4);
+              String _name_4 = ((MessageNormal)m).getReceiver().getName();
+              String _name_5 = r.getName();
+              boolean _equals_1 = Objects.equal(_name_4, _name_5);
               if (_equals_1) {
-                String _messageType_1 = ((MessageNormal)m).getMessageType();
-                _builder.append(_messageType_1);
+                String _name_6 = ((MessageNormal)m).getMessageType().getName();
+                _builder.append(_name_6);
                 _builder.append("(");
                 CharSequence _printPayload_1 = this.printPayload(((MessageNormal)m).getPayload());
                 _builder.append(_printPayload_1);
                 _builder.append(") from ");
-                String _name_5 = ((MessageNormal)m).getSender().getName();
-                _builder.append(_name_5);
+                String _name_7 = ((MessageNormal)m).getSender().getName();
+                _builder.append(_name_7);
                 _builder.append(".");
                 _builder.newLineIfNotEmpty();
               }
@@ -201,23 +284,23 @@ public class MyDslGenerator extends AbstractGenerator {
         _builder.newLineIfNotEmpty();
       } else {
         {
-          String _name_6 = m.getSender().getName();
-          String _name_7 = r.getName();
-          boolean _equals_2 = Objects.equal(_name_6, _name_7);
+          String _name_8 = m.getSender().getName();
+          String _name_9 = r.getName();
+          boolean _equals_2 = Objects.equal(_name_8, _name_9);
           if (_equals_2) {
             _builder.append("QUIT() to ");
-            String _name_8 = m.getReceiver().getName();
-            _builder.append(_name_8);
+            String _name_10 = m.getReceiver().getName();
+            _builder.append(_name_10);
             _builder.newLineIfNotEmpty();
           } else {
             {
-              String _name_9 = m.getReceiver().getName();
-              String _name_10 = r.getName();
-              boolean _equals_3 = Objects.equal(_name_9, _name_10);
+              String _name_11 = m.getReceiver().getName();
+              String _name_12 = r.getName();
+              boolean _equals_3 = Objects.equal(_name_11, _name_12);
               if (_equals_3) {
                 _builder.append("QUIT() from ");
-                String _name_11 = m.getSender().getName();
-                _builder.append(_name_11);
+                String _name_13 = m.getSender().getName();
+                _builder.append(_name_13);
                 _builder.newLineIfNotEmpty();
               }
             }
@@ -342,7 +425,7 @@ public class MyDslGenerator extends AbstractGenerator {
 
   protected CharSequence _seqOn(final Message m, final Role r, final Role rs, final Protocol p) {
     StringConcatenation _builder = new StringConcatenation();
-    String _messageType = m.getMessageType();
+    Definition _messageType = m.getMessageType();
     String _plus = ("seq message " + _messageType);
     System.out.println(_plus);
     _builder.newLineIfNotEmpty();
@@ -353,30 +436,30 @@ public class MyDslGenerator extends AbstractGenerator {
           String _name_1 = r.getName();
           boolean _equals = Objects.equal(_name, _name_1);
           if (_equals) {
-            String _messageType_1 = ((MessageNormal)m).getMessageType();
-            _builder.append(_messageType_1);
+            String _name_2 = ((MessageNormal)m).getMessageType().getName();
+            _builder.append(_name_2);
             _builder.append("(");
             CharSequence _printPayload = this.printPayload(((MessageNormal)m).getPayload());
             _builder.append(_printPayload);
             _builder.append(") to ");
-            String _name_2 = ((MessageNormal)m).getReceiver().getName();
-            _builder.append(_name_2);
+            String _name_3 = ((MessageNormal)m).getReceiver().getName();
+            _builder.append(_name_3);
             _builder.append(".");
             _builder.newLineIfNotEmpty();
           } else {
             {
-              String _name_3 = ((MessageNormal)m).getReceiver().getName();
-              String _name_4 = r.getName();
-              boolean _equals_1 = Objects.equal(_name_3, _name_4);
+              String _name_4 = ((MessageNormal)m).getReceiver().getName();
+              String _name_5 = r.getName();
+              boolean _equals_1 = Objects.equal(_name_4, _name_5);
               if (_equals_1) {
-                String _messageType_2 = ((MessageNormal)m).getMessageType();
-                _builder.append(_messageType_2);
+                String _name_6 = ((MessageNormal)m).getMessageType().getName();
+                _builder.append(_name_6);
                 _builder.append("(");
                 CharSequence _printPayload_1 = this.printPayload(((MessageNormal)m).getPayload());
                 _builder.append(_printPayload_1);
                 _builder.append(") from ");
-                String _name_5 = ((MessageNormal)m).getSender().getName();
-                _builder.append(_name_5);
+                String _name_7 = ((MessageNormal)m).getSender().getName();
+                _builder.append(_name_7);
                 _builder.append(".");
                 _builder.newLineIfNotEmpty();
               }
@@ -388,23 +471,23 @@ public class MyDslGenerator extends AbstractGenerator {
         _builder.newLineIfNotEmpty();
       } else {
         {
-          String _name_6 = m.getSender().getName();
-          String _name_7 = r.getName();
-          boolean _equals_2 = Objects.equal(_name_6, _name_7);
+          String _name_8 = m.getSender().getName();
+          String _name_9 = r.getName();
+          boolean _equals_2 = Objects.equal(_name_8, _name_9);
           if (_equals_2) {
             _builder.append("QUIT() to ");
-            String _name_8 = m.getReceiver().getName();
-            _builder.append(_name_8);
+            String _name_10 = m.getReceiver().getName();
+            _builder.append(_name_10);
             _builder.newLineIfNotEmpty();
           } else {
             {
-              String _name_9 = m.getReceiver().getName();
-              String _name_10 = r.getName();
-              boolean _equals_3 = Objects.equal(_name_9, _name_10);
+              String _name_11 = m.getReceiver().getName();
+              String _name_12 = r.getName();
+              boolean _equals_3 = Objects.equal(_name_11, _name_12);
               if (_equals_3) {
                 _builder.append("QUIT() from ");
-                String _name_11 = m.getSender().getName();
-                _builder.append(_name_11);
+                String _name_13 = m.getSender().getName();
+                _builder.append(_name_13);
                 _builder.newLineIfNotEmpty();
               }
             }

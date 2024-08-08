@@ -14,6 +14,7 @@ import org.xtext.globalTypes.myDsl.Choice;
 import org.xtext.globalTypes.myDsl.ChoiceL;
 import org.xtext.globalTypes.myDsl.CloseRecursion;
 import org.xtext.globalTypes.myDsl.CloseRecursionL;
+import org.xtext.globalTypes.myDsl.Definition;
 import org.xtext.globalTypes.myDsl.EndProtocol;
 import org.xtext.globalTypes.myDsl.ForEach;
 import org.xtext.globalTypes.myDsl.ForEachL;
@@ -32,6 +33,7 @@ import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.Payload;
 import org.xtext.globalTypes.myDsl.Protocol;
 import org.xtext.globalTypes.myDsl.ProtocolL;
+import org.xtext.globalTypes.myDsl.QuitDefinition;
 import org.xtext.globalTypes.myDsl.ReceiverL;
 import org.xtext.globalTypes.myDsl.Recursion;
 import org.xtext.globalTypes.myDsl.RecursionL;
@@ -62,6 +64,20 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   private EClass globalProtocolEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass definitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass quitDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -324,9 +340,20 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getModel_Protocol()
+  public EReference getModel_Definitions()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getModel_Protocol()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -371,6 +398,61 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
   public EReference getGlobalProtocol_Protocol()
   {
     return (EReference)globalProtocolEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getDefinition()
+  {
+    return definitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getDefinition_Type()
+  {
+    return (EAttribute)definitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getDefinition_Name()
+  {
+    return (EAttribute)definitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getDefinition_Types()
+  {
+    return (EAttribute)definitionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getQuitDefinition()
+  {
+    return quitDefinitionEClass;
   }
 
   /**
@@ -665,9 +747,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EAttribute getMessage_MessageType()
+  public EReference getMessage_MessageType()
   {
-    return (EAttribute)messageEClass.getEStructuralFeatures().get(0);
+    return (EReference)messageEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1142,12 +1224,20 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     // Create classes and their features
     modelEClass = createEClass(MODEL);
+    createEReference(modelEClass, MODEL__DEFINITIONS);
     createEReference(modelEClass, MODEL__PROTOCOL);
 
     globalProtocolEClass = createEClass(GLOBAL_PROTOCOL);
     createEAttribute(globalProtocolEClass, GLOBAL_PROTOCOL__PROTOCOL_NAME);
     createEReference(globalProtocolEClass, GLOBAL_PROTOCOL__ROLES);
     createEReference(globalProtocolEClass, GLOBAL_PROTOCOL__PROTOCOL);
+
+    definitionEClass = createEClass(DEFINITION);
+    createEAttribute(definitionEClass, DEFINITION__TYPE);
+    createEAttribute(definitionEClass, DEFINITION__NAME);
+    createEAttribute(definitionEClass, DEFINITION__TYPES);
+
+    quitDefinitionEClass = createEClass(QUIT_DEFINITION);
 
     rolesEClass = createEClass(ROLES);
     createEReference(rolesEClass, ROLES__ROLES);
@@ -1185,7 +1275,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     createEReference(choiceEClass, CHOICE__BRANCHES);
 
     messageEClass = createEClass(MESSAGE);
-    createEAttribute(messageEClass, MESSAGE__MESSAGE_TYPE);
+    createEReference(messageEClass, MESSAGE__MESSAGE_TYPE);
     createEReference(messageEClass, MESSAGE__SENDER);
     createEReference(messageEClass, MESSAGE__RECEIVER);
 
@@ -1272,6 +1362,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    quitDefinitionEClass.getESuperTypes().add(this.getDefinition());
     roleOneEClass.getESuperTypes().add(this.getRole());
     roleSetEClass.getESuperTypes().add(this.getRole());
     messageNormalEClass.getESuperTypes().add(this.getMessage());
@@ -1283,12 +1374,20 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getModel_Definitions(), this.getDefinition(), null, "definitions", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_Protocol(), ecorePackage.getEObject(), null, "protocol", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(globalProtocolEClass, GlobalProtocol.class, "GlobalProtocol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getGlobalProtocol_ProtocolName(), ecorePackage.getEString(), "protocolName", null, 0, 1, GlobalProtocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGlobalProtocol_Roles(), this.getRoles(), null, "roles", null, 0, 1, GlobalProtocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGlobalProtocol_Protocol(), this.getProtocol(), null, "protocol", null, 0, 1, GlobalProtocol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(definitionEClass, Definition.class, "Definition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDefinition_Type(), ecorePackage.getEString(), "type", null, 0, 1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDefinition_Types(), ecorePackage.getEString(), "types", null, 0, -1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(quitDefinitionEClass, QuitDefinition.class, "QuitDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(rolesEClass, Roles.class, "Roles", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRoles_Roles(), this.getRole(), null, "roles", null, 0, -1, Roles.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1326,7 +1425,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     initEReference(getChoice_Branches(), this.getMessage(), null, "branches", null, 0, -1, Choice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getMessage_MessageType(), ecorePackage.getEString(), "messageType", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMessage_MessageType(), this.getDefinition(), null, "messageType", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMessage_Sender(), this.getRoleOne(), null, "sender", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMessage_Receiver(), this.getRole(), null, "receiver", null, 0, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

@@ -18,6 +18,7 @@ import org.xtext.globalTypes.myDsl.Choice;
 import org.xtext.globalTypes.myDsl.ChoiceL;
 import org.xtext.globalTypes.myDsl.CloseRecursion;
 import org.xtext.globalTypes.myDsl.CloseRecursionL;
+import org.xtext.globalTypes.myDsl.Definition;
 import org.xtext.globalTypes.myDsl.EndProtocol;
 import org.xtext.globalTypes.myDsl.ForEach;
 import org.xtext.globalTypes.myDsl.ForEachL;
@@ -32,6 +33,7 @@ import org.xtext.globalTypes.myDsl.MyDslPackage;
 import org.xtext.globalTypes.myDsl.Payload;
 import org.xtext.globalTypes.myDsl.Protocol;
 import org.xtext.globalTypes.myDsl.ProtocolL;
+import org.xtext.globalTypes.myDsl.QuitDefinition;
 import org.xtext.globalTypes.myDsl.ReceiverL;
 import org.xtext.globalTypes.myDsl.Recursion;
 import org.xtext.globalTypes.myDsl.RecursionL;
@@ -66,6 +68,9 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				return; 
 			case MyDslPackage.CLOSE_RECURSION_L:
 				sequence_CloseRecursionL(context, (CloseRecursionL) semanticObject); 
+				return; 
+			case MyDslPackage.DEFINITION:
+				sequence_Definition(context, (Definition) semanticObject); 
 				return; 
 			case MyDslPackage.END_PROTOCOL:
 				sequence_EndProtocol(context, (EndProtocol) semanticObject); 
@@ -105,6 +110,9 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				return; 
 			case MyDslPackage.PROTOCOL_L:
 				sequence_ProtocolL(context, (ProtocolL) semanticObject); 
+				return; 
+			case MyDslPackage.QUIT_DEFINITION:
+				sequence_QuitDefinition(context, (QuitDefinition) semanticObject); 
 				return; 
 			case MyDslPackage.RECEIVER_L:
 				sequence_ReceiverL(context, (ReceiverL) semanticObject); 
@@ -197,6 +205,20 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCloseRecursionAccess().getRecursionVariableRecursionIDTerminalRuleCall_1_0_1(), semanticObject.eGet(MyDslPackage.Literals.CLOSE_RECURSION__RECURSION_VARIABLE, false));
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Definition returns Definition
+	 *
+	 * Constraint:
+	 *     ((type='@proposition' name=ID) | (type='@action' name=ID (types+=Type types+=Type?)?) | (type='@predicate' name=ID types+=Type types+=Type?))
+	 * </pre>
+	 */
+	protected void sequence_Definition(ISerializationContext context, Definition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -361,7 +383,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     MessageNormal returns MessageNormal
 	 *
 	 * Constraint:
-	 *     (messageType=ID payload=Payload? sender=[RoleOne|ID] receiver=[Role|ID] protocol=Protocol)
+	 *     (messageType=[Definition|ID] payload=Payload? sender=[RoleOne|ID] receiver=[Role|ID] protocol=Protocol)
 	 * </pre>
 	 */
 	protected void sequence_MessageNormal(ISerializationContext context, MessageNormal semanticObject) {
@@ -400,7 +422,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     MessageQuit returns MessageQuit
 	 *
 	 * Constraint:
-	 *     (messageType='QUIT' sender=[RoleOne|ID] receiver=[Role|ID])
+	 *     (messageType=[Definition|'QUIT'] sender=[RoleOne|ID] receiver=[Role|ID])
 	 * </pre>
 	 */
 	protected void sequence_MessageQuit(ISerializationContext context, MessageQuit semanticObject) {
@@ -413,7 +435,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.MESSAGE__RECEIVER));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getMessageQuitAccess().getMessageTypeQUITKeyword_0_0(), semanticObject.getMessageType());
+		feeder.accept(grammarAccess.getMessageQuitAccess().getMessageTypeDefinitionQUITKeyword_0_0_1(), semanticObject.eGet(MyDslPackage.Literals.MESSAGE__MESSAGE_TYPE, false));
 		feeder.accept(grammarAccess.getMessageQuitAccess().getSenderRoleOneIDTerminalRuleCall_3_0_1(), semanticObject.eGet(MyDslPackage.Literals.MESSAGE__SENDER, false));
 		feeder.accept(grammarAccess.getMessageQuitAccess().getReceiverRoleIDTerminalRuleCall_5_0_1(), semanticObject.eGet(MyDslPackage.Literals.MESSAGE__RECEIVER, false));
 		feeder.finish();
@@ -426,7 +448,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Model returns Model
 	 *
 	 * Constraint:
-	 *     (protocol=GlobalProtocol | protocol=LocalProtocol)
+	 *     (definitions+=QuitDefinition definitions+=Definition* (protocol=GlobalProtocol | protocol=LocalProtocol))
 	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
@@ -487,6 +509,30 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 */
 	protected void sequence_Protocol(ISerializationContext context, Protocol semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Definition returns QuitDefinition
+	 *     QuitDefinition returns QuitDefinition
+	 *
+	 * Constraint:
+	 *     (type='@action' name='QUIT')
+	 * </pre>
+	 */
+	protected void sequence_QuitDefinition(ISerializationContext context, QuitDefinition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.DEFINITION__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.DEFINITION__TYPE));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.DEFINITION__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getQuitDefinitionAccess().getTypeActionKeyword_0_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getQuitDefinitionAccess().getNameQUITKeyword_1_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	

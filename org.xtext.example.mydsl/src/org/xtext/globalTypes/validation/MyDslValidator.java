@@ -4,6 +4,7 @@
 package org.xtext.globalTypes.validation;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 import org.xtext.globalTypes.myDsl.Choice;
 import org.xtext.globalTypes.myDsl.ChoiceL;
+import org.xtext.globalTypes.myDsl.Definition;
 import org.xtext.globalTypes.myDsl.ForEach;
 import org.xtext.globalTypes.myDsl.GlobalProtocol;
 import org.xtext.globalTypes.myDsl.LocalProtocol;
@@ -32,7 +34,44 @@ import org.xtext.globalTypes.myDsl.SenderL;
  *
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
-public class MyDslValidator extends AbstractMyDslValidator {		
+public class MyDslValidator extends AbstractMyDslValidator {
+	
+		@Check
+		public void uniqueDefinitions(Model m) {
+			List<Definition> definitions = m.getDefinitions();
+			var defNames = new HashMap<String, Definition>();
+			
+			for(Definition d : definitions) {
+				if(defNames.containsKey(d.getName())) {
+					error(
+							"Definition names must be unique",
+							d,
+							MyDslPackage.Literals.DEFINITION__NAME
+						);
+					error(
+							"Definition names must be unique",
+							defNames.get(d.getName()),
+							MyDslPackage.Literals.DEFINITION__NAME
+						);
+				}
+				else {
+					defNames.put(d.getName(), d);
+				}
+			}
+		}
+	
+		@Check
+		public void rightDefinitionsPatternGlobal(GlobalProtocol p) {
+			ArrayList<Definition> definitions = (ArrayList<Definition>) EcoreUtil2.getAllContentsOfType(p, Definition.class);
+			ArrayList<Message> messages = (ArrayList<Message>) EcoreUtil2.getAllContentsOfType(p, Message.class);
+			
+			for(Message m: messages) {
+				Definition d = definitions.stream()
+                        .filter(def -> def.getType().equals(m.getMessageType()))
+                        .findFirst()
+                        .orElse(null);
+			}
+		}
 		
 		@Check
 		public void choiceMessageFromChoiceAgent(Choice c) {
@@ -81,15 +120,38 @@ public class MyDslValidator extends AbstractMyDslValidator {
 			var messageTypeMap = new HashMap<String, Message>();
 			
 			for(Message m: c.getBranches()) {
-				if(messageTypeMap.containsKey(m.getMessageType())) {
+				if(messageTypeMap.containsKey(m.getMessageType().getName())) {
 					error("Messages must be different",
 							m,
 							MyDslPackage.Literals.MESSAGE__MESSAGE_TYPE);
 					error("Messages must be different",
-							messageTypeMap.get(m.getMessageType()),
+							messageTypeMap.get(m.getMessageType().getName()),
 							MyDslPackage.Literals.MESSAGE__MESSAGE_TYPE);
 				} else {
-					messageTypeMap.put(m.getMessageType(), m);
+					messageTypeMap.put(m.getMessageType().getName(), m);
+				}
+			}
+		}
+		
+		@Check
+		public void sameReceiverChoice(Choice c) {
+			Message firstMessage = null;
+			
+			for(Message m: c.getBranches()) {
+				if(firstMessage==null) firstMessage = m;
+				else {
+					if(m.getReceiver() != firstMessage.getReceiver()) {
+						error(
+							"Receiver of first message must be equal in each branch",
+							m,
+							MyDslPackage.Literals.MESSAGE__RECEIVER
+						);
+						error(
+							"Receiver of first message must be equal in each branch",
+							firstMessage,
+							MyDslPackage.Literals.MESSAGE__RECEIVER
+						);
+					}
 				}
 			}
 		}

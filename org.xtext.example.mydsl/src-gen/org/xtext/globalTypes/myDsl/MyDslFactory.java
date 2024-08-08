@@ -42,6 +42,24 @@ public interface MyDslFactory extends EFactory
   GlobalProtocol createGlobalProtocol();
 
   /**
+   * Returns a new object of class '<em>Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Definition</em>'.
+   * @generated
+   */
+  Definition createDefinition();
+
+  /**
+   * Returns a new object of class '<em>Quit Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Quit Definition</em>'.
+   * @generated
+   */
+  QuitDefinition createQuitDefinition();
+
+  /**
    * Returns a new object of class '<em>Roles</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

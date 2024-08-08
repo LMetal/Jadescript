@@ -90,7 +90,7 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('(' ')') | '()'
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     messageType=ID (ambiguity) 'from' sender=[RoleOne|ID]
+	 *     messageType=[Definition|ID] (ambiguity) 'from' sender=[RoleOne|ID]
 	 
 	 * </pre>
 	 */

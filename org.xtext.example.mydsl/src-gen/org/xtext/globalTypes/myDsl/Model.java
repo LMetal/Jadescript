@@ -3,6 +3,8 @@
  */
 package org.xtext.globalTypes.myDsl;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.globalTypes.myDsl.Model#getDefinitions <em>Definitions</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.Model#getProtocol <em>Protocol</em>}</li>
  * </ul>
  *
@@ -23,6 +26,18 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Model extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Definitions</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.globalTypes.myDsl.Definition}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Definitions</em>' containment reference list.
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getModel_Definitions()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Definition> getDefinitions();
+
   /**
    * Returns the value of the '<em><b>Protocol</b></em>' containment reference.
    * <!-- begin-user-doc -->

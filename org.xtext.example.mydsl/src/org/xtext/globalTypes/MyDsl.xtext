@@ -3,7 +3,11 @@ grammar org.xtext.globalTypes.MyDsl with org.eclipse.xtext.common.Terminals
 generate myDsl "http://www.xtext.org/globalTypes/MyDsl"
 
 Model:
-	protocol = GlobalProtocol | protocol = LocalProtocol
+	//ontology definitions
+	definitions+=QuitDefinition
+	definitions+=Definition*
+	
+	(protocol = GlobalProtocol | protocol = LocalProtocol)
 ;
 
 GlobalProtocol:
@@ -19,6 +23,17 @@ GlobalProtocol:
 	 */
 	'global' 'protocol' protocolName=ID '(' roles=Roles '){'protocol=Protocol'}'
 	;
+	
+Definition:
+		  type='@proposition' name = ID
+		| type='@action' name = ID ('('types+=Type (',' types+=Type)?')')?
+		| type='@predicate' name = ID '('types+=Type (',' types+=Type)?')'
+		| QuitDefinition
+;
+
+QuitDefinition:
+	type='@action' name = 'QUIT'
+;
 
 Roles:
 	roles+=Role (',' roles+=Role)*
@@ -78,13 +93,13 @@ Message:
 ;
 
 MessageNormal:
-	messageType=ID ('(' (payload=Payload)? ')' | '()') 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
+	messageType=[Definition | ID] ('(' (payload=Payload)? ')' | '()') 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.'
 	protocol = Protocol
 ;
 
 
 MessageQuit: //terminale
-	messageType = 'QUIT' '()' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] 
+	messageType = [Definition | 'QUIT'] '()' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] 
 ;
 
 Payload:
@@ -155,7 +170,7 @@ ForEachL:
 
 
 Type:
-	'int' | 'string' | 'action'  //add more
+	'int' | 'text' | 'aid' | 'float'  //jadescript types
 ;
 
 

@@ -18,4 +18,6 @@
     <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.ReceiverL"/>
     <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.MessageNormal"/>
     <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.MessageL"/>
+    <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.Definition"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

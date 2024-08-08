@@ -24,6 +24,8 @@ import org.xtext.globalTypes.myDsl.RoleSet
 import org.xtext.globalTypes.myDsl.MessageNormal
 import org.xtext.globalTypes.myDsl.MessageQuit
 import org.xtext.globalTypes.myDsl.EndProtocol
+import org.eclipse.emf.common.util.EList
+import org.xtext.globalTypes.myDsl.Definition
 
 /**
  * Generates code from your model files on save.
@@ -38,7 +40,7 @@ class MyDslGenerator extends AbstractGenerator {
 			var globalProtocol = model.protocol as GlobalProtocol
 			for(Role r : globalProtocol.getRoles().getRoles()){
 				System.out.println("LOCAL in " + r.getName());
-				fsa.generateFile('../src/local/local_'+r.getName()+'.jglobal', globalProtocol.project(r))
+				fsa.generateFile('../src/local/local_'+r.getName()+'.jglobal', globalProtocol.project(model.getDefinitions, r))
 				System.out.println("END LOCAL on " + r.getName());		
 			}
 		} else {
@@ -50,7 +52,23 @@ class MyDslGenerator extends AbstractGenerator {
 		
 	}
 	
-	def CharSequence project(GlobalProtocol p, Role role)'''
+	def CharSequence project(GlobalProtocol p, EList<Definition> definitions, Role role)'''
+		«FOR d: definitions»
+			«IF (d.type == '@proposition')»
+				«d.type» «d.name»
+			«ENDIF»
+			«IF (d.type == '@predicate')»
+				«d.type» «d.name»(«FOR t : d.types SEPARATOR ', '»«t»«ENDFOR»)
+			«ENDIF»
+			«IF (d.type == '@action')»
+				«IF d.types.length != 0»
+					«d.type» «d.name»(«FOR t : d.types SEPARATOR ', '»«t»«ENDFOR»)
+				«ELSE»
+					«d.type» «d.name»
+				«ENDIF»
+			«ENDIF»
+		«ENDFOR»
+		
 		local protocol «p.protocolName» at «projectOn(role, role)»(«projectOn(p.roles, role)») {
 			«projectOn(p.protocol, role)»
 		}
@@ -78,10 +96,10 @@ class MyDslGenerator extends AbstractGenerator {
 	def dispatch projectOn(Message m, Role r)'''
 		«IF m instanceof MessageNormal»
 			«IF m.sender.name == r.name»
-				«m.messageType»(«printPayload(m.payload)») to «m.receiver.name».
+				«m.messageType.name»(«printPayload(m.payload)») to «m.receiver.name».
 			«ELSE»
 				«IF m.receiver.name == r.name»
-					«m.messageType»(«printPayload(m.payload)») from «m.sender.name».
+					«m.messageType.name»(«printPayload(m.payload)») from «m.sender.name».
 				«ENDIF»
 			«ENDIF»
 			«projectOn(m.protocol, r)»
@@ -142,10 +160,10 @@ class MyDslGenerator extends AbstractGenerator {
 		«System.out.println("seq message "+m.messageType)»
 		«IF m instanceof MessageNormal»
 			«IF m.sender.name == r.name»
-				«m.messageType»(«printPayload(m.payload)») to «m.receiver.name».
+				«m.messageType.name»(«printPayload(m.payload)») to «m.receiver.name».
 			«ELSE»
 				«IF m.receiver.name == r.name»
-					«m.messageType»(«printPayload(m.payload)») from «m.sender.name».
+					«m.messageType.name»(«printPayload(m.payload)») from «m.sender.name».
 				«ENDIF»
 			«ENDIF»
 			«seqOn(m.protocol, r, rs, p)»

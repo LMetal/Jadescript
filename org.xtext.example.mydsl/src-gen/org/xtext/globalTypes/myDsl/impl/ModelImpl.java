@@ -3,8 +3,12 @@
  */
 package org.xtext.globalTypes.myDsl.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -13,6 +17,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.xtext.globalTypes.myDsl.Definition;
 import org.xtext.globalTypes.myDsl.Model;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
 
@@ -24,6 +32,7 @@ import org.xtext.globalTypes.myDsl.MyDslPackage;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.globalTypes.myDsl.impl.ModelImpl#getDefinitions <em>Definitions</em>}</li>
  *   <li>{@link org.xtext.globalTypes.myDsl.impl.ModelImpl#getProtocol <em>Protocol</em>}</li>
  * </ul>
  *
@@ -31,6 +40,16 @@ import org.xtext.globalTypes.myDsl.MyDslPackage;
  */
 public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
+  /**
+   * The cached value of the '{@link #getDefinitions() <em>Definitions</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDefinitions()
+   * @generated
+   * @ordered
+   */
+  protected EList<Definition> definitions;
+
   /**
    * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -60,6 +79,21 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   protected EClass eStaticClass()
   {
     return MyDslPackage.Literals.MODEL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<Definition> getDefinitions()
+  {
+    if (definitions == null)
+    {
+      definitions = new EObjectContainmentEList<Definition>(Definition.class, this, MyDslPackage.MODEL__DEFINITIONS);
+    }
+    return definitions;
   }
 
   /**
@@ -122,6 +156,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case MyDslPackage.MODEL__DEFINITIONS:
+        return ((InternalEList<?>)getDefinitions()).basicRemove(otherEnd, msgs);
       case MyDslPackage.MODEL__PROTOCOL:
         return basicSetProtocol(null, msgs);
     }
@@ -138,6 +174,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case MyDslPackage.MODEL__DEFINITIONS:
+        return getDefinitions();
       case MyDslPackage.MODEL__PROTOCOL:
         return getProtocol();
     }
@@ -149,11 +187,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
+      case MyDslPackage.MODEL__DEFINITIONS:
+        getDefinitions().clear();
+        getDefinitions().addAll((Collection<? extends Definition>)newValue);
+        return;
       case MyDslPackage.MODEL__PROTOCOL:
         setProtocol((EObject)newValue);
         return;
@@ -171,6 +214,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case MyDslPackage.MODEL__DEFINITIONS:
+        getDefinitions().clear();
+        return;
       case MyDslPackage.MODEL__PROTOCOL:
         setProtocol((EObject)null);
         return;
@@ -188,6 +234,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case MyDslPackage.MODEL__DEFINITIONS:
+        return definitions != null && !definitions.isEmpty();
       case MyDslPackage.MODEL__PROTOCOL:
         return protocol != null;
     }

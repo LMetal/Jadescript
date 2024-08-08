@@ -1,6 +1,5 @@
 #encoding=UTF-8
 #version=1
-Example,1.0.0.qualifier,file:/C:/Users/leoga/Jadescript/Example/,4,false
 bcpg,1.78.1,file:/C:/Users/leoga/.p2/pool/plugins/bcpg_1.78.1.jar,4,false
 bcpkix,1.78.1,file:/C:/Users/leoga/.p2/pool/plugins/bcpkix_1.78.1.jar,4,false
 bcprov,1.78.1,file:/C:/Users/leoga/.p2/pool/plugins/bcprov_1.78.1.jar,4,false

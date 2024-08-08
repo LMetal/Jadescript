@@ -26,26 +26,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface Message extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Message Type</b></em>' attribute.
+   * Returns the value of the '<em><b>Message Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Message Type</em>' attribute.
-   * @see #setMessageType(String)
+   * @return the value of the '<em>Message Type</em>' reference.
+   * @see #setMessageType(Definition)
    * @see org.xtext.globalTypes.myDsl.MyDslPackage#getMessage_MessageType()
    * @model
    * @generated
    */
-  String getMessageType();
+  Definition getMessageType();
 
   /**
-   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.Message#getMessageType <em>Message Type</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.Message#getMessageType <em>Message Type</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Message Type</em>' attribute.
+   * @param value the new value of the '<em>Message Type</em>' reference.
    * @see #getMessageType()
    * @generated
    */
-  void setMessageType(String value);
+  void setMessageType(Definition value);
 
   /**
    * Returns the value of the '<em><b>Sender</b></em>' reference.

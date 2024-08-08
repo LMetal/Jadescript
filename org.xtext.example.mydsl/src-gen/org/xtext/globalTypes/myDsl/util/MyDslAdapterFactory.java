@@ -86,6 +86,16 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createGlobalProtocolAdapter();
       }
       @Override
+      public Adapter caseDefinition(Definition object)
+      {
+        return createDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseQuitDefinition(QuitDefinition object)
+      {
+        return createQuitDefinitionAdapter();
+      }
+      @Override
       public Adapter caseRoles(Roles object)
       {
         return createRolesAdapter();
@@ -263,6 +273,36 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createGlobalProtocolAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.Definition <em>Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.globalTypes.myDsl.Definition
+   * @generated
+   */
+  public Adapter createDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.globalTypes.myDsl.QuitDefinition <em>Quit Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.globalTypes.myDsl.QuitDefinition
+   * @generated
+   */
+  public Adapter createQuitDefinitionAdapter()
   {
     return null;
   }
