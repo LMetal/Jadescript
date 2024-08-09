@@ -117,6 +117,19 @@ class MyDslGenerator extends AbstractGenerator {
 		
 	
 	def dispatch projectOn(Choice c, Role r)'''
+		«IF c.branches.get(0).getReceiver() == r || c.branches.get(0).getSender() == r»
+			choice at «c.role.name»{
+			«FOR int i: 0..c.branches.length-1 SEPARATOR ' or {'»
+					«projectOn(c.branches.get(i), r)»
+				}
+			«ENDFOR»
+		«ELSE»
+			«MergeUtil.merge(c, r)»
+		«ENDIF»
+	'''
+	
+	//only used by MERGE UTIL if merge is possible
+	def safeProjectOn(Choice c, Role r)'''
 		choice at «c.role.name»{
 		«FOR int i: 0..c.branches.length-1 SEPARATOR ' or {'»
 				«projectOn(c.branches.get(i), r)»

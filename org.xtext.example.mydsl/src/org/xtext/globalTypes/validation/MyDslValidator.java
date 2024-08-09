@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
@@ -20,8 +21,10 @@ import org.xtext.globalTypes.myDsl.LocalProtocol;
 import org.xtext.globalTypes.myDsl.Message;
 import org.xtext.globalTypes.myDsl.MessageL;
 import org.xtext.globalTypes.myDsl.MessageNormal;
+import org.xtext.globalTypes.myDsl.MessageQuit;
 import org.xtext.globalTypes.myDsl.Model;
 import org.xtext.globalTypes.myDsl.MyDslPackage;
+import org.xtext.globalTypes.myDsl.Payload;
 import org.xtext.globalTypes.myDsl.ReceiverL;
 import org.xtext.globalTypes.myDsl.Role;
 import org.xtext.globalTypes.myDsl.RoleSet;
@@ -60,16 +63,43 @@ public class MyDslValidator extends AbstractMyDslValidator {
 			}
 		}
 	
-		@Check
+		//@Check
 		public void rightDefinitionsPatternGlobal(GlobalProtocol p) {
 			ArrayList<Definition> definitions = (ArrayList<Definition>) EcoreUtil2.getAllContentsOfType(p, Definition.class);
-			ArrayList<Message> messages = (ArrayList<Message>) EcoreUtil2.getAllContentsOfType(p, Message.class);
+			List<Message> messages = EcoreUtil2.getAllContentsOfType(p, Message.class);
 			
 			for(Message m: messages) {
+				System.out.println("check "+m.getMessageType().getName());
+				if(m instanceof MessageQuit) continue;
+
+				MessageNormal mn = (MessageNormal) m;
 				Definition d = definitions.stream()
-                        .filter(def -> def.getType().equals(m.getMessageType()))
+                        .filter(def -> def.getType().equals(mn.getMessageType().toString()))
                         .findFirst()
                         .orElse(null);
+				
+				EList<String> payload = mn.getPayload().getTypes();
+				EList<String> pattern = d.getTypes();
+				System.out.println("HERE5");
+
+				if(payload.size() != pattern.size()) {
+					error(
+							"Wrong paylod pattern",
+							mn,
+							MyDslPackage.Literals.MESSAGE_NORMAL__PAYLOAD
+							);
+				}
+
+				for(int i=0; i<d.getTypes().size(); i++) {
+					System.out.println(payload.get(i) + " "+pattern.get(i));
+					if(!payload.get(i).equals(pattern.get(i))) {
+						error(
+							"Wrong paylod pattern",
+							mn,
+							MyDslPackage.Literals.MESSAGE_NORMAL__PAYLOAD
+							);
+					}
+				}
 			}
 		}
 		

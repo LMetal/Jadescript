@@ -313,6 +313,43 @@ public class MyDslGenerator extends AbstractGenerator {
 
   protected CharSequence _projectOn(final Choice c, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
+    {
+      if ((Objects.equal(c.getBranches().get(0).getReceiver(), r) || Objects.equal(c.getBranches().get(0).getSender(), r))) {
+        _builder.append("choice at ");
+        String _name = c.getRole().getName();
+        _builder.append(_name);
+        _builder.append("{");
+        _builder.newLineIfNotEmpty();
+        {
+          int _length = ((Object[])Conversions.unwrapArray(c.getBranches(), Object.class)).length;
+          int _minus = (_length - 1);
+          IntegerRange _upTo = new IntegerRange(0, _minus);
+          boolean _hasElements = false;
+          for(final int i : _upTo) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(" or {", "");
+            }
+            _builder.append("\t");
+            Object _projectOn = this.projectOn(c.getBranches().get(i), r);
+            _builder.append(_projectOn, "\t");
+            _builder.newLineIfNotEmpty();
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+      } else {
+        CharSequence _merge = MergeUtil.merge(c, r);
+        _builder.append(_merge);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+
+  public CharSequence safeProjectOn(final Choice c, final Role r) {
+    StringConcatenation _builder = new StringConcatenation();
     _builder.append("choice at ");
     String _name = c.getRole().getName();
     _builder.append(_name);
@@ -330,7 +367,7 @@ public class MyDslGenerator extends AbstractGenerator {
           _builder.appendImmediate(" or {", "");
         }
         _builder.append("\t");
-        Object _projectOn = this.projectOn(c.getBranches().get(i), r);
+        CharSequence _projectOn = this.projectOn(c.getBranches().get(i), r);
         _builder.append(_projectOn, "\t");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
