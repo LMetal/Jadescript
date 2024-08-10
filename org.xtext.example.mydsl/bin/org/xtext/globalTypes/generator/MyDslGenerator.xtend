@@ -92,6 +92,11 @@ class MyDslGenerator extends AbstractGenerator {
 	 * 
 	 * m: Message (superclass of MessageNormal and MessageQuit)
 	 * r: role to project on
+	 * 
+	 * 
+	 * (𝑥 → q ℓQuit ) ↾𝜌 q = 𝑥 ? ℓQuit
+	 * (𝑥 → q ℓQuit ) ↾𝜌R = q!ℓQuit
+	 * (𝑥 → q ℓQuit ) ↾𝜌 p = End
 	 */
 	def dispatch projectOn(Message m, Role r)'''
 		«IF m instanceof MessageNormal»
@@ -109,13 +114,19 @@ class MyDslGenerator extends AbstractGenerator {
 			«ELSE»
 				«IF m.receiver.name == r.name»
 					QUIT() from «m.sender.name»
+				«ELSE»
+					End
 				«ENDIF»
 			«ENDIF»
 		«ENDIF»
 		'''
 
 		
-	
+	/*
+	 * p → Q{ ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼 ↾𝜌 R = Q!{ ℓ𝑖⟨S𝑖⟩.G𝑖 ↾𝜌 R }𝑖∈𝐼 if RoleSet(p, 𝜌) = R
+	 * p → Q{ ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼 ↾𝜌 R = p?{ ℓ𝑖⟨S𝑖⟩.G𝑖 ↾𝜌 R }𝑖∈𝐼 if RoleSet(Q, 𝜌) = R
+	 * p → Q{ ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼 ↾𝜌 R = ⨆︀𝑖∈𝐼 G𝑖 ↾𝜌 R //merge
+	 */
 	def dispatch projectOn(Choice c, Role r)'''
 		«IF c.branches.get(0).getReceiver() == r || c.branches.get(0).getSender() == r»
 			choice at «c.role.name»{

@@ -239,6 +239,11 @@ public class MyDslGenerator extends AbstractGenerator {
    * 
    * m: Message (superclass of MessageNormal and MessageQuit)
    * r: role to project on
+   * 
+   * 
+   * (\ud835\udc65 → q ℓQuit ) ↾\ud835\udf0c q = \ud835\udc65 ? ℓQuit
+   * (\ud835\udc65 → q ℓQuit ) ↾\ud835\udf0cR = q!ℓQuit
+   * (\ud835\udc65 → q ℓQuit ) ↾\ud835\udf0c p = End
    */
   protected CharSequence _projectOn(final Message m, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
@@ -302,6 +307,9 @@ public class MyDslGenerator extends AbstractGenerator {
                 String _name_13 = m.getSender().getName();
                 _builder.append(_name_13);
                 _builder.newLineIfNotEmpty();
+              } else {
+                _builder.append("End");
+                _builder.newLine();
               }
             }
           }
@@ -311,6 +319,11 @@ public class MyDslGenerator extends AbstractGenerator {
     return _builder;
   }
 
+  /**
+   * p → Q{ ℓ\ud835\udc56⟨S\ud835\udc56⟩.G\ud835\udc56 }\ud835\udc56∈\ud835\udc3c ↾\ud835\udf0c R = Q!{ ℓ\ud835\udc56⟨S\ud835\udc56⟩.G\ud835\udc56 ↾\ud835\udf0c R }\ud835\udc56∈\ud835\udc3c if RoleSet(p, \ud835\udf0c) = R
+   * p → Q{ ℓ\ud835\udc56⟨S\ud835\udc56⟩.G\ud835\udc56 }\ud835\udc56∈\ud835\udc3c ↾\ud835\udf0c R = p?{ ℓ\ud835\udc56⟨S\ud835\udc56⟩.G\ud835\udc56 ↾\ud835\udf0c R }\ud835\udc56∈\ud835\udc3c if RoleSet(Q, \ud835\udf0c) = R
+   * p → Q{ ℓ\ud835\udc56⟨S\ud835\udc56⟩.G\ud835\udc56 }\ud835\udc56∈\ud835\udc3c ↾\ud835\udf0c R = ⨆︀\ud835\udc56∈\ud835\udc3c G\ud835\udc56 ↾\ud835\udf0c R //merge
+   */
   protected CharSequence _projectOn(final Choice c, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
     {

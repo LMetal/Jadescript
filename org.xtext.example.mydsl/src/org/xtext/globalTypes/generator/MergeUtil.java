@@ -20,7 +20,7 @@ public class MergeUtil {
 		System.out.println(localTypes);
 		
 		if(allEquals(localTypesNoSpaces)) {
-			System.out.print("Equals");
+			//success, all branches are equal, no choice needed
 			return localTypes.get(0);
 		} else if(! allFirstMessageExternalChoice(localTypes)) {
 			return "//MERGE FAILED: Must wait message in choice";
@@ -28,8 +28,8 @@ public class MergeUtil {
 			return "//MERGE FAILED: Two branches, but not all, waits for same message";
 		}
 		
-		//SUCCESS, can merge
 		
+		//SUCCESS, can merge
 		return gen.safeProjectOn(c, r);
 	}
 

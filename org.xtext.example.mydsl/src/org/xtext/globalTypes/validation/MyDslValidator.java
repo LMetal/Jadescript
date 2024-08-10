@@ -63,41 +63,57 @@ public class MyDslValidator extends AbstractMyDslValidator {
 			}
 		}
 	
-		//@Check
-		public void rightDefinitionsPatternGlobal(GlobalProtocol p) {
-			ArrayList<Definition> definitions = (ArrayList<Definition>) EcoreUtil2.getAllContentsOfType(p, Definition.class);
-			List<Message> messages = EcoreUtil2.getAllContentsOfType(p, Message.class);
+		@Check
+		public void rightDefinitionsPatternGlobal(Model mod) {
+			List<Definition> definitions = EcoreUtil2.getAllContentsOfType(mod, Definition.class);
+			List<Message> messages = EcoreUtil2.getAllContentsOfType(mod, Message.class);
 			
 			for(Message m: messages) {
 				System.out.println("check "+m.getMessageType().getName());
 				if(m instanceof MessageQuit) continue;
 
 				MessageNormal mn = (MessageNormal) m;
+				System.out.println(mn.getMessageType().getName());
 				Definition d = definitions.stream()
-                        .filter(def -> def.getType().equals(mn.getMessageType().toString()))
+                        .filter(def -> def.getName().equals(mn.getMessageType().getName()))
                         .findFirst()
                         .orElse(null);
+				System.out.println(d.getTypes());
 				
-				EList<String> payload = mn.getPayload().getTypes();
-				EList<String> pattern = d.getTypes();
-				System.out.println("HERE5");
-
-				if(payload.size() != pattern.size()) {
-					error(
-							"Wrong paylod pattern",
-							mn,
-							MyDslPackage.Literals.MESSAGE_NORMAL__PAYLOAD
-							);
-				}
-
-				for(int i=0; i<d.getTypes().size(); i++) {
-					System.out.println(payload.get(i) + " "+pattern.get(i));
-					if(!payload.get(i).equals(pattern.get(i))) {
+				//se payload messaggio null
+				if(mn.getPayload() == null) {
+					if(d.getTypes().size() != 0) {
 						error(
 							"Wrong paylod pattern",
 							mn,
 							MyDslPackage.Literals.MESSAGE_NORMAL__PAYLOAD
-							);
+						);
+					}
+				} else {
+					EList<String> payload = mn.getPayload().getTypes();
+					System.out.println("payload: "+payload);
+					EList<String> pattern = d.getTypes();
+					System.out.println(payload + " "+ pattern);
+
+					
+					if(payload.size() != pattern.size()) {
+						error(
+								"Wrong paylod pattern",
+								mn,
+								MyDslPackage.Literals.MESSAGE_NORMAL__PAYLOAD
+								);
+						continue;
+					}
+
+					for(int i=0; i<d.getTypes().size(); i++) {
+						System.out.println(payload.get(i) + " "+pattern.get(i));
+						if(!payload.get(i).equals(pattern.get(i))) {
+							error(
+								"Wrong paylod pattern",
+								mn,
+								MyDslPackage.Literals.MESSAGE_NORMAL__PAYLOAD
+								);
+						}
 					}
 				}
 			}
