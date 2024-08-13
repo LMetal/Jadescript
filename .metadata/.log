@@ -9290,3 +9290,878 @@ java.lang.Error: SWT Resource was not properly disposed
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:588)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1459)
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1432)
+!SESSION 2024-08-12 18:49:46.324 -----------------------------------------------
+eclipse.buildId=4.30.0.20231201-1200
+java.version=17.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.eclemma.core 4 0 2024-08-12 18:49:48.217
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.eclemma.core [151]
+  Unresolved requirement: Require-Bundle: org.jacoco.report; bundle-version="[0.8.11,0.8.12)"
+    -> Bundle-SymbolicName: org.jacoco.report; bundle-version="0.8.11.202310140853"
+       org.jacoco.report [483]
+         Unresolved requirement: Import-Package: org.jacoco.core.analysis; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core.analysis; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.jacoco.core.internal.analysis"
+              org.jacoco.core [482]
+         Unresolved requirement: Import-Package: org.jacoco.core; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"
+         Unresolved requirement: Import-Package: org.jacoco.core.data; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core.data; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.internal.data"
+         Unresolved requirement: Import-Package: org.jacoco.core.runtime; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core.runtime; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.objectweb.asm"
+  Unresolved requirement: Require-Bundle: org.jacoco.core; bundle-version="[0.8.11,0.8.12)"
+    -> Bundle-SymbolicName: org.jacoco.core; bundle-version="0.8.11.202310140853"
+  Bundle was not resolved because of a uses constraint violation.
+  org.apache.felix.resolver.reason.ReasonException: Uses constraint violation. Unable to resolve resource org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"] because it is exposed to package 'org.objectweb.asm' from resources org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"] and org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.7.0"; osgi.identity="org.objectweb.asm"] via two dependency chains.
+
+Chain 1:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"]
+
+Chain 2:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm.commons)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package=org.objectweb.asm.commons; uses:=org.objectweb.asm
+  org.objectweb.asm.commons [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm.commons"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(version>=9.6.0))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.7.0"; osgi.identity="org.objectweb.asm"]
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.eclemma.ui 4 0 2024-08-12 18:49:48.224
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.eclemma.ui [153]
+  Unresolved requirement: Require-Bundle: org.eclipse.eclemma.core
+    -> Bundle-SymbolicName: org.eclipse.eclemma.core; bundle-version="3.1.8.202311140945"; singleton:="true"
+       org.eclipse.eclemma.core [151]
+         Unresolved requirement: Require-Bundle: org.jacoco.report; bundle-version="[0.8.11,0.8.12)"
+           -> Bundle-SymbolicName: org.jacoco.report; bundle-version="0.8.11.202310140853"
+              org.jacoco.report [483]
+                Unresolved requirement: Import-Package: org.jacoco.core.analysis; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core.analysis; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.jacoco.core.internal.analysis"
+                     org.jacoco.core [482]
+                Unresolved requirement: Import-Package: org.jacoco.core; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"
+                Unresolved requirement: Import-Package: org.jacoco.core.data; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core.data; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.internal.data"
+                Unresolved requirement: Import-Package: org.jacoco.core.runtime; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core.runtime; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.objectweb.asm"
+         Unresolved requirement: Require-Bundle: org.jacoco.core; bundle-version="[0.8.11,0.8.12)"
+           -> Bundle-SymbolicName: org.jacoco.core; bundle-version="0.8.11.202310140853"
+  Unresolved requirement: Require-Bundle: org.jacoco.core; bundle-version="[0.8.11,0.8.12)"
+    -> Bundle-SymbolicName: org.jacoco.core; bundle-version="0.8.11.202310140853"
+  Bundle was not resolved because of a uses constraint violation.
+  org.apache.felix.resolver.reason.ReasonException: Uses constraint violation. Unable to resolve resource org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"] because it is exposed to package 'org.objectweb.asm' from resources org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"] and org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.7.0"; osgi.identity="org.objectweb.asm"] via two dependency chains.
+
+Chain 1:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"]
+
+Chain 2:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm.commons)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package=org.objectweb.asm.commons; uses:=org.objectweb.asm
+  org.objectweb.asm.commons [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm.commons"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(version>=9.6.0))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.7.0"; osgi.identity="org.objectweb.asm"]
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY ch.qos.logback.classic 1 0 2024-08-12 18:49:48.386
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-08-12 18:49:51.154
+!MESSAGE Logback config file: C:\Users\leoga\Jadescript\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.2.1.20231030-1438.xml
+
+!ENTRY org.eclipse.jface 2 0 2024-08-12 18:49:52.794
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-08-12 18:49:52.794
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.jdt.ui.navigate.open.type"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.lsp4e.symbolinworkspace"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-08-12 18:49:57.157
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\leoga'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 21:58:52.186
+!MESSAGE org.eclipse.xtext.validation.ResourceValidatorImpl  - index (-2089947) must not be negative
+
+!STACK 0
+java.lang.IndexOutOfBoundsException: index (-2089947) must not be negative
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1416)
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1398)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:96)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:56)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.internalGetLineAndColumn(NodeModelUtils.java:97)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils$Implementation.getLineAndColumn(NodeModelUtils.java:279)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.getLineAndColumn(NodeModelUtils.java:93)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationForNode(DiagnosticConverterImpl.java:280)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationData(DiagnosticConverterImpl.java:207)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.convertValidatorDiagnostic(DiagnosticConverterImpl.java:98)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.issueFromEValidatorDiagnostic(ResourceValidatorImpl.java:181)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:150)
+	at org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.validate(DerivedStateAwareResourceValidator.java:33)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:91)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.lambda$0(CachingResourceValidatorImpl.java:77)
+	at org.eclipse.xtext.util.OnChangeEvictingCache.get(OnChangeEvictingCache.java:79)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.validate(CachingResourceValidatorImpl.java:79)
+	at org.eclipse.xtend.ide.validator.XtendResourceValidator.validate(XtendResourceValidator.java:32)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:92)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:1)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.util.concurrent.WrappingCancelableUnitOfWork.exec(WrappingCancelableUnitOfWork.java:58)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.resource.OutdatedStateManager.exec(OutdatedStateManager.java:70)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.internalReadOnly(XtextDocument.java:525)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.readOnly(XtextDocument.java:497)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument.readOnly(XtextDocument.java:136)
+	at org.eclipse.xtext.util.concurrent.IReadAccess.tryReadOnly(IReadAccess.java:50)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.createIssues(ValidationJob.java:87)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.run(ValidationJob.java:68)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 21:58:54.529
+!MESSAGE org.eclipse.xtext.validation.ResourceValidatorImpl  - index (-2089941) must not be negative
+
+!STACK 0
+java.lang.IndexOutOfBoundsException: index (-2089941) must not be negative
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1416)
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1398)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:96)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:56)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.internalGetLineAndColumn(NodeModelUtils.java:97)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils$Implementation.getLineAndColumn(NodeModelUtils.java:279)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.getLineAndColumn(NodeModelUtils.java:93)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationForNode(DiagnosticConverterImpl.java:280)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationData(DiagnosticConverterImpl.java:207)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.convertValidatorDiagnostic(DiagnosticConverterImpl.java:98)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.issueFromEValidatorDiagnostic(ResourceValidatorImpl.java:181)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:150)
+	at org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.validate(DerivedStateAwareResourceValidator.java:33)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:91)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.lambda$0(CachingResourceValidatorImpl.java:77)
+	at org.eclipse.xtext.util.OnChangeEvictingCache.get(OnChangeEvictingCache.java:79)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.validate(CachingResourceValidatorImpl.java:79)
+	at org.eclipse.xtend.ide.validator.XtendResourceValidator.validate(XtendResourceValidator.java:32)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:92)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:1)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.util.concurrent.WrappingCancelableUnitOfWork.exec(WrappingCancelableUnitOfWork.java:58)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.resource.OutdatedStateManager.exec(OutdatedStateManager.java:70)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.internalReadOnly(XtextDocument.java:525)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.readOnly(XtextDocument.java:497)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument.readOnly(XtextDocument.java:136)
+	at org.eclipse.xtext.util.concurrent.IReadAccess.tryReadOnly(IReadAccess.java:50)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.createIssues(ValidationJob.java:87)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.run(ValidationJob.java:68)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:08:36.800
+!MESSAGE org.eclipse.xtext.validation.Issue$IssueImpl  - Issue length was -64
+
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:08:36.806
+!MESSAGE org.eclipse.xtext.validation.ResourceValidatorImpl  - index (-1779) must not be negative
+
+!STACK 0
+java.lang.IndexOutOfBoundsException: index (-1779) must not be negative
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1416)
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1398)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:96)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:56)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.internalGetLineAndColumn(NodeModelUtils.java:97)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils$Implementation.getLineAndColumn(NodeModelUtils.java:279)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.getLineAndColumn(NodeModelUtils.java:93)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationForNode(DiagnosticConverterImpl.java:280)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationData(DiagnosticConverterImpl.java:207)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.convertValidatorDiagnostic(DiagnosticConverterImpl.java:98)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.issueFromEValidatorDiagnostic(ResourceValidatorImpl.java:181)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:150)
+	at org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.validate(DerivedStateAwareResourceValidator.java:33)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:91)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.lambda$0(CachingResourceValidatorImpl.java:77)
+	at org.eclipse.xtext.util.OnChangeEvictingCache.get(OnChangeEvictingCache.java:79)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.validate(CachingResourceValidatorImpl.java:79)
+	at org.eclipse.xtend.ide.validator.XtendResourceValidator.validate(XtendResourceValidator.java:32)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:92)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:1)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.util.concurrent.WrappingCancelableUnitOfWork.exec(WrappingCancelableUnitOfWork.java:58)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.resource.OutdatedStateManager.exec(OutdatedStateManager.java:70)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.internalReadOnly(XtextDocument.java:525)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.readOnly(XtextDocument.java:497)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument.readOnly(XtextDocument.java:136)
+	at org.eclipse.xtext.util.concurrent.IReadAccess.tryReadOnly(IReadAccess.java:50)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.createIssues(ValidationJob.java:87)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.run(ValidationJob.java:68)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:08:38.340
+!MESSAGE org.eclipse.xtext.validation.Issue$IssueImpl  - Issue length was -64
+
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:08:38.342
+!MESSAGE org.eclipse.xtext.validation.ResourceValidatorImpl  - index (-1778) must not be negative
+
+!STACK 0
+java.lang.IndexOutOfBoundsException: index (-1778) must not be negative
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1416)
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1398)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:96)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:56)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.internalGetLineAndColumn(NodeModelUtils.java:97)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils$Implementation.getLineAndColumn(NodeModelUtils.java:279)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.getLineAndColumn(NodeModelUtils.java:93)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationForNode(DiagnosticConverterImpl.java:280)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationData(DiagnosticConverterImpl.java:207)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.convertValidatorDiagnostic(DiagnosticConverterImpl.java:98)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.issueFromEValidatorDiagnostic(ResourceValidatorImpl.java:181)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:150)
+	at org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.validate(DerivedStateAwareResourceValidator.java:33)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:91)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.lambda$0(CachingResourceValidatorImpl.java:77)
+	at org.eclipse.xtext.util.OnChangeEvictingCache.get(OnChangeEvictingCache.java:79)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.validate(CachingResourceValidatorImpl.java:79)
+	at org.eclipse.xtend.ide.validator.XtendResourceValidator.validate(XtendResourceValidator.java:32)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:92)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:1)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.util.concurrent.WrappingCancelableUnitOfWork.exec(WrappingCancelableUnitOfWork.java:58)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.resource.OutdatedStateManager.exec(OutdatedStateManager.java:70)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.internalReadOnly(XtextDocument.java:525)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.readOnly(XtextDocument.java:497)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument.readOnly(XtextDocument.java:136)
+	at org.eclipse.xtext.util.concurrent.IReadAccess.tryReadOnly(IReadAccess.java:50)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.createIssues(ValidationJob.java:87)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.run(ValidationJob.java:68)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:07.505
+!MESSAGE org.eclipse.xtext.validation.Issue$IssueImpl  - Issue length was -64
+
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:07.507
+!MESSAGE org.eclipse.xtext.validation.ResourceValidatorImpl  - index (-1773) must not be negative
+
+!STACK 0
+java.lang.IndexOutOfBoundsException: index (-1773) must not be negative
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1416)
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1398)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:96)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:56)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.internalGetLineAndColumn(NodeModelUtils.java:97)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils$Implementation.getLineAndColumn(NodeModelUtils.java:279)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.getLineAndColumn(NodeModelUtils.java:93)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationForNode(DiagnosticConverterImpl.java:280)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationData(DiagnosticConverterImpl.java:207)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.convertValidatorDiagnostic(DiagnosticConverterImpl.java:98)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.issueFromEValidatorDiagnostic(ResourceValidatorImpl.java:181)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:150)
+	at org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.validate(DerivedStateAwareResourceValidator.java:33)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:91)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.lambda$0(CachingResourceValidatorImpl.java:77)
+	at org.eclipse.xtext.util.OnChangeEvictingCache.get(OnChangeEvictingCache.java:79)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.validate(CachingResourceValidatorImpl.java:79)
+	at org.eclipse.xtend.ide.validator.XtendResourceValidator.validate(XtendResourceValidator.java:32)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:92)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:1)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.util.concurrent.WrappingCancelableUnitOfWork.exec(WrappingCancelableUnitOfWork.java:58)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.resource.OutdatedStateManager.exec(OutdatedStateManager.java:70)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.internalReadOnly(XtextDocument.java:525)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.readOnly(XtextDocument.java:497)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument.readOnly(XtextDocument.java:136)
+	at org.eclipse.xtext.util.concurrent.IReadAccess.tryReadOnly(IReadAccess.java:50)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.createIssues(ValidationJob.java:87)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.run(ValidationJob.java:68)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:08.662
+!MESSAGE org.eclipse.xtext.validation.Issue$IssueImpl  - Issue length was -64
+
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:08.663
+!MESSAGE org.eclipse.xtext.validation.ResourceValidatorImpl  - index (-1768) must not be negative
+
+!STACK 0
+java.lang.IndexOutOfBoundsException: index (-1768) must not be negative
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1416)
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1398)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:96)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:56)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.internalGetLineAndColumn(NodeModelUtils.java:97)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils$Implementation.getLineAndColumn(NodeModelUtils.java:279)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.getLineAndColumn(NodeModelUtils.java:93)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationForNode(DiagnosticConverterImpl.java:280)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationData(DiagnosticConverterImpl.java:207)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.convertValidatorDiagnostic(DiagnosticConverterImpl.java:98)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.issueFromEValidatorDiagnostic(ResourceValidatorImpl.java:181)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:150)
+	at org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.validate(DerivedStateAwareResourceValidator.java:33)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:91)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.lambda$0(CachingResourceValidatorImpl.java:77)
+	at org.eclipse.xtext.util.OnChangeEvictingCache.get(OnChangeEvictingCache.java:79)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.validate(CachingResourceValidatorImpl.java:79)
+	at org.eclipse.xtend.ide.validator.XtendResourceValidator.validate(XtendResourceValidator.java:32)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:92)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:1)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.util.concurrent.WrappingCancelableUnitOfWork.exec(WrappingCancelableUnitOfWork.java:58)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.resource.OutdatedStateManager.exec(OutdatedStateManager.java:70)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.internalReadOnly(XtextDocument.java:525)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.readOnly(XtextDocument.java:497)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument.readOnly(XtextDocument.java:136)
+	at org.eclipse.xtext.util.concurrent.IReadAccess.tryReadOnly(IReadAccess.java:50)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.createIssues(ValidationJob.java:87)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.run(ValidationJob.java:68)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:09.591
+!MESSAGE org.eclipse.xtext.validation.Issue$IssueImpl  - Issue length was -64
+
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:09.593
+!MESSAGE org.eclipse.xtext.validation.ResourceValidatorImpl  - index (-1766) must not be negative
+
+!STACK 0
+java.lang.IndexOutOfBoundsException: index (-1766) must not be negative
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1416)
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1398)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:96)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:56)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.internalGetLineAndColumn(NodeModelUtils.java:97)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils$Implementation.getLineAndColumn(NodeModelUtils.java:279)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.getLineAndColumn(NodeModelUtils.java:93)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationForNode(DiagnosticConverterImpl.java:280)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationData(DiagnosticConverterImpl.java:207)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.convertValidatorDiagnostic(DiagnosticConverterImpl.java:98)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.issueFromEValidatorDiagnostic(ResourceValidatorImpl.java:181)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:150)
+	at org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.validate(DerivedStateAwareResourceValidator.java:33)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:91)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.lambda$0(CachingResourceValidatorImpl.java:77)
+	at org.eclipse.xtext.util.OnChangeEvictingCache.get(OnChangeEvictingCache.java:79)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.validate(CachingResourceValidatorImpl.java:79)
+	at org.eclipse.xtend.ide.validator.XtendResourceValidator.validate(XtendResourceValidator.java:32)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:92)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:1)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.util.concurrent.WrappingCancelableUnitOfWork.exec(WrappingCancelableUnitOfWork.java:58)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.resource.OutdatedStateManager.exec(OutdatedStateManager.java:70)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.internalReadOnly(XtextDocument.java:525)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.readOnly(XtextDocument.java:497)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument.readOnly(XtextDocument.java:136)
+	at org.eclipse.xtext.util.concurrent.IReadAccess.tryReadOnly(IReadAccess.java:50)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.createIssues(ValidationJob.java:87)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.run(ValidationJob.java:68)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:11.266
+!MESSAGE org.eclipse.xtext.validation.Issue$IssueImpl  - Issue length was -64
+
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:11.267
+!MESSAGE org.eclipse.xtext.validation.ResourceValidatorImpl  - index (-1762) must not be negative
+
+!STACK 0
+java.lang.IndexOutOfBoundsException: index (-1762) must not be negative
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1416)
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1398)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:96)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:56)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.internalGetLineAndColumn(NodeModelUtils.java:97)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils$Implementation.getLineAndColumn(NodeModelUtils.java:279)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.getLineAndColumn(NodeModelUtils.java:93)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationForNode(DiagnosticConverterImpl.java:280)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationData(DiagnosticConverterImpl.java:207)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.convertValidatorDiagnostic(DiagnosticConverterImpl.java:98)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.issueFromEValidatorDiagnostic(ResourceValidatorImpl.java:181)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:150)
+	at org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.validate(DerivedStateAwareResourceValidator.java:33)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:91)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.lambda$0(CachingResourceValidatorImpl.java:77)
+	at org.eclipse.xtext.util.OnChangeEvictingCache.get(OnChangeEvictingCache.java:79)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.validate(CachingResourceValidatorImpl.java:79)
+	at org.eclipse.xtend.ide.validator.XtendResourceValidator.validate(XtendResourceValidator.java:32)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:92)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:1)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.util.concurrent.WrappingCancelableUnitOfWork.exec(WrappingCancelableUnitOfWork.java:58)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.resource.OutdatedStateManager.exec(OutdatedStateManager.java:70)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.internalReadOnly(XtextDocument.java:525)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.readOnly(XtextDocument.java:497)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument.readOnly(XtextDocument.java:136)
+	at org.eclipse.xtext.util.concurrent.IReadAccess.tryReadOnly(IReadAccess.java:50)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.createIssues(ValidationJob.java:87)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.run(ValidationJob.java:68)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:14.479
+!MESSAGE org.eclipse.xtext.validation.Issue$IssueImpl  - Issue length was -64
+
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:14.481
+!MESSAGE org.eclipse.xtext.validation.ResourceValidatorImpl  - index (-1756) must not be negative
+
+!STACK 0
+java.lang.IndexOutOfBoundsException: index (-1756) must not be negative
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1416)
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1398)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:96)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:56)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.internalGetLineAndColumn(NodeModelUtils.java:97)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils$Implementation.getLineAndColumn(NodeModelUtils.java:279)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.getLineAndColumn(NodeModelUtils.java:93)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationForNode(DiagnosticConverterImpl.java:280)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationData(DiagnosticConverterImpl.java:207)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.convertValidatorDiagnostic(DiagnosticConverterImpl.java:98)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.issueFromEValidatorDiagnostic(ResourceValidatorImpl.java:181)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:150)
+	at org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.validate(DerivedStateAwareResourceValidator.java:33)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:91)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.lambda$0(CachingResourceValidatorImpl.java:77)
+	at org.eclipse.xtext.util.OnChangeEvictingCache.get(OnChangeEvictingCache.java:79)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.validate(CachingResourceValidatorImpl.java:79)
+	at org.eclipse.xtend.ide.validator.XtendResourceValidator.validate(XtendResourceValidator.java:32)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:92)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:1)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.util.concurrent.WrappingCancelableUnitOfWork.exec(WrappingCancelableUnitOfWork.java:58)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.resource.OutdatedStateManager.exec(OutdatedStateManager.java:70)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.internalReadOnly(XtextDocument.java:525)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.readOnly(XtextDocument.java:497)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument.readOnly(XtextDocument.java:136)
+	at org.eclipse.xtext.util.concurrent.IReadAccess.tryReadOnly(IReadAccess.java:50)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.createIssues(ValidationJob.java:87)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.run(ValidationJob.java:68)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:17.419
+!MESSAGE org.eclipse.xtext.validation.Issue$IssueImpl  - Issue length was -64
+
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:17.421
+!MESSAGE org.eclipse.xtext.validation.ResourceValidatorImpl  - index (-1751) must not be negative
+
+!STACK 0
+java.lang.IndexOutOfBoundsException: index (-1751) must not be negative
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1416)
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1398)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:96)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:56)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.internalGetLineAndColumn(NodeModelUtils.java:97)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils$Implementation.getLineAndColumn(NodeModelUtils.java:279)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.getLineAndColumn(NodeModelUtils.java:93)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationForNode(DiagnosticConverterImpl.java:280)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationData(DiagnosticConverterImpl.java:207)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.convertValidatorDiagnostic(DiagnosticConverterImpl.java:98)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.issueFromEValidatorDiagnostic(ResourceValidatorImpl.java:181)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:150)
+	at org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.validate(DerivedStateAwareResourceValidator.java:33)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:91)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.lambda$0(CachingResourceValidatorImpl.java:77)
+	at org.eclipse.xtext.util.OnChangeEvictingCache.get(OnChangeEvictingCache.java:79)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.validate(CachingResourceValidatorImpl.java:79)
+	at org.eclipse.xtend.ide.validator.XtendResourceValidator.validate(XtendResourceValidator.java:32)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:92)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:1)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.util.concurrent.WrappingCancelableUnitOfWork.exec(WrappingCancelableUnitOfWork.java:58)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.resource.OutdatedStateManager.exec(OutdatedStateManager.java:70)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.internalReadOnly(XtextDocument.java:525)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.readOnly(XtextDocument.java:497)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument.readOnly(XtextDocument.java:136)
+	at org.eclipse.xtext.util.concurrent.IReadAccess.tryReadOnly(IReadAccess.java:50)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.createIssues(ValidationJob.java:87)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.run(ValidationJob.java:68)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:18.342
+!MESSAGE org.eclipse.xtext.validation.Issue$IssueImpl  - Issue length was -64
+
+
+!ENTRY org.apache.log4j 4 0 2024-08-12 22:09:18.343
+!MESSAGE org.eclipse.xtext.validation.ResourceValidatorImpl  - index (-1749) must not be negative
+
+!STACK 0
+java.lang.IndexOutOfBoundsException: index (-1749) must not be negative
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1416)
+	at com.google.common.base.Preconditions.checkPositionIndex(Preconditions.java:1398)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:96)
+	at org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils.getLineAndColumn(InternalNodeModelUtils.java:56)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.internalGetLineAndColumn(NodeModelUtils.java:97)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils$Implementation.getLineAndColumn(NodeModelUtils.java:279)
+	at org.eclipse.xtext.nodemodel.util.NodeModelUtils.getLineAndColumn(NodeModelUtils.java:93)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationForNode(DiagnosticConverterImpl.java:280)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.getLocationData(DiagnosticConverterImpl.java:207)
+	at org.eclipse.xtext.validation.DiagnosticConverterImpl.convertValidatorDiagnostic(DiagnosticConverterImpl.java:98)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.issueFromEValidatorDiagnostic(ResourceValidatorImpl.java:181)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:150)
+	at org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.validate(DerivedStateAwareResourceValidator.java:33)
+	at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:91)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.lambda$0(CachingResourceValidatorImpl.java:77)
+	at org.eclipse.xtext.util.OnChangeEvictingCache.get(OnChangeEvictingCache.java:79)
+	at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.validate(CachingResourceValidatorImpl.java:79)
+	at org.eclipse.xtend.ide.validator.XtendResourceValidator.validate(XtendResourceValidator.java:32)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:92)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:1)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.util.concurrent.WrappingCancelableUnitOfWork.exec(WrappingCancelableUnitOfWork.java:58)
+	at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:27)
+	at org.eclipse.xtext.resource.OutdatedStateManager.exec(OutdatedStateManager.java:70)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.internalReadOnly(XtextDocument.java:525)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.readOnly(XtextDocument.java:497)
+	at org.eclipse.xtext.ui.editor.model.XtextDocument.readOnly(XtextDocument.java:136)
+	at org.eclipse.xtext.util.concurrent.IReadAccess.tryReadOnly(IReadAccess.java:50)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.createIssues(ValidationJob.java:87)
+	at org.eclipse.xtext.ui.editor.validation.ValidationJob.run(ValidationJob.java:68)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-08-13 11:39:22.553 -----------------------------------------------
+eclipse.buildId=4.30.0.20231201-1200
+java.version=17.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.eclemma.core 4 0 2024-08-13 11:39:28.341
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.eclemma.core [151]
+  Unresolved requirement: Require-Bundle: org.jacoco.core; bundle-version="[0.8.11,0.8.12)"
+    -> Bundle-SymbolicName: org.jacoco.core; bundle-version="0.8.11.202310140853"
+       org.jacoco.core [482]
+  Unresolved requirement: Require-Bundle: org.jacoco.report; bundle-version="[0.8.11,0.8.12)"
+    -> Bundle-SymbolicName: org.jacoco.report; bundle-version="0.8.11.202310140853"
+       org.jacoco.report [483]
+         Unresolved requirement: Import-Package: org.jacoco.core.runtime; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core.runtime; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.objectweb.asm"
+         Unresolved requirement: Import-Package: org.jacoco.core.analysis; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core.analysis; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.jacoco.core.internal.analysis"
+         Unresolved requirement: Import-Package: org.jacoco.core; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"
+         Unresolved requirement: Import-Package: org.jacoco.core.data; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core.data; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.internal.data"
+  Bundle was not resolved because of a uses constraint violation.
+  org.apache.felix.resolver.reason.ReasonException: Uses constraint violation. Unable to resolve resource org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"] because it is exposed to package 'org.objectweb.asm' from resources org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"] and org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.7.0"; osgi.identity="org.objectweb.asm"] via two dependency chains.
+
+Chain 1:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"]
+
+Chain 2:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm.commons)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package=org.objectweb.asm.commons; uses:=org.objectweb.asm
+  org.objectweb.asm.commons [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm.commons"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(version>=9.6.0))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.7.0"; osgi.identity="org.objectweb.asm"]
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.eclemma.ui 4 0 2024-08-13 11:39:28.362
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.eclemma.ui [153]
+  Unresolved requirement: Require-Bundle: org.eclipse.eclemma.core
+    -> Bundle-SymbolicName: org.eclipse.eclemma.core; bundle-version="3.1.8.202311140945"; singleton:="true"
+       org.eclipse.eclemma.core [151]
+         Unresolved requirement: Require-Bundle: org.jacoco.core; bundle-version="[0.8.11,0.8.12)"
+           -> Bundle-SymbolicName: org.jacoco.core; bundle-version="0.8.11.202310140853"
+              org.jacoco.core [482]
+         Unresolved requirement: Require-Bundle: org.jacoco.report; bundle-version="[0.8.11,0.8.12)"
+           -> Bundle-SymbolicName: org.jacoco.report; bundle-version="0.8.11.202310140853"
+              org.jacoco.report [483]
+                Unresolved requirement: Import-Package: org.jacoco.core.runtime; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core.runtime; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.objectweb.asm"
+                Unresolved requirement: Import-Package: org.jacoco.core.analysis; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core.analysis; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.jacoco.core.internal.analysis"
+                Unresolved requirement: Import-Package: org.jacoco.core; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"
+                Unresolved requirement: Import-Package: org.jacoco.core.data; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core.data; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.internal.data"
+  Unresolved requirement: Require-Bundle: org.jacoco.core; bundle-version="[0.8.11,0.8.12)"
+    -> Bundle-SymbolicName: org.jacoco.core; bundle-version="0.8.11.202310140853"
+  Bundle was not resolved because of a uses constraint violation.
+  org.apache.felix.resolver.reason.ReasonException: Uses constraint violation. Unable to resolve resource org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"] because it is exposed to package 'org.objectweb.asm' from resources org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"] and org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.7.0"; osgi.identity="org.objectweb.asm"] via two dependency chains.
+
+Chain 1:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"]
+
+Chain 2:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm.commons)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package=org.objectweb.asm.commons; uses:=org.objectweb.asm
+  org.objectweb.asm.commons [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm.commons"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(version>=9.6.0))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.7.0"; osgi.identity="org.objectweb.asm"]
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY ch.qos.logback.classic 1 0 2024-08-13 11:39:28.749
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-08-13 11:39:51.038
+!MESSAGE Logback config file: C:\Users\leoga\Jadescript\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.2.1.20231030-1438.xml
+
+!ENTRY org.eclipse.jface 2 0 2024-08-13 11:39:54.056
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-08-13 11:39:54.056
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.jdt.ui.navigate.open.type"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.lsp4e.symbolinworkspace"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-08-13 11:40:07.962
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\leoga'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2024-08-13 12:05:30.029 -----------------------------------------------
+eclipse.buildId=4.30.0.20231201-1200
+java.version=17.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.eclemma.core 4 0 2024-08-13 12:05:33.528
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.eclemma.core [151]
+  Unresolved requirement: Require-Bundle: org.jacoco.report; bundle-version="[0.8.11,0.8.12)"
+    -> Bundle-SymbolicName: org.jacoco.report; bundle-version="0.8.11.202310140853"
+       org.jacoco.report [483]
+         Unresolved requirement: Import-Package: org.jacoco.core.runtime; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core.runtime; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.objectweb.asm"
+              org.jacoco.core [482]
+         Unresolved requirement: Import-Package: org.jacoco.core.data; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core.data; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.internal.data"
+         Unresolved requirement: Import-Package: org.jacoco.core; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"
+         Unresolved requirement: Import-Package: org.jacoco.core.analysis; version="[0.8.11,0.8.12)"
+           -> Export-Package: org.jacoco.core.analysis; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.jacoco.core.internal.analysis"
+  Unresolved requirement: Require-Bundle: org.jacoco.core; bundle-version="[0.8.11,0.8.12)"
+    -> Bundle-SymbolicName: org.jacoco.core; bundle-version="0.8.11.202310140853"
+  Bundle was not resolved because of a uses constraint violation.
+  org.apache.felix.resolver.reason.ReasonException: Uses constraint violation. Unable to resolve resource org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"] because it is exposed to package 'org.objectweb.asm' from resources org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"] and org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.7.0"; osgi.identity="org.objectweb.asm"] via two dependency chains.
+
+Chain 1:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"]
+
+Chain 2:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm.commons)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package=org.objectweb.asm.commons; uses:=org.objectweb.asm
+  org.objectweb.asm.commons [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm.commons"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(version>=9.6.0))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.7.0"; osgi.identity="org.objectweb.asm"]
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY org.eclipse.eclemma.ui 4 0 2024-08-13 12:05:33.543
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.eclemma.ui [153]
+  Unresolved requirement: Require-Bundle: org.eclipse.eclemma.core
+    -> Bundle-SymbolicName: org.eclipse.eclemma.core; bundle-version="3.1.8.202311140945"; singleton:="true"
+       org.eclipse.eclemma.core [151]
+         Unresolved requirement: Require-Bundle: org.jacoco.report; bundle-version="[0.8.11,0.8.12)"
+           -> Bundle-SymbolicName: org.jacoco.report; bundle-version="0.8.11.202310140853"
+              org.jacoco.report [483]
+                Unresolved requirement: Import-Package: org.jacoco.core.runtime; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core.runtime; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.objectweb.asm"
+                     org.jacoco.core [482]
+                Unresolved requirement: Import-Package: org.jacoco.core.data; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core.data; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.internal.data"
+                Unresolved requirement: Import-Package: org.jacoco.core; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"
+                Unresolved requirement: Import-Package: org.jacoco.core.analysis; version="[0.8.11,0.8.12)"
+                  -> Export-Package: org.jacoco.core.analysis; bundle-symbolic-name="org.jacoco.core"; bundle-version="0.8.11.202310140853"; version="0.8.11"; uses:="org.jacoco.core.data,org.jacoco.core.internal.analysis"
+         Unresolved requirement: Require-Bundle: org.jacoco.core; bundle-version="[0.8.11,0.8.12)"
+           -> Bundle-SymbolicName: org.jacoco.core; bundle-version="0.8.11.202310140853"
+  Unresolved requirement: Require-Bundle: org.jacoco.core; bundle-version="[0.8.11,0.8.12)"
+    -> Bundle-SymbolicName: org.jacoco.core; bundle-version="0.8.11.202310140853"
+  Bundle was not resolved because of a uses constraint violation.
+  org.apache.felix.resolver.reason.ReasonException: Uses constraint violation. Unable to resolve resource org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"] because it is exposed to package 'org.objectweb.asm' from resources org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"] and org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.7.0"; osgi.identity="org.objectweb.asm"] via two dependency chains.
+
+Chain 1:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm"]
+
+Chain 2:
+  org.jacoco.core [osgi.identity; type="osgi.bundle"; version:Version="0.8.11.202310140853"; osgi.identity="org.jacoco.core"]
+    import: (&(osgi.wiring.package=org.objectweb.asm.commons)(&(version>=9.6.0)(!(version>=9.7.0))))
+     |
+    export: osgi.wiring.package=org.objectweb.asm.commons; uses:=org.objectweb.asm
+  org.objectweb.asm.commons [osgi.identity; type="osgi.bundle"; version:Version="9.6.0"; osgi.identity="org.objectweb.asm.commons"]
+    import: (&(osgi.wiring.package=org.objectweb.asm)(version>=9.6.0))
+     |
+    export: osgi.wiring.package: org.objectweb.asm
+  org.objectweb.asm [osgi.identity; type="osgi.bundle"; version:Version="9.7.0"; osgi.identity="org.objectweb.asm"]
+	at org.eclipse.osgi.container.Module.start(Module.java:463)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel$2.run(ModuleContainer.java:1852)
+	at org.eclipse.osgi.internal.framework.EquinoxContainerAdaptor$1$1.execute(EquinoxContainerAdaptor.java:136)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1845)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1786)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1750)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1672)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:234)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:345)
+
+!ENTRY ch.qos.logback.classic 1 0 2024-08-13 12:05:33.854
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-08-13 12:05:37.615
+!MESSAGE Logback config file: C:\Users\leoga\Jadescript\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.2.1.20231030-1438.xml
+
+!ENTRY org.eclipse.jface 2 0 2024-08-13 12:05:40.599
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-08-13 12:05:40.599
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.jdt.ui.navigate.open.type"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.lsp4e.symbolinworkspace"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-08-13 12:05:53.921
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\leoga'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.

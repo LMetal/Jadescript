@@ -69,16 +69,16 @@ public class MyDslValidator extends AbstractMyDslValidator {
 			List<Message> messages = EcoreUtil2.getAllContentsOfType(mod, Message.class);
 			
 			for(Message m: messages) {
-				System.out.println("check "+m.getMessageType().getName());
+				//System.out.println("check "+m.getMessageType().getName());
 				if(m instanceof MessageQuit) continue;
 
 				MessageNormal mn = (MessageNormal) m;
-				System.out.println(mn.getMessageType().getName());
+				//System.out.println(mn.getMessageType().getName());
 				Definition d = definitions.stream()
                         .filter(def -> def.getName().equals(mn.getMessageType().getName()))
                         .findFirst()
                         .orElse(null);
-				System.out.println(d.getTypes());
+				//System.out.println(d.getTypes());
 				
 				//se payload messaggio null
 				if(mn.getPayload() == null) {
@@ -91,9 +91,9 @@ public class MyDslValidator extends AbstractMyDslValidator {
 					}
 				} else {
 					EList<String> payload = mn.getPayload().getTypes();
-					System.out.println("payload: "+payload);
+					//System.out.println("payload: "+payload);
 					EList<String> pattern = d.getTypes();
-					System.out.println(payload + " "+ pattern);
+					//System.out.println(payload + " "+ pattern);
 
 					
 					if(payload.size() != pattern.size()) {
@@ -106,7 +106,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 					}
 
 					for(int i=0; i<d.getTypes().size(); i++) {
-						System.out.println(payload.get(i) + " "+pattern.get(i));
+						//System.out.println(payload.get(i) + " "+pattern.get(i));
 						if(!payload.get(i).equals(pattern.get(i))) {
 							error(
 								"Wrong paylod pattern",
@@ -139,7 +139,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 				for(MessageL m: c.getBranches()) {
 					if(c.getRoleMakingChoice().getName().equals(lp.getProjectedRole().getName())) {
 						//se scelta interna deve essere un invio di messaggio
-						System.out.println(m.getSendReceive() instanceof ReceiverL);
+						//System.out.println(m.getSendReceive() instanceof ReceiverL);
 						if(m.getSendReceive() instanceof SenderL) {
 							error(
 								"Must send message when making a choice" + c.getRoleMakingChoice().getName() + lp.getProjectedRole().getName(),

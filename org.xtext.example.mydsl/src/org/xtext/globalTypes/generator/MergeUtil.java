@@ -17,7 +17,7 @@ public class MergeUtil {
 
 		}
 		
-		System.out.println(localTypes);
+		//System.out.println(localTypes);
 		
 		if(allEquals(localTypesNoSpaces)) {
 			//success, all branches are equal, no choice needed
@@ -52,7 +52,7 @@ public class MergeUtil {
 			String l1 = l.toString();
 			//porzione interessante per capire se e' messaggio in ingresso o uscita
 			String s = l1.subSequence(l1.indexOf(')')+2, l1.indexOf('.')).toString();
-			System.out.println(s);
+			//System.out.println(s);
 			if(s.startsWith("to")) return false;
 		}
 		return true;

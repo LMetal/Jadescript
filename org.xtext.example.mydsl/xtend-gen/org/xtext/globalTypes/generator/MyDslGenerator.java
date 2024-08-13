@@ -41,6 +41,8 @@ import org.xtext.globalTypes.myDsl.Roles;
  */
 @SuppressWarnings("all")
 public class MyDslGenerator extends AbstractGenerator {
+  private final Participants parts = new Participants();
+
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
@@ -52,6 +54,8 @@ public class MyDslGenerator extends AbstractGenerator {
       EList<Role> _roles = globalProtocol.getRoles().getRoles();
       for (final Role r : _roles) {
         {
+          this.parts.resetLists();
+          this.parts.addRoleOne(globalProtocol);
           String _name = r.getName();
           String _plus = ("LOCAL in " + _name);
           System.out.println(_plus);
@@ -183,10 +187,6 @@ public class MyDslGenerator extends AbstractGenerator {
 
   protected CharSequence _projectOn(final Protocol protocol, final Role role) {
     StringConcatenation _builder = new StringConcatenation();
-    String _name = role.getName();
-    String _plus = ("Project on here " + _name);
-    System.out.println(_plus);
-    _builder.newLineIfNotEmpty();
     Object _projectOn = this.projectOn(protocol.getBegin(), role);
     _builder.append(_projectOn);
     return _builder;
@@ -327,35 +327,40 @@ public class MyDslGenerator extends AbstractGenerator {
   protected CharSequence _projectOn(final Choice c, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      if ((Objects.equal(c.getBranches().get(0).getReceiver(), r) || Objects.equal(c.getBranches().get(0).getSender(), r))) {
-        _builder.append("choice at ");
-        String _name = c.getRole().getName();
-        _builder.append(_name);
-        _builder.append("{");
-        _builder.newLineIfNotEmpty();
+      boolean _contains = this.parts.partsChoice(c).contains(r);
+      if (_contains) {
         {
-          int _length = ((Object[])Conversions.unwrapArray(c.getBranches(), Object.class)).length;
-          int _minus = (_length - 1);
-          IntegerRange _upTo = new IntegerRange(0, _minus);
-          boolean _hasElements = false;
-          for(final int i : _upTo) {
-            if (!_hasElements) {
-              _hasElements = true;
-            } else {
-              _builder.appendImmediate(" or {", "");
-            }
-            _builder.append("\t");
-            Object _projectOn = this.projectOn(c.getBranches().get(i), r);
-            _builder.append(_projectOn, "\t");
+          if ((Objects.equal(c.getBranches().get(0).getReceiver(), r) || Objects.equal(c.getBranches().get(0).getSender(), r))) {
+            _builder.append("choice at ");
+            String _name = c.getRole().getName();
+            _builder.append(_name);
+            _builder.append("{");
             _builder.newLineIfNotEmpty();
-            _builder.append("}");
-            _builder.newLine();
+            {
+              int _length = ((Object[])Conversions.unwrapArray(c.getBranches(), Object.class)).length;
+              int _minus = (_length - 1);
+              IntegerRange _upTo = new IntegerRange(0, _minus);
+              boolean _hasElements = false;
+              for(final int i : _upTo) {
+                if (!_hasElements) {
+                  _hasElements = true;
+                } else {
+                  _builder.appendImmediate(" or {", "");
+                }
+                _builder.append("\t");
+                Object _projectOn = this.projectOn(c.getBranches().get(i), r);
+                _builder.append(_projectOn, "\t");
+                _builder.newLineIfNotEmpty();
+                _builder.append("}");
+                _builder.newLine();
+              }
+            }
+          } else {
+            CharSequence _merge = MergeUtil.merge(c, r);
+            _builder.append(_merge);
+            _builder.newLineIfNotEmpty();
           }
         }
-      } else {
-        CharSequence _merge = MergeUtil.merge(c, r);
-        _builder.append(_merge);
-        _builder.newLineIfNotEmpty();
       }
     }
     return _builder;
@@ -392,17 +397,35 @@ public class MyDslGenerator extends AbstractGenerator {
 
   protected CharSequence _projectOn(final Recursion rec, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("rec ");
-    String _name = rec.getName();
-    _builder.append(_name);
-    _builder.append(": {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    Object _projectOn = this.projectOn(rec.getRecProtocol(), r);
-    _builder.append(_projectOn, "\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("}");
-    _builder.newLine();
+    {
+      boolean _contains = this.parts.partsRecursion(rec).contains(r);
+      boolean _not = (!_contains);
+      if (_not) {
+        _builder.append("End");
+        _builder.newLine();
+      } else {
+        {
+          boolean _isRecVariableInRecursion = Util.isRecVariableInRecursion(rec);
+          if (_isRecVariableInRecursion) {
+            Object _projectOn = this.projectOn(rec.getRecProtocol(), r);
+            _builder.append(_projectOn);
+            _builder.newLineIfNotEmpty();
+          } else {
+            _builder.append("rec ");
+            String _name = rec.getName();
+            _builder.append(_name);
+            _builder.append(": {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            Object _projectOn_1 = this.projectOn(rec.getRecProtocol(), r);
+            _builder.append(_projectOn_1, "\t");
+            _builder.newLineIfNotEmpty();
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+      }
+    }
     return _builder;
   }
 
@@ -415,45 +438,61 @@ public class MyDslGenerator extends AbstractGenerator {
     return _builder;
   }
 
+  /**
+   * (for \ud835\udc65 : ⟨R, q⟩ G1; G2) ↾\ud835\udf0c R = G2 ↾\ud835\udf0c R 							if R ̸∈ Parts(G1, \ud835\udf0c)
+   * (for \ud835\udc65 : ⟨R, q⟩ G1; G2) ↾\ud835\udf0c q = for \ud835\udc65 : ⟨R, q⟩ (G1 ↾\ud835\udf0c[\ud835\udc65↦→R] q); (G2 ↾\ud835\udf0c q )
+   * (for \ud835\udc65 : ⟨R, q⟩ G1; G2) ↾\ud835\udf0c R = Seq(G1 ↾\ud835\udf0c[\ud835\udc65↦→R] R‘, G2 ↾\ud835\udf0c R ) 		otherwise
+   */
   protected CharSequence _projectOn(final ForEach each, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      RoleSet _roleset = each.getRoleset();
-      boolean _equals = Objects.equal(_roleset, r);
-      if (_equals) {
-        System.out.println("seq foreach start");
+      boolean _contains = this.parts.partsFor(each).contains(r);
+      boolean _not = (!_contains);
+      if (_not) {
+        Object _projectOn = this.projectOn(each.getProtocol(), r);
+        _builder.append(_projectOn);
         _builder.newLineIfNotEmpty();
-        CharSequence _seqOn = this.seqOn(each.getForBody(), each.getLoopRole(), each.getRoleset(), each.getProtocol());
-        _builder.append(_seqOn);
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
-      RoleOne _refRole = each.getRefRole();
-      boolean _equals_1 = Objects.equal(_refRole, r);
-      if (_equals_1) {
-        System.out.println("project foreach start");
-        _builder.newLineIfNotEmpty();
-        _builder.append("foreach role ");
-        String _name = each.getLoopRole().getName();
-        _builder.append(_name);
-        _builder.append(":<");
-        String _name_1 = each.getRoleset().getName();
-        _builder.append(_name_1);
-        _builder.append(",");
-        String _name_2 = each.getRefRole().getName();
-        _builder.append(_name_2);
-        _builder.append(">{");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        Object _projectOn = this.projectOn(each.getForBody(), r);
-        _builder.append(_projectOn, "\t");
-        _builder.newLineIfNotEmpty();
-        _builder.append("};");
-        _builder.newLine();
-        Object _projectOn_1 = this.projectOn(each.getProtocol(), r);
-        _builder.append(_projectOn_1);
-        _builder.newLineIfNotEmpty();
+      } else {
+        {
+          RoleOne _refRole = each.getRefRole();
+          boolean _equals = Objects.equal(_refRole, r);
+          if (_equals) {
+            _builder.append("foreach role ");
+            String _name = each.getLoopRole().getName();
+            _builder.append(_name);
+            _builder.append(":<");
+            String _name_1 = each.getRoleset().getName();
+            _builder.append(_name_1);
+            _builder.append(",");
+            String _name_2 = each.getRefRole().getName();
+            _builder.append(_name_2);
+            _builder.append(">{");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            Object _projectOn_1 = this.projectOn(each.getForBody(), r);
+            _builder.append(_projectOn_1, "\t");
+            _builder.newLineIfNotEmpty();
+            _builder.append("};");
+            _builder.newLine();
+            Object _projectOn_2 = this.projectOn(each.getProtocol(), r);
+            _builder.append(_projectOn_2);
+            _builder.newLineIfNotEmpty();
+          } else {
+            {
+              RoleSet _roleset = each.getRoleset();
+              boolean _equals_1 = Objects.equal(r, _roleset);
+              if (_equals_1) {
+                CharSequence _seqOn = this.seqOn(each.getForBody(), each.getLoopRole(), each.getProtocol());
+                _builder.append(_seqOn);
+                _builder.newLineIfNotEmpty();
+              } else {
+                CharSequence _seqOn_1 = this.seqOn(each.getForBody(), r, each.getProtocol());
+                _builder.append(_seqOn_1);
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
       }
     }
     return _builder;
@@ -466,19 +505,15 @@ public class MyDslGenerator extends AbstractGenerator {
     return _builder;
   }
 
-  protected CharSequence _seqOn(final Protocol protocol, final Role role, final Role roleset, final Protocol p) {
+  protected CharSequence _seqOn(final Protocol protocol, final Role role, final Protocol p) {
     StringConcatenation _builder = new StringConcatenation();
-    Object _seqOn = this.seqOn(protocol.getBegin(), role, roleset, p);
+    Object _seqOn = this.seqOn(protocol.getBegin(), role, p);
     _builder.append(_seqOn);
     return _builder;
   }
 
-  protected CharSequence _seqOn(final Message m, final Role r, final Role rs, final Protocol p) {
+  protected CharSequence _seqOn(final Message m, final Role r, final Protocol p) {
     StringConcatenation _builder = new StringConcatenation();
-    Definition _messageType = m.getMessageType();
-    String _plus = ("seq message " + _messageType);
-    System.out.println(_plus);
-    _builder.newLineIfNotEmpty();
     {
       if ((m instanceof MessageNormal)) {
         {
@@ -516,7 +551,7 @@ public class MyDslGenerator extends AbstractGenerator {
             }
           }
         }
-        Object _seqOn = this.seqOn(((MessageNormal)m).getProtocol(), r, rs, p);
+        Object _seqOn = this.seqOn(((MessageNormal)m).getProtocol(), r, p);
         _builder.append(_seqOn);
         _builder.newLineIfNotEmpty();
       } else {
@@ -548,7 +583,7 @@ public class MyDslGenerator extends AbstractGenerator {
     return _builder;
   }
 
-  protected CharSequence _seqOn(final Choice c, final Role r, final Role rs, final Protocol p) {
+  protected CharSequence _seqOn(final Choice c, final Role r, final Protocol p) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("choice at ");
     String _name = c.getRole().getName();
@@ -567,7 +602,7 @@ public class MyDslGenerator extends AbstractGenerator {
           _builder.appendImmediate(" or {", "");
         }
         _builder.append("\t");
-        Object _seqOn = this.seqOn(c.getBranches().get(i), r, rs, p);
+        Object _seqOn = this.seqOn(c.getBranches().get(i), r, p);
         _builder.append(_seqOn, "\t");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
@@ -577,37 +612,36 @@ public class MyDslGenerator extends AbstractGenerator {
     return _builder;
   }
 
-  protected CharSequence _seqOn(final Recursion rec, final Role r, final Role rs, final Protocol p) {
+  /**
+   * (\ud835\udf07X .G) ↾\ud835\udf0c R = End if R ̸∈ Parts(G, \ud835\udf0c)
+   * (\ud835\udf07X .G) ↾\ud835\udf0c R = G↾\ud835\udf0c R if X ̸∈ G
+   * (\ud835\udf07X .G) ↾\ud835\udf0c R = \ud835\udf07X .(G↾\ud835\udf0c R ) otherwise
+   */
+  protected CharSequence _seqOn(final Recursion rec, final Role r, final Protocol p) {
     StringConcatenation _builder = new StringConcatenation();
-    System.out.println("seq rec");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
     _builder.append("rec ");
     String _name = rec.getName();
-    _builder.append(_name, "\t");
+    _builder.append(_name);
     _builder.append(": {");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    Object _seqOn = this.seqOn(rec.getRecProtocol(), r, rs, p);
-    _builder.append(_seqOn, "\t\t");
-    _builder.newLineIfNotEmpty();
     _builder.append("\t");
+    Object _seqOn = this.seqOn(rec.getRecProtocol(), r, p);
+    _builder.append(_seqOn, "\t");
+    _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
     return _builder;
   }
 
-  protected CharSequence _seqOn(final ForEach f, final Role r, final Role rs, final Protocol p) {
+  protected CharSequence _seqOn(final ForEach f, final Role r, final Protocol p) {
     StringConcatenation _builder = new StringConcatenation();
-    System.out.println("seq for");
-    _builder.newLineIfNotEmpty();
-    Object _projectOn = this.projectOn(f, rs);
+    Object _projectOn = this.projectOn(f, this.parts.roleSet(r));
     _builder.append(_projectOn);
     _builder.newLineIfNotEmpty();
     return _builder;
   }
 
-  protected CharSequence _seqOn(final CloseRecursion close, final Role r, final Role rs, final Protocol p) {
+  protected CharSequence _seqOn(final CloseRecursion close, final Role r, final Protocol p) {
     StringConcatenation _builder = new StringConcatenation();
     Object _projectOn = this.projectOn(close, r);
     _builder.append(_projectOn);
@@ -615,11 +649,9 @@ public class MyDslGenerator extends AbstractGenerator {
     return _builder;
   }
 
-  protected CharSequence _seqOn(final EndProtocol end, final Role r, final Role rs, final Protocol p) {
+  protected CharSequence _seqOn(final EndProtocol end, final Role r, final Protocol p) {
     StringConcatenation _builder = new StringConcatenation();
-    System.out.println("seq end");
-    _builder.newLineIfNotEmpty();
-    Object _projectOn = this.projectOn(p, rs);
+    Object _projectOn = this.projectOn(p, this.parts.roleSet(r));
     _builder.append(_projectOn);
     _builder.newLineIfNotEmpty();
     return _builder;
@@ -671,24 +703,24 @@ public class MyDslGenerator extends AbstractGenerator {
     }
   }
 
-  public CharSequence seqOn(final EObject c, final Role r, final Role rs, final Protocol p) {
+  public CharSequence seqOn(final EObject c, final Role r, final Protocol p) {
     if (c instanceof Choice) {
-      return _seqOn((Choice)c, r, rs, p);
+      return _seqOn((Choice)c, r, p);
     } else if (c instanceof CloseRecursion) {
-      return _seqOn((CloseRecursion)c, r, rs, p);
+      return _seqOn((CloseRecursion)c, r, p);
     } else if (c instanceof EndProtocol) {
-      return _seqOn((EndProtocol)c, r, rs, p);
+      return _seqOn((EndProtocol)c, r, p);
     } else if (c instanceof ForEach) {
-      return _seqOn((ForEach)c, r, rs, p);
+      return _seqOn((ForEach)c, r, p);
     } else if (c instanceof Message) {
-      return _seqOn((Message)c, r, rs, p);
+      return _seqOn((Message)c, r, p);
     } else if (c instanceof Protocol) {
-      return _seqOn((Protocol)c, r, rs, p);
+      return _seqOn((Protocol)c, r, p);
     } else if (c instanceof Recursion) {
-      return _seqOn((Recursion)c, r, rs, p);
+      return _seqOn((Recursion)c, r, p);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(c, r, rs, p).toString());
+        Arrays.<Object>asList(c, r, p).toString());
     }
   }
 }

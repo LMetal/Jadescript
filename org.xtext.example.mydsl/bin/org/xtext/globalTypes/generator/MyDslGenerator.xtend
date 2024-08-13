@@ -33,12 +33,15 @@ import org.xtext.globalTypes.myDsl.Definition
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 class MyDslGenerator extends AbstractGenerator {
+	val parts = new Participants();
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		var model = resource.contents.head as Model;
 		//create projection file(local protocol) for each role
 		if(model.getProtocol() instanceof GlobalProtocol){
 			var globalProtocol = model.protocol as GlobalProtocol
 			for(Role r : globalProtocol.getRoles().getRoles()){
+				parts.resetLists()
+				parts.addRoleOne(globalProtocol)
 				System.out.println("LOCAL in " + r.getName());
 				fsa.generateFile('../src/local/local_'+r.getName()+'.jglobal', globalProtocol.project(model.getDefinitions, r))
 				System.out.println("END LOCAL on " + r.getName());		
@@ -75,7 +78,6 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def dispatch projectOn(Protocol protocol, Role role)'''
-		«System.out.println("Project on here " + role.name)»
 		«projectOn(protocol.begin, role)»'''
 	
 	def dispatch projectOn(Roles roles, Role r)
@@ -128,14 +130,16 @@ class MyDslGenerator extends AbstractGenerator {
 	 * p → Q{ ℓ𝑖⟨S𝑖⟩.G𝑖 }𝑖∈𝐼 ↾𝜌 R = ⨆︀𝑖∈𝐼 G𝑖 ↾𝜌 R //merge
 	 */
 	def dispatch projectOn(Choice c, Role r)'''
-		«IF c.branches.get(0).getReceiver() == r || c.branches.get(0).getSender() == r»
-			choice at «c.role.name»{
-			«FOR int i: 0..c.branches.length-1 SEPARATOR ' or {'»
-					«projectOn(c.branches.get(i), r)»
-				}
-			«ENDFOR»
-		«ELSE»
-			«MergeUtil.merge(c, r)»
+		«IF parts.partsChoice(c).contains(r)»
+			«IF c.branches.get(0).getReceiver() == r || c.branches.get(0).getSender() == r»
+				choice at «c.role.name»{
+				«FOR int i: 0..c.branches.length-1 SEPARATOR ' or {'»
+						«projectOn(c.branches.get(i), r)»
+					}
+				«ENDFOR»
+			«ELSE»
+				«MergeUtil.merge(c, r)»
+			«ENDIF»
 		«ENDIF»
 	'''
 	
@@ -150,26 +154,44 @@ class MyDslGenerator extends AbstractGenerator {
 	
 	
 	def dispatch projectOn(Recursion rec, Role r)'''
-		rec «rec.name»: {
-			«projectOn(rec.recProtocol, r)»
-		}
+		«IF !parts.partsRecursion(rec).contains(r)»
+			End
+		«ELSE»
+			«IF Util.isRecVariableInRecursion(rec)»
+				«projectOn(rec.recProtocol, r)»
+			«ELSE»
+				rec «rec.name»: {
+					«projectOn(rec.recProtocol, r)»
+				}
+			«ENDIF»
+		«ENDIF»
 	'''
 	
 	def dispatch projectOn(CloseRecursion recEnd, Role r)'''
 		loop «recEnd.recursionVariable.name»
 	'''
 	
+	/*
+	 * (for 𝑥 : ⟨R, q⟩ G1; G2) ↾𝜌 R = G2 ↾𝜌 R 							if R ̸∈ Parts(G1, 𝜌)
+	 * (for 𝑥 : ⟨R, q⟩ G1; G2) ↾𝜌 q = for 𝑥 : ⟨R, q⟩ (G1 ↾𝜌[𝑥↦→R] q); (G2 ↾𝜌 q )
+	 * (for 𝑥 : ⟨R, q⟩ G1; G2) ↾𝜌 R = Seq(G1 ↾𝜌[𝑥↦→R] R‘, G2 ↾𝜌 R ) 		otherwise
+	 */
 	def dispatch projectOn(ForEach each, Role r)'''
-		«IF each.roleset == r»
-			«System.out.println("seq foreach start")»
-			«seqOn(each.forBody, each.loopRole, each.roleset, each.protocol)»
-		«ENDIF»
-		«IF each.refRole == r»
-			«System.out.println("project foreach start")»
-			foreach role «each.loopRole.name»:<«each.roleset.name»,«each.refRole.name»>{
-				«projectOn(each.forBody, r)»
-			};
+		«IF !parts.partsFor(each).contains(r)»
 			«projectOn(each.protocol, r)»
+		«ELSE»
+			«IF each.refRole == r»
+				foreach role «each.loopRole.name»:<«each.roleset.name»,«each.refRole.name»>{
+					«projectOn(each.forBody, r)»
+				};
+				«projectOn(each.protocol, r)»
+			«ELSE»
+				«IF r == each.roleset»
+					«seqOn(each.forBody, each.loopRole, each.protocol)»
+				«ELSE»
+					«seqOn(each.forBody, r, each.protocol)»
+				«ENDIF»
+			«ENDIF»
 		«ENDIF»
 	'''
 	
@@ -177,11 +199,10 @@ class MyDslGenerator extends AbstractGenerator {
 		End
 	'''
 	
-	def dispatch seqOn(Protocol protocol, Role role, Role roleset, Protocol p)'''
-		«seqOn(protocol.begin, role, roleset, p)»'''
+	def dispatch seqOn(Protocol protocol, Role role, Protocol p)'''
+		«seqOn(protocol.begin, role, p)»'''
 	
-	def dispatch seqOn(Message m, Role r, Role rs, Protocol p)'''
-		«System.out.println("seq message "+m.messageType)»
+	def dispatch seqOn(Message m, Role r, Protocol p)'''
 		«IF m instanceof MessageNormal»
 			«IF m.sender.name == r.name»
 				«m.messageType.name»(«printPayload(m.payload)») to «m.receiver.name».
@@ -190,7 +211,7 @@ class MyDslGenerator extends AbstractGenerator {
 					«m.messageType.name»(«printPayload(m.payload)») from «m.sender.name».
 				«ENDIF»
 			«ENDIF»
-			«seqOn(m.protocol, r, rs, p)»
+			«seqOn(m.protocol, r, p)»
 		«ELSE»
 			«IF m.sender.name == r.name»
 				QUIT() to «m.receiver.name»
@@ -202,33 +223,35 @@ class MyDslGenerator extends AbstractGenerator {
 		«ENDIF»
 	'''
 	
-	def dispatch seqOn(Choice c, Role r, Role rs, Protocol p)'''
+	def dispatch seqOn(Choice c, Role r, Protocol p)'''
 		choice at «c.role.name»{
 		«FOR int i: 0..c.branches.length-1 SEPARATOR ' or {'»
-				«seqOn(c.branches.get(i), r, rs, p)»
+				«seqOn(c.branches.get(i), r, p)»
 			}
 		«ENDFOR»
 	'''
 
-	def dispatch seqOn(Recursion rec, Role r, Role rs, Protocol p)'''
-	«System.out.println("seq rec")»
+	/*
+	 * (𝜇X .G) ↾𝜌 R = End if R ̸∈ Parts(G, 𝜌)
+	 * (𝜇X .G) ↾𝜌 R = G↾𝜌 R if X ̸∈ G
+	 * (𝜇X .G) ↾𝜌 R = 𝜇X .(G↾𝜌 R ) otherwise
+	 */
+	def dispatch seqOn(Recursion rec, Role r, Protocol p)'''
 		rec «rec.name»: {
-			«seqOn(rec.recProtocol, r, rs, p)»
+			«seqOn(rec.recProtocol, r, p)»
 		}
 	'''
 	
-	def dispatch seqOn(ForEach f, Role r, Role rs, Protocol p)'''
-		«System.out.println("seq for")»
-		«projectOn(f, rs)»
+	def dispatch seqOn(ForEach f, Role r, Protocol p)'''
+		«projectOn(f, parts.roleSet(r))»
 	'''
 	
-	def dispatch seqOn(CloseRecursion close, Role r, Role rs, Protocol p)'''
+	def dispatch seqOn(CloseRecursion close, Role r, Protocol p)'''
 		«projectOn(close, r)»
 	'''
 	
-	def dispatch seqOn(EndProtocol end, Role r, Role rs, Protocol p)'''
-		«System.out.println("seq end")»
-		«projectOn(p, rs)»
+	def dispatch seqOn(EndProtocol end, Role r, Protocol p)'''
+		«projectOn(p, parts.roleSet(r))»
 	'''
 	
 	def printPayload(Payload payload)'''

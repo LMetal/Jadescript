@@ -5,7 +5,6 @@
     <fullyQualifiedTypeName name="org.eclipse.xtext.scoping.IScope"/>
     <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.Message"/>
     <fullyQualifiedTypeName name="org.eclipse.xtext.scoping.Scopes"/>
-    <fullyQualifiedTypeName name="org.eclipse.xtext.EcoreUtil2"/>
     <fullyQualifiedTypeName name="org.eclipse.emf.ecore.EObject"/>
     <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.GlobalProtocol"/>
     <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.ChoiceL"/>
@@ -24,4 +23,7 @@
     <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.Role"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="org.xtext.globalTypes.generator.MyDslGenerator"/>
+    <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.Recursion"/>
+    <fullyQualifiedTypeName name="org.eclipse.xtext.EcoreUtil2"/>
+    <fullyQualifiedTypeName name="org.xtext.globalTypes.myDsl.CloseRecursion"/>
 </qualifiedTypeNameHistroy>
