@@ -23,13 +23,15 @@ public class MergeUtil {
 			//success, all branches are equal, no choice needed
 			return localTypes.get(0);
 		} else if(! allFirstMessageExternalChoice(localTypes)) {
+			// error, internal choice as first message
 			return "//MERGE FAILED: Must wait message in choice";
 		} else if(! allFirstMessageDifferents(localTypes)) {
+			// error, not all messages are different
 			return "//MERGE FAILED: Two branches, but not all, waits for same message";
 		}
 		
 		
-		//SUCCESS, can merge
+		//SUCCESS, all branches begins with an external choice. In each branch the first message is different
 		return gen.safeProjectOn(c, r);
 	}
 
