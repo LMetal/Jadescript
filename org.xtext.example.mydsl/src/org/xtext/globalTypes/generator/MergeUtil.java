@@ -8,7 +8,7 @@ import org.xtext.globalTypes.myDsl.Message;
 
 public class MergeUtil {
 	public static CharSequence merge(Choice c, Role r) {
-		MyDslGenerator gen = new MyDslGenerator();
+		LocalGenerator gen = new LocalGenerator();
 		var localTypes = new ArrayList<CharSequence>();
 		var localTypesNoSpaces = new ArrayList<CharSequence>();
 		for(Message m: c.getBranches()) {
