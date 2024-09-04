@@ -21,7 +21,7 @@
 'foreach'=40
 'from'=36
 'global'=17
-'int'=13
+'integer'=13
 'local'=39
 'loop'=28
 'or'=35

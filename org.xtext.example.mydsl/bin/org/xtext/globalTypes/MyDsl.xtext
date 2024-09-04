@@ -170,7 +170,7 @@ ForEachL:
 
 
 Type:
-	'int' | 'text' | 'aid' | 'float'  //jadescript types
+	'integer' | 'text' | 'aid' | 'float'  //jadescript types
 ;
 
 

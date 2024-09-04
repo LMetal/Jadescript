@@ -21,7 +21,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalMyDslParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'global'", "'protocol'", "'('", "'){'", "'}'", "'@proposition'", "'@action'", "','", "')'", "'@predicate'", "'QUIT'", "'role'", "'roleset'", "':'", "'End'", "'rec'", "'{'", "'loop'", "'for'", "'<'", "'>'", "';'", "'choice'", "'at'", "'or'", "'()'", "'from'", "'to'", "'.'", "'local'", "'foreach'", "'int'", "'text'", "'aid'", "'float'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'global'", "'protocol'", "'('", "'){'", "'}'", "'@proposition'", "'@action'", "','", "')'", "'@predicate'", "'QUIT'", "'role'", "'roleset'", "':'", "'End'", "'rec'", "'{'", "'loop'", "'for'", "'<'", "'>'", "';'", "'choice'", "'at'", "'or'", "'()'", "'from'", "'to'", "'.'", "'local'", "'foreach'", "'integer'", "'text'", "'aid'", "'float'"
     };
     public static final int T__19=19;
     public static final int T__15=15;
@@ -5784,7 +5784,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleType"
-    // InternalMyDsl.g:2438:1: ruleType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'int' | kw= 'text' | kw= 'aid' | kw= 'float' ) ;
+    // InternalMyDsl.g:2438:1: ruleType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'integer' | kw= 'text' | kw= 'aid' | kw= 'float' ) ;
     public final AntlrDatatypeRuleToken ruleType() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -5794,10 +5794,10 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalMyDsl.g:2444:2: ( (kw= 'int' | kw= 'text' | kw= 'aid' | kw= 'float' ) )
-            // InternalMyDsl.g:2445:2: (kw= 'int' | kw= 'text' | kw= 'aid' | kw= 'float' )
+            // InternalMyDsl.g:2444:2: ( (kw= 'integer' | kw= 'text' | kw= 'aid' | kw= 'float' ) )
+            // InternalMyDsl.g:2445:2: (kw= 'integer' | kw= 'text' | kw= 'aid' | kw= 'float' )
             {
-            // InternalMyDsl.g:2445:2: (kw= 'int' | kw= 'text' | kw= 'aid' | kw= 'float' )
+            // InternalMyDsl.g:2445:2: (kw= 'integer' | kw= 'text' | kw= 'aid' | kw= 'float' )
             int alt22=4;
             switch ( input.LA(1) ) {
             case 42:
@@ -5829,12 +5829,12 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             switch (alt22) {
                 case 1 :
-                    // InternalMyDsl.g:2446:3: kw= 'int'
+                    // InternalMyDsl.g:2446:3: kw= 'integer'
                     {
                     kw=(Token)match(input,42,FOLLOW_2); 
 
                     			current.merge(kw);
-                    			newLeafNode(kw, grammarAccess.getTypeAccess().getIntKeyword_0());
+                    			newLeafNode(kw, grammarAccess.getTypeAccess().getIntegerKeyword_0());
                     		
 
                     }

@@ -1121,9 +1121,9 @@ rule__Type__Alternatives
 	}
 :
 	(
-		{ before(grammarAccess.getTypeAccess().getIntKeyword_0()); }
-		'int'
-		{ after(grammarAccess.getTypeAccess().getIntKeyword_0()); }
+		{ before(grammarAccess.getTypeAccess().getIntegerKeyword_0()); }
+		'integer'
+		{ after(grammarAccess.getTypeAccess().getIntegerKeyword_0()); }
 	)
 	|
 	(

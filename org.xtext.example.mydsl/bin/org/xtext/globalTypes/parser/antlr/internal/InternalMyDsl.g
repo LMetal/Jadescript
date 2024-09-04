@@ -2443,10 +2443,10 @@ ruleType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	leaveRule();
 }:
 	(
-		kw='int'
+		kw='integer'
 		{
 			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getTypeAccess().getIntKeyword_0());
+			newLeafNode(kw, grammarAccess.getTypeAccess().getIntegerKeyword_0());
 		}
 		    |
 		kw='text'

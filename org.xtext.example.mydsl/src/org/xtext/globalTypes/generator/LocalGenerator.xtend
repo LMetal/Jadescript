@@ -102,7 +102,7 @@ class LocalGenerator {
 	def dispatch projectOn(Choice c, Role r)'''
 		«IF parts.partsChoice(c).contains(r)»
 			«IF c.branches.get(0).getReceiver() == r || c.branches.get(0).getSender() == r»
-				choice at «c.role.name»{
+				choice at «parts.roleSet(c.role).name»{
 				«FOR int i: 0..c.branches.length-1 SEPARATOR ' or {'»
 						«projectOn(c.branches.get(i), r)»
 					}

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'()'", "'){'", "'int'", "'text'", "'aid'", "'float'", "'global'", "'protocol'", "'('", "'}'", "')'", "','", "'role'", "'roleset'", "':'", "'rec'", "'{'", "'loop'", "'for'", "'<'", "'>'", "';'", "'choice'", "'at'", "'or'", "'from'", "'to'", "'.'", "'local'", "'foreach'", "'@proposition'", "'@action'", "'@predicate'", "'QUIT'", "'End'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'()'", "'){'", "'integer'", "'text'", "'aid'", "'float'", "'global'", "'protocol'", "'('", "'}'", "')'", "','", "'role'", "'roleset'", "':'", "'rec'", "'{'", "'loop'", "'for'", "'<'", "'>'", "';'", "'choice'", "'at'", "'or'", "'from'", "'to'", "'.'", "'local'", "'foreach'", "'@proposition'", "'@action'", "'@predicate'", "'QUIT'", "'End'"
     };
     public static final int T__19=19;
     public static final int T__15=15;
@@ -3658,13 +3658,13 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Type__Alternatives"
-    // InternalMyDsl.g:1118:1: rule__Type__Alternatives : ( ( 'int' ) | ( 'text' ) | ( 'aid' ) | ( 'float' ) );
+    // InternalMyDsl.g:1118:1: rule__Type__Alternatives : ( ( 'integer' ) | ( 'text' ) | ( 'aid' ) | ( 'float' ) );
     public final void rule__Type__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMyDsl.g:1122:1: ( ( 'int' ) | ( 'text' ) | ( 'aid' ) | ( 'float' ) )
+            // InternalMyDsl.g:1122:1: ( ( 'integer' ) | ( 'text' ) | ( 'aid' ) | ( 'float' ) )
             int alt12=4;
             switch ( input.LA(1) ) {
             case 13:
@@ -3696,14 +3696,14 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
             switch (alt12) {
                 case 1 :
-                    // InternalMyDsl.g:1123:2: ( 'int' )
+                    // InternalMyDsl.g:1123:2: ( 'integer' )
                     {
-                    // InternalMyDsl.g:1123:2: ( 'int' )
-                    // InternalMyDsl.g:1124:3: 'int'
+                    // InternalMyDsl.g:1123:2: ( 'integer' )
+                    // InternalMyDsl.g:1124:3: 'integer'
                     {
-                     before(grammarAccess.getTypeAccess().getIntKeyword_0()); 
+                     before(grammarAccess.getTypeAccess().getIntegerKeyword_0()); 
                     match(input,13,FOLLOW_2); 
-                     after(grammarAccess.getTypeAccess().getIntKeyword_0()); 
+                     after(grammarAccess.getTypeAccess().getIntegerKeyword_0()); 
 
                     }
 

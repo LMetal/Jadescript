@@ -133,11 +133,11 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		}
 		
 		
-		@Check
+		//@Check
 		public void choiceMessageFromChoiceAgentLocal(LocalProtocol lp) {
 			for(ChoiceL c: EcoreUtil2.getAllContentsOfType(lp, ChoiceL.class)) {
 				for(MessageL m: c.getBranches()) {
-					if(c.getRoleMakingChoice().getName().equals(lp.getProjectedRole().getName())) {
+					if(c.getRoleMakingChoice().getName().equals(lp.getProjectedRole().getName())) { //problema con roleset
 						//se scelta interna deve essere un invio di messaggio
 						//System.out.println(m.getSendReceive() instanceof ReceiverL);
 						if(m.getSendReceive() instanceof SenderL) {

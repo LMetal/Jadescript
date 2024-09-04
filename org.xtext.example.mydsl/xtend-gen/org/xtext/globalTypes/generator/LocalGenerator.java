@@ -284,7 +284,7 @@ public class LocalGenerator {
         {
           if ((Objects.equal(c.getBranches().get(0).getReceiver(), r) || Objects.equal(c.getBranches().get(0).getSender(), r))) {
             _builder.append("choice at ");
-            String _name = c.getRole().getName();
+            String _name = this.parts.roleSet(c.getRole()).getName();
             _builder.append(_name);
             _builder.append("{");
             _builder.newLineIfNotEmpty();

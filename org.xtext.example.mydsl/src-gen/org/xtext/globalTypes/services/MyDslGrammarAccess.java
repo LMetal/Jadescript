@@ -1579,21 +1579,21 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.Type");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cIntKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cIntegerKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cTextKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		private final Keyword cAidKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		private final Keyword cFloatKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		
 		//Type:
-		//    'int' | 'text' | 'aid' | 'float'  //jadescript types
+		//    'integer' | 'text' | 'aid' | 'float'  //jadescript types
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'int' | 'text' | 'aid' | 'float'
+		//'integer' | 'text' | 'aid' | 'float'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'int'
-		public Keyword getIntKeyword_0() { return cIntKeyword_0; }
+		//'integer'
+		public Keyword getIntegerKeyword_0() { return cIntegerKeyword_0; }
 		
 		//'text'
 		public Keyword getTextKeyword_1() { return cTextKeyword_1; }
@@ -2076,7 +2076,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//Type:
-	//    'int' | 'text' | 'aid' | 'float'  //jadescript types
+	//    'integer' | 'text' | 'aid' | 'float'  //jadescript types
 	//;
 	public TypeElements getTypeAccess() {
 		return pType;
