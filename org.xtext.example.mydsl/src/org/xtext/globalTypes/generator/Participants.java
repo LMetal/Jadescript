@@ -145,6 +145,8 @@ public class Participants {
 			parts = partsRecursion(begin);
 		else if(begin instanceof MessageQuitImpl)
 			parts = partsQuit(begin);
+		else if(begin instanceof ChoiceImpl)
+			parts = partsChoice(begin);
 	
 		return parts;
 	}
