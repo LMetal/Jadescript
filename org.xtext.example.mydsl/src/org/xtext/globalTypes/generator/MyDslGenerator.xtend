@@ -28,13 +28,13 @@ class MyDslGenerator extends AbstractGenerator {
 			var globalProtocol = model.protocol as GlobalProtocol
 			for(Role r : globalProtocol.getRoles().getRoles()){
 				System.out.println("LOCAL in " + r.getName());
-				fsa.generateFile('../src/local/local_'+r.getName()+'.jglobal', locGen.project(globalProtocol, model.getDefinitions, r))
+				fsa.generateFile('local/local_'+r.getName()+'.jglobal', locGen.project(globalProtocol, model.getDefinitions, r))
 				System.out.println("END LOCAL on " + r.getName());		
 			}
 		} else {
 			var localProtocol = model.protocol as LocalProtocol
 			System.out.println("JADE");
-			fsa.generateFile('jade/jade'+localProtocol.projectedRole+'.jade', jadeGen.project(localProtocol, model.getDefinitions))
+			fsa.generateFile('jade/jade_'+localProtocol.getProjectedRole()+'.jade', jadeGen.project(localProtocol, model.getDefinitions))
 		}
 		
 		

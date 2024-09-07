@@ -41,7 +41,7 @@ public class MyDslGenerator extends AbstractGenerator {
           String _plus = ("LOCAL in " + _name);
           System.out.println(_plus);
           String _name_1 = r.getName();
-          String _plus_1 = ("../src/local/local_" + _name_1);
+          String _plus_1 = ("local/local_" + _name_1);
           String _plus_2 = (_plus_1 + ".jglobal");
           fsa.generateFile(_plus_2, this.locGen.project(globalProtocol, model.getDefinitions(), r));
           String _name_2 = r.getName();
@@ -54,7 +54,7 @@ public class MyDslGenerator extends AbstractGenerator {
       LocalProtocol localProtocol = ((LocalProtocol) _protocol_2);
       System.out.println("JADE");
       Role _projectedRole = localProtocol.getProjectedRole();
-      String _plus = ("jade/jade" + _projectedRole);
+      String _plus = ("jade/jade_" + _projectedRole);
       String _plus_1 = (_plus + ".jade");
       fsa.generateFile(_plus_1, this.jadeGen.project(localProtocol, model.getDefinitions()));
     }
