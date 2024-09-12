@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item key="initLaunch" value="false"/>
 	<section name="quick_assist_proposal_size">
 	</section>
 	<section name="PDEFormActionManager">
@@ -18,5 +19,25 @@
 			<item key="DIALOG_Y_ORIGIN" value="195"/>
 			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 		</section>
+	</section>
+	<section name="FeatureExportWizard">
+		<item key="jnlp" value="false"/>
+		<item key="siteURL" value=""/>
+		<item key="jre" value=""/>
+		<item key="exportType" value="1"/>
+		<item key="destination0" value="C:\Users\leoga\Jadescript\plugin_exp"/>
+		<item key="destination1" value="C:\Users\leoga\Jadescript\plugin_exp"/>
+		<item key="exportUpdate" value="true"/>
+		<item key="exportSource" value="false"/>
+		<item key="exportSourceFormat" value="Generate source bundles"/>
+		<item key="saveAsAnt" value="false"/>
+		<item key="qualifier" value="false"/>
+		<item key="qualifierName" value="202409121038"/>
+		<item key="allowBinaryCycles" value="true"/>
+		<item key="useWorkspaceCompiledClasses" value="false"/>
+		<item key="p2metadata" value="true"/>
+		<item key="create_categories" value="true"/>
+		<item key="category_file" value=""/>
+		<item key="signJAR" value="false"/>
 	</section>
 </section>

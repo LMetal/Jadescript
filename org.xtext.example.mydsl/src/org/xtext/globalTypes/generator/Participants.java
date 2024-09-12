@@ -50,7 +50,7 @@ public class Participants {
 			rho.put(((ForEachImpl) forEach).getLoopRole(), ((ForEachImpl) forEach).getRoleset());
 			loopRole.add(((ForEachImpl) forEach).getLoopRole());
 		}
-		System.out.println(rho.toString());
+		System.out.println("rho:"+rho.toString());
 	}
 		
 	public HashMap<RoleOne, RoleSet> getRho() {
@@ -115,6 +115,7 @@ public class Participants {
 		parts.add(roleSet(((MessageImpl)message).getReceiver()));
 		// U𝑖∈𝐼 Parts(G𝑖)
 		// obtaining the global protocol after the message
+		if(message instanceof MessageQuitImpl) return parts;
 		EObject protocol = ((MessageNormalImpl)message).getProtocol();
 		EObject begin = ((ProtocolImpl)protocol).getBegin();
 		// search for the type of protocol in order to use the right Parts function
@@ -126,6 +127,8 @@ public class Participants {
 			partsGlobal = partsFor(begin);
 		else if(begin instanceof MessageQuitImpl)
 			partsGlobal = partsQuit(begin);
+		else if(begin instanceof ChoiceImpl)
+			partsGlobal = partsChoice(begin);
 		// merging the results
 		parts.addAll(partsGlobal);
 		
@@ -170,6 +173,8 @@ public class Participants {
 			partsGlobal1 = partsRecursion(begin1);
 		else if(begin1 instanceof MessageQuitImpl)
 			partsGlobal1 = partsQuit(begin1);
+		else if(begin1 instanceof ChoiceImpl)
+			partsGlobal1 = partsChoice(begin1);
 		// Parts(G2, 𝜌)
 		if(begin2 instanceof MessageNormalImpl)
 			partsGlobal2 = partsMessage(begin2);
@@ -179,8 +184,12 @@ public class Participants {
 			partsGlobal2 = partsRecursion(begin2);
 		else if(begin2 instanceof MessageQuitImpl)
 			partsGlobal2 = partsQuit(begin2);
+		else if(begin2 instanceof ChoiceImpl)
+			partsGlobal2 = partsChoice(begin2);
 		// merging the results
 		partsGlobal1.addAll(partsGlobal2);
+		
+		System.out.println(partsGlobal1);
 		return partsGlobal1;
 		
 	}
@@ -193,7 +202,7 @@ public class Participants {
 	}
 	
 	public Set<Role> partsChoice(EObject choice){
-		Choice c = (ChoiceImpl) choice;
+		ChoiceImpl c = (ChoiceImpl) choice;
 		Set<Role> parts = new LinkedHashSet<>();
 		parts.add(c.getRole());
 		for(Message m: c.getBranches()) {
@@ -204,3 +213,5 @@ public class Participants {
 	}
 	
 }
+	
+
