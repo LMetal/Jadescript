@@ -10,6 +10,8 @@ HOW TO RUN
 
 2- Use the Eclipse IDE with the Xtext plugin installed. Import with "Import Projects from File System or Archive", select the folder containing all the projects, open all the projects.
 
+2.1- Building the language artifacts may be needed. Go to /org.xtext.example.mydsl/src/org/xtext/globalTypes/MyDsl.xtext, right click, Run As, Generate Xtext Artifacts.
+
 3- Go to org.xtext.example.mydsl and open META-INF, select Overview, in the Testing section select Launch an Eclipse application.
 
 4- Now create a *.jglobal file, write the protocol, and save. If the protocol passed validatin, in the src-gen folder a local directory was created. It contains the Local Protocols for each role part of the protocol.
