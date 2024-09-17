@@ -147,20 +147,30 @@ public class LocalGenerator {
   protected CharSequence _projectOn(final Roles roles, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      final Function1<Role, Boolean> _function = (Role it) -> {
-        boolean _equals = it.getName().equals(r.getName());
-        return Boolean.valueOf((!_equals));
-      };
-      Iterable<Role> _filter = IterableExtensions.<Role>filter(roles.getRoles(), _function);
-      boolean _hasElements = false;
-      for(final Role role : _filter) {
-        if (!_hasElements) {
-          _hasElements = true;
-        } else {
-          _builder.appendImmediate(", ", "");
+      if ((r instanceof RoleOne)) {
+        _builder.newLineIfNotEmpty();
+        {
+          final Function1<Role, Boolean> _function = (Role it) -> {
+            boolean _equals = it.getName().equals(((RoleOne)r).getName());
+            return Boolean.valueOf((!_equals));
+          };
+          Iterable<Role> _filter = IterableExtensions.<Role>filter(roles.getRoles(), _function);
+          boolean _hasElements = false;
+          for(final Role role : _filter) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(", ", "");
+            }
+            Object _projectOn = this.projectOn(role, r);
+            _builder.append(_projectOn);
+          }
         }
-        Object _projectOn = this.projectOn(role, r);
-        _builder.append(_projectOn);
+      } else {
+        _builder.newLineIfNotEmpty();
+        _builder.append("role ");
+        String _name = ((RoleSet) r).getRef().getName();
+        _builder.append(_name);
       }
     }
     return _builder;

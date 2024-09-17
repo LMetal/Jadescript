@@ -81,6 +81,7 @@ class JadescriptGenerator {
 	
 	def createAgent(LocalProtocol lp)'''
 		agent «lp.projectedRole.name» uses ontology «lp.protocolName»
+			property forCounter as integer = 0
 			«var rolesetList = EcoreUtil2.getAllContentsOfType(lp.roles, RoleSet)»
 			«FOR r: rolesetList»
 				«IF r.ref.name == agentName»

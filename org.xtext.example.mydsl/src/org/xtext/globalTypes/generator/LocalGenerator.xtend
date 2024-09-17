@@ -51,7 +51,9 @@ class LocalGenerator {
 		«projectOn(protocol.begin, role)»'''
 	
 	def dispatch projectOn(Roles roles, Role r)
-	'''«FOR role : roles.roles.filter[!name.equals(r.name)] SEPARATOR ', '»«projectOn(role, r)»«ENDFOR»'''
+	'''«IF r instanceof RoleOne»
+	   «FOR role : roles.roles.filter[!name.equals(r.name)] SEPARATOR ', '»«projectOn(role, r)»«ENDFOR»«ELSE»
+	   role «(r as RoleSet).ref.name»«ENDIF»'''
 	
 		
 	def dispatch projectOn(Role role, Role r)'''

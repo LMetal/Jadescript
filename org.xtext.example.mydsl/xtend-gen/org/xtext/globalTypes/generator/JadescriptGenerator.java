@@ -156,6 +156,9 @@ public class JadescriptGenerator {
     _builder.append(_protocolName);
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
+    _builder.append("property forCounter as integer = 0");
+    _builder.newLine();
+    _builder.append("\t");
     List<RoleSet> rolesetList = EcoreUtil2.<RoleSet>getAllContentsOfType(lp.getRoles(), RoleSet.class);
     _builder.newLineIfNotEmpty();
     {
