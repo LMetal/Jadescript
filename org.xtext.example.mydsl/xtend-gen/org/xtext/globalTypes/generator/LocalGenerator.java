@@ -538,7 +538,7 @@ public class LocalGenerator {
   protected CharSequence _seqOn(final Choice c, final Role r, final Protocol p) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("choice at ");
-    String _name = c.getRole().getName();
+    String _name = this.parts.roleSet(c.getRole()).getName();
     _builder.append(_name);
     _builder.append("{");
     _builder.newLineIfNotEmpty();

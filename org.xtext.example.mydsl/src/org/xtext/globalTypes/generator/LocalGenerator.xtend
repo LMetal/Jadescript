@@ -194,7 +194,7 @@ class LocalGenerator {
 	'''
 	
 	def dispatch seqOn(Choice c, Role r, Protocol p)'''
-		choice at «c.role.name»{
+		choice at «parts.roleSet(c.role).name»{
 		«FOR int i: 0..c.branches.length-1 SEPARATOR ' or {'»
 				«seqOn(c.branches.get(i), r, p)»
 			}
