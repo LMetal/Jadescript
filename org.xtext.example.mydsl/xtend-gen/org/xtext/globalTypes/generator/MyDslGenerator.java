@@ -56,7 +56,7 @@ public class MyDslGenerator extends AbstractGenerator {
       Role _projectedRole = localProtocol.getProjectedRole();
       String _plus = ("jade/jade_" + _projectedRole);
       String _plus_1 = (_plus + ".jade");
-      fsa.generateFile(_plus_1, this.jadeGen.project(localProtocol, model.getDefinitions()));
+      fsa.generateFile(_plus_1, this.jadeGen.translate(localProtocol, model.getDefinitions()));
     }
   }
 }

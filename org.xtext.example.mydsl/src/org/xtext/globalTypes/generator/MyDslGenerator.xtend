@@ -34,7 +34,7 @@ class MyDslGenerator extends AbstractGenerator {
 		} else {
 			var localProtocol = model.protocol as LocalProtocol
 			System.out.println("JADE");
-			fsa.generateFile('jade/jade_'+localProtocol.getProjectedRole()+'.jade', jadeGen.project(localProtocol, model.getDefinitions))
+			fsa.generateFile('jade/jade_'+localProtocol.getProjectedRole()+'.jade', jadeGen.translate(localProtocol, model.getDefinitions))
 		}
 		
 		
