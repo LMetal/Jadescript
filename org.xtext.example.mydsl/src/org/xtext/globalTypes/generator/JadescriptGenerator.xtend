@@ -52,7 +52,8 @@ class JadescriptGenerator {
 			var entry = behQueue.poll
 			
 			if(entry.getValue instanceof ChoiceL) agentString = agentString + "\n\n\n" + createBehaviour(entry.getKey, agentName, entry.getValue as ChoiceL)
-			else agentString = agentString + "\n\n\n" + createBehaviour(entry.getKey, agentName, entry.getValue as MessageL)
+			else if(entry.getValue instanceof MessageL) agentString = agentString + "\n\n\n" + createBehaviour(entry.getKey, agentName, entry.getValue as MessageL)
+			else  agentString = agentString + "\n\n\n" + createWaitAgents(entry.getKey, entry.getValue as RoleSet)
 		}
 		
 		return agentString
@@ -96,8 +97,38 @@ class JadescriptGenerator {
 			«ENDFOR»
 			
 			on create do
+				«FOR r: rolesetList»
+					«IF lp.projectedRole.name.equals(r.ref.name)»
+						activate WaitSubAgents«behaviourNumber»
+						«behQueue.add(new SimpleEntry<String, Object>("WaitSubAgents"+behaviourNumber, r))»
+					«ENDIF»
+				«ENDFOR»
+				«IF lp.projectedRole instanceof RoleSet»
+					activate ContactCoordinator«behaviourNumber»
+					«behQueue.add(new SimpleEntry<String, Object>("ContactCoordinator"+behaviourNumber, lp.projectedRole))»
+				«ENDIF»
 				«createProtocol(lp.protocol.begin)»
 	'''
+	
+	def createWaitAgents(String name, RoleSet r){
+		behaviourNumber++;
+	'''
+		«IF agentName.equals(r.ref.name)»
+		cyclic behaviour «name» for agent «agentName»
+			on create do
+				deactivate this after "PT(/*time*)S" as duration
+		
+			on message inform do
+				add sender of message to «r.name»List
+		«ELSE»
+			one shot behaviour «name» for agent «agentName»
+				on execute do
+					send message inform broadcast
+		«ENDIF»
+	'''
+	}
+
+	
 	
 	//creo behaviour con scelta esterna
 	def createBehaviour(String behName, String agentName, ChoiceL c)'''
@@ -191,9 +222,33 @@ class JadescriptGenerator {
 		}
 	}
 	
-	def dispatch createProtocol(ForEachL forEach)'''
-		
-	'''
+	/*
+	 * «IF forEach.refrole.name.equals(agentName)», alias "sto proiettando sul coordinatore"
+	 * 		*metodo ad-hoc per gestire il coordinatore*
+	 * 	ELSE -> non sto proiettando sul coordinatore
+	 * 		IF sto proiettando sui subagents
+	 * 			*metodo ad-hoc per gestire i subagents*
+	 * 		ELS
+	 * 			// non ancora implementato
+	 */
+	def dispatch createProtocol(ForEachL forEach){
+		if (forEach.refrole.name.equals(agentName)){
+		behaviourNumber++;
+		'''
+			for agents in «forEach.roleset.name»List do
+				activate Behaviour«behaviourNumber»(agents)
+			deactivate this
+			«forLoopCoordinator(forEach.branch)»
+		'''
+		}
+	}
+
+	
+	def forLoopCoordinator(ProtocolL protocol){
+		'''
+			*behaviour*
+		'''
+	}
 	
 	def dispatch createProtocol(RecursionL rec){
 		recursionNumber++;

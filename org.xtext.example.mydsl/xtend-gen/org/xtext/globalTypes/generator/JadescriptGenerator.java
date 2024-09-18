@@ -23,8 +23,10 @@ import org.xtext.globalTypes.myDsl.MessageL;
 import org.xtext.globalTypes.myDsl.MessageNormalL;
 import org.xtext.globalTypes.myDsl.MessageQuitL;
 import org.xtext.globalTypes.myDsl.MessageType;
+import org.xtext.globalTypes.myDsl.ProtocolL;
 import org.xtext.globalTypes.myDsl.ReceiverL;
 import org.xtext.globalTypes.myDsl.RecursionL;
+import org.xtext.globalTypes.myDsl.Role;
 import org.xtext.globalTypes.myDsl.RoleOne;
 import org.xtext.globalTypes.myDsl.RoleSet;
 import org.xtext.globalTypes.myDsl.SenderL;
@@ -71,9 +73,17 @@ public class JadescriptGenerator {
           this.agentString = _plus_1;
         } else {
           Object _value_2 = entry.getValue();
-          CharSequence _createBehaviour_1 = this.createBehaviour(entry.getKey(), this.agentName, ((MessageL) _value_2));
-          String _plus_2 = ((this.agentString + "\n\n\n") + _createBehaviour_1);
-          this.agentString = _plus_2;
+          if ((_value_2 instanceof MessageL)) {
+            Object _value_3 = entry.getValue();
+            CharSequence _createBehaviour_1 = this.createBehaviour(entry.getKey(), this.agentName, ((MessageL) _value_3));
+            String _plus_2 = ((this.agentString + "\n\n\n") + _createBehaviour_1);
+            this.agentString = _plus_2;
+          } else {
+            Object _value_4 = entry.getValue();
+            CharSequence _createWaitAgents = this.createWaitAgents(entry.getKey(), ((RoleSet) _value_4));
+            String _plus_3 = ((this.agentString + "\n\n\n") + _createWaitAgents);
+            this.agentString = _plus_3;
+          }
         }
       }
     }
@@ -201,11 +211,92 @@ public class JadescriptGenerator {
     _builder.append("\t");
     _builder.append("on create do");
     _builder.newLine();
+    {
+      for(final RoleSet r_2 : rolesetList) {
+        {
+          boolean _equals_1 = lp.getProjectedRole().getName().equals(r_2.getRef().getName());
+          if (_equals_1) {
+            _builder.append("\t\t");
+            _builder.append("activate WaitSubAgents");
+            _builder.append(this.behaviourNumber, "\t\t");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            AbstractMap.SimpleEntry<String, Object> _simpleEntry = new AbstractMap.SimpleEntry<String, Object>(("WaitSubAgents" + Integer.valueOf(this.behaviourNumber)), r_2);
+            boolean _add = this.behQueue.add(_simpleEntry);
+            _builder.append(_add, "\t\t");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      Role _projectedRole = lp.getProjectedRole();
+      if ((_projectedRole instanceof RoleSet)) {
+        _builder.append("\t\t");
+        _builder.append("activate ContactCoordinator");
+        _builder.append(this.behaviourNumber, "\t\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        Role _projectedRole_1 = lp.getProjectedRole();
+        AbstractMap.SimpleEntry<String, Object> _simpleEntry_1 = new AbstractMap.SimpleEntry<String, Object>(("ContactCoordinator" + Integer.valueOf(this.behaviourNumber)), _projectedRole_1);
+        boolean _add_1 = this.behQueue.add(_simpleEntry_1);
+        _builder.append(_add_1, "\t\t");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("\t\t");
     CharSequence _createProtocol = this.createProtocol(lp.getProtocol().getBegin());
     _builder.append(_createProtocol, "\t\t");
     _builder.newLineIfNotEmpty();
     return _builder;
+  }
+
+  public CharSequence createWaitAgents(final String name, final RoleSet r) {
+    CharSequence _xblockexpression = null;
+    {
+      this.behaviourNumber++;
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        boolean _equals = this.agentName.equals(r.getRef().getName());
+        if (_equals) {
+          _builder.append("cyclic behaviour ");
+          _builder.append(name);
+          _builder.append(" for agent ");
+          _builder.append(this.agentName);
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("on create do");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("deactivate this after \"PT(/*time*)S\" as duration");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("on message inform do");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("add sender of message to ");
+          String _name = r.getName();
+          _builder.append(_name, "\t\t");
+          _builder.append("List");
+          _builder.newLineIfNotEmpty();
+        } else {
+          _builder.append("one shot behaviour ");
+          _builder.append(name);
+          _builder.append(" for agent ");
+          _builder.append(this.agentName);
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("on execute do");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("send message inform broadcast");
+          _builder.newLine();
+        }
+      }
+      _xblockexpression = _builder;
+    }
+    return _xblockexpression;
   }
 
   public CharSequence createBehaviour(final String behName, final String agentName, final ChoiceL c) {
@@ -384,9 +475,48 @@ public class JadescriptGenerator {
     }
   }
 
+  /**
+   * «IF forEach.refrole.name.equals(agentName)», alias "sto proiettando sul coordinatore"
+   * 		*metodo ad-hoc per gestire il coordinatore
+   * 	ELSE -> non sto proiettando sul coordinatore
+   * 		IF sto proiettando sui subagents
+   * 			*metodo ad-hoc per gestire i subagents
+   * 		ELS
+   * 			// non ancora implementato
+   */
   protected CharSequence _createProtocol(final ForEachL forEach) {
+    CharSequence _xifexpression = null;
+    boolean _equals = forEach.getRefrole().getName().equals(this.agentName);
+    if (_equals) {
+      CharSequence _xblockexpression = null;
+      {
+        this.behaviourNumber++;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("for agents in ");
+        String _name = forEach.getRoleset().getName();
+        _builder.append(_name);
+        _builder.append("List do");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("activate Behaviour");
+        _builder.append(this.behaviourNumber, "\t");
+        _builder.append("(agents)");
+        _builder.newLineIfNotEmpty();
+        _builder.append("deactivate this");
+        _builder.newLine();
+        CharSequence _forLoopCoordinator = this.forLoopCoordinator(forEach.getBranch());
+        _builder.append(_forLoopCoordinator);
+        _builder.newLineIfNotEmpty();
+        _xblockexpression = _builder;
+      }
+      _xifexpression = _xblockexpression;
+    }
+    return _xifexpression;
+  }
+
+  public CharSequence forLoopCoordinator(final ProtocolL protocol) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t\t");
+    _builder.append("*behaviour*");
     _builder.newLine();
     return _builder;
   }
