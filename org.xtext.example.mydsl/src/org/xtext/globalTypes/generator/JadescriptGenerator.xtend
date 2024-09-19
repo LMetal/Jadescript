@@ -53,6 +53,7 @@ class JadescriptGenerator {
 			
 			if(entry.getValue instanceof ChoiceL) agentString = agentString + "\n\n\n" + createBehaviour(entry.getKey, agentName, entry.getValue as ChoiceL)
 			else if(entry.getValue instanceof MessageL) agentString = agentString + "\n\n\n" + createBehaviour(entry.getKey, agentName, entry.getValue as MessageL)
+			else if(entry.getValue instanceof LocalProtocol) agentString = agentString + "\n\n\n" + createWaitAgents(entry.getKey, entry.getValue as LocalProtocol)
 			else  agentString = agentString + "\n\n\n" + createWaitAgents(entry.getKey, entry.getValue as RoleSet)
 		}
 		
@@ -84,6 +85,7 @@ class JadescriptGenerator {
 		agent «lp.projectedRole.name» uses ontology «lp.protocolName»
 			property forCounter as integer = 0
 			«var rolesetList = EcoreUtil2.getAllContentsOfType(lp.roles, RoleSet)»
+			«var isDone = 0»
 			«FOR r: rolesetList»
 				«IF r.ref.name == agentName»
 					property «r.name»List as list of aid
@@ -100,36 +102,48 @@ class JadescriptGenerator {
 				«FOR r: rolesetList»
 					«IF lp.projectedRole.name.equals(r.ref.name)»
 						activate WaitSubAgents«behaviourNumber»
-						«behQueue.add(new SimpleEntry<String, Object>("WaitSubAgents"+behaviourNumber, r))»
+						«val ignore = behQueue.add(new SimpleEntry<String, Object>("WaitSubAgents"+behaviourNumber, lp))»
+						«val ignore2 = isDone = 1»
 					«ENDIF»
 				«ENDFOR»
 				«IF lp.projectedRole instanceof RoleSet»
-					activate ContactCoordinator«behaviourNumber»
-					«behQueue.add(new SimpleEntry<String, Object>("ContactCoordinator"+behaviourNumber, lp.projectedRole))»
+						activate ContactCoordinator«behaviourNumber»
+						«val ignore = behQueue.add(new SimpleEntry<String, Object>("ContactCoordinator"+behaviourNumber, lp.projectedRole))»
 				«ENDIF»
-				«createProtocol(lp.protocol.begin)»
+				«IF (isDone == 0)»
+					«createProtocol(lp.protocol.begin)»
+				«ENDIF»
 	'''
 	
-	def createWaitAgents(String name, RoleSet r){
+	def dispatch createWaitAgents(String name, LocalProtocol lp){
 		behaviourNumber++;
-	'''
-		«IF agentName.equals(r.ref.name)»
-		cyclic behaviour «name» for agent «agentName»
-			on create do
-				deactivate this after "PT(/*time*)S" as duration
+		var rolesetList = EcoreUtil2.getAllContentsOfType(lp.roles, RoleSet);
+		'''
+			«FOR r : rolesetList»
+				«IF agentName.equals(r.ref.name)»
+						cyclic behaviour «name» for agent «agentName»
+							on create do
+								deactivate this after "PT(/*time*)S" as duration
+						
+							on message inform(«r.ref.name») do
+								add sender of message to «r.name»List
+								
+							on deactivate do
+								«createProtocol(lp.protocol.begin)»
+				«ENDIF»
+			«ENDFOR»
+		'''
+		}
 		
-			on message inform do
-				add sender of message to «r.name»List
-		«ELSE»
+	def dispatch createWaitAgents(String name, RoleSet r){
+		'''
 			one shot behaviour «name» for agent «agentName»
 				on execute do
-					send message inform broadcast
-		«ENDIF»
-	'''
+					send message inform(«r.ref.name») to «r.ref.name»
+		'''
 	}
+	
 
-	
-	
 	//creo behaviour con scelta esterna
 	def createBehaviour(String behName, String agentName, ChoiceL c)'''
 		cyclic behaviour «behName» for agent «agentName»

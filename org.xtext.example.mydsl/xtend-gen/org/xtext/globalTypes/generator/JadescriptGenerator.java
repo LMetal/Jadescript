@@ -80,9 +80,17 @@ public class JadescriptGenerator {
             this.agentString = _plus_2;
           } else {
             Object _value_4 = entry.getValue();
-            CharSequence _createWaitAgents = this.createWaitAgents(entry.getKey(), ((RoleSet) _value_4));
-            String _plus_3 = ((this.agentString + "\n\n\n") + _createWaitAgents);
-            this.agentString = _plus_3;
+            if ((_value_4 instanceof LocalProtocol)) {
+              Object _value_5 = entry.getValue();
+              CharSequence _createWaitAgents = this.createWaitAgents(entry.getKey(), ((LocalProtocol) _value_5));
+              String _plus_3 = ((this.agentString + "\n\n\n") + _createWaitAgents);
+              this.agentString = _plus_3;
+            } else {
+              Object _value_6 = entry.getValue();
+              CharSequence _createWaitAgents_1 = this.createWaitAgents(entry.getKey(), ((RoleSet) _value_6));
+              String _plus_4 = ((this.agentString + "\n\n\n") + _createWaitAgents_1);
+              this.agentString = _plus_4;
+            }
           }
         }
       }
@@ -171,6 +179,9 @@ public class JadescriptGenerator {
     _builder.append("\t");
     List<RoleSet> rolesetList = EcoreUtil2.<RoleSet>getAllContentsOfType(lp.getRoles(), RoleSet.class);
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    int isDone = 0;
+    _builder.newLineIfNotEmpty();
     {
       for(final RoleSet r : rolesetList) {
         {
@@ -221,9 +232,11 @@ public class JadescriptGenerator {
             _builder.append(this.behaviourNumber, "\t\t");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
-            AbstractMap.SimpleEntry<String, Object> _simpleEntry = new AbstractMap.SimpleEntry<String, Object>(("WaitSubAgents" + Integer.valueOf(this.behaviourNumber)), r_2);
-            boolean _add = this.behQueue.add(_simpleEntry);
-            _builder.append(_add, "\t\t");
+            AbstractMap.SimpleEntry<String, Object> _simpleEntry = new AbstractMap.SimpleEntry<String, Object>(("WaitSubAgents" + Integer.valueOf(this.behaviourNumber)), lp);
+            final boolean ignore = this.behQueue.add(_simpleEntry);
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            final int ignore2 = isDone = 1;
             _builder.newLineIfNotEmpty();
           }
         }
@@ -239,64 +252,93 @@ public class JadescriptGenerator {
         _builder.append("\t\t");
         Role _projectedRole_1 = lp.getProjectedRole();
         AbstractMap.SimpleEntry<String, Object> _simpleEntry_1 = new AbstractMap.SimpleEntry<String, Object>(("ContactCoordinator" + Integer.valueOf(this.behaviourNumber)), _projectedRole_1);
-        boolean _add_1 = this.behQueue.add(_simpleEntry_1);
-        _builder.append(_add_1, "\t\t");
+        final boolean ignore_1 = this.behQueue.add(_simpleEntry_1);
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append("\t\t");
-    CharSequence _createProtocol = this.createProtocol(lp.getProtocol().getBegin());
-    _builder.append(_createProtocol, "\t\t");
-    _builder.newLineIfNotEmpty();
+    {
+      if ((isDone == 0)) {
+        _builder.append("\t\t");
+        CharSequence _createProtocol = this.createProtocol(lp.getProtocol().getBegin());
+        _builder.append(_createProtocol, "\t\t");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     return _builder;
   }
 
-  public CharSequence createWaitAgents(final String name, final RoleSet r) {
+  protected CharSequence _createWaitAgents(final String name, final LocalProtocol lp) {
     CharSequence _xblockexpression = null;
     {
       this.behaviourNumber++;
+      List<RoleSet> rolesetList = EcoreUtil2.<RoleSet>getAllContentsOfType(lp.getRoles(), RoleSet.class);
       StringConcatenation _builder = new StringConcatenation();
       {
-        boolean _equals = this.agentName.equals(r.getRef().getName());
-        if (_equals) {
-          _builder.append("cyclic behaviour ");
-          _builder.append(name);
-          _builder.append(" for agent ");
-          _builder.append(this.agentName);
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("on create do");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("deactivate this after \"PT(/*time*)S\" as duration");
-          _builder.newLine();
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("on message inform do");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("add sender of message to ");
-          String _name = r.getName();
-          _builder.append(_name, "\t\t");
-          _builder.append("List");
-          _builder.newLineIfNotEmpty();
-        } else {
-          _builder.append("one shot behaviour ");
-          _builder.append(name);
-          _builder.append(" for agent ");
-          _builder.append(this.agentName);
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("on execute do");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("send message inform broadcast");
-          _builder.newLine();
+        for(final RoleSet r : rolesetList) {
+          {
+            boolean _equals = this.agentName.equals(r.getRef().getName());
+            if (_equals) {
+              _builder.append("cyclic behaviour ");
+              _builder.append(name);
+              _builder.append(" for agent ");
+              _builder.append(this.agentName);
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("on create do");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("deactivate this after \"PT(/*time*)S\" as duration");
+              _builder.newLine();
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("on message inform(");
+              String _name = r.getRef().getName();
+              _builder.append(_name, "\t");
+              _builder.append(") do");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("add sender of message to ");
+              String _name_1 = r.getName();
+              _builder.append(_name_1, "\t\t");
+              _builder.append("List");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("on deactivate do");
+              _builder.newLine();
+              _builder.append("\t\t");
+              CharSequence _createProtocol = this.createProtocol(lp.getProtocol().getBegin());
+              _builder.append(_createProtocol, "\t\t");
+              _builder.newLineIfNotEmpty();
+            }
+          }
         }
       }
       _xblockexpression = _builder;
     }
     return _xblockexpression;
+  }
+
+  protected CharSequence _createWaitAgents(final String name, final RoleSet r) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("one shot behaviour ");
+    _builder.append(name);
+    _builder.append(" for agent ");
+    _builder.append(this.agentName);
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("on execute do");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("send message inform(");
+    String _name = r.getRef().getName();
+    _builder.append(_name, "\t\t");
+    _builder.append(") to ");
+    String _name_1 = r.getRef().getName();
+    _builder.append(_name_1, "\t\t");
+    _builder.newLineIfNotEmpty();
+    return _builder;
   }
 
   public CharSequence createBehaviour(final String behName, final String agentName, final ChoiceL c) {
@@ -554,6 +596,17 @@ public class JadescriptGenerator {
     _builder.append("deactivate this");
     _builder.newLine();
     return _builder;
+  }
+
+  public CharSequence createWaitAgents(final String name, final EObject r) {
+    if (r instanceof RoleSet) {
+      return _createWaitAgents(name, (RoleSet)r);
+    } else if (r instanceof LocalProtocol) {
+      return _createWaitAgents(name, (LocalProtocol)r);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(name, r).toString());
+    }
   }
 
   public CharSequence createProtocol(final EObject choice) {
