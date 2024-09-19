@@ -74,28 +74,59 @@ public class JadescriptGenerator {
         Object firstObj = entry.getValue().getKey();
         String behName = entry.getKey();
         Boolean par = entry.getValue().getValue();
+        System.out.println(entry.toString());
         if ((firstObj instanceof ChoiceL)) {
+          String _string_1 = entry.toString();
+          String _plus_1 = ("*******CHOICEL*******" + _string_1);
+          System.out.println(_plus_1);
           String _agentString = this.agentString;
           CharSequence _createBehaviour = this.createBehaviour(behName, this.agentName, ((ChoiceL) firstObj), (par).booleanValue());
-          String _plus_1 = ("\n\n\n" + _createBehaviour);
-          this.agentString = (_agentString + _plus_1);
+          String _plus_2 = ("\n\n\n" + _createBehaviour);
+          this.agentString = (_agentString + _plus_2);
         } else {
           if ((firstObj instanceof MessageL)) {
+            String _string_2 = entry.toString();
+            String _plus_3 = ("*******MESSAGEL*******" + _string_2);
+            System.out.println(_plus_3);
             String _agentString_1 = this.agentString;
             CharSequence _createBehaviour_1 = this.createBehaviour(behName, this.agentName, ((MessageL) firstObj), (par).booleanValue());
-            String _plus_2 = ("\n\n\n" + _createBehaviour_1);
-            this.agentString = (_agentString_1 + _plus_2);
+            String _plus_4 = ("\n\n\n" + _createBehaviour_1);
+            this.agentString = (_agentString_1 + _plus_4);
           } else {
             if ((firstObj instanceof RecursionL)) {
+              String _string_3 = entry.toString();
+              String _plus_5 = ("*******RECURSIONL*******" + _string_3);
+              System.out.println(_plus_5);
               String _agentString_2 = this.agentString;
               CharSequence _createBehaviour_2 = this.createBehaviour(behName, this.agentName, ((RecursionL) firstObj), (par).booleanValue());
-              String _plus_3 = ("\n\n\n" + _createBehaviour_2);
-              this.agentString = (_agentString_2 + _plus_3);
+              String _plus_6 = ("\n\n\n" + _createBehaviour_2);
+              this.agentString = (_agentString_2 + _plus_6);
             } else {
-              String _agentString_3 = this.agentString;
-              String _createBehaviour_3 = this.createBehaviour(behName, this.agentName, ((ForEachL) firstObj), (par).booleanValue());
-              String _plus_4 = ("\n\n\n" + _createBehaviour_3);
-              this.agentString = (_agentString_3 + _plus_4);
+              if ((firstObj instanceof LocalProtocol)) {
+                String _string_4 = entry.toString();
+                String _plus_7 = ("*******LOCALPROTOCOLL*******" + _string_4);
+                System.out.println(_plus_7);
+                CharSequence _createWaitAgents = this.createWaitAgents(behName, ((LocalProtocol) firstObj));
+                String _plus_8 = ((this.agentString + "\n\n\n") + _createWaitAgents);
+                this.agentString = _plus_8;
+              } else {
+                if ((firstObj instanceof RoleSet)) {
+                  String _string_5 = entry.toString();
+                  String _plus_9 = ("*******ROLESET*******" + _string_5);
+                  System.out.println(_plus_9);
+                  CharSequence _createWaitAgents_1 = this.createWaitAgents(behName, ((RoleSet) firstObj));
+                  String _plus_10 = ((this.agentString + "\n\n\n") + _createWaitAgents_1);
+                  this.agentString = _plus_10;
+                } else {
+                  String _string_6 = entry.toString();
+                  String _plus_11 = ("*******FOREACH???*******" + _string_6);
+                  System.out.println(_plus_11);
+                  String _agentString_3 = this.agentString;
+                  String _createBehaviour_3 = this.createBehaviour(behName, this.agentName, ((ForEachL) firstObj), (par).booleanValue());
+                  String _plus_12 = ("\n\n\n" + _createBehaviour_3);
+                  this.agentString = (_agentString_3 + _plus_12);
+                }
+              }
             }
           }
         }
@@ -185,6 +216,9 @@ public class JadescriptGenerator {
     _builder.append("\t");
     List<RoleSet> rolesetList = EcoreUtil2.<RoleSet>getAllContentsOfType(lp.getRoles(), RoleSet.class);
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    int isDone = 0;
+    _builder.newLineIfNotEmpty();
     {
       for(final RoleSet r : rolesetList) {
         {
@@ -225,9 +259,118 @@ public class JadescriptGenerator {
     _builder.append("\t");
     _builder.append("on create do");
     _builder.newLine();
+    {
+      for(final RoleSet r_2 : rolesetList) {
+        {
+          boolean _equals_1 = lp.getProjectedRole().getName().equals(r_2.getRef().getName());
+          if (_equals_1) {
+            _builder.append("\t\t");
+            _builder.append("activate WaitSubAgents");
+            _builder.append(this.behaviourNumber, "\t\t");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            final boolean ignore = this.behQueue.add(this.getEntry("WaitSubAgents", lp, Boolean.valueOf(false), Integer.valueOf(this.behaviourNumber)));
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            final int ignore2 = isDone = 1;
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    {
+      Role _projectedRole = lp.getProjectedRole();
+      if ((_projectedRole instanceof RoleSet)) {
+        _builder.append("\t\t");
+        _builder.append("activate ContactCoordinator");
+        _builder.append(this.behaviourNumber, "\t\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        final boolean ignore_1 = this.behQueue.add(this.getEntry("ContactCoordinator", lp.getProjectedRole(), Boolean.valueOf(false), Integer.valueOf(this.behaviourNumber)));
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      if ((isDone == 0)) {
+        _builder.append("\t\t");
+        CharSequence _createProtocol = this.createProtocol(lp.getProtocol().getBegin(), false);
+        _builder.append(_createProtocol, "\t\t");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+
+  protected CharSequence _createWaitAgents(final String name, final LocalProtocol lp) {
+    CharSequence _xblockexpression = null;
+    {
+      this.behaviourNumber++;
+      List<RoleSet> rolesetList = EcoreUtil2.<RoleSet>getAllContentsOfType(lp.getRoles(), RoleSet.class);
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        for(final RoleSet r : rolesetList) {
+          {
+            boolean _equals = this.agentName.equals(r.getRef().getName());
+            if (_equals) {
+              _builder.append("cyclic behaviour ");
+              _builder.append(name);
+              _builder.append(" for agent ");
+              _builder.append(this.agentName);
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("on create do");
+              _builder.newLine();
+              _builder.append("\t\t");
+              _builder.append("deactivate this after \"PT(/*time*)S\" as duration");
+              _builder.newLine();
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("on message inform(");
+              String _name = r.getRef().getName();
+              _builder.append(_name, "\t");
+              _builder.append(") do");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.append("add sender of message to ");
+              String _name_1 = r.getName();
+              _builder.append(_name_1, "\t\t");
+              _builder.append("List");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t\t");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("on deactivate do");
+              _builder.newLine();
+              _builder.append("\t\t");
+              CharSequence _createProtocol = this.createProtocol(lp.getProtocol().getBegin(), false);
+              _builder.append(_createProtocol, "\t\t");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _xblockexpression = _builder;
+    }
+    return _xblockexpression;
+  }
+
+  protected CharSequence _createWaitAgents(final String name, final RoleSet r) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("one shot behaviour ");
+    _builder.append(name);
+    _builder.append(" for agent ");
+    _builder.append(this.agentName);
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("on execute do");
+    _builder.newLine();
     _builder.append("\t\t");
-    CharSequence _createProtocol = this.createProtocol(lp.getProtocol().getBegin(), false);
-    _builder.append(_createProtocol, "\t\t");
+    _builder.append("send message inform(");
+    String _name = r.getRef().getName();
+    _builder.append(_name, "\t\t");
+    _builder.append(") to ");
+    String _name_1 = r.getRef().getName();
+    _builder.append(_name_1, "\t\t");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
@@ -663,6 +806,17 @@ public class JadescriptGenerator {
   public Map.Entry<String, Map.Entry<Object, Boolean>> getEntry(final String s, final Object o, final Boolean b, final Integer n) {
     AbstractMap.SimpleEntry<Object, Boolean> _simpleEntry = new AbstractMap.SimpleEntry<Object, Boolean>(o, b);
     return new AbstractMap.SimpleEntry<String, Map.Entry<Object, Boolean>>((s + n), _simpleEntry);
+  }
+
+  public CharSequence createWaitAgents(final String name, final EObject r) {
+    if (r instanceof RoleSet) {
+      return _createWaitAgents(name, (RoleSet)r);
+    } else if (r instanceof LocalProtocol) {
+      return _createWaitAgents(name, (LocalProtocol)r);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(name, r).toString());
+    }
   }
 
   public CharSequence createProtocol(final EObject choice, final boolean p) {

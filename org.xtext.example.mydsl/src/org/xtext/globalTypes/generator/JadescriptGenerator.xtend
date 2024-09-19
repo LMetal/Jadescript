@@ -58,10 +58,31 @@ class JadescriptGenerator {
 			var behName = entry.getKey
 			var par = entry.getValue.getValue
 			
-			if(firstObj instanceof ChoiceL) agentString += "\n\n\n" + createBehaviour(behName, agentName, firstObj as ChoiceL, par)
-			else if(firstObj instanceof MessageL) agentString += "\n\n\n" + createBehaviour(behName, agentName, firstObj as MessageL, par)
-			else if(firstObj instanceof RecursionL) agentString += "\n\n\n" + createBehaviour(behName, agentName, firstObj as RecursionL, par)
-			else agentString += "\n\n\n" + createBehaviour(behName, agentName, firstObj as ForEachL, par)
+			System.out.println(entry.toString());
+			if(firstObj instanceof ChoiceL){
+				System.out.println("*******CHOICEL*******"+ entry.toString());
+				agentString += "\n\n\n" + createBehaviour(behName, agentName, firstObj as ChoiceL, par)
+			}
+			else if(firstObj instanceof MessageL){
+				System.out.println("*******MESSAGEL*******"+ entry.toString());
+				agentString += "\n\n\n" + createBehaviour(behName, agentName, firstObj as MessageL, par)
+				}
+			else if(firstObj instanceof RecursionL){
+				System.out.println("*******RECURSIONL*******"+ entry.toString());
+				agentString += "\n\n\n" + createBehaviour(behName, agentName, firstObj as RecursionL, par)
+				}
+			else if(firstObj instanceof LocalProtocol){
+				System.out.println("*******LOCALPROTOCOLL*******"+ entry.toString());
+				agentString = agentString + "\n\n\n" + createWaitAgents(behName, firstObj as LocalProtocol)
+				}
+			else if(firstObj instanceof RoleSet){
+				System.out.println("*******ROLESET*******"+ entry.toString());
+				agentString = agentString + "\n\n\n" + createWaitAgents(behName, firstObj as RoleSet)
+				}
+			else {
+				System.out.println("*******FOREACH???*******"+ entry.toString());
+				agentString += "\n\n\n" + createBehaviour(behName, agentName, firstObj as ForEachL, par)
+				}
 		}
 		
 		return agentString
@@ -92,6 +113,7 @@ class JadescriptGenerator {
 		agent «lp.projectedRole.name» uses ontology «lp.protocolName»
 			property forCounter as integer = 0
 			«var rolesetList = EcoreUtil2.getAllContentsOfType(lp.roles, RoleSet)»
+			«var isDone = 0»
 			«FOR r: rolesetList»
 				«IF r.ref.name == agentName»
 					property «r.name»List as list of aid
@@ -105,8 +127,52 @@ class JadescriptGenerator {
 			«ENDFOR»
 			
 			on create do
-				«createProtocol(lp.protocol.begin, false)»
-	'''
+				«FOR r: rolesetList»
+					«IF lp.projectedRole.name.equals(r.ref.name)»
+						activate WaitSubAgents«behaviourNumber»
+						«val ignore = behQueue.add(getEntry("WaitSubAgents", lp, false, behaviourNumber))»
+						«val ignore2 = isDone = 1»
+					«ENDIF»
+				«ENDFOR»
+				«IF lp.projectedRole instanceof RoleSet»
+					activate ContactCoordinator«behaviourNumber»
+					«val ignore = behQueue.add(getEntry("ContactCoordinator", lp.projectedRole, false, behaviourNumber))»
+				«ENDIF»
+				«IF (isDone == 0)»
+					«createProtocol(lp.protocol.begin, false)»
+				«ENDIF»
+		'''
+		// behQueue.add(getEntry("Behaviour", f.branch.begin, true, behaviourNumber))
+		// «val ignore = behQueue.add(new SimpleEntry<String, Object>("ContactCoordinator"+behaviourNumber, lp.projectedRole))»
+		// «val ignore = behQueue.add(new SimpleEntry<String, Object>("WaitSubAgents"+behaviourNumber, lp))»
+	
+	def dispatch createWaitAgents(String name, LocalProtocol lp){
+		behaviourNumber++;
+		var rolesetList = EcoreUtil2.getAllContentsOfType(lp.roles, RoleSet);
+		'''
+			«FOR r : rolesetList»
+				«IF agentName.equals(r.ref.name)»
+						cyclic behaviour «name» for agent «agentName»
+							on create do
+								deactivate this after "PT(/*time*)S" as duration
+						
+							on message inform(«r.ref.name») do
+								add sender of message to «r.name»List
+								
+							on deactivate do
+								«createProtocol(lp.protocol.begin, false)»
+				«ENDIF»
+			«ENDFOR»
+		'''
+		}
+		
+	def dispatch createWaitAgents(String name, RoleSet r){
+		'''
+			one shot behaviour «name» for agent «agentName»
+				on execute do
+					send message inform(«r.ref.name») to «r.ref.name»
+		'''
+	}
 	
 	//creo behaviour con scelta esterna
 	def createBehaviour(String behName, String agentName, ChoiceL c, boolean par)'''
