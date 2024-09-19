@@ -14,6 +14,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.xtext.globalTypes.myDsl.ChoiceL;
+import org.xtext.globalTypes.myDsl.CloseRecursion;
 import org.xtext.globalTypes.myDsl.CloseRecursionL;
 import org.xtext.globalTypes.myDsl.Definition;
 import org.xtext.globalTypes.myDsl.EndProtocol;
@@ -118,13 +119,35 @@ public class JadescriptGenerator {
                   String _plus_10 = ((this.agentString + "\n\n\n") + _createWaitAgents_1);
                   this.agentString = _plus_10;
                 } else {
-                  String _string_6 = entry.toString();
-                  String _plus_11 = ("*******FOREACH???*******" + _string_6);
-                  System.out.println(_plus_11);
-                  String _agentString_3 = this.agentString;
-                  String _createBehaviour_3 = this.createBehaviour(behName, this.agentName, ((ForEachL) firstObj), (par).booleanValue());
-                  String _plus_12 = ("\n\n\n" + _createBehaviour_3);
-                  this.agentString = (_agentString_3 + _plus_12);
+                  if ((firstObj instanceof ForEachL)) {
+                    String _string_6 = entry.toString();
+                    String _plus_11 = ("*******FOREACH???*******" + _string_6);
+                    System.out.println(_plus_11);
+                    String _agentString_3 = this.agentString;
+                    String _createBehaviour_3 = this.createBehaviour(behName, this.agentName, ((ForEachL) firstObj), (par).booleanValue());
+                    String _plus_12 = ("\n\n\n" + _createBehaviour_3);
+                    this.agentString = (_agentString_3 + _plus_12);
+                  } else {
+                    if ((firstObj instanceof EndProtocol)) {
+                      String _string_7 = entry.toString();
+                      String _plus_13 = ("*******END*******" + _string_7);
+                      System.out.println(_plus_13);
+                      String _agentString_4 = this.agentString;
+                      CharSequence _createBehaviour_4 = this.createBehaviour(behName, this.agentName, ((EndProtocol) firstObj), (par).booleanValue());
+                      String _plus_14 = ("\n\n\n" + _createBehaviour_4);
+                      this.agentString = (_agentString_4 + _plus_14);
+                    } else {
+                      if ((firstObj instanceof CloseRecursion)) {
+                        String _string_8 = entry.toString();
+                        String _plus_15 = ("*******LOOP*******" + _string_8);
+                        System.out.println(_plus_15);
+                        String _agentString_5 = this.agentString;
+                        CharSequence _createBehaviour_5 = this.createBehaviour(behName, this.agentName, ((CloseRecursion) firstObj), (par).booleanValue());
+                        String _plus_16 = ("\n\n\n" + _createBehaviour_5);
+                        this.agentString = (_agentString_5 + _plus_16);
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -553,6 +576,55 @@ public class JadescriptGenerator {
     _builder.append("deactivate this");
     _builder.newLine();
     return _builder.toString();
+  }
+
+  public CharSequence createBehaviour(final String behName, final String agentName, final EndProtocol r, final boolean par) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("oneshot behaviour ");
+    _builder.append(behName);
+    _builder.append(" for agent ");
+    _builder.append(agentName);
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("on activate do");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("log \"reached sub-protocol end\"");
+    _builder.newLine();
+    return _builder;
+  }
+
+  public CharSequence createBehaviour(final String behName, final String agentName, final CloseRecursion r, final boolean par) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("oneshot behaviour ");
+    _builder.append(behName);
+    _builder.append(" for agent ");
+    _builder.append(agentName);
+    _builder.newLineIfNotEmpty();
+    {
+      if (par) {
+        _builder.append("\t");
+        _builder.append("property intAgent as aid");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("on create with intAgent as aid do");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("intAgent of this = intAgent");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t");
+    _builder.append("on activate do");
+    _builder.newLine();
+    _builder.append("\t\t");
+    CharSequence _createProtocol = this.createProtocol(r, par);
+    _builder.append(_createProtocol, "\t\t");
+    _builder.newLineIfNotEmpty();
+    return _builder;
   }
 
   public CharSequence createHandler(final MessageL message, final boolean par) {

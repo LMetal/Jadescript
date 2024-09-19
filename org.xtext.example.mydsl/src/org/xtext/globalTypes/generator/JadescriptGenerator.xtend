@@ -23,6 +23,7 @@ import java.util.Map.Entry
 import java.util.LinkedList
 import java.util.AbstractMap.SimpleEntry
 import org.xtext.globalTypes.myDsl.RoleOne
+import org.xtext.globalTypes.myDsl.CloseRecursion
 
 class JadescriptGenerator {
 	Queue<Entry<String, Entry<Object, Boolean>>> behQueue; //object is either a MessageNormal or a ChoiceL
@@ -79,10 +80,19 @@ class JadescriptGenerator {
 				System.out.println("*******ROLESET*******"+ entry.toString());
 				agentString = agentString + "\n\n\n" + createWaitAgents(behName, firstObj as RoleSet)
 				}
-			else {
+			else if(firstObj instanceof ForEachL){
 				System.out.println("*******FOREACH???*******"+ entry.toString());
 				agentString += "\n\n\n" + createBehaviour(behName, agentName, firstObj as ForEachL, par)
 				}
+			else if(firstObj instanceof EndProtocol){
+				System.out.println("*******END*******"+ entry.toString());
+				agentString += "\n\n\n" + createBehaviour(behName, agentName, firstObj as EndProtocol, par)
+				}
+			else if(firstObj instanceof CloseRecursion){
+				System.out.println("*******LOOP*******"+ entry.toString());
+				agentString += "\n\n\n" + createBehaviour(behName, agentName, firstObj as CloseRecursion, par)
+				}
+			
 		}
 		
 		return agentString
@@ -246,6 +256,26 @@ class JadescriptGenerator {
 						deactivate this
 		'''
 	}
+	
+	//creo behaviour per end
+	def createBehaviour(String behName, String agentName, EndProtocol r, boolean par)'''
+		oneshot behaviour «behName» for agent «agentName»
+			on activate do
+				log "reached sub-protocol end"
+	'''
+	
+	//creo behaviour per loop
+	def createBehaviour(String behName, String agentName, CloseRecursion r, boolean par)'''
+		oneshot behaviour «behName» for agent «agentName»
+			«IF par»
+				property intAgent as aid
+				on create with intAgent as aid do
+					intAgent of this = intAgent
+				
+			«ENDIF»
+			on activate do
+				«createProtocol(r, par)»
+	'''
 	
 	
 	def createHandler(MessageL message, boolean par)'''
