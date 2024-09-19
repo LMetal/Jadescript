@@ -36,6 +36,7 @@ class JadescriptGenerator {
 	int recursionNumber
 	int forNumber
 	String forVariable
+	String forRoleset
 	
 	
 	def CharSequence translate(LocalProtocol lp, EList<Definition> definitions){
@@ -220,7 +221,7 @@ class JadescriptGenerator {
 			«ENDIF»
 	'''
 	
-	//creo behaviour per rec annidate
+	//creo behaviour per rec
 	def createBehaviour(String behName, String agentName, RecursionL r, boolean par)'''
 		cyclic behaviour «behName» for agent «agentName»
 			«IF par»
@@ -230,7 +231,7 @@ class JadescriptGenerator {
 				
 			«ENDIF»
 			on activate do
-				«createProtocol(r, par)»
+				«createProtocol(r.recProtocol.begin, par)»
 	'''
 	
 	//creo behaviour per for in rec
@@ -287,7 +288,9 @@ class JadescriptGenerator {
 			«ENDIF»
 				«createProtocol(message.protocol.begin, par)»
 		«ELSE»
-			handler quit
+			on message inform QUIT do
+				remove sender of message from «forRoleset»List
+				forCounter = forCounter-1
 		«ENDIF»
 	'''
 	
@@ -399,6 +402,7 @@ class JadescriptGenerator {
 		forNumber++;
 		behQueue.add(getEntry("ForBehaviour", forEach, true, forNumber))
 		forVariable = forEach.eachRole.name
+		forRoleset = forEach.roleset.name
 		return "activate ForBehaviour"+forNumber
 	}
 	
@@ -407,13 +411,13 @@ class JadescriptGenerator {
 	def dispatch createProtocol(RecursionL rec, boolean p){
 		recursionNumber++;
 		if(p){
-			behQueue.add(getEntry("Behaviour", rec, true, recursionNumber))
+			behQueue.add(getEntry("RecBehaviour", rec, true, recursionNumber))
 			recNumAssociation.put(rec.name ,recursionNumber);
 			return '''
 				activate RecBehaviour«recursionNumber»(intAgent)
 				deactivate this'''
 		} else {
-			behQueue.add(getEntry("Behaviour", rec, false, recursionNumber))
+			behQueue.add(getEntry("RecBehaviour", rec, false, recursionNumber))
 			recNumAssociation.put(rec.name ,recursionNumber);
 			return '''
 				activate RecBehaviour«recursionNumber»
@@ -427,6 +431,7 @@ class JadescriptGenerator {
 		if(p){
 			return '''
 				activate RecBehaviour«recNumber»(intAgent)
+				forCounter = forCounter-1
 				deactivate this'''
 		} else {
 			return '''
@@ -437,6 +442,9 @@ class JadescriptGenerator {
 	}
 	
 	def dispatch createProtocol(EndProtocol end, boolean p)'''
+		«IF p»
+			forCounter = forCounter-1
+		«ENDIF»
 		deactivate this
 	'''
 	def Entry<String, Entry<Object, Boolean>> getEntry(String s, Object o, Boolean b, Integer n){

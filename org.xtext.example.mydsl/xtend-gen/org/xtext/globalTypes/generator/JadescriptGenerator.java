@@ -53,6 +53,8 @@ public class JadescriptGenerator {
 
   private String forVariable;
 
+  private String forRoleset;
+
   public CharSequence translate(final LocalProtocol lp, final EList<Definition> definitions) {
     String _string = new String();
     this.agentString = _string;
@@ -519,7 +521,7 @@ public class JadescriptGenerator {
     _builder.append("on activate do");
     _builder.newLine();
     _builder.append("\t\t");
-    CharSequence _createProtocol = this.createProtocol(r, par);
+    CharSequence _createProtocol = this.createProtocol(r.getRecProtocol().getBegin(), par);
     _builder.append(_createProtocol, "\t\t");
     _builder.newLineIfNotEmpty();
     return _builder;
@@ -651,7 +653,15 @@ public class JadescriptGenerator {
         _builder.append(_createProtocol, "\t");
         _builder.newLineIfNotEmpty();
       } else {
-        _builder.append("handler quit");
+        _builder.append("on message inform QUIT do");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("remove sender of message from ");
+        _builder.append(this.forRoleset, "\t");
+        _builder.append("List");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("forCounter = forCounter-1");
         _builder.newLine();
       }
     }
@@ -817,13 +827,14 @@ public class JadescriptGenerator {
     this.forNumber++;
     this.behQueue.add(this.getEntry("ForBehaviour", forEach, Boolean.valueOf(true), Integer.valueOf(this.forNumber)));
     this.forVariable = forEach.getEachRole().getName();
+    this.forRoleset = forEach.getRoleset().getName();
     return ("activate ForBehaviour" + Integer.valueOf(this.forNumber));
   }
 
   protected CharSequence _createProtocol(final RecursionL rec, final boolean p) {
     this.recursionNumber++;
     if (p) {
-      this.behQueue.add(this.getEntry("Behaviour", rec, Boolean.valueOf(true), Integer.valueOf(this.recursionNumber)));
+      this.behQueue.add(this.getEntry("RecBehaviour", rec, Boolean.valueOf(true), Integer.valueOf(this.recursionNumber)));
       this.recNumAssociation.put(rec.getName(), Integer.valueOf(this.recursionNumber));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("activate RecBehaviour");
@@ -833,7 +844,7 @@ public class JadescriptGenerator {
       _builder.append("deactivate this");
       return _builder.toString();
     } else {
-      this.behQueue.add(this.getEntry("Behaviour", rec, Boolean.valueOf(false), Integer.valueOf(this.recursionNumber)));
+      this.behQueue.add(this.getEntry("RecBehaviour", rec, Boolean.valueOf(false), Integer.valueOf(this.recursionNumber)));
       this.recNumAssociation.put(rec.getName(), Integer.valueOf(this.recursionNumber));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("activate RecBehaviour");
@@ -856,6 +867,8 @@ public class JadescriptGenerator {
       _builder.append(recNumber);
       _builder.append("(intAgent)");
       _builder.newLineIfNotEmpty();
+      _builder.append("forCounter = forCounter-1");
+      _builder.newLine();
       _builder.append("deactivate this");
       return _builder.toString();
     } else {
@@ -870,6 +883,12 @@ public class JadescriptGenerator {
 
   protected CharSequence _createProtocol(final EndProtocol end, final boolean p) {
     StringConcatenation _builder = new StringConcatenation();
+    {
+      if (p) {
+        _builder.append("forCounter = forCounter-1");
+        _builder.newLine();
+      }
+    }
     _builder.append("deactivate this");
     _builder.newLine();
     return _builder;
