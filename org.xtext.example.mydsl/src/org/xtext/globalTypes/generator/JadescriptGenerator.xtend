@@ -167,7 +167,7 @@ class JadescriptGenerator {
 							on create do
 								deactivate this after "PT(/*time*)S" as duration
 						
-							on message inform(«r.ref.name») do
+							on message inform /*Proposition*/ do
 								add sender of message to «r.name»List
 								
 							on deactivate do
@@ -181,7 +181,8 @@ class JadescriptGenerator {
 		'''
 			one shot behaviour «name» for agent «agentName»
 				on execute do
-					send message inform(«r.ref.name») to «r.ref.name»
+					send message inform /*Proposition*/ to «r.ref.name»
+					#wait "PT(*/time*)S" as duration
 		'''
 	}
 	
@@ -245,7 +246,7 @@ class JadescriptGenerator {
 		return '''
 			cyclic behaviour «behName» for agent «agentName»
 				on create do
-					forCounter = 0
+					forCounter = size of «f.roleset.name»List
 				
 				on activate do
 					for i in «f.roleset.name»List do

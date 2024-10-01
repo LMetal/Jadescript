@@ -350,15 +350,12 @@ public class JadescriptGenerator {
               _builder.newLine();
               _builder.newLine();
               _builder.append("\t");
-              _builder.append("on message inform(");
-              String _name = r.getRef().getName();
-              _builder.append(_name, "\t");
-              _builder.append(") do");
-              _builder.newLineIfNotEmpty();
+              _builder.append("on message inform /*Proposition*/ do");
+              _builder.newLine();
               _builder.append("\t\t");
               _builder.append("add sender of message to ");
-              String _name_1 = r.getName();
-              _builder.append(_name_1, "\t\t");
+              String _name = r.getName();
+              _builder.append(_name, "\t\t");
               _builder.append("List");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
@@ -390,13 +387,13 @@ public class JadescriptGenerator {
     _builder.append("on execute do");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("send message inform(");
+    _builder.append("send message inform /*Proposition*/ to ");
     String _name = r.getRef().getName();
     _builder.append(_name, "\t\t");
-    _builder.append(") to ");
-    String _name_1 = r.getRef().getName();
-    _builder.append(_name_1, "\t\t");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("#wait \"PT(*/time*)S\" as duration");
+    _builder.newLine();
     return _builder;
   }
 
@@ -544,8 +541,11 @@ public class JadescriptGenerator {
     _builder.append("on create do");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("forCounter = 0");
-    _builder.newLine();
+    _builder.append("forCounter = size of ");
+    String _name = f.getRoleset().getName();
+    _builder.append(_name, "\t\t");
+    _builder.append("List");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
@@ -553,8 +553,8 @@ public class JadescriptGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("for i in ");
-    String _name = f.getRoleset().getName();
-    _builder.append(_name, "\t\t");
+    String _name_1 = f.getRoleset().getName();
+    _builder.append(_name_1, "\t\t");
     _builder.append("List do");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
