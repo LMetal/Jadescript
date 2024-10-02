@@ -2,9 +2,11 @@ package org.xtext.globalTypes.generator;
 
 import com.google.common.base.Objects;
 import java.util.Arrays;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -31,6 +33,8 @@ public class LocalGenerator {
 
   public CharSequence project(final GlobalProtocol p, final EList<Definition> definitions, final Role role) {
     StringConcatenation _builder = new StringConcatenation();
+    List<RoleSet> rolesetList = EcoreUtil2.<RoleSet>getAllContentsOfType(p.getRoles(), RoleSet.class);
+    _builder.newLineIfNotEmpty();
     this.parts.resetLists();
     _builder.newLineIfNotEmpty();
     this.parts.addRoleOne(p);
@@ -114,6 +118,15 @@ public class LocalGenerator {
             }
           }
         }
+      }
+    }
+    {
+      for(final RoleSet r : rolesetList) {
+        _builder.append("@proposition ");
+        String _name_4 = r.getRef().getName();
+        _builder.append(_name_4);
+        _builder.append("Hello");
+        _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
