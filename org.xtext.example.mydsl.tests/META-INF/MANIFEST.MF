@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Automatic-Module-Name: org.xtext.example.mydsl.tests
 Bundle-ManifestVersion: 2
-Bundle-Name: org.xtext.example.mydsl.tests
-Bundle-Vendor: My Company
+Bundle-Name: %Bundle-Name
+Bundle-Vendor: %Bundle-Vendor
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.xtext.example.mydsl.tests; singleton:=true
 Bundle-ActivationPolicy: lazy

@@ -1481,7 +1481,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	public class ForEachLElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.ForEachL");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cForeachKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cForKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cEachRoleAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cEachRoleRoleOneParserRuleCall_1_0 = (RuleCall)cEachRoleAssignment_1.eContents().get(0);
 		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
@@ -1503,21 +1503,21 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final RuleCall cProtocolProtocolLParserRuleCall_12_0 = (RuleCall)cProtocolAssignment_12.eContents().get(0);
 		
 		//ForEachL:
-		//    'foreach' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
+		//    'for' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
 		//        branch=ProtocolL
 		//    '}'';'
 		//    protocol = ProtocolL
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'foreach' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
+		//'for' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
 		//    branch=ProtocolL
 		//'}'';'
 		//protocol = ProtocolL
 		public Group getGroup() { return cGroup; }
 		
-		//'foreach'
-		public Keyword getForeachKeyword_0() { return cForeachKeyword_0; }
+		//'for'
+		public Keyword getForKeyword_0() { return cForKeyword_0; }
 		
 		//eachRole=RoleOne
 		public Assignment getEachRoleAssignment_1() { return cEachRoleAssignment_1; }
@@ -1637,6 +1637,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	private final ChoiceLElements pChoiceL;
 	private final ForEachLElements pForEachL;
 	private final TypeElements pType;
+	private final TerminalRule tNUM;
 	
 	private final Grammar grammar;
 	
@@ -1678,6 +1679,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		this.pChoiceL = new ChoiceLElements();
 		this.pForEachL = new ForEachLElements();
 		this.pType = new TypeElements();
+		this.tNUM = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.globalTypes.MyDsl.NUM");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -2062,7 +2064,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//ForEachL:
-	//    'foreach' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
+	//    'for' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
 	//        branch=ProtocolL
 	//    '}'';'
 	//    protocol = ProtocolL
@@ -2084,6 +2086,11 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 	public ParserRule getTypeRule() {
 		return getTypeAccess().getRule();
+	}
+	
+	//terminal NUM: ('0' | ('1'..'9')('0'..'9')*);
+	public TerminalRule getNUMRule() {
+		return tNUM;
 	}
 	
 	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;

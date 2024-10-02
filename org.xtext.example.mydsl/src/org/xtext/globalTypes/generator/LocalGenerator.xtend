@@ -153,7 +153,7 @@ class LocalGenerator {
 			«projectOn(each.protocol, r)»
 		«ELSE»
 			«IF each.refRole == r»
-				foreach role «each.loopRole.name»:<«each.roleset.name»,«each.refRole.name»>{
+				for role «each.loopRole.name»:<«each.roleset.name»,«each.refRole.name»>{
 					«projectOn(each.forBody, r)»
 				};
 				«projectOn(each.protocol, r)»

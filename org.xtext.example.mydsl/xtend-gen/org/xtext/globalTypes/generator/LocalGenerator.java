@@ -419,7 +419,7 @@ public class LocalGenerator {
           RoleOne _refRole = each.getRefRole();
           boolean _equals = Objects.equal(_refRole, r);
           if (_equals) {
-            _builder.append("foreach role ");
+            _builder.append("for role ");
             String _name = each.getLoopRole().getName();
             _builder.append(_name);
             _builder.append(":<");

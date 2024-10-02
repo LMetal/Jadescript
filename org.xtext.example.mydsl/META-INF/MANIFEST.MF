@@ -1,11 +1,10 @@
 Manifest-Version: 1.0
 Automatic-Module-Name: org.xtext.example.mydsl
 Bundle-ManifestVersion: 2
-Bundle-Name: org.xtext.example.mydsl
-Bundle-Vendor: My Company
+Bundle-Name: %Bundle-Name
+Bundle-Vendor: %Bundle-Vendor
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.xtext.example.mydsl; singleton:=true
-Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,
  org.eclipse.equinox.common;bundle-version="3.16.0",
@@ -14,15 +13,15 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
-Export-Package: org.xtext.globalTypes.validation,
- org.xtext.globalTypes,
- org.xtext.globalTypes.myDsl.impl,
- org.xtext.globalTypes.serializer,
+Export-Package: org.xtext.globalTypes,
  org.xtext.globalTypes.generator,
- org.xtext.globalTypes.services,
  org.xtext.globalTypes.myDsl,
- org.xtext.globalTypes.parser.antlr,
+ org.xtext.globalTypes.myDsl.impl,
  org.xtext.globalTypes.myDsl.util,
+ org.xtext.globalTypes.parser.antlr,
+ org.xtext.globalTypes.parser.antlr.internal;x-internal:=true,
  org.xtext.globalTypes.scoping,
- org.xtext.globalTypes.parser.antlr.internal
+ org.xtext.globalTypes.serializer,
+ org.xtext.globalTypes.services,
+ org.xtext.globalTypes.validation
 Import-Package: org.apache.log4j

@@ -2309,9 +2309,9 @@ ruleForEachL returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='foreach'
+		otherlv_0='for'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getForEachLAccess().getForeachKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getForEachLAccess().getForKeyword_0());
 		}
 		(
 			(
@@ -2468,6 +2468,8 @@ ruleType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 		}
 	)
 ;
+
+RULE_NUM : ('0'|'1'..'9' ('0'..'9')*);
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

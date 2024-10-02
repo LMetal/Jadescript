@@ -4973,9 +4973,9 @@ rule__ForEachL__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getForEachLAccess().getForeachKeyword_0()); }
-	'foreach'
-	{ after(grammarAccess.getForEachLAccess().getForeachKeyword_0()); }
+	{ before(grammarAccess.getForEachLAccess().getForKeyword_0()); }
+	'for'
+	{ after(grammarAccess.getForEachLAccess().getForKeyword_0()); }
 )
 ;
 finally {
@@ -6466,6 +6466,8 @@ rule__ForEachL__ProtocolAssignment_12
 finally {
 	restoreStackSize(stackSize);
 }
+
+RULE_NUM : ('0'|'1'..'9' ('0'..'9')*);
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

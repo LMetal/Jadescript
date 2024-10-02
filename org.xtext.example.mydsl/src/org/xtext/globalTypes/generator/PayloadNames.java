@@ -9,6 +9,7 @@ import org.xtext.globalTypes.myDsl.Definition;
 
 public class PayloadNames {
 	HashMap<String, ArrayList<String>> actionPredicateList;
+	ArrayList<String> variables;
 	
 	int textNum = 0;
 	int intNum = 0;
@@ -16,6 +17,7 @@ public class PayloadNames {
 
 	public void init(EList<Definition> defList) {
 		actionPredicateList = new HashMap<String, ArrayList<String>>();
+		variables = new ArrayList<String>();
 		textNum = 0;
 		intNum = 0;
 		aidNum = 0;
@@ -56,4 +58,11 @@ public class PayloadNames {
 			return null;
 		}
 	}
+	
+	/*public ArrayList<String> getNames() {
+		var list = new ArrayList<String>();
+		for(var d: actionPredicateList) {
+			
+		}
+	}*/
 }

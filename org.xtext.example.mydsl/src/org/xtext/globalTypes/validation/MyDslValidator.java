@@ -226,7 +226,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 		
 		HashMap<RoleSet, RoleOne> getRolesetRef(Model m) {
 			List<RoleSet> rolesetDef = EcoreUtil2.getAllContentsOfType(m, RoleSet.class);
-			
+			System.out.println(rolesetDef);
 			var references = new HashMap<RoleSet, RoleOne>();
 			for(RoleSet r: rolesetDef) {
 				references.put(r, r.getRef());

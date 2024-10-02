@@ -145,7 +145,7 @@ public class Participants {
 		else if(begin instanceof RecursionImpl)
 			parts = partsRecursion(begin);
 		else if(begin instanceof ForEachImpl)
-			parts = partsRecursion(begin);
+			parts = partsFor(begin);
 		else if(begin instanceof MessageQuitImpl)
 			parts = partsQuit(begin);
 		else if(begin instanceof ChoiceImpl)

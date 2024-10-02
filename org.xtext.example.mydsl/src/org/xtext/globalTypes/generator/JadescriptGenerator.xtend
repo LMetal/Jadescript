@@ -130,6 +130,8 @@ class JadescriptGenerator {
 					property «r.name»List as list of aid
 				«ENDIF»
 			«ENDFOR»
+			
+			
 			«var roleList = EcoreUtil2.getAllContentsOfType(lp.roles, RoleOne)»
 			«FOR r: roleList»
 				«IF r.name != agentName»
@@ -244,10 +246,8 @@ class JadescriptGenerator {
 		behQueue.add(getEntry("Behaviour", f.protocol.begin, false, behaviourNumber))
 		return '''
 			cyclic behaviour «behName» for agent «agentName»
-				on create do
-					forCounter = 0
-				
 				on activate do
+					forCounter = length of «f.roleset.name»List
 					for i in «f.roleset.name»List do
 						activate Behaviour«forBodyNum»(i)
 					

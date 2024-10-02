@@ -261,6 +261,10 @@ public class JadescriptGenerator {
       }
     }
     _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
     List<RoleOne> roleList = EcoreUtil2.<RoleOne>getAllContentsOfType(lp.getRoles(), RoleOne.class);
     _builder.newLineIfNotEmpty();
     {
@@ -541,20 +545,18 @@ public class JadescriptGenerator {
     _builder.append(agentName);
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("on create do");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("forCounter = 0");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
     _builder.append("on activate do");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("for i in ");
+    _builder.append("forCounter = length of ");
     String _name = f.getRoleset().getName();
     _builder.append(_name, "\t\t");
+    _builder.append("List");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("for i in ");
+    String _name_1 = f.getRoleset().getName();
+    _builder.append(_name_1, "\t\t");
     _builder.append("List do");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
