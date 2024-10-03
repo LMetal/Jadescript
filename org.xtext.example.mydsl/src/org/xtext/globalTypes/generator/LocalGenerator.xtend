@@ -18,12 +18,13 @@ import org.xtext.globalTypes.myDsl.EndProtocol
 import org.eclipse.emf.common.util.EList
 import org.xtext.globalTypes.myDsl.Definition
 import org.xtext.globalTypes.myDsl.Role
-
+import org.eclipse.xtext.EcoreUtil2
 
 class LocalGenerator {
 	val parts = new Participants()
 	
 	def CharSequence project(GlobalProtocol p, EList<Definition> definitions, Role role)'''
+		«var rolesetList = EcoreUtil2.getAllContentsOfType(p.roles, RoleSet)»
 		«parts.resetLists()»
 		«parts.addRoleOne(p)»
 		«FOR d: definitions»
@@ -40,6 +41,9 @@ class LocalGenerator {
 					«d.type» «d.name»
 				«ENDIF»
 			«ENDIF»
+		«ENDFOR»
+		«FOR r: rolesetList»
+					    @proposition «r.ref.name»Hello
 		«ENDFOR»
 		
 		local protocol «p.protocolName» at «projectOn(role, role)»(«projectOn(p.roles, role)») {

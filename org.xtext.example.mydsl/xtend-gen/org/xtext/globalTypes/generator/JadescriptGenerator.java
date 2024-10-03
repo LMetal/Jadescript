@@ -354,10 +354,10 @@ public class JadescriptGenerator {
               _builder.newLine();
               _builder.newLine();
               _builder.append("\t");
-              _builder.append("on message inform(");
+              _builder.append("on message inform ");
               String _name = r.getRef().getName();
               _builder.append(_name, "\t");
-              _builder.append(") do");
+              _builder.append("Hello do");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
               _builder.append("add sender of message to ");
@@ -394,10 +394,10 @@ public class JadescriptGenerator {
     _builder.append("on execute do");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("send message inform(");
+    _builder.append("send message inform ");
     String _name = r.getRef().getName();
     _builder.append(_name, "\t\t");
-    _builder.append(") to ");
+    _builder.append("Hello to ");
     String _name_1 = r.getRef().getName();
     _builder.append(_name_1, "\t\t");
     _builder.newLineIfNotEmpty();

@@ -169,7 +169,7 @@ class JadescriptGenerator {
 							on create do
 								deactivate this after "PT(/*time*)S" as duration
 						
-							on message inform(«r.ref.name») do
+							on message inform «r.ref.name»Hello do
 								add sender of message to «r.name»List
 								
 							on deactivate do
@@ -183,7 +183,7 @@ class JadescriptGenerator {
 		'''
 			one shot behaviour «name» for agent «agentName»
 				on execute do
-					send message inform(«r.ref.name») to «r.ref.name»
+					send message inform «r.ref.name»Hello to «r.ref.name»
 		'''
 	}
 	
