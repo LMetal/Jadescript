@@ -277,7 +277,10 @@ public class JadescriptGenerator {
             _builder.append("property ");
             String _name_4 = r_1.getName();
             _builder.append(_name_4, "\t");
-            _builder.append(" as aid");
+            _builder.append(" as aid = \"");
+            String _name_5 = r_1.getName();
+            _builder.append(_name_5, "\t");
+            _builder.append("\"@");
             _builder.newLineIfNotEmpty();
           }
         }

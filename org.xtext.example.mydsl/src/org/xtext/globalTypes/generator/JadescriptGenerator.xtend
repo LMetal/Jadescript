@@ -135,7 +135,7 @@ class JadescriptGenerator {
 			«var roleList = EcoreUtil2.getAllContentsOfType(lp.roles, RoleOne)»
 			«FOR r: roleList»
 				«IF r.name != agentName»
-					property «r.name» as aid
+					property «r.name» as aid = "«r.name»"@
 				«ENDIF»
 			«ENDFOR»
 			
