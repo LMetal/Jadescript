@@ -6,7 +6,7 @@ THIS IS A WORK IN PROGRESS
 
 HOW TO RUN
 
-1- Download this archive 
+1- Download the archive [HERE](https://github.com/LMetal/JadescriptPlugin)
 
 2- Open Eclipse, go to Help -> Install New Software
 
