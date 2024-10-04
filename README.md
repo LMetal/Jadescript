@@ -7,7 +7,9 @@ THIS IS A WORK IN PROGRESS
 HOW TO RUN
 
 1- Download this archive 
+
 2- Open Eclipse, go to Help -> Install New Software
+
 3- Click Add -> Archive, select the donloaded archive and Open
 4- Insert a name and Add
 5- "Translation" should appear, if not check that "Group items by category" is unchecked
