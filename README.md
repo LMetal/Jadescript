@@ -6,14 +6,15 @@ THIS IS A WORK IN PROGRESS
 
 HOW TO RUN
 
-1- Dowload the projects in a selected folder.
+1- Download this archive 
+2- Open Eclipse, go to Help -> Install New Software
+3- Click Add -> Archive, select the donloaded archive and Open
+4- Insert a name and Add
+5- "Translation" should appear, if not check that "Group items by category" is unchecked
+6- Select Traslation, click Next and Finish
+7- Accept the Terms, Trust the Content
+8- Eclipse will Restart, after that create a project
+9- Inside src/, create a .jglobal file, when asked to configure Xtext select Yes
 
-2- Use the Eclipse IDE with the Xtext plugin installed. Import with "Import Projects from File System or Archive", select the folder containing all the projects, open all the projects.
-
-2.1- Building the language artifacts may be needed. Go to /org.xtext.example.mydsl/src/org/xtext/globalTypes/MyDsl.xtext, right click, Run As, Generate Xtext Artifacts.
-
-3- Go to org.xtext.example.mydsl and open META-INF, select Overview, in the Testing section select Launch an Eclipse application.
-
-4- Now create a *.jglobal file, write the protocol, and save. If the protocol passed validatin, in the src-gen folder a local directory was created. It contains the Local Protocols for each role part of the protocol.
-
-5- Modify the Local Protocol and save to generate *.jade files, containing jadescript code. It is now necessary to copy the snippets of code in a Jadescript project.
+You can now write a global (or local) protocol inside the .iglobal file. When saved, it will create in src-gen/local the local types.
+Open these, modify something (add and remove a space) and save. The Jadescript structure will be created in src-gen
