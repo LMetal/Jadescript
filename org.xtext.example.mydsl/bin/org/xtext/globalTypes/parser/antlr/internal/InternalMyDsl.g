@@ -385,7 +385,7 @@ ruleDefinition returns [EObject current=null]
 							}
 						)
 					)
-				)?
+				)*
 				otherlv_8=')'
 				{
 					newLeafNode(otherlv_8, grammarAccess.getDefinitionAccess().getRightParenthesisKeyword_1_2_3());
@@ -473,7 +473,7 @@ ruleDefinition returns [EObject current=null]
 						}
 					)
 				)
-			)?
+			)*
 			otherlv_15=')'
 			{
 				newLeafNode(otherlv_15, grammarAccess.getDefinitionAccess().getRightParenthesisKeyword_2_5());

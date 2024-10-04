@@ -31,6 +31,7 @@ class JadescriptGenerator {
 	String agentString;
 	String agentName;
 	String buffer;
+	OntologyTypes ontology = new OntologyTypes();
 	PayloadNames payloadNames = new PayloadNames();
 	int behaviourNumber
 	int recursionNumber
@@ -44,6 +45,7 @@ class JadescriptGenerator {
 		behQueue = new LinkedList<Entry<String, Entry<Object, Boolean>>>();
 		recNumAssociation = new HashMap<String, Integer>();
 		payloadNames.init(definitions);
+		ontology.init(definitions);
 		agentString = printOntology(lp, definitions).toString
 		agentName = lp.projectedRole.name
 		behaviourNumber = 0
@@ -282,9 +284,9 @@ class JadescriptGenerator {
 	def createHandler(MessageL message, boolean par)'''
 		«IF message instanceof MessageNormalL»
 			«IF par»
-				on message inform «message.messageType» when sender of message = intAgent do
+				on message inform(«message.messageType»«messageOntologyHandler(message, true)») when sender of message = intAgent do
 			«ELSE»
-				on message inform «message.messageType» do
+				on message inform(«message.messageType»«messageOntologyHandler(message, true)») do
 			«ENDIF»
 				«createProtocol(message.protocol.begin, par)»
 		«ELSE»
@@ -309,14 +311,14 @@ class JadescriptGenerator {
 		if(message.sendReceive instanceof ReceiverL)
 			if(message.sendReceive.role instanceof RoleSet)
 				return '''
-				send message inform «message.messageType»(/*payload*/) to «message.sendReceive.role.name»List
+				send message inform(«message.messageType»«messageOntologyHandler(message, false)») to «message.sendReceive.role.name»List
 				«createProtocol(message.protocol.begin, p)»
 			'''
 			else return '''
 				«IF message.sendReceive.role.name == forVariable»
-					send message inform «message.messageType»(/*payload*/) to intAgent
+					send message inform(«message.messageType»«messageOntologyHandler(message, false)») to intAgent
 				«ELSE»
-					send message inform «message.messageType»(/*payload*/) to «message.sendReceive.role.name»
+					send message inform(«message.messageType»«messageOntologyHandler(message, false)») to «message.sendReceive.role.name»
 				«ENDIF»
 				«createProtocol(message.protocol.begin, p)»
 			'''
@@ -335,6 +337,23 @@ class JadescriptGenerator {
 					deactivate this'''
 			}
 			
+		}
+	}
+	
+	def String messageOntologyHandler(MessageNormalL message, boolean decision){
+		var nameOntology = ontology.extractOntology(message.messageType);
+		if(nameOntology.equals("@proposition"))
+			return ""
+		else{
+			if(decision){
+				return payloadNames.getPayload(message.messageType, false);
+			}
+			else{
+				// estraggo tutti i campi che ha quella definizione
+				// compongo una stringa
+				// ritorno la stringa
+				return payloadNames.getPayload(message.messageType, true);
+			}
 		}
 	}
 	

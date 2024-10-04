@@ -43,6 +43,8 @@ public class JadescriptGenerator {
 
   private String buffer;
 
+  private OntologyTypes ontology = new OntologyTypes();
+
   private PayloadNames payloadNames = new PayloadNames();
 
   private int behaviourNumber;
@@ -63,6 +65,7 @@ public class JadescriptGenerator {
     HashMap<String, Integer> _hashMap = new HashMap<String, Integer>();
     this.recNumAssociation = _hashMap;
     this.payloadNames.init(definitions);
+    this.ontology.init(definitions);
     this.agentString = this.printOntology(lp, definitions).toString();
     this.agentName = lp.getProjectedRole().getName();
     this.behaviourNumber = 0;
@@ -640,16 +643,20 @@ public class JadescriptGenerator {
       if ((message instanceof MessageNormalL)) {
         {
           if (par) {
-            _builder.append("on message inform ");
+            _builder.append("on message inform(");
             String _messageType = ((MessageNormalL)message).getMessageType();
             _builder.append(_messageType);
-            _builder.append(" when sender of message = intAgent do");
+            String _messageOntologyHandler = this.messageOntologyHandler(((MessageNormalL)message), true);
+            _builder.append(_messageOntologyHandler);
+            _builder.append(") when sender of message = intAgent do");
             _builder.newLineIfNotEmpty();
           } else {
-            _builder.append("on message inform ");
+            _builder.append("on message inform(");
             String _messageType_1 = ((MessageNormalL)message).getMessageType();
             _builder.append(_messageType_1);
-            _builder.append(" do");
+            String _messageOntologyHandler_1 = this.messageOntologyHandler(((MessageNormalL)message), true);
+            _builder.append(_messageOntologyHandler_1);
+            _builder.append(") do");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -698,10 +705,12 @@ public class JadescriptGenerator {
       Role _role = message.getSendReceive().getRole();
       if ((_role instanceof RoleSet)) {
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append("send message inform ");
+        _builder.append("send message inform(");
         String _messageType = message.getMessageType();
         _builder.append(_messageType);
-        _builder.append("(/*payload*/) to ");
+        String _messageOntologyHandler = this.messageOntologyHandler(message, false);
+        _builder.append(_messageOntologyHandler);
+        _builder.append(") to ");
         String _name = message.getSendReceive().getRole().getName();
         _builder.append(_name);
         _builder.append("List");
@@ -716,16 +725,20 @@ public class JadescriptGenerator {
           String _name_1 = message.getSendReceive().getRole().getName();
           boolean _equals = Objects.equal(_name_1, this.forVariable);
           if (_equals) {
-            _builder_1.append("send message inform ");
+            _builder_1.append("send message inform(");
             String _messageType_1 = message.getMessageType();
             _builder_1.append(_messageType_1);
-            _builder_1.append("(/*payload*/) to intAgent");
+            String _messageOntologyHandler_1 = this.messageOntologyHandler(message, false);
+            _builder_1.append(_messageOntologyHandler_1);
+            _builder_1.append(") to intAgent");
             _builder_1.newLineIfNotEmpty();
           } else {
-            _builder_1.append("send message inform ");
+            _builder_1.append("send message inform(");
             String _messageType_2 = message.getMessageType();
             _builder_1.append(_messageType_2);
-            _builder_1.append("(/*payload*/) to ");
+            String _messageOntologyHandler_2 = this.messageOntologyHandler(message, false);
+            _builder_1.append(_messageOntologyHandler_2);
+            _builder_1.append(") to ");
             String _name_2 = message.getSendReceive().getRole().getName();
             _builder_1.append(_name_2);
             _builder_1.newLineIfNotEmpty();
@@ -755,6 +768,20 @@ public class JadescriptGenerator {
         _builder_3.newLineIfNotEmpty();
         _builder_3.append("deactivate this");
         return _builder_3.toString();
+      }
+    }
+  }
+
+  public String messageOntologyHandler(final MessageNormalL message, final boolean decision) {
+    String nameOntology = this.ontology.extractOntology(message.getMessageType());
+    boolean _equals = nameOntology.equals("@proposition");
+    if (_equals) {
+      return "";
+    } else {
+      if (decision) {
+        return this.payloadNames.getPayload(message.getMessageType(), false);
+      } else {
+        return this.payloadNames.getPayload(message.getMessageType(), true);
       }
     }
   }

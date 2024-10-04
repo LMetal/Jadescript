@@ -214,7 +214,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Definition returns Definition
 	 *
 	 * Constraint:
-	 *     ((type='@proposition' name=ID) | (type='@action' name=ID (types+=Type types+=Type?)?) | (type='@predicate' name=ID types+=Type types+=Type?))
+	 *     ((type='@proposition' name=ID) | (type='@action' name=ID (types+=Type types+=Type*)?) | (type='@predicate' name=ID types+=Type types+=Type*))
 	 * </pre>
 	 */
 	protected void sequence_Definition(ISerializationContext context, Definition semanticObject) {

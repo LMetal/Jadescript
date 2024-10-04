@@ -26,8 +26,8 @@ GlobalProtocol:
 	
 Definition:
 		  type='@proposition' name = ID
-		| type='@action' name = ID ('('types+=Type (',' types+=Type)?')')?
-		| type='@predicate' name = ID '('types+=Type (',' types+=Type)?')'
+		| type='@action' name = ID ('('types+=Type (',' types+=Type)*')')?
+		| type='@predicate' name = ID '('types+=Type (',' types+=Type)*')'
 		| QuitDefinition
 ;
 

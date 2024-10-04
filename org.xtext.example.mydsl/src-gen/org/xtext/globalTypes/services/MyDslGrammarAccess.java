@@ -203,15 +203,15 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		
 		//Definition:
 		//          type='@proposition' name = ID
-		//        | type='@action' name = ID ('('types+=Type (',' types+=Type)?')')?
-		//        | type='@predicate' name = ID '('types+=Type (',' types+=Type)?')'
+		//        | type='@action' name = ID ('('types+=Type (',' types+=Type)*')')?
+		//        | type='@predicate' name = ID '('types+=Type (',' types+=Type)*')'
 		//        | QuitDefinition
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//  type='@proposition' name = ID
-		//| type='@action' name = ID ('('types+=Type (',' types+=Type)?')')?
-		//| type='@predicate' name = ID '('types+=Type (',' types+=Type)?')'
+		//| type='@action' name = ID ('('types+=Type (',' types+=Type)*')')?
+		//| type='@predicate' name = ID '('types+=Type (',' types+=Type)*')'
 		//| QuitDefinition
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
@@ -230,7 +230,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_1_0() { return cNameIDTerminalRuleCall_0_1_0; }
 		
-		//type='@action' name = ID ('('types+=Type (',' types+=Type)?')')?
+		//type='@action' name = ID ('('types+=Type (',' types+=Type)*')')?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//type='@action'
@@ -245,7 +245,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_1_0() { return cNameIDTerminalRuleCall_1_1_0; }
 		
-		//('('types+=Type (',' types+=Type)?')')?
+		//('('types+=Type (',' types+=Type)*')')?
 		public Group getGroup_1_2() { return cGroup_1_2; }
 		
 		//'('
@@ -257,7 +257,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//Type
 		public RuleCall getTypesTypeParserRuleCall_1_2_1_0() { return cTypesTypeParserRuleCall_1_2_1_0; }
 		
-		//(',' types+=Type)?
+		//(',' types+=Type)*
 		public Group getGroup_1_2_2() { return cGroup_1_2_2; }
 		
 		//','
@@ -272,7 +272,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//')'
 		public Keyword getRightParenthesisKeyword_1_2_3() { return cRightParenthesisKeyword_1_2_3; }
 		
-		//type='@predicate' name = ID '('types+=Type (',' types+=Type)?')'
+		//type='@predicate' name = ID '('types+=Type (',' types+=Type)*')'
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//type='@predicate'
@@ -296,7 +296,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//Type
 		public RuleCall getTypesTypeParserRuleCall_2_3_0() { return cTypesTypeParserRuleCall_2_3_0; }
 		
-		//(',' types+=Type)?
+		//(',' types+=Type)*
 		public Group getGroup_2_4() { return cGroup_2_4; }
 		
 		//','
@@ -1746,8 +1746,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 	//Definition:
 	//          type='@proposition' name = ID
-	//        | type='@action' name = ID ('('types+=Type (',' types+=Type)?')')?
-	//        | type='@predicate' name = ID '('types+=Type (',' types+=Type)?')'
+	//        | type='@action' name = ID ('('types+=Type (',' types+=Type)*')')?
+	//        | type='@predicate' name = ID '('types+=Type (',' types+=Type)*')'
 	//        | QuitDefinition
 	//;
 	public DefinitionElements getDefinitionAccess() {

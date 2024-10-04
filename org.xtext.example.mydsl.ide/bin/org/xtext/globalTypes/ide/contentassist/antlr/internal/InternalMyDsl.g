@@ -1653,7 +1653,7 @@ rule__Definition__Group_1_2__2__Impl
 :
 (
 	{ before(grammarAccess.getDefinitionAccess().getGroup_1_2_2()); }
-	(rule__Definition__Group_1_2_2__0)?
+	(rule__Definition__Group_1_2_2__0)*
 	{ after(grammarAccess.getDefinitionAccess().getGroup_1_2_2()); }
 )
 ;
@@ -1869,7 +1869,7 @@ rule__Definition__Group_2__4__Impl
 :
 (
 	{ before(grammarAccess.getDefinitionAccess().getGroup_2_4()); }
-	(rule__Definition__Group_2_4__0)?
+	(rule__Definition__Group_2_4__0)*
 	{ after(grammarAccess.getDefinitionAccess().getGroup_2_4()); }
 )
 ;

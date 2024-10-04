@@ -65,4 +65,47 @@ public class PayloadNames {
 			
 		}
 	}*/
+	
+	public String getPayload(String name, boolean choice) {
+		if(actionPredicateList.containsKey(name)) {
+			ArrayList<String> defNames = actionPredicateList.get(name);
+			String result = "(";
+			int count = 0;
+			for(String found : defNames) {
+				if(count != 0)
+					result = result + ", ";
+				// integer | float | text | aid
+				if(found.substring(0, 3).equals("aid")) {
+
+					if(choice)
+						result = result + "/*fill_AID*/" /*+ " as aid"*/;
+					else
+						result = result + found/*+ " as aid"*/;
+				}
+				else if(found.substring(0, 3).equals("int")) {
+					if(choice)
+						result = result + "/*fill_INT*/" /*+ " as integer"*/;
+					else
+						result = result + found/* + " as integer"*/;
+				}
+					
+				else if(found.substring(0, 3).equals("flo")) {
+					if(choice)
+						result = result + "/*fill_FLOAT*/" /*+ " as float"*/;
+					else
+						result = result + found/* + " as float"*/;
+				}
+				else {
+					if(choice)
+						result = result + "/*fill_TEXT*/" /*+ " as text"*/;
+					else
+						result = result + found/* + " as text"*/;
+				}
+				count++;
+			}
+			return result + ")";
+		}else {
+			return null;
+		}
+	}
 }

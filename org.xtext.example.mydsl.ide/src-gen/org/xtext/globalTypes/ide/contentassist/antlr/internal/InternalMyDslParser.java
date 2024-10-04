@@ -5290,40 +5290,47 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Definition__Group_1_2__2__Impl"
-    // InternalMyDsl.g:1649:1: rule__Definition__Group_1_2__2__Impl : ( ( rule__Definition__Group_1_2_2__0 )? ) ;
+    // InternalMyDsl.g:1649:1: rule__Definition__Group_1_2__2__Impl : ( ( rule__Definition__Group_1_2_2__0 )* ) ;
     public final void rule__Definition__Group_1_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMyDsl.g:1653:1: ( ( ( rule__Definition__Group_1_2_2__0 )? ) )
-            // InternalMyDsl.g:1654:1: ( ( rule__Definition__Group_1_2_2__0 )? )
+            // InternalMyDsl.g:1653:1: ( ( ( rule__Definition__Group_1_2_2__0 )* ) )
+            // InternalMyDsl.g:1654:1: ( ( rule__Definition__Group_1_2_2__0 )* )
             {
-            // InternalMyDsl.g:1654:1: ( ( rule__Definition__Group_1_2_2__0 )? )
-            // InternalMyDsl.g:1655:2: ( rule__Definition__Group_1_2_2__0 )?
+            // InternalMyDsl.g:1654:1: ( ( rule__Definition__Group_1_2_2__0 )* )
+            // InternalMyDsl.g:1655:2: ( rule__Definition__Group_1_2_2__0 )*
             {
              before(grammarAccess.getDefinitionAccess().getGroup_1_2_2()); 
-            // InternalMyDsl.g:1656:2: ( rule__Definition__Group_1_2_2__0 )?
-            int alt15=2;
-            int LA15_0 = input.LA(1);
+            // InternalMyDsl.g:1656:2: ( rule__Definition__Group_1_2_2__0 )*
+            loop15:
+            do {
+                int alt15=2;
+                int LA15_0 = input.LA(1);
 
-            if ( (LA15_0==23) ) {
-                alt15=1;
-            }
-            switch (alt15) {
-                case 1 :
-                    // InternalMyDsl.g:1656:3: rule__Definition__Group_1_2_2__0
-                    {
-                    pushFollow(FOLLOW_2);
-                    rule__Definition__Group_1_2_2__0();
-
-                    state._fsp--;
+                if ( (LA15_0==23) ) {
+                    alt15=1;
+                }
 
 
-                    }
-                    break;
+                switch (alt15) {
+            	case 1 :
+            	    // InternalMyDsl.g:1656:3: rule__Definition__Group_1_2_2__0
+            	    {
+            	    pushFollow(FOLLOW_14);
+            	    rule__Definition__Group_1_2_2__0();
 
-            }
+            	    state._fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop15;
+                }
+            } while (true);
 
              after(grammarAccess.getDefinitionAccess().getGroup_1_2_2()); 
 
@@ -5941,40 +5948,47 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Definition__Group_2__4__Impl"
-    // InternalMyDsl.g:1865:1: rule__Definition__Group_2__4__Impl : ( ( rule__Definition__Group_2_4__0 )? ) ;
+    // InternalMyDsl.g:1865:1: rule__Definition__Group_2__4__Impl : ( ( rule__Definition__Group_2_4__0 )* ) ;
     public final void rule__Definition__Group_2__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMyDsl.g:1869:1: ( ( ( rule__Definition__Group_2_4__0 )? ) )
-            // InternalMyDsl.g:1870:1: ( ( rule__Definition__Group_2_4__0 )? )
+            // InternalMyDsl.g:1869:1: ( ( ( rule__Definition__Group_2_4__0 )* ) )
+            // InternalMyDsl.g:1870:1: ( ( rule__Definition__Group_2_4__0 )* )
             {
-            // InternalMyDsl.g:1870:1: ( ( rule__Definition__Group_2_4__0 )? )
-            // InternalMyDsl.g:1871:2: ( rule__Definition__Group_2_4__0 )?
+            // InternalMyDsl.g:1870:1: ( ( rule__Definition__Group_2_4__0 )* )
+            // InternalMyDsl.g:1871:2: ( rule__Definition__Group_2_4__0 )*
             {
              before(grammarAccess.getDefinitionAccess().getGroup_2_4()); 
-            // InternalMyDsl.g:1872:2: ( rule__Definition__Group_2_4__0 )?
-            int alt16=2;
-            int LA16_0 = input.LA(1);
+            // InternalMyDsl.g:1872:2: ( rule__Definition__Group_2_4__0 )*
+            loop16:
+            do {
+                int alt16=2;
+                int LA16_0 = input.LA(1);
 
-            if ( (LA16_0==23) ) {
-                alt16=1;
-            }
-            switch (alt16) {
-                case 1 :
-                    // InternalMyDsl.g:1872:3: rule__Definition__Group_2_4__0
-                    {
-                    pushFollow(FOLLOW_2);
-                    rule__Definition__Group_2_4__0();
-
-                    state._fsp--;
+                if ( (LA16_0==23) ) {
+                    alt16=1;
+                }
 
 
-                    }
-                    break;
+                switch (alt16) {
+            	case 1 :
+            	    // InternalMyDsl.g:1872:3: rule__Definition__Group_2_4__0
+            	    {
+            	    pushFollow(FOLLOW_14);
+            	    rule__Definition__Group_2_4__0();
 
-            }
+            	    state._fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop16;
+                }
+            } while (true);
 
              after(grammarAccess.getDefinitionAccess().getGroup_2_4()); 
 
@@ -6233,7 +6247,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:1965:1: ( rule__QuitDefinition__Group__0__Impl rule__QuitDefinition__Group__1 )
             // InternalMyDsl.g:1966:2: rule__QuitDefinition__Group__0__Impl rule__QuitDefinition__Group__1
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_15);
             rule__QuitDefinition__Group__0__Impl();
 
             state._fsp--;
@@ -6398,7 +6412,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:2019:1: ( rule__Roles__Group__0__Impl rule__Roles__Group__1 )
             // InternalMyDsl.g:2020:2: rule__Roles__Group__0__Impl rule__Roles__Group__1
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__Roles__Group__0__Impl();
 
             state._fsp--;
@@ -6535,7 +6549,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalMyDsl.g:2060:3: rule__Roles__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_16);
+            	    pushFollow(FOLLOW_14);
             	    rule__Roles__Group_1__0();
 
             	    state._fsp--;
@@ -8136,7 +8150,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:2613:1: ( rule__ForEach__Group__4__Impl rule__ForEach__Group__5 )
             // InternalMyDsl.g:2614:2: rule__ForEach__Group__4__Impl rule__ForEach__Group__5
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__ForEach__Group__4__Impl();
 
             state._fsp--;
@@ -11080,7 +11094,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:3612:1: ( rule__Payload__Group__0__Impl rule__Payload__Group__1 )
             // InternalMyDsl.g:3613:2: rule__Payload__Group__0__Impl rule__Payload__Group__1
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__Payload__Group__0__Impl();
 
             state._fsp--;
@@ -11217,7 +11231,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalMyDsl.g:3653:3: rule__Payload__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_16);
+            	    pushFollow(FOLLOW_14);
             	    rule__Payload__Group_1__0();
 
             	    state._fsp--;
@@ -15362,7 +15376,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:5070:1: ( rule__ForEachL__Group__4__Impl rule__ForEachL__Group__5 )
             // InternalMyDsl.g:5071:2: rule__ForEachL__Group__4__Impl rule__ForEachL__Group__5
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__ForEachL__Group__4__Impl();
 
             state._fsp--;
@@ -19058,9 +19072,9 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000200000L});
     public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x000000000003C000L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000C00000L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000100000000000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000800000L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000004000000L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000010000000L});
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000001000000L});
