@@ -25,5 +25,8 @@ HOW TO RUN
 9- Inside src/, create a .jglobal file, when asked to configure Xtext select Yes
 
 
-You can now write a global (or local) protocol inside the .iglobal file. When saved, it will create in src-gen/local the local types.
+You can now write a global (or local) protocol inside the .iglobal file.
+
+When saved, it will create in src-gen/local the local types.
+
 Open these, modify something (add and remove a space) and save. The Jadescript structure will be created in src-gen
