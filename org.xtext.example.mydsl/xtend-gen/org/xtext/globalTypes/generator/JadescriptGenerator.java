@@ -57,6 +57,8 @@ public class JadescriptGenerator {
 
   private String forRoleset;
 
+  private boolean inCreateAgent = true;
+
   public CharSequence translate(final LocalProtocol lp, final EList<Definition> definitions) {
     String _string = new String();
     this.agentString = _string;
@@ -71,11 +73,13 @@ public class JadescriptGenerator {
     this.behaviourNumber = 0;
     this.recursionNumber = 0;
     this.forNumber = 0;
+    this.inCreateAgent = true;
     CharSequence _createAgent = this.createAgent(lp);
     String _plus = ((this.agentString + "\n\n") + _createAgent);
     this.agentString = _plus;
     while ((this.behQueue.peek() != null)) {
       {
+        this.inCreateAgent = false;
         Map.Entry<String, Map.Entry<Object, Boolean>> entry = this.behQueue.poll();
         Object firstObj = entry.getValue().getKey();
         String behName = entry.getKey();
@@ -758,7 +762,8 @@ public class JadescriptGenerator {
         _builder_2.append(this.behaviourNumber);
         _builder_2.append("(intAgent)");
         _builder_2.newLineIfNotEmpty();
-        _builder_2.append("deactivate this");
+        String _deactivate = this.deactivate();
+        _builder_2.append(_deactivate);
         return _builder_2.toString();
       } else {
         this.behQueue.add(this.getEntry("Behaviour", message, Boolean.valueOf(false), Integer.valueOf(this.behaviourNumber)));
@@ -766,7 +771,8 @@ public class JadescriptGenerator {
         _builder_3.append("activate Behaviour");
         _builder_3.append(this.behaviourNumber);
         _builder_3.newLineIfNotEmpty();
-        _builder_3.append("deactivate this");
+        String _deactivate_1 = this.deactivate();
+        _builder_3.append(_deactivate_1);
         return _builder_3.toString();
       }
     }
@@ -794,8 +800,9 @@ public class JadescriptGenerator {
       String _name = message.getSendReceive().getRole().getName();
       _builder.append(_name);
       _builder.newLineIfNotEmpty();
-      _builder.append("deactivate this");
-      _builder.newLine();
+      String _deactivate = this.deactivate();
+      _builder.append(_deactivate);
+      _builder.newLineIfNotEmpty();
       return _builder.toString();
     } else {
       this.behaviourNumber++;
@@ -806,7 +813,8 @@ public class JadescriptGenerator {
         _builder_1.append(this.behaviourNumber);
         _builder_1.append("(intAgent)");
         _builder_1.newLineIfNotEmpty();
-        _builder_1.append("deactivate this");
+        String _deactivate_1 = this.deactivate();
+        _builder_1.append(_deactivate_1);
         return _builder_1.toString();
       } else {
         this.behQueue.add(this.getEntry("Behaviour", message, Boolean.valueOf(false), Integer.valueOf(this.behaviourNumber)));
@@ -814,7 +822,8 @@ public class JadescriptGenerator {
         _builder_2.append("activate Behaviour");
         _builder_2.append(this.behaviourNumber);
         _builder_2.newLineIfNotEmpty();
-        _builder_2.append("deactivate this");
+        String _deactivate_2 = this.deactivate();
+        _builder_2.append(_deactivate_2);
         return _builder_2.toString();
       }
     }
@@ -873,7 +882,8 @@ public class JadescriptGenerator {
       _builder.append(this.recursionNumber);
       _builder.append("(intAgent)");
       _builder.newLineIfNotEmpty();
-      _builder.append("deactivate this");
+      String _deactivate = this.deactivate();
+      _builder.append(_deactivate);
       return _builder.toString();
     } else {
       this.behQueue.add(this.getEntry("RecBehaviour", rec, Boolean.valueOf(false), Integer.valueOf(this.recursionNumber)));
@@ -882,7 +892,8 @@ public class JadescriptGenerator {
       _builder_1.append("activate RecBehaviour");
       _builder_1.append(this.recursionNumber);
       _builder_1.newLineIfNotEmpty();
-      _builder_1.append("deactivate this");
+      String _deactivate_1 = this.deactivate();
+      _builder_1.append(_deactivate_1);
       return _builder_1.toString();
     }
   }
@@ -901,14 +912,16 @@ public class JadescriptGenerator {
       _builder.newLineIfNotEmpty();
       _builder.append("forCounter = forCounter-1");
       _builder.newLine();
-      _builder.append("deactivate this");
+      String _deactivate = this.deactivate();
+      _builder.append(_deactivate);
       return _builder.toString();
     } else {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("activate RecBehaviour");
       _builder_1.append(recNumber);
       _builder_1.newLineIfNotEmpty();
-      _builder_1.append("deactivate this");
+      String _deactivate_1 = this.deactivate();
+      _builder_1.append(_deactivate_1);
       return _builder_1.toString();
     }
   }
@@ -921,14 +934,23 @@ public class JadescriptGenerator {
         _builder.newLine();
       }
     }
-    _builder.append("deactivate this");
-    _builder.newLine();
+    String _deactivate = this.deactivate();
+    _builder.append(_deactivate);
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
 
   public Map.Entry<String, Map.Entry<Object, Boolean>> getEntry(final String s, final Object o, final Boolean b, final Integer n) {
     AbstractMap.SimpleEntry<Object, Boolean> _simpleEntry = new AbstractMap.SimpleEntry<Object, Boolean>(o, b);
     return new AbstractMap.SimpleEntry<String, Map.Entry<Object, Boolean>>((s + n), _simpleEntry);
+  }
+
+  public String deactivate() {
+    if ((!this.inCreateAgent)) {
+      return "deactivate this";
+    } else {
+      return "";
+    }
   }
 
   public CharSequence createWaitAgents(final String name, final EObject r) {

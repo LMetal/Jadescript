@@ -38,6 +38,7 @@ class JadescriptGenerator {
 	int forNumber
 	String forVariable
 	String forRoleset
+	boolean inCreateAgent = true
 	
 	
 	def CharSequence translate(LocalProtocol lp, EList<Definition> definitions){
@@ -51,12 +52,15 @@ class JadescriptGenerator {
 		behaviourNumber = 0
 		recursionNumber = 0
 		forNumber = 0
+		inCreateAgent = true
 		
 		
 		agentString = agentString + "\n\n" + createAgent(lp)
 		
 		//print behaviors loop
 		while(behQueue.peek !== null){
+			inCreateAgent = false
+			
 			var entry = behQueue.poll
 			var firstObj = entry.getValue.getKey
 			var behName = entry.getKey
@@ -329,16 +333,17 @@ class JadescriptGenerator {
 				behQueue.add(getEntry("Behaviour", message, true, behaviourNumber))
 				return '''
 					activate Behaviour«behaviourNumber»(intAgent)
-					deactivate this'''
+					«deactivate()»'''
 			}else{
 				behQueue.add(getEntry("Behaviour", message, false, behaviourNumber))
 				return '''
 					activate Behaviour«behaviourNumber»
-					deactivate this'''
+					«deactivate()»'''
 			}
 			
 		}
 	}
+	
 	
 	def String messageOntologyHandler(MessageNormalL message, boolean decision){
 		var nameOntology = ontology.extractOntology(message.messageType);
@@ -361,7 +366,7 @@ class JadescriptGenerator {
 		if(message.sendReceive instanceof ReceiverL)
 			return '''
 				send message inform QUIT to «message.sendReceive.role.name»
-				deactivate this
+				«deactivate()»
 			'''
 			
 		else{
@@ -370,12 +375,12 @@ class JadescriptGenerator {
 				behQueue.add(getEntry("Behaviour", message, true, behaviourNumber))
 				return '''
 					activate Behaviour«behaviourNumber»(intAgent)
-					deactivate this'''
+					«deactivate()»'''
 			} else {
 				behQueue.add(getEntry("Behaviour", message, false, behaviourNumber))
 				return '''
 					activate Behaviour«behaviourNumber»
-					deactivate this'''
+					«deactivate()»'''
 			}
 			
 		}
@@ -434,13 +439,13 @@ class JadescriptGenerator {
 			recNumAssociation.put(rec.name ,recursionNumber);
 			return '''
 				activate RecBehaviour«recursionNumber»(intAgent)
-				deactivate this'''
+				«deactivate()»'''
 		} else {
 			behQueue.add(getEntry("RecBehaviour", rec, false, recursionNumber))
 			recNumAssociation.put(rec.name ,recursionNumber);
 			return '''
 				activate RecBehaviour«recursionNumber»
-				deactivate this'''
+				«deactivate()»'''
 		}	
 	}
 	
@@ -451,11 +456,11 @@ class JadescriptGenerator {
 			return '''
 				activate RecBehaviour«recNumber»(intAgent)
 				forCounter = forCounter-1
-				deactivate this'''
+				«deactivate()»'''
 		} else {
 			return '''
 				activate RecBehaviour«recNumber»
-				deactivate this'''
+				«deactivate()»'''
 		}
 		
 	}
@@ -464,9 +469,14 @@ class JadescriptGenerator {
 		«IF p»
 			forCounter = forCounter-1
 		«ENDIF»
-		deactivate this
+		«deactivate()»
 	'''
 	def Entry<String, Entry<Object, Boolean>> getEntry(String s, Object o, Boolean b, Integer n){
 		return new SimpleEntry<String, Entry<Object, Boolean>>(s+n, new SimpleEntry<Object, Boolean>(o, b))
+	}
+	
+	def deactivate() {
+		if(!inCreateAgent) return "deactivate this"
+		else return ""
 	}
 }
