@@ -68,7 +68,6 @@ public class JadescriptGenerator {
     this.recNumAssociation = _hashMap;
     this.payloadNames.init(definitions);
     this.ontology.init(definitions);
-    this.agentString = this.printOntology(lp, definitions).toString();
     this.agentName = lp.getProjectedRole().getName();
     this.behaviourNumber = 0;
     this.recursionNumber = 0;

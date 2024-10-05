@@ -47,7 +47,7 @@ class JadescriptGenerator {
 		recNumAssociation = new HashMap<String, Integer>();
 		payloadNames.init(definitions);
 		ontology.init(definitions);
-		agentString = printOntology(lp, definitions).toString
+		//agentString = printOntology(lp, definitions).toString
 		agentName = lp.projectedRole.name
 		behaviourNumber = 0
 		recursionNumber = 0

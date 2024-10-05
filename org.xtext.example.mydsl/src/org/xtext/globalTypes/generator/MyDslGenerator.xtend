@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject
 import org.xtext.globalTypes.myDsl.RoleOne
 import org.eclipse.emf.common.util.EList
 import org.xtext.globalTypes.myDsl.Definition
+import org.xtext.globalTypes.myDsl.RoleSet
 
 /**
  * Generates code from your model files on save.
@@ -49,6 +50,7 @@ class MyDslGenerator extends AbstractGenerator {
 	}
 	
 	def genOntoFile(GlobalProtocol gp, EList<Definition> definitions)'''
+		«var rolesetList = EcoreUtil2.getAllContentsOfType(gp.roles, RoleSet)»
 		ontology «gp.protocolName»
 			«FOR d: definitions»
 				«IF (d.type == '@proposition')»
@@ -64,6 +66,9 @@ class MyDslGenerator extends AbstractGenerator {
 						action «d.name»
 					«ENDIF»
 				«ENDIF»
+			«ENDFOR»
+			«FOR r: rolesetList»
+				proposition «r.ref.name»Hello
 			«ENDFOR»
 	'''
 

@@ -21,6 +21,7 @@ import org.xtext.globalTypes.myDsl.LocalProtocol;
 import org.xtext.globalTypes.myDsl.Model;
 import org.xtext.globalTypes.myDsl.Role;
 import org.xtext.globalTypes.myDsl.RoleOne;
+import org.xtext.globalTypes.myDsl.RoleSet;
 
 /**
  * Generates code from your model files on save.
@@ -74,6 +75,8 @@ public class MyDslGenerator extends AbstractGenerator {
 
   public CharSequence genOntoFile(final GlobalProtocol gp, final EList<Definition> definitions) {
     StringConcatenation _builder = new StringConcatenation();
+    List<RoleSet> rolesetList = EcoreUtil2.<RoleSet>getAllContentsOfType(gp.getRoles(), RoleSet.class);
+    _builder.newLineIfNotEmpty();
     _builder.append("ontology ");
     String _protocolName = gp.getProtocolName();
     _builder.append(_protocolName);
@@ -133,6 +136,16 @@ public class MyDslGenerator extends AbstractGenerator {
             }
           }
         }
+      }
+    }
+    {
+      for(final RoleSet r : rolesetList) {
+        _builder.append("\t");
+        _builder.append("proposition ");
+        String _name_4 = r.getRef().getName();
+        _builder.append(_name_4, "\t");
+        _builder.append("Hello");
+        _builder.newLineIfNotEmpty();
       }
     }
     return _builder;
