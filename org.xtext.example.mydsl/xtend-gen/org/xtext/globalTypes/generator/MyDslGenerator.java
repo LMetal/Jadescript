@@ -3,17 +3,24 @@
  */
 package org.xtext.globalTypes.generator;
 
+import com.google.common.base.Objects;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.xtext.globalTypes.myDsl.Definition;
 import org.xtext.globalTypes.myDsl.GlobalProtocol;
 import org.xtext.globalTypes.myDsl.LocalProtocol;
 import org.xtext.globalTypes.myDsl.Model;
 import org.xtext.globalTypes.myDsl.Role;
+import org.xtext.globalTypes.myDsl.RoleOne;
 
 /**
  * Generates code from your model files on save.
@@ -26,6 +33,8 @@ public class MyDslGenerator extends AbstractGenerator {
 
   private JadescriptGenerator jadeGen = new JadescriptGenerator();
 
+  private PayloadNames payloadNames = new PayloadNames();
+
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
@@ -34,6 +43,9 @@ public class MyDslGenerator extends AbstractGenerator {
     if ((_protocol instanceof GlobalProtocol)) {
       EObject _protocol_1 = model.getProtocol();
       GlobalProtocol globalProtocol = ((GlobalProtocol) _protocol_1);
+      fsa.generateFile("Start.java", this.genStartFile(globalProtocol.getRoles()));
+      this.payloadNames.init(model.getDefinitions());
+      fsa.generateFile("ontology.jade", this.genOntoFile(globalProtocol, model.getDefinitions()));
       EList<Role> _roles = globalProtocol.getRoles().getRoles();
       for (final Role r : _roles) {
         {
@@ -58,5 +70,151 @@ public class MyDslGenerator extends AbstractGenerator {
       String _plus_1 = (_plus + ".jade");
       fsa.generateFile(_plus_1, this.jadeGen.translate(localProtocol, model.getDefinitions()));
     }
+  }
+
+  public CharSequence genOntoFile(final GlobalProtocol gp, final EList<Definition> definitions) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("ontology ");
+    String _protocolName = gp.getProtocolName();
+    _builder.append(_protocolName);
+    _builder.newLineIfNotEmpty();
+    {
+      for(final Definition d : definitions) {
+        {
+          String _type = d.getType();
+          boolean _equals = Objects.equal(_type, "@proposition");
+          if (_equals) {
+            _builder.append("\t");
+            _builder.append("proposition ");
+            String _name = d.getName();
+            _builder.append(_name, "\t");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _type_1 = d.getType();
+          boolean _equals_1 = Objects.equal(_type_1, "@predicate");
+          if (_equals_1) {
+            _builder.append("\t");
+            _builder.append("predicate ");
+            String _name_1 = d.getName();
+            _builder.append(_name_1, "\t");
+            _builder.append("(");
+            String _payload = this.payloadNames.getPayload(d);
+            _builder.append(_payload, "\t");
+            _builder.append(")");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          String _type_2 = d.getType();
+          boolean _equals_2 = Objects.equal(_type_2, "@action");
+          if (_equals_2) {
+            {
+              int _length = ((Object[])Conversions.unwrapArray(d.getTypes(), Object.class)).length;
+              boolean _notEquals = (_length != 0);
+              if (_notEquals) {
+                _builder.append("\t");
+                _builder.append("action ");
+                String _name_2 = d.getName();
+                _builder.append(_name_2, "\t");
+                _builder.append("(");
+                String _payload_1 = this.payloadNames.getPayload(d);
+                _builder.append(_payload_1, "\t");
+                _builder.append(")");
+                _builder.newLineIfNotEmpty();
+              } else {
+                _builder.append("\t");
+                _builder.append("action ");
+                String _name_3 = d.getName();
+                _builder.append(_name_3, "\t");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+          }
+        }
+      }
+    }
+    return _builder;
+  }
+
+  public CharSequence genStartFile(final EObject roles) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Scanner;");
+    _builder.newLine();
+    _builder.append("import jade.wrapper.ContainerController;");
+    _builder.newLine();
+    _builder.append("import jadescript.java.Jadescript;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class Start {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public static void main(String[] args) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("try (Scanner scanner = new Scanner(System.in)) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("int port = (int) (Math.random()*1000) + 10000;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("System.out.println(port);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("ContainerController container = Jadescript.newMainContainer(port);");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    List<Role> roleList = EcoreUtil2.<Role>getAllContentsOfType(roles, Role.class);
+    _builder.newLineIfNotEmpty();
+    {
+      for(final Role r : roleList) {
+        {
+          if ((r instanceof RoleOne)) {
+            _builder.append("\t\t");
+            String _name = ((RoleOne)r).getName();
+            _builder.append(_name, "\t\t");
+            _builder.append(".create(container, \"");
+            String _name_1 = ((RoleOne)r).getName();
+            _builder.append(_name_1, "\t\t");
+            _builder.append("\");");
+            _builder.newLineIfNotEmpty();
+          } else {
+            _builder.append("\t\t");
+            _builder.append("for(int i=0; i<3; i++){ //rimpiazza 3 con il numero di agenti richiesti");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            String _name_2 = r.getName();
+            _builder.append(_name_2, "\t\t\t");
+            _builder.append(".create(container, \"");
+            String _name_3 = r.getName();
+            _builder.append(_name_3, "\t\t\t");
+            _builder.append("\"+Integer.toString(i));");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+      }
+    }
+    _builder.append("\t\t");
+    _builder.append("} catch (Exception e) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("e.printStackTrace();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
   }
 }
