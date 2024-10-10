@@ -1,10 +1,10 @@
-This project is the implementation of the projection and traduction described in "Global Types for Agent Interaction Protocols" presented at the 2024 ICTCS conference https://ictcs2024.di.unito.it.
+This project is the implementation of an Xtext editor for the multy party session types defined in "Global Types for Agent Interaction Protocols" (presented at the 2024 ICTCS conference https://ictcs2024.di.unito.it). In addition to implement the projection of the global types onto local types we also provide the translation of local types into Jadescript agents, reported in the documents "Relazione per la prova finale" of Leonardo Gallieri and Riccardo Nazzarr available at this link:.
 
-The full version is available at this link: https://drive.google.com/file/d/17BsoRcDP1gvcwYO_94my5wZ5TBP7T628/view?usp=sharing, here are defined the projection rules and are present examples.
+The full version of the ICTCS 2024 paper is available at this link: https://drive.google.com/file/d/17BsoRcDP1gvcwYO_94my5wZ5TBP7T628/view?usp=sharing, where are defined the projection rules and the examples.
 
-THIS IS A WORK IN PROGRESS
+THIS IS STILL A WORK IN PROGRESS
 
-HOW TO RUN
+HOW TO GENERATE THE PLUGIN. 
 
 1- Download the archive [HERE](https://github.com/LMetal/JadescriptPlugin)
 
