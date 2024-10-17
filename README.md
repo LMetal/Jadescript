@@ -4,7 +4,7 @@ The full version of the ICTCS 2024 paper is available at this link: https://driv
 
 THIS IS STILL A WORK IN PROGRESS
 
-HOW TO GENERATE THE ECLIPSE PLUGIN. 
+HOW TO INSTALL THE ECLIPSE PLUGIN. 
 
 1- Download the archive [HERE](https://github.com/LMetal/JadescriptPlugin)
 
