@@ -59,6 +59,10 @@ public class JadescriptGenerator {
 
   private boolean inCreateAgent = true;
 
+  private int iteration = 0;
+
+  private int forBodyNum;
+
   public CharSequence translate(final LocalProtocol lp, final EList<Definition> definitions) {
     String _string = new String();
     this.agentString = _string;
@@ -234,6 +238,24 @@ public class JadescriptGenerator {
 
   public CharSequence createAgent(final LocalProtocol lp) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("function cloneListOfAIDs(");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("agents as list of aid) as list of aid do");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("result = [] of aid");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("for peer in agents do");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("add peer to result");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return result");
+    _builder.newLine();
+    _builder.newLine();
     _builder.append("agent ");
     String _name = lp.getProjectedRole().getName();
     _builder.append(_name);
@@ -243,6 +265,12 @@ public class JadescriptGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("property forCounter as integer = 0");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("property rolesetNum as integer = 0");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("property forAidList as list of aid");
     _builder.newLine();
     _builder.append("\t");
     List<RoleSet> rolesetList = EcoreUtil2.<RoleSet>getAllContentsOfType(lp.getRoles(), RoleSet.class);
@@ -356,10 +384,16 @@ public class JadescriptGenerator {
               _builder.append(this.agentName);
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
+              _builder.append("property initTime as timestamp");
+              _builder.newLine();
+              _builder.append("    ");
+              _builder.append("property timeout as duration = \"PT1S\" as duration");
+              _builder.newLine();
+              _builder.append("    ");
               _builder.append("on create do");
               _builder.newLine();
-              _builder.append("\t\t");
-              _builder.append("deactivate this after \"PT(/*time*)S\" as duration");
+              _builder.append("        ");
+              _builder.append("initTime = now");
               _builder.newLine();
               _builder.newLine();
               _builder.append("\t");
@@ -377,12 +411,18 @@ public class JadescriptGenerator {
               _builder.append("\t\t");
               _builder.newLine();
               _builder.append("\t");
-              _builder.append("on deactivate do");
+              _builder.append("on execute do");
               _builder.newLine();
-              _builder.append("\t\t");
+              _builder.append("\t    ");
+              _builder.append("if(now > initTime + timeout) do");
+              _builder.newLine();
+              _builder.append("\t\t\t");
               CharSequence _createProtocol = this.createProtocol(lp.getProtocol().getBegin(), false);
-              _builder.append(_createProtocol, "\t\t");
+              _builder.append(_createProtocol, "\t\t\t");
               _builder.newLineIfNotEmpty();
+              _builder.append("\t\t\t");
+              _builder.append("deactivate this");
+              _builder.newLine();
             }
           }
         }
@@ -471,6 +511,23 @@ public class JadescriptGenerator {
     _builder.append(agentName);
     _builder.newLineIfNotEmpty();
     {
+      if (par) {
+        _builder.append("\t");
+        _builder.append("property intAgent as aid");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("on create with intAgent as aid do");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("intAgent of this = intAgent");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.newLine();
+      }
+    }
+    {
       MessageType _sendReceive = m.getSendReceive();
       if ((_sendReceive instanceof SenderL)) {
         _builder.append("\t");
@@ -478,22 +535,6 @@ public class JadescriptGenerator {
         _builder.append(_createHandler, "\t");
         _builder.newLineIfNotEmpty();
       } else {
-        {
-          if (par) {
-            _builder.append("\t");
-            _builder.append("property intAgent as aid");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("on create with intAgent as aid do");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("intAgent of this = intAgent");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.newLine();
-          }
-        }
         _builder.append("\t");
         _builder.append("on activate do");
         _builder.newLine();
@@ -542,7 +583,7 @@ public class JadescriptGenerator {
 
   public String createBehaviour(final String behName, final String agentName, final ForEachL f, final boolean par) {
     this.behaviourNumber++;
-    final int forBodyNum = this.behaviourNumber;
+    this.forBodyNum = this.behaviourNumber;
     this.behQueue.add(this.getEntry("Behaviour", f.getBranch().getBegin(), Boolean.valueOf(true), Integer.valueOf(this.behaviourNumber)));
     this.behaviourNumber++;
     final int forExitNum = this.behaviourNumber;
@@ -557,21 +598,29 @@ public class JadescriptGenerator {
     _builder.append("on activate do");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("forCounter = length of ");
+    _builder.append("forCounter = 0");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("rolesetNum = length of ");
     String _name = f.getRoleset().getName();
     _builder.append(_name, "\t\t");
     _builder.append("List");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    _builder.append("for i in ");
+    _builder.append("forAidList = cloneListOfAIDs(");
     String _name_1 = f.getRoleset().getName();
     _builder.append(_name_1, "\t\t");
-    _builder.append("List do");
+    _builder.append("List)");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if(forCounter < rolesetNum) do");
+    _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("activate Behaviour");
-    _builder.append(forBodyNum, "\t\t\t");
-    _builder.append("(i)");
+    _builder.append(this.forBodyNum, "\t\t\t");
+    _builder.append("(forAidList[forCounter])");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.newLine();
@@ -579,7 +628,7 @@ public class JadescriptGenerator {
     _builder.append("on execute do");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("if forCounter = 0 do");
+    _builder.append("if forCounter = rolesetNum do");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("activate Behaviour");
@@ -676,8 +725,16 @@ public class JadescriptGenerator {
         _builder.append("List");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("forCounter = forCounter-1");
+        _builder.append("forCounter = forCounter+1");
         _builder.newLine();
+        _builder.append("\t");
+        _builder.append("if(forCounter < rolesetNum) do");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("activate Behaviour");
+        _builder.append(this.forBodyNum, "\t\t");
+        _builder.append("(forAidList[forCounter])");
+        _builder.newLineIfNotEmpty();
       }
     }
     return _builder;
@@ -795,7 +852,7 @@ public class JadescriptGenerator {
     MessageType _sendReceive = message.getSendReceive();
     if ((_sendReceive instanceof ReceiverL)) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("send message inform QUIT to ");
+      _builder.append("send message inform QUIT() to ");
       String _name = message.getSendReceive().getRole().getName();
       _builder.append(_name);
       _builder.newLineIfNotEmpty();
@@ -837,16 +894,44 @@ public class JadescriptGenerator {
     String _name = choice.getRoleMakingChoice().getName();
     boolean _equals = Objects.equal(_name, this.agentName);
     if (_equals) {
+      this.iteration = 0;
+      final int numBranches = ((Object[])Conversions.unwrapArray(choice.getBranches(), Object.class)).length;
       StringConcatenation _builder = new StringConcatenation();
       {
         EList<MessageL> _branches = choice.getBranches();
         for(final MessageL branch : _branches) {
-          _builder.append("if(/*cond*/) do");
-          _builder.newLine();
-          _builder.append("\t");
-          Object _createProtocol = this.createProtocol(branch, p);
-          _builder.append(_createProtocol, "\t");
-          _builder.newLineIfNotEmpty();
+          {
+            int _plusPlus = this.iteration++;
+            boolean _equals_1 = (_plusPlus == 0);
+            if (_equals_1) {
+              _builder.append("if(/*cond*/) do");
+              _builder.newLine();
+              _builder.append("\t");
+              Object _createProtocol = this.createProtocol(branch, p);
+              _builder.append(_createProtocol, "\t");
+              _builder.newLineIfNotEmpty();
+            } else {
+              {
+                int _plusPlus_1 = this.iteration++;
+                boolean _notEquals = (_plusPlus_1 != numBranches);
+                if (_notEquals) {
+                  _builder.append("else if(/*cond*/) do");
+                  _builder.newLine();
+                  _builder.append("\t");
+                  Object _createProtocol_1 = this.createProtocol(branch, p);
+                  _builder.append(_createProtocol_1, "\t");
+                  _builder.newLineIfNotEmpty();
+                } else {
+                  _builder.append("else do");
+                  _builder.newLine();
+                  _builder.append("\t");
+                  Object _createProtocol_2 = this.createProtocol(branch, p);
+                  _builder.append(_createProtocol_2, "\t");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            }
+          }
         }
       }
       return _builder.toString();
@@ -909,8 +994,15 @@ public class JadescriptGenerator {
       _builder.append(recNumber);
       _builder.append("(intAgent)");
       _builder.newLineIfNotEmpty();
-      _builder.append("forCounter = forCounter-1");
+      _builder.append("forCounter = forCounter+1");
       _builder.newLine();
+      _builder.append("if(forCounter < rolesetNum) do");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("activate Behaviour");
+      _builder.append(this.forBodyNum, "\t");
+      _builder.append("(forAidList[forCounter])");
+      _builder.newLineIfNotEmpty();
       String _deactivate = this.deactivate();
       _builder.append(_deactivate);
       return _builder.toString();
@@ -929,8 +1021,15 @@ public class JadescriptGenerator {
     StringConcatenation _builder = new StringConcatenation();
     {
       if (p) {
-        _builder.append("forCounter = forCounter-1");
+        _builder.append("forCounter = forCounter+1");
         _builder.newLine();
+        _builder.append("if(forCounter < rolesetNum) do");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("activate Behaviour");
+        _builder.append(this.forBodyNum, "\t");
+        _builder.append("(forAidList[forCounter])");
+        _builder.newLineIfNotEmpty();
       }
     }
     String _deactivate = this.deactivate();

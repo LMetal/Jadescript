@@ -39,6 +39,8 @@ class JadescriptGenerator {
 	String forVariable
 	String forRoleset
 	boolean inCreateAgent = true
+	int iteration = 0
+	int forBodyNum
 	
 	
 	def CharSequence translate(LocalProtocol lp, EList<Definition> definitions){
@@ -127,8 +129,17 @@ class JadescriptGenerator {
 	'''
 	
 	def createAgent(LocalProtocol lp)'''
+		function cloneListOfAIDs(
+			agents as list of aid) as list of aid do
+			result = [] of aid
+			for peer in agents do
+				add peer to result
+			return result
+		
 		agent «lp.projectedRole.name» uses ontology «lp.protocolName»
 			property forCounter as integer = 0
+			property rolesetNum as integer = 0
+			property forAidList as list of aid
 			«var rolesetList = EcoreUtil2.getAllContentsOfType(lp.roles, RoleSet)»
 			«var isDone = 0»
 			«FOR r: rolesetList»
@@ -172,14 +183,18 @@ class JadescriptGenerator {
 			«FOR r : rolesetList»
 				«IF agentName.equals(r.ref.name)»
 						cyclic behaviour «name» for agent «agentName»
-							on create do
-								deactivate this after "PT(/*time*)S" as duration
+							property initTime as timestamp
+						    property timeout as duration = "PT1S" as duration
+						    on create do
+						        initTime = now
 						
 							on message inform «r.ref.name»Hello do
 								add sender of message to «r.name»List
 								
-							on deactivate do
-								«createProtocol(lp.protocol.begin, false)»
+							on execute do
+							    if(now > initTime + timeout) do
+									«createProtocol(lp.protocol.begin, false)»
+									deactivate this
 				«ENDIF»
 			«ENDFOR»
 		'''
@@ -215,15 +230,15 @@ class JadescriptGenerator {
 	//creo behaviour per ricezione messaggio
 	def createBehaviour(String behName, String agentName, MessageL m, boolean par)'''
 		cyclic behaviour «behName» for agent «agentName»
+			«IF par»
+				property intAgent as aid
+				on create with intAgent as aid do
+					intAgent of this = intAgent
+					
+			«ENDIF»
 			«IF m.sendReceive instanceof SenderL»
 				«createHandler(m, par)»
 			«ELSE»
-				«IF par»
-					property intAgent as aid
-					on create with intAgent as aid do
-						intAgent of this = intAgent
-					
-				«ENDIF»
 				on activate do
 					«createProtocol(m, par)»
 			«ENDIF»
@@ -245,7 +260,7 @@ class JadescriptGenerator {
 	//creo behaviour per for in rec
 	def createBehaviour(String behName, String agentName, ForEachL f, boolean par){
 		behaviourNumber++
-		val forBodyNum = behaviourNumber
+		forBodyNum = behaviourNumber
 		behQueue.add(getEntry("Behaviour", f.branch.begin, true, behaviourNumber))
 		behaviourNumber++
 		val forExitNum = behaviourNumber
@@ -253,12 +268,15 @@ class JadescriptGenerator {
 		return '''
 			cyclic behaviour «behName» for agent «agentName»
 				on activate do
-					forCounter = length of «f.roleset.name»List
-					for i in «f.roleset.name»List do
-						activate Behaviour«forBodyNum»(i)
+					forCounter = 0
+					rolesetNum = length of «f.roleset.name»List
+					forAidList = cloneListOfAIDs(«f.roleset.name»List)
+					
+					if(forCounter < rolesetNum) do
+						activate Behaviour«forBodyNum»(forAidList[forCounter])
 					
 				on execute do
-					if forCounter = 0 do
+					if forCounter = rolesetNum do
 						activate Behaviour«forExitNum»
 						deactivate this
 		'''
@@ -296,7 +314,9 @@ class JadescriptGenerator {
 		«ELSE»
 			on message inform QUIT do
 				remove sender of message from «forRoleset»List
-				forCounter = forCounter-1
+				forCounter = forCounter+1
+				if(forCounter < rolesetNum) do
+					activate Behaviour«forBodyNum»(forAidList[forCounter])
 		«ENDIF»
 	'''
 	
@@ -365,7 +385,7 @@ class JadescriptGenerator {
 	def createMessage(MessageQuitL message, boolean p){
 		if(message.sendReceive instanceof ReceiverL)
 			return '''
-				send message inform QUIT to «message.sendReceive.role.name»
+				send message inform QUIT() to «message.sendReceive.role.name»
 				«deactivate()»
 			'''
 			
@@ -393,10 +413,22 @@ class JadescriptGenerator {
 	def dispatch createProtocol(ChoiceL choice, boolean p){
 		buffer = ""
 		if(choice.roleMakingChoice.name == agentName){
+			iteration = 0
+			val numBranches = choice.branches.length
 			return'''
 				«FOR MessageL branch: choice.branches»
-					if(/*cond*/) do
-						«createProtocol(branch, p)»
+					«IF iteration++ == 0»
+						if(/*cond*/) do
+							«createProtocol(branch, p)»
+					«ELSE»«
+						IF iteration++ != numBranches»
+							else if(/*cond*/) do
+								«createProtocol(branch, p)»
+						«ELSE»
+							else do
+								«createProtocol(branch, p)»
+						«ENDIF»
+					«ENDIF»
 				«ENDFOR»
 			'''
 			/*for(MessageL branch: choice.branches){
@@ -455,7 +487,9 @@ class JadescriptGenerator {
 		if(p){
 			return '''
 				activate RecBehaviour«recNumber»(intAgent)
-				forCounter = forCounter-1
+				forCounter = forCounter+1
+				if(forCounter < rolesetNum) do
+					activate Behaviour«forBodyNum»(forAidList[forCounter])
 				«deactivate()»'''
 		} else {
 			return '''
@@ -467,7 +501,9 @@ class JadescriptGenerator {
 	
 	def dispatch createProtocol(EndProtocol end, boolean p)'''
 		«IF p»
-			forCounter = forCounter-1
+			forCounter = forCounter+1
+			if(forCounter < rolesetNum) do
+				activate Behaviour«forBodyNum»(forAidList[forCounter])
 		«ENDIF»
 		«deactivate()»
 	'''
