@@ -25,6 +25,7 @@ public class MergeUtil {
 		} else if(! allFirstMessageExternalChoice(localTypes)) {
 			// error, internal choice as first message
 			return "//MERGE FAILED: Must wait message in choice";
+			
 		} else if(! allFirstMessageDifferents(localTypes)) {
 			// error, not all messages are different
 			return "//MERGE FAILED: Two branches, but not all, waits for same message";
@@ -37,15 +38,21 @@ public class MergeUtil {
 
 	private static boolean allFirstMessageDifferents(ArrayList<CharSequence> localTypes) {
 		ArrayList<String> messageTypes = new ArrayList<String>();
+		boolean someEmpty = false;
 		
 		for(CharSequence l: localTypes) {
 			String s = l.toString();
-			s = s.substring(0, s.indexOf('('));
 			
-			if(messageTypes.contains(s)) return false;
-			else messageTypes.add(s);
+			if(s.isEmpty()) {
+				someEmpty = true;
+			} else {
+				s = s.substring(0, s.indexOf('('));
+				if(messageTypes.contains(s)) return false;
+				else messageTypes.add(s);
+			}
 		}
 		
+		if(someEmpty && !messageTypes.isEmpty()) return false;
 		return true;
 	}
 
@@ -53,8 +60,10 @@ public class MergeUtil {
 		for(CharSequence l: localTypes) {
 			String l1 = l.toString();
 			//porzione interessante per capire se e' messaggio in ingresso o uscita
+			if (l1.isEmpty()){
+				return true;
+			}
 			String s = l1.subSequence(l1.indexOf(')')+2, l1.indexOf('.')).toString();
-			//System.out.println(s);
 			if(s.startsWith("to")) return false;
 		}
 		return true;

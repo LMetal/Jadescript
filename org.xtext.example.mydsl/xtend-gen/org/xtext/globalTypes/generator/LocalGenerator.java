@@ -526,6 +526,10 @@ public class LocalGenerator {
             }
           }
         }
+        EObject _begin = ((MessageNormal)m).getProtocol().getBegin();
+        String _plus = ("HERE OBV for " + _begin);
+        System.out.println(_plus);
+        _builder.newLineIfNotEmpty();
         Object _seqOn = this.seqOn(((MessageNormal)m).getProtocol(), r, p);
         _builder.append(_seqOn);
         _builder.newLineIfNotEmpty();
@@ -558,30 +562,56 @@ public class LocalGenerator {
     return _builder;
   }
 
+  /**
+   * def dispatch seqOn(Choice c, Role r, Protocol p)'''
+   * choice at «parts.roleSet(c.role).name»{
+   * «FOR int i: 0..c.branches.length-1 SEPARATOR ' or {'»
+   * «seqOn(c.branches.get(i), r, p)»
+   * }
+   * «ENDFOR»
+   * '''
+   */
   protected CharSequence _seqOn(final Choice c, final Role r, final Protocol p) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("choice at ");
-    String _name = this.parts.roleSet(c.getRole()).getName();
-    _builder.append(_name);
-    _builder.append("{");
+    boolean _inside = this.parts.inside(this.parts.partsChoice(c), r);
+    String _plus = ("HERE OBV2 " + Boolean.valueOf(_inside));
+    System.out.println(_plus);
     _builder.newLineIfNotEmpty();
     {
-      int _length = ((Object[])Conversions.unwrapArray(c.getBranches(), Object.class)).length;
-      int _minus = (_length - 1);
-      IntegerRange _upTo = new IntegerRange(0, _minus);
-      boolean _hasElements = false;
-      for(final int i : _upTo) {
-        if (!_hasElements) {
-          _hasElements = true;
-        } else {
-          _builder.appendImmediate(" or {", "");
+      boolean _inside_1 = this.parts.inside(this.parts.partsChoice(c), r);
+      if (_inside_1) {
+        {
+          if ((Objects.equal(c.getBranches().get(0).getReceiver().getName(), r.getName()) || Objects.equal(c.getBranches().get(0).getSender().getName(), r.getName()))) {
+            _builder.append("choice at ");
+            String _name = this.parts.roleSet(r).getName();
+            _builder.append(_name);
+            _builder.append("{");
+            _builder.newLineIfNotEmpty();
+            {
+              int _length = ((Object[])Conversions.unwrapArray(c.getBranches(), Object.class)).length;
+              int _minus = (_length - 1);
+              IntegerRange _upTo = new IntegerRange(0, _minus);
+              boolean _hasElements = false;
+              for(final int i : _upTo) {
+                if (!_hasElements) {
+                  _hasElements = true;
+                } else {
+                  _builder.appendImmediate(" or {", "");
+                }
+                _builder.append("\t");
+                Object _seqOn = this.seqOn(c.getBranches().get(i), r, p);
+                _builder.append(_seqOn, "\t");
+                _builder.newLineIfNotEmpty();
+                _builder.append("}");
+                _builder.newLine();
+              }
+            }
+          }
         }
-        _builder.append("\t");
-        Object _seqOn = this.seqOn(c.getBranches().get(i), r, p);
-        _builder.append(_seqOn, "\t");
+      } else {
+        Object _projectOn = this.projectOn(p, this.parts.roleSet(r));
+        _builder.append(_projectOn);
         _builder.newLineIfNotEmpty();
-        _builder.append("}");
-        _builder.newLine();
       }
     }
     return _builder;
@@ -594,17 +624,26 @@ public class LocalGenerator {
    */
   protected CharSequence _seqOn(final Recursion rec, final Role r, final Protocol p) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("rec ");
-    String _name = rec.getName();
-    _builder.append(_name);
-    _builder.append(": {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    Object _seqOn = this.seqOn(rec.getRecProtocol(), r, p);
-    _builder.append(_seqOn, "\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("}");
-    _builder.newLine();
+    {
+      boolean _inside = this.parts.inside(this.parts.partsRecursion(rec), r);
+      if (_inside) {
+        _builder.append("rec ");
+        String _name = rec.getName();
+        _builder.append(_name);
+        _builder.append(": {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        Object _seqOn = this.seqOn(rec.getRecProtocol(), r, p);
+        _builder.append(_seqOn, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+      } else {
+        Object _projectOn = this.projectOn(p, this.parts.roleSet(r));
+        _builder.append(_projectOn);
+        _builder.newLineIfNotEmpty();
+      }
+    }
     return _builder;
   }
 

@@ -187,6 +187,7 @@ class LocalGenerator {
 					«m.messageType.name»(«printPayload(m.payload)») from «m.sender.name».
 				«ENDIF»
 			«ENDIF»
+			«System.out.println("HERE OBV for " + m.protocol.begin)»
 			«seqOn(m.protocol, r, p)»
 		«ELSE»
 			«IF m.sender.name == r.name»
@@ -199,12 +200,26 @@ class LocalGenerator {
 		«ENDIF»
 	'''
 	
-	def dispatch seqOn(Choice c, Role r, Protocol p)'''
+	/*def dispatch seqOn(Choice c, Role r, Protocol p)'''
 		choice at «parts.roleSet(c.role).name»{
 		«FOR int i: 0..c.branches.length-1 SEPARATOR ' or {'»
 				«seqOn(c.branches.get(i), r, p)»
 			}
 		«ENDFOR»
+	'''*/
+	def dispatch seqOn(Choice c, Role r, Protocol p)'''
+		«System.out.println("HERE OBV2 "+parts.inside(parts.partsChoice(c),r))»
+		«IF parts.inside(parts.partsChoice(c),r)»
+			«IF c.branches.get(0).getReceiver().name == r.name || c.branches.get(0).getSender().name == r.name»
+				choice at «parts.roleSet(r).name»{
+				«FOR int i: 0..c.branches.length-1 SEPARATOR ' or {'»
+						«seqOn(c.branches.get(i), r, p)»
+					}
+				«ENDFOR»
+			«ENDIF»
+		«ELSE»
+			«projectOn(p, parts.roleSet(r))»
+		«ENDIF»
 	'''
 
 	/*
@@ -213,9 +228,13 @@ class LocalGenerator {
 	 * (𝜇X .G) ↾𝜌 R = 𝜇X .(G↾𝜌 R ) otherwise
 	 */
 	def dispatch seqOn(Recursion rec, Role r, Protocol p)'''
-		rec «rec.name»: {
-			«seqOn(rec.recProtocol, r, p)»
-		}
+		«IF parts.inside(parts.partsRecursion(rec), r)»
+			rec «rec.name»: {
+				«seqOn(rec.recProtocol, r, p)»
+			}
+		«ELSE»
+			«projectOn(p, parts.roleSet(r))»
+		«ENDIF»
 	'''
 	
 	def dispatch seqOn(ForEach f, Role r, Protocol p)'''

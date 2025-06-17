@@ -158,6 +158,8 @@ public class Participants {
 	public Set<Role> partsFor(EObject forEach){
 		Set<Role> partsGlobal1 = new LinkedHashSet<>();
 		Set<Role> partsGlobal2 = new LinkedHashSet<>();
+		
+		RoleSet Roleset = ((ForEachImpl)forEach).getRoleset();
 		// extracting begin of forBody protocol
 		EObject begin1 = ((ProtocolImpl)((ForEachImpl)forEach).getForBody()).getBegin();
 		// extracting begin of protocol after forEach
@@ -188,6 +190,7 @@ public class Participants {
 			partsGlobal2 = partsChoice(begin2);
 		// merging the results
 		partsGlobal1.addAll(partsGlobal2);
+		partsGlobal1.add(Roleset);
 		
 		System.out.println(partsGlobal1);
 		return partsGlobal1;
@@ -210,6 +213,18 @@ public class Participants {
 		}
 		
 		return parts;
+	}
+	
+	public boolean inside(Set<Role> set, Role r) {
+		if(r == null) return false;
+		for(Role role: set) {
+			if(role == null) continue;
+			if(role.getName().equals(r.getName())){
+				System.out.println(role.getName()+" "+r.getName());
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }
