@@ -398,7 +398,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     MessageQuitL returns MessageQuitL
 	 *
 	 * Constraint:
-	 *     (messageType='QUIT' sendReceive=MessageType)
+	 *     (messageType='QUIT' sendReceive=MessageType end=EndProtocol)
 	 * </pre>
 	 */
 	protected void sequence_MessageQuitL(ISerializationContext context, MessageQuitL semanticObject) {
@@ -407,10 +407,13 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.MESSAGE_L__MESSAGE_TYPE));
 			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.MESSAGE_L__SEND_RECEIVE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.MESSAGE_L__SEND_RECEIVE));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.MESSAGE_QUIT_L__END) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.MESSAGE_QUIT_L__END));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getMessageQuitLAccess().getMessageTypeQUITKeyword_0_0(), semanticObject.getMessageType());
 		feeder.accept(grammarAccess.getMessageQuitLAccess().getSendReceiveMessageTypeParserRuleCall_2_0(), semanticObject.getSendReceive());
+		feeder.accept(grammarAccess.getMessageQuitLAccess().getEndEndProtocolParserRuleCall_4_0(), semanticObject.getEnd());
 		feeder.finish();
 	}
 	
@@ -422,7 +425,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     MessageQuit returns MessageQuit
 	 *
 	 * Constraint:
-	 *     (messageType=[Definition|'QUIT'] sender=[RoleOne|ID] receiver=[Role|ID])
+	 *     (messageType=[Definition|'QUIT'] sender=[RoleOne|ID] receiver=[Role|ID] end=EndProtocol)
 	 * </pre>
 	 */
 	protected void sequence_MessageQuit(ISerializationContext context, MessageQuit semanticObject) {
@@ -433,11 +436,14 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.MESSAGE__SENDER));
 			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.MESSAGE__RECEIVER) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.MESSAGE__RECEIVER));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.MESSAGE_QUIT__END) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.MESSAGE_QUIT__END));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getMessageQuitAccess().getMessageTypeDefinitionQUITKeyword_0_0_1(), semanticObject.eGet(MyDslPackage.Literals.MESSAGE__MESSAGE_TYPE, false));
 		feeder.accept(grammarAccess.getMessageQuitAccess().getSenderRoleOneIDTerminalRuleCall_3_0_1(), semanticObject.eGet(MyDslPackage.Literals.MESSAGE__SENDER, false));
 		feeder.accept(grammarAccess.getMessageQuitAccess().getReceiverRoleIDTerminalRuleCall_5_0_1(), semanticObject.eGet(MyDslPackage.Literals.MESSAGE__RECEIVER, false));
+		feeder.accept(grammarAccess.getMessageQuitAccess().getEndEndProtocolParserRuleCall_7_0(), semanticObject.getEnd());
 		feeder.finish();
 	}
 	

@@ -9,6 +9,12 @@ package org.xtext.globalTypes.myDsl;
  * A representation of the model object '<em><b>Message Quit L</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link org.xtext.globalTypes.myDsl.MessageQuitL#getEnd <em>End</em>}</li>
+ * </ul>
  *
  * @see org.xtext.globalTypes.myDsl.MyDslPackage#getMessageQuitL()
  * @model
@@ -16,4 +22,26 @@ package org.xtext.globalTypes.myDsl;
  */
 public interface MessageQuitL extends MessageL
 {
+  /**
+   * Returns the value of the '<em><b>End</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>End</em>' containment reference.
+   * @see #setEnd(EndProtocol)
+   * @see org.xtext.globalTypes.myDsl.MyDslPackage#getMessageQuitL_End()
+   * @model containment="true"
+   * @generated
+   */
+  EndProtocol getEnd();
+
+  /**
+   * Sets the value of the '{@link org.xtext.globalTypes.myDsl.MessageQuitL#getEnd <em>End</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>End</em>' containment reference.
+   * @see #getEnd()
+   * @generated
+   */
+  void setEnd(EndProtocol value);
+
 } // MessageQuitL

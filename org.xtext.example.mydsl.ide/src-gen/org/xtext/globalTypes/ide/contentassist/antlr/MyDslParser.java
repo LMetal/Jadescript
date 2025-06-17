@@ -123,6 +123,7 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getMessageQuitAccess().getMessageTypeAssignment_0(), "rule__MessageQuit__MessageTypeAssignment_0");
 			builder.put(grammarAccess.getMessageQuitAccess().getSenderAssignment_3(), "rule__MessageQuit__SenderAssignment_3");
 			builder.put(grammarAccess.getMessageQuitAccess().getReceiverAssignment_5(), "rule__MessageQuit__ReceiverAssignment_5");
+			builder.put(grammarAccess.getMessageQuitAccess().getEndAssignment_7(), "rule__MessageQuit__EndAssignment_7");
 			builder.put(grammarAccess.getPayloadAccess().getTypesAssignment_0(), "rule__Payload__TypesAssignment_0");
 			builder.put(grammarAccess.getPayloadAccess().getTypesAssignment_1_1(), "rule__Payload__TypesAssignment_1_1");
 			builder.put(grammarAccess.getLocalProtocolAccess().getProtocolNameAssignment_2(), "rule__LocalProtocol__ProtocolNameAssignment_2");
@@ -139,6 +140,7 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getMessageNormalLAccess().getProtocolAssignment_4(), "rule__MessageNormalL__ProtocolAssignment_4");
 			builder.put(grammarAccess.getMessageQuitLAccess().getMessageTypeAssignment_0(), "rule__MessageQuitL__MessageTypeAssignment_0");
 			builder.put(grammarAccess.getMessageQuitLAccess().getSendReceiveAssignment_2(), "rule__MessageQuitL__SendReceiveAssignment_2");
+			builder.put(grammarAccess.getMessageQuitLAccess().getEndAssignment_4(), "rule__MessageQuitL__EndAssignment_4");
 			builder.put(grammarAccess.getSenderLAccess().getRoleAssignment_1(), "rule__SenderL__RoleAssignment_1");
 			builder.put(grammarAccess.getReceiverLAccess().getRoleAssignment_1(), "rule__ReceiverL__RoleAssignment_1");
 			builder.put(grammarAccess.getChoiceLAccess().getRoleMakingChoiceAssignment_2(), "rule__ChoiceL__RoleMakingChoiceAssignment_2");

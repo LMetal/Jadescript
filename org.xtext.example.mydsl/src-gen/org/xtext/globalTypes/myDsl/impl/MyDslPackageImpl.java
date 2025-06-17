@@ -824,6 +824,17 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
+  public EReference getMessageQuit_End()
+  {
+    return (EReference)messageQuitEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getPayload()
   {
     return payloadEClass;
@@ -1047,6 +1058,17 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
   public EClass getMessageQuitL()
   {
     return messageQuitLEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getMessageQuitL_End()
+  {
+    return (EReference)messageQuitLEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1284,6 +1306,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     createEReference(messageNormalEClass, MESSAGE_NORMAL__PROTOCOL);
 
     messageQuitEClass = createEClass(MESSAGE_QUIT);
+    createEReference(messageQuitEClass, MESSAGE_QUIT__END);
 
     payloadEClass = createEClass(PAYLOAD);
     createEAttribute(payloadEClass, PAYLOAD__TYPES);
@@ -1313,6 +1336,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     createEReference(messageNormalLEClass, MESSAGE_NORMAL_L__PROTOCOL);
 
     messageQuitLEClass = createEClass(MESSAGE_QUIT_L);
+    createEReference(messageQuitLEClass, MESSAGE_QUIT_L__END);
 
     messageTypeEClass = createEClass(MESSAGE_TYPE);
     createEReference(messageTypeEClass, MESSAGE_TYPE__ROLE);
@@ -1434,6 +1458,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     initEReference(getMessageNormal_Protocol(), this.getProtocol(), null, "protocol", null, 0, 1, MessageNormal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(messageQuitEClass, MessageQuit.class, "MessageQuit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMessageQuit_End(), this.getEndProtocol(), null, "end", null, 0, 1, MessageQuit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(payloadEClass, Payload.class, "Payload", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPayload_Types(), ecorePackage.getEString(), "types", null, 0, -1, Payload.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1463,6 +1488,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     initEReference(getMessageNormalL_Protocol(), this.getProtocolL(), null, "protocol", null, 0, 1, MessageNormalL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(messageQuitLEClass, MessageQuitL.class, "MessageQuitL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMessageQuitL_End(), this.getEndProtocol(), null, "end", null, 0, 1, MessageQuitL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(messageTypeEClass, MessageType.class, "MessageType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMessageType_Role(), this.getRole(), null, "role", null, 0, 1, MessageType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

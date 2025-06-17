@@ -1009,9 +1009,9 @@ ruleForEach returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='for'
+		otherlv_0='map'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getForEachAccess().getForKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getForEachAccess().getMapKeyword_0());
 		}
 		(
 			(
@@ -1452,6 +1452,29 @@ ruleMessageQuit returns [EObject current=null]
 				otherlv_5=RULE_ID
 				{
 					newLeafNode(otherlv_5, grammarAccess.getMessageQuitAccess().getReceiverRoleCrossReference_5_0());
+				}
+			)
+		)
+		otherlv_6='.'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getMessageQuitAccess().getFullStopKeyword_6());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getMessageQuitAccess().getEndEndProtocolParserRuleCall_7_0());
+				}
+				lv_end_7_0=ruleEndProtocol
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getMessageQuitRule());
+					}
+					set(
+						$current,
+						"end",
+						lv_end_7_0,
+						"org.xtext.globalTypes.MyDsl.EndProtocol");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -2082,6 +2105,29 @@ ruleMessageQuitL returns [EObject current=null]
 				}
 			)
 		)
+		otherlv_3='.'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getMessageQuitLAccess().getFullStopKeyword_3());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getMessageQuitLAccess().getEndEndProtocolParserRuleCall_4_0());
+				}
+				lv_end_4_0=ruleEndProtocol
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getMessageQuitLRule());
+					}
+					set(
+						$current,
+						"end",
+						lv_end_4_0,
+						"org.xtext.globalTypes.MyDsl.EndProtocol");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
 	)
 ;
 
@@ -2309,9 +2355,9 @@ ruleForEachL returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='for'
+		otherlv_0='map'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getForEachLAccess().getForKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getForEachLAccess().getMapKeyword_0());
 		}
 		(
 			(

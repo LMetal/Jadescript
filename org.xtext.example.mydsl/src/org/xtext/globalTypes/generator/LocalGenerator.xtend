@@ -88,10 +88,10 @@ class LocalGenerator {
 			«projectOn(m.protocol, r)»
 		«ELSE»
 			«IF m.sender.name == r.name»
-				QUIT() to «m.receiver.name»
+				QUIT() to «m.receiver.name».End
 			«ELSE»
 				«IF m.receiver.name == r.name»
-					QUIT() from «m.sender.name»
+					QUIT() from «m.sender.name».End
 				«ELSE»
 					End
 				«ENDIF»
@@ -116,6 +116,8 @@ class LocalGenerator {
 			«ELSE»
 				«MergeUtil.merge(c, r)»
 			«ENDIF»
+		«ELSE»
+			End
 		«ENDIF»
 	'''
 	
@@ -157,7 +159,7 @@ class LocalGenerator {
 			«projectOn(each.protocol, r)»
 		«ELSE»
 			«IF each.refRole == r»
-				for role «each.loopRole.name»:<«each.roleset.name»,«each.refRole.name»>{
+				map role «each.loopRole.name»:<«each.roleset.name»,«each.refRole.name»>{
 					«projectOn(each.forBody, r)»
 				};
 				«projectOn(each.protocol, r)»
@@ -187,14 +189,13 @@ class LocalGenerator {
 					«m.messageType.name»(«printPayload(m.payload)») from «m.sender.name».
 				«ENDIF»
 			«ENDIF»
-			«System.out.println("HERE OBV for " + m.protocol.begin)»
 			«seqOn(m.protocol, r, p)»
 		«ELSE»
 			«IF m.sender.name == r.name»
-				QUIT() to «m.receiver.name»
+				QUIT() to «m.receiver.name».End
 			«ELSE»
 				«IF m.receiver.name == r.name»
-					QUIT() from «m.sender.name»
+					QUIT() from «m.sender.name».End
 				«ENDIF»
 			«ENDIF»
 		«ENDIF»
@@ -208,7 +209,6 @@ class LocalGenerator {
 		«ENDFOR»
 	'''*/
 	def dispatch seqOn(Choice c, Role r, Protocol p)'''
-		«System.out.println("HERE OBV2 "+parts.inside(parts.partsChoice(c),r))»
 		«IF parts.inside(parts.partsChoice(c),r)»
 			«IF c.branches.get(0).getReceiver().name == r.name || c.branches.get(0).getSender().name == r.name»
 				choice at «parts.roleSet(r).name»{
@@ -246,6 +246,7 @@ class LocalGenerator {
 	'''
 	
 	def dispatch seqOn(EndProtocol end, Role r, Protocol p)'''
+		«System.out.println("SEQ END "+p.begin)»
 		«projectOn(p, parts.roleSet(r))»
 	'''
 	

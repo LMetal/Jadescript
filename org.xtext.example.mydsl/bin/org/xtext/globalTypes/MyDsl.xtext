@@ -73,7 +73,7 @@ CloseRecursion: //terminale
 
 ForEach:
 
-	'for' loopRole=RoleOne ':' '<'roleset=[RoleSet | ID] ',' refRole = [RoleOne | ID] '>' '{'
+	'map' loopRole=RoleOne ':' '<'roleset=[RoleSet | ID] ',' refRole = [RoleOne | ID] '>' '{'
 		forBody=Protocol
 	'}'';'
 	protocol = Protocol
@@ -99,7 +99,7 @@ MessageNormal:
 
 
 MessageQuit: //terminale
-	messageType = [Definition | 'QUIT'] '()' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] 
+	messageType = [Definition | 'QUIT'] '()' 'from' sender=[RoleOne | ID] 'to' receiver=[Role | ID] '.' end=EndProtocol
 ;
 
 Payload:
@@ -136,7 +136,7 @@ MessageNormalL:
 ;
 
 MessageQuitL:
-	messageType='QUIT' '()' (sendReceive=MessageType)
+	messageType='QUIT' '()' (sendReceive=MessageType) '.' end=EndProtocol
 ;
 
 MessageType:
@@ -161,7 +161,7 @@ ChoiceL:
 
 
 ForEachL:
-	'for' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
+	'map' eachRole=RoleOne ':' '<'roleset=[RoleSet | ID]','refrole=[RoleOne | ID]'>' '{'
 		branch=ProtocolL
 	'}'';'
 	protocol = ProtocolL

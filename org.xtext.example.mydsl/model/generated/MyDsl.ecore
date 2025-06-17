@@ -73,7 +73,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//Protocol"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MessageQuit" eSuperTypes="#//Message"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageQuit" eSuperTypes="#//Message">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="end" eType="#//EndProtocol"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Payload">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="types" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -110,7 +113,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//ProtocolL"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MessageQuitL" eSuperTypes="#//MessageL"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageQuitL" eSuperTypes="#//MessageL">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="end" eType="#//EndProtocol"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MessageType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//Role"/>
   </eClassifiers>

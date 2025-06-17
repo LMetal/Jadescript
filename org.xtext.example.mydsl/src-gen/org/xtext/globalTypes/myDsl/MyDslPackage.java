@@ -723,13 +723,22 @@ public interface MyDslPackage extends EPackage
   int MESSAGE_QUIT__RECEIVER = MESSAGE__RECEIVER;
 
   /**
+   * The feature id for the '<em><b>End</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MESSAGE_QUIT__END = MESSAGE_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Message Quit</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MESSAGE_QUIT_FEATURE_COUNT = MESSAGE_FEATURE_COUNT + 0;
+  int MESSAGE_QUIT_FEATURE_COUNT = MESSAGE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.PayloadImpl <em>Payload</em>}' class.
@@ -1028,13 +1037,22 @@ public interface MyDslPackage extends EPackage
   int MESSAGE_QUIT_L__SEND_RECEIVE = MESSAGE_L__SEND_RECEIVE;
 
   /**
+   * The feature id for the '<em><b>End</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MESSAGE_QUIT_L__END = MESSAGE_L_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Message Quit L</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MESSAGE_QUIT_L_FEATURE_COUNT = MESSAGE_L_FEATURE_COUNT + 0;
+  int MESSAGE_QUIT_L_FEATURE_COUNT = MESSAGE_L_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.xtext.globalTypes.myDsl.impl.MessageTypeImpl <em>Message Type</em>}' class.
@@ -1701,6 +1719,17 @@ public interface MyDslPackage extends EPackage
   EClass getMessageQuit();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.xtext.globalTypes.myDsl.MessageQuit#getEnd <em>End</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>End</em>'.
+   * @see org.xtext.globalTypes.myDsl.MessageQuit#getEnd()
+   * @see #getMessageQuit()
+   * @generated
+   */
+  EReference getMessageQuit_End();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.Payload <em>Payload</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1922,6 +1951,17 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EClass getMessageQuitL();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.globalTypes.myDsl.MessageQuitL#getEnd <em>End</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>End</em>'.
+   * @see org.xtext.globalTypes.myDsl.MessageQuitL#getEnd()
+   * @see #getMessageQuitL()
+   * @generated
+   */
+  EReference getMessageQuitL_End();
 
   /**
    * Returns the meta object for class '{@link org.xtext.globalTypes.myDsl.MessageType <em>Message Type</em>}'.
@@ -2479,6 +2519,14 @@ public interface MyDslPackage extends EPackage
     EClass MESSAGE_QUIT = eINSTANCE.getMessageQuit();
 
     /**
+     * The meta object literal for the '<em><b>End</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MESSAGE_QUIT__END = eINSTANCE.getMessageQuit_End();
+
+    /**
      * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.PayloadImpl <em>Payload</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2661,6 +2709,14 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EClass MESSAGE_QUIT_L = eINSTANCE.getMessageQuitL();
+
+    /**
+     * The meta object literal for the '<em><b>End</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MESSAGE_QUIT_L__END = eINSTANCE.getMessageQuitL_End();
 
     /**
      * The meta object literal for the '{@link org.xtext.globalTypes.myDsl.impl.MessageTypeImpl <em>Message Type</em>}' class.

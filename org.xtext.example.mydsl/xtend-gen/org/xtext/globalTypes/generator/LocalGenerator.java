@@ -271,6 +271,7 @@ public class LocalGenerator {
             _builder.append("QUIT() to ");
             String _name_10 = m.getReceiver().getName();
             _builder.append(_name_10);
+            _builder.append(".End");
             _builder.newLineIfNotEmpty();
           } else {
             {
@@ -281,6 +282,7 @@ public class LocalGenerator {
                 _builder.append("QUIT() from ");
                 String _name_13 = m.getSender().getName();
                 _builder.append(_name_13);
+                _builder.append(".End");
                 _builder.newLineIfNotEmpty();
               } else {
                 _builder.append("End");
@@ -336,6 +338,9 @@ public class LocalGenerator {
             _builder.newLineIfNotEmpty();
           }
         }
+      } else {
+        _builder.append("End");
+        _builder.newLine();
       }
     }
     return _builder;
@@ -432,7 +437,7 @@ public class LocalGenerator {
           RoleOne _refRole = each.getRefRole();
           boolean _equals = Objects.equal(_refRole, r);
           if (_equals) {
-            _builder.append("for role ");
+            _builder.append("map role ");
             String _name = each.getLoopRole().getName();
             _builder.append(_name);
             _builder.append(":<");
@@ -526,10 +531,6 @@ public class LocalGenerator {
             }
           }
         }
-        EObject _begin = ((MessageNormal)m).getProtocol().getBegin();
-        String _plus = ("HERE OBV for " + _begin);
-        System.out.println(_plus);
-        _builder.newLineIfNotEmpty();
         Object _seqOn = this.seqOn(((MessageNormal)m).getProtocol(), r, p);
         _builder.append(_seqOn);
         _builder.newLineIfNotEmpty();
@@ -542,6 +543,7 @@ public class LocalGenerator {
             _builder.append("QUIT() to ");
             String _name_10 = m.getReceiver().getName();
             _builder.append(_name_10);
+            _builder.append(".End");
             _builder.newLineIfNotEmpty();
           } else {
             {
@@ -552,6 +554,7 @@ public class LocalGenerator {
                 _builder.append("QUIT() from ");
                 String _name_13 = m.getSender().getName();
                 _builder.append(_name_13);
+                _builder.append(".End");
                 _builder.newLineIfNotEmpty();
               }
             }
@@ -573,13 +576,9 @@ public class LocalGenerator {
    */
   protected CharSequence _seqOn(final Choice c, final Role r, final Protocol p) {
     StringConcatenation _builder = new StringConcatenation();
-    boolean _inside = this.parts.inside(this.parts.partsChoice(c), r);
-    String _plus = ("HERE OBV2 " + Boolean.valueOf(_inside));
-    System.out.println(_plus);
-    _builder.newLineIfNotEmpty();
     {
-      boolean _inside_1 = this.parts.inside(this.parts.partsChoice(c), r);
-      if (_inside_1) {
+      boolean _inside = this.parts.inside(this.parts.partsChoice(c), r);
+      if (_inside) {
         {
           if ((Objects.equal(c.getBranches().get(0).getReceiver().getName(), r.getName()) || Objects.equal(c.getBranches().get(0).getSender().getName(), r.getName()))) {
             _builder.append("choice at ");
@@ -665,6 +664,10 @@ public class LocalGenerator {
 
   protected CharSequence _seqOn(final EndProtocol end, final Role r, final Protocol p) {
     StringConcatenation _builder = new StringConcatenation();
+    EObject _begin = p.getBegin();
+    String _plus = ("SEQ END " + _begin);
+    System.out.println(_plus);
+    _builder.newLineIfNotEmpty();
     Object _projectOn = this.projectOn(p, this.parts.roleSet(r));
     _builder.append(_projectOn);
     _builder.newLineIfNotEmpty();

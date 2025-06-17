@@ -64,7 +64,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//MessageNormal/payload"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//MessageNormal/protocol"/>
     </genClasses>
-    <genClasses ecoreClass="MyDsl.ecore#//MessageQuit"/>
+    <genClasses ecoreClass="MyDsl.ecore#//MessageQuit">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//MessageQuit/end"/>
+    </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Payload">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Payload/types"/>
     </genClasses>
@@ -92,7 +94,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//MessageNormalL/payload"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//MessageNormalL/protocol"/>
     </genClasses>
-    <genClasses ecoreClass="MyDsl.ecore#//MessageQuitL"/>
+    <genClasses ecoreClass="MyDsl.ecore#//MessageQuitL">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//MessageQuitL/end"/>
+    </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//MessageType">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//MessageType/role"/>
     </genClasses>

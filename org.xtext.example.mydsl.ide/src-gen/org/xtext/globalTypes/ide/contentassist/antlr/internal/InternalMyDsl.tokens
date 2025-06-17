@@ -17,12 +17,12 @@
 'at'=35
 'choice'=34
 'float'=17
-'for'=30
 'from'=37
 'global'=18
 'integer'=14
 'local'=40
 'loop'=29
+'map'=30
 'or'=36
 'protocol'=19
 'rec'=27
