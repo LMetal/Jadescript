@@ -6,7 +6,7 @@ THIS IS STILL A WORK IN PROGRESS
 
 HOW TO INSTALL THE ECLIPSE PLUGIN. 
 
-1- Download the archive [HERE](https://github.com/LMetal/JadescriptPlugin)
+1- Download the .zip archive [HERE](https://github.com/LMetal/Jadescript/releases/tag/1.1.0), or use the lastest Release of this repository
 
 2- Open Eclipse, go to Help -> Install New Software
 
