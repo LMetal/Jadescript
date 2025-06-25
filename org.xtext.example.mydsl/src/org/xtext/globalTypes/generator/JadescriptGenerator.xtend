@@ -137,9 +137,12 @@ class JadescriptGenerator {
 			return result
 		
 		agent «lp.projectedRole.name» uses ontology «lp.protocolName»
+			«var mapList = EcoreUtil2.getAllContentsOfType(lp.roles, ForEachL)»
+			«IF !mapList.empty »
 			property forCounter as integer = 0
 			property rolesetNum as integer = 0
 			property forAidList as list of aid
+			«ENDIF»
 			«var rolesetList = EcoreUtil2.getAllContentsOfType(lp.roles, RoleSet)»
 			«var isDone = 0»
 			«FOR r: rolesetList»

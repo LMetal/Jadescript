@@ -264,14 +264,23 @@ public class JadescriptGenerator {
     _builder.append(_protocolName);
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("property forCounter as integer = 0");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("property rolesetNum as integer = 0");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("property forAidList as list of aid");
-    _builder.newLine();
+    List<ForEachL> mapList = EcoreUtil2.<ForEachL>getAllContentsOfType(lp.getRoles(), ForEachL.class);
+    _builder.newLineIfNotEmpty();
+    {
+      boolean _isEmpty = mapList.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _builder.append("\t");
+        _builder.append("property forCounter as integer = 0");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("property rolesetNum as integer = 0");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("property forAidList as list of aid");
+        _builder.newLine();
+      }
+    }
     _builder.append("\t");
     List<RoleSet> rolesetList = EcoreUtil2.<RoleSet>getAllContentsOfType(lp.getRoles(), RoleSet.class);
     _builder.newLineIfNotEmpty();

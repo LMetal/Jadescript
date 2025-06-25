@@ -426,8 +426,8 @@ public class LocalGenerator {
   protected CharSequence _projectOn(final ForEach each, final Role r) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _contains = this.parts.partsFor(each).contains(r);
-      boolean _not = (!_contains);
+      boolean _inside = this.parts.inside(this.parts.partsFor(each), r);
+      boolean _not = (!_inside);
       if (_not) {
         Object _projectOn = this.projectOn(each.getProtocol(), r);
         _builder.append(_projectOn);
@@ -638,6 +638,8 @@ public class LocalGenerator {
         _builder.append("}");
         _builder.newLine();
       } else {
+        _builder.append("SEQ NOT REC");
+        _builder.newLine();
         Object _projectOn = this.projectOn(p, this.parts.roleSet(r));
         _builder.append(_projectOn);
         _builder.newLineIfNotEmpty();

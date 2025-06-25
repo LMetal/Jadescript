@@ -163,7 +163,7 @@ public class Participants {
 		// extracting begin of forBody protocol
 		EObject begin1 = ((ProtocolImpl)((ForEachImpl)forEach).getForBody()).getBegin();
 		// extracting begin of protocol after forEach
-		EObject begin2 = ((ProtocolImpl)((ForEachImpl)forEach).getProtocol()).getBegin();
+		//EObject begin2 = ((ProtocolImpl)((ForEachImpl)forEach).getProtocol()).getBegin();
 		// Parts(G1, 𝜌[𝑥 ↦→ R])
 		// a modify to hashmap rho is neeeded
 		addRhoHash((ForEachImpl)forEach);
@@ -178,7 +178,7 @@ public class Participants {
 		else if(begin1 instanceof ChoiceImpl)
 			partsGlobal1 = partsChoice(begin1);
 		// Parts(G2, 𝜌)
-		if(begin2 instanceof MessageNormalImpl)
+		/*if(begin2 instanceof MessageNormalImpl)
 			partsGlobal2 = partsMessage(begin2);
 		else if(begin2 instanceof RecursionImpl)
 			partsGlobal2 = partsRecursion(begin2);
@@ -189,7 +189,7 @@ public class Participants {
 		else if(begin2 instanceof ChoiceImpl)
 			partsGlobal2 = partsChoice(begin2);
 		// merging the results
-		partsGlobal1.addAll(partsGlobal2);
+		partsGlobal1.addAll(partsGlobal2);*/
 		partsGlobal1.add(Roleset);
 		
 		System.out.println(partsGlobal1);

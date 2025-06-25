@@ -155,7 +155,7 @@ class LocalGenerator {
 	 * (for 𝑥 : ⟨R, q⟩ G1; G2) ↾𝜌 R = Seq(G1 ↾𝜌[𝑥↦→R] R‘, G2 ↾𝜌 R ) 		otherwise
 	 */
 	def dispatch projectOn(ForEach each, Role r)'''
-		«IF !parts.partsFor(each).contains(r)»
+		«IF !parts.inside(parts.partsFor(each), r)»
 			«projectOn(each.protocol, r)»
 		«ELSE»
 			«IF each.refRole == r»
@@ -233,6 +233,7 @@ class LocalGenerator {
 				«seqOn(rec.recProtocol, r, p)»
 			}
 		«ELSE»
+			SEQ NOT REC
 			«projectOn(p, parts.roleSet(r))»
 		«ENDIF»
 	'''
