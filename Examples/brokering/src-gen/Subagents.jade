@@ -1,0 +1,71 @@
+
+
+function cloneListOfAIDs(
+	agents as list of aid) as list of aid do
+	result = [] of aid
+	for peer in agents do
+		add peer to result
+	return result
+
+agent Subagents uses ontology myBrokering
+	
+	
+	property broker as aid = "broker"@
+	
+	on create do
+		activate ContactCoordinator0
+		activate Behaviour1
+		deactivate this
+
+
+
+one shot behaviour ContactCoordinator0 for agent Subagents
+	on execute do
+		send message inform brokerHello to broker
+
+
+
+cyclic behaviour Behaviour1 for agent Subagents
+	on message inform(stopJ()) do
+		deactivate this
+	on message inform(findAgent(text3)) do
+		if(/*cond*/) do
+			send message inform(notPossible()) to broker
+			send message inform QUIT() to broker
+			deactivate this
+		else do
+			send message inform(canDo()) to broker
+			activate Behaviour2
+			deactivate this
+
+
+
+cyclic behaviour Behaviour2 for agent Subagents
+	on message inform(stopJ()) do
+		deactivate this
+	on message inform(continueJ()) do
+		activate RecBehaviour1
+		deactivate this
+
+
+
+cyclic behaviour RecBehaviour1 for agent Subagents
+	on activate do
+		activate Behaviour3
+		deactivate this
+
+
+
+cyclic behaviour Behaviour3 for agent Subagents
+	on message inform(sendMore()) do
+		if(/*cond*/) do
+			send message inform(addData(/*fill_TEXT*/)) to broker
+			activate RecBehaviour1
+			deactivate this
+		else if(/*cond*/) do
+			send message inform(noMoreData) to broker
+			deactivate this
+		else if(/*cond*/) do
+			send message inform(someError) to broker
+			send message inform QUIT() to broker
+			deactivate this

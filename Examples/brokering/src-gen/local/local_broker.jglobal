@@ -1,0 +1,69 @@
+@action QUIT
+@predicate proxyJ(text)
+@action refuseJ
+@action stopJ
+@action agreeJ
+@action notPossible
+@action canDo
+@action sendMore
+@proposition failNoMatch
+@proposition foundMatches
+@proposition noMoreData
+@proposition someError
+@proposition failBrokering
+@action addData(text)
+@action replyFromSubagents(text)
+@action findAgent(text)
+@action continueJ
+@proposition brokerHello
+
+local protocol myBrokering at role broker(role initiator, roleset Subagents:broker) {
+	proxyJ(text) from initiator.
+	choice at broker{
+		refuseJ() to initiator.
+		stopJ() to Subagents.
+		End
+	} or {
+		agreeJ() to initiator.
+		findAgent(text) to Subagents.
+		map role agent:<Subagents,broker>{
+			choice at Subagents{
+				notPossible() from agent.
+				QUIT() from agent.End
+			} or {
+				canDo() from agent.
+				End
+			}
+		};
+		choice at broker{
+			failNoMatch() to initiator.
+			stopJ() to Subagents.
+			End
+		} or {
+			foundMatches() to initiator.
+			continueJ() to Subagents.
+			map role agent:<Subagents,broker>{
+				rec COLLDATI: {
+					sendMore() to agent.
+					choice at Subagents{
+						addData(text) from agent.
+						loop COLLDATI
+					} or {
+						noMoreData() from agent.
+						End
+					} or {
+						someError() from agent.
+						QUIT() from agent.End
+					}
+				}
+			};
+			choice at broker{
+				replyFromSubagents(text) to initiator.
+				End
+			} or {
+				failBrokering() to initiator.
+				End
+			}
+		}
+	}
+}

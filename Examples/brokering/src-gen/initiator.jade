@@ -1,0 +1,44 @@
+
+
+function cloneListOfAIDs(
+	agents as list of aid) as list of aid do
+	result = [] of aid
+	for peer in agents do
+		add peer to result
+	return result
+
+agent initiator uses ontology myBrokering
+	
+	
+	property broker as aid = "broker"@
+	
+	on create do
+		send message inform(proxyJ(/*fill_TEXT*/)) to broker
+		activate Behaviour1
+		deactivate this
+
+
+
+cyclic behaviour Behaviour1 for agent initiator
+	on message inform(refuseJ()) do
+		deactivate this
+	on message inform(agreeJ()) do
+		activate Behaviour2
+		deactivate this
+
+
+
+cyclic behaviour Behaviour2 for agent initiator
+	on message inform(failNoMatch) do
+		deactivate this
+	on message inform(foundMatches) do
+		activate Behaviour3
+		deactivate this
+
+
+
+cyclic behaviour Behaviour3 for agent initiator
+	on message inform(replyFromSubagents(text2)) do
+		deactivate this
+	on message inform(failBrokering) do
+		deactivate this

@@ -1,0 +1,41 @@
+@action QUIT
+@predicate proxyJ(text)
+@action refuseJ
+@action stopJ
+@action agreeJ
+@action notPossible
+@action canDo
+@action sendMore
+@proposition failNoMatch
+@proposition foundMatches
+@proposition noMoreData
+@proposition someError
+@proposition failBrokering
+@action addData(text)
+@action replyFromSubagents(text)
+@action findAgent(text)
+@action continueJ
+@proposition brokerHello
+
+local protocol myBrokering at role initiator(role broker, roleset Subagents:broker) {
+	proxyJ(text) to broker.
+	choice at broker{
+		refuseJ() from broker.
+		End
+	} or {
+		agreeJ() from broker.
+		choice at broker{
+			failNoMatch() from broker.
+			End
+		} or {
+			foundMatches() from broker.
+			choice at broker{
+				replyFromSubagents(text) from broker.
+				End
+			} or {
+				failBrokering() from broker.
+				End
+			}
+		}
+	}
+}
