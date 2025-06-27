@@ -17,3 +17,8 @@ HOW TO RUN
 4- Now create a *.jglobal file, write the protocol, and save. If the protocol passed validatin, in the src-gen folder a local directory was created. It contains the Local Protocols for each role part of the protocol.
 
 5- Modify the Local Protocol and save to generate *.jade files, containing jadescript code. It is now necessary to copy the snippets of code in a Jadescript project.
+
+
+EXAMPLES
+
+Some examples of global types and generated code can be found in the folder Examples. 
