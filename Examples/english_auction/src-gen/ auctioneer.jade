@@ -1,0 +1,117 @@
+
+
+function cloneListOfAIDs(
+	agents as list of aid) as list of aid do
+	result = [] of aid
+	for peer in agents do
+		add peer to result
+	return result
+
+agent auctioneer uses ontology EnglishAuction
+	property forCounter as integer
+	property forAidList as list of aid
+	property BiddersList as list of aid
+	
+	
+	
+	on create do
+		activate WaitSubAgents0
+
+
+
+cyclic behaviour WaitSubAgents0 for agent auctioneer
+	property initTime as timestamp
+    property timeout as duration = "PT1S" as duration
+    on create do
+        initTime = now
+
+	on message inform auctioneerHello do
+		add sender of message to BiddersList
+		
+	on execute do
+	    if(now > initTime + timeout) do
+			send message inform(startAuction(/*fill_TEXT*/)) to BiddersList
+			activate ForBehaviour1
+
+
+
+cyclic behaviour ForBehaviour1 for agent auctioneer
+	on activate do
+		forCounter = length of BiddersList
+		forAidList = cloneListOfAIDs(BiddersList)
+		
+		for i in forAidList do
+			activate Behaviour1(i)
+		
+	on execute do
+		if forCounter = 0 do
+			activate RecBehaviour1
+			deactivate this
+
+
+
+cyclic behaviour Behaviour1 for agent auctioneer
+	property intAgent as aid
+	on create with intAgent as aid do
+		intAgent of this = intAgent
+	
+	on message inform QUIT when sender of message = intAgent do
+		remove sender of message from BiddersList
+		forCounter = forCounter-1
+		deactivate this
+	on message inform(interested) when sender of message = intAgent do
+		forCounter = forCounter-1
+		deactivate this
+
+
+
+cyclic behaviour RecBehaviour1 for agent auctioneer
+	on activate do
+		send message inform(initialPrice(/*fill_INT*/)) to BiddersList
+		activate ForBehaviour2
+
+
+
+cyclic behaviour ForBehaviour2 for agent auctioneer
+	on activate do
+		forCounter = length of BiddersList
+		forAidList = cloneListOfAIDs(BiddersList)
+		
+		for i in forAidList do
+			activate Behaviour3(i)
+		
+	on execute do
+		if forCounter = 0 do
+			activate Behaviour4
+			deactivate this
+
+
+
+cyclic behaviour Behaviour3 for agent auctioneer
+	property intAgent as aid
+	on create with intAgent as aid do
+		intAgent of this = intAgent
+	
+	on message inform(addToPrice(integer1)) when sender of message = intAgent do
+		forCounter = forCounter-1
+		deactivate this
+	on message inform(noBid()) when sender of message = intAgent do
+		forCounter = forCounter-1
+		deactivate this
+	on message inform QUIT when sender of message = intAgent do
+		remove sender of message from BiddersList
+		forCounter = forCounter-1
+		deactivate this
+
+
+
+cyclic behaviour Behaviour4 for agent auctioneer
+	on activate do
+		if(/*cond*/) do
+			send message inform(nextPrice(/*fill_INT*/)) to BiddersList
+			activate RecBehaviour
+			deactivate this
+		else do
+			send message inform(endAuction()) to BiddersList
+			send message inform(communicateWinner(/*fill_TEXT*/)) to BiddersList
+			deactivate this

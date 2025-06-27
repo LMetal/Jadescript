@@ -1,0 +1,45 @@
+@action QUIT
+@action startAuction(text)
+@proposition interested
+@predicate initialPrice(integer)
+@action addToPrice(integer)
+@action noBid
+@predicate nextPrice(integer)
+@action endAuction
+@action communicateWinner(text)
+@proposition auctioneerHello
+
+local protocol EnglishAuction at roleset Bidders:auctioneer(role auctioneer) {
+	startAuction(text) from auctioneer.
+	choice at Bidders{
+		QUIT() to auctioneer.End
+	} or {
+		interested() to auctioneer.
+		rec CONT: {
+			initialPrice(integer) from auctioneer.
+			choice at Bidders{
+				addToPrice(integer) to auctioneer.
+				choice at auctioneer{
+					nextPrice(integer) from auctioneer.
+					loop CONT
+				} or {
+					endAuction() from auctioneer.
+					communicateWinner(text) from auctioneer.
+					End
+				}
+			} or {
+				noBid() to auctioneer.
+				choice at auctioneer{
+					nextPrice(integer) from auctioneer.
+					loop CONT
+				} or {
+					endAuction() from auctioneer.
+					communicateWinner(text) from auctioneer.
+					End
+				}
+			} or {
+				QUIT() to auctioneer.End
+			}
+		}
+	}
+}
