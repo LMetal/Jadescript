@@ -33,6 +33,7 @@ class JadescriptGenerator {
 	String buffer;
 	OntologyTypes ontology = new OntologyTypes();
 	PayloadNames payloadNames = new PayloadNames();
+	int waitNumber
 	int behaviourNumber
 	int recursionNumber
 	int forNumber
@@ -51,6 +52,7 @@ class JadescriptGenerator {
 		ontology.init(definitions);
 		//agentString = printOntology(lp, definitions).toString
 		agentName = lp.projectedRole.name
+		waitNumber = 0
 		behaviourNumber = 0
 		recursionNumber = 0
 		forNumber = 0
@@ -137,10 +139,9 @@ class JadescriptGenerator {
 			return result
 		
 		agent «lp.projectedRole.name» uses ontology «lp.protocolName»
-			«var mapList = EcoreUtil2.getAllContentsOfType(lp.roles, ForEachL)»
+			«var mapList = EcoreUtil2.getAllContentsOfType(lp, ForEachL)»
 			«IF !mapList.empty »
-			property forCounter as integer = 0
-			property rolesetNum as integer = 0
+			property forCounter as integer
 			property forAidList as list of aid
 			«ENDIF»
 			«var rolesetList = EcoreUtil2.getAllContentsOfType(lp.roles, RoleSet)»
@@ -162,8 +163,8 @@ class JadescriptGenerator {
 			on create do
 				«FOR r: rolesetList»
 					«IF lp.projectedRole.name.equals(r.ref.name)»
-						activate WaitSubAgents«behaviourNumber»
-						«val ignore = behQueue.add(getEntry("WaitSubAgents", lp, false, behaviourNumber))»
+						activate WaitSubAgents«waitNumber»
+						«val ignore = behQueue.add(getEntry("WaitSubAgents", lp, false, waitNumber++))»
 						«val ignore2 = isDone = 1»
 					«ENDIF»
 				«ENDFOR»
@@ -180,7 +181,6 @@ class JadescriptGenerator {
 		// «val ignore = behQueue.add(new SimpleEntry<String, Object>("WaitSubAgents"+behaviourNumber, lp))»
 	
 	def dispatch createWaitAgents(String name, LocalProtocol lp){
-		behaviourNumber++;
 		var rolesetList = EcoreUtil2.getAllContentsOfType(lp.roles, RoleSet);
 		'''
 			«FOR r : rolesetList»
@@ -197,7 +197,6 @@ class JadescriptGenerator {
 							on execute do
 							    if(now > initTime + timeout) do
 									«createProtocol(lp.protocol.begin, false)»
-									deactivate this
 				«ENDIF»
 			«ENDFOR»
 		'''
@@ -260,7 +259,7 @@ class JadescriptGenerator {
 				«createProtocol(r.recProtocol.begin, par)»
 	'''
 	
-	//creo behaviour per for in rec
+	//creo behaviour per for
 	def createBehaviour(String behName, String agentName, ForEachL f, boolean par){
 		behaviourNumber++
 		forBodyNum = behaviourNumber
@@ -271,19 +270,19 @@ class JadescriptGenerator {
 		return '''
 			cyclic behaviour «behName» for agent «agentName»
 				on activate do
-					forCounter = 0
-					rolesetNum = length of «f.roleset.name»List
+					forCounter = length of «f.roleset.name»List
 					forAidList = cloneListOfAIDs(«f.roleset.name»List)
 					
-					if(forCounter < rolesetNum) do
-						activate Behaviour«forBodyNum»(forAidList[forCounter])
+					for i in forAidList do
+						activate Behaviour«forBodyNum»(i)
 					
 				on execute do
-					if forCounter = rolesetNum do
+					if forCounter = 0 do
 						activate Behaviour«forExitNum»
 						deactivate this
 		'''
 	}
+	
 	
 	//creo behaviour per end
 	def createBehaviour(String behName, String agentName, EndProtocol r, boolean par)'''
@@ -315,11 +314,14 @@ class JadescriptGenerator {
 			«ENDIF»
 				«createProtocol(message.protocol.begin, par)»
 		«ELSE»
-			on message inform QUIT do
+			«IF par»
+				on message inform QUIT when sender of message = intAgent do
+			«ELSE»
+				on message inform QUIT do
+			«ENDIF»
 				remove sender of message from «forRoleset»List
-				forCounter = forCounter+1
-				if(forCounter < rolesetNum) do
-					activate Behaviour«forBodyNum»(forAidList[forCounter])
+				forCounter = forCounter-1
+				«deactivate()»
 		«ENDIF»
 	'''
 	
@@ -490,9 +492,6 @@ class JadescriptGenerator {
 		if(p){
 			return '''
 				activate RecBehaviour«recNumber»(intAgent)
-				forCounter = forCounter+1
-				if(forCounter < rolesetNum) do
-					activate Behaviour«forBodyNum»(forAidList[forCounter])
 				«deactivate()»'''
 		} else {
 			return '''
@@ -504,9 +503,7 @@ class JadescriptGenerator {
 	
 	def dispatch createProtocol(EndProtocol end, boolean p)'''
 		«IF p»
-			forCounter = forCounter+1
-			if(forCounter < rolesetNum) do
-				activate Behaviour«forBodyNum»(forAidList[forCounter])
+			forCounter = forCounter-1
 		«ENDIF»
 		«deactivate()»
 	'''

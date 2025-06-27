@@ -47,6 +47,8 @@ public class JadescriptGenerator {
 
   private PayloadNames payloadNames = new PayloadNames();
 
+  private int waitNumber;
+
   private int behaviourNumber;
 
   private int recursionNumber;
@@ -73,6 +75,7 @@ public class JadescriptGenerator {
     this.payloadNames.init(definitions);
     this.ontology.init(definitions);
     this.agentName = lp.getProjectedRole().getName();
+    this.waitNumber = 0;
     this.behaviourNumber = 0;
     this.recursionNumber = 0;
     this.forNumber = 0;
@@ -264,17 +267,14 @@ public class JadescriptGenerator {
     _builder.append(_protocolName);
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    List<ForEachL> mapList = EcoreUtil2.<ForEachL>getAllContentsOfType(lp.getRoles(), ForEachL.class);
+    List<ForEachL> mapList = EcoreUtil2.<ForEachL>getAllContentsOfType(lp, ForEachL.class);
     _builder.newLineIfNotEmpty();
     {
       boolean _isEmpty = mapList.isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
         _builder.append("\t");
-        _builder.append("property forCounter as integer = 0");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("property rolesetNum as integer = 0");
+        _builder.append("property forCounter as integer");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("property forAidList as list of aid");
@@ -341,10 +341,11 @@ public class JadescriptGenerator {
           if (_equals_1) {
             _builder.append("\t\t");
             _builder.append("activate WaitSubAgents");
-            _builder.append(this.behaviourNumber, "\t\t");
+            _builder.append(this.waitNumber, "\t\t");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
-            final boolean ignore = this.behQueue.add(this.getEntry("WaitSubAgents", lp, Boolean.valueOf(false), Integer.valueOf(this.behaviourNumber)));
+            int _plusPlus = this.waitNumber++;
+            final boolean ignore = this.behQueue.add(this.getEntry("WaitSubAgents", lp, Boolean.valueOf(false), Integer.valueOf(_plusPlus)));
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             final int ignore2 = isDone = 1;
@@ -379,7 +380,6 @@ public class JadescriptGenerator {
   protected CharSequence _createWaitAgents(final String name, final LocalProtocol lp) {
     CharSequence _xblockexpression = null;
     {
-      this.behaviourNumber++;
       List<RoleSet> rolesetList = EcoreUtil2.<RoleSet>getAllContentsOfType(lp.getRoles(), RoleSet.class);
       StringConcatenation _builder = new StringConcatenation();
       {
@@ -429,9 +429,6 @@ public class JadescriptGenerator {
               CharSequence _createProtocol = this.createProtocol(lp.getProtocol().getBegin(), false);
               _builder.append(_createProtocol, "\t\t\t");
               _builder.newLineIfNotEmpty();
-              _builder.append("\t\t\t");
-              _builder.append("deactivate this");
-              _builder.newLine();
             }
           }
         }
@@ -607,10 +604,7 @@ public class JadescriptGenerator {
     _builder.append("on activate do");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("forCounter = 0");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("rolesetNum = length of ");
+    _builder.append("forCounter = length of ");
     String _name = f.getRoleset().getName();
     _builder.append(_name, "\t\t");
     _builder.append("List");
@@ -624,12 +618,12 @@ public class JadescriptGenerator {
     _builder.append("\t\t");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("if(forCounter < rolesetNum) do");
+    _builder.append("for i in forAidList do");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("activate Behaviour");
     _builder.append(this.forBodyNum, "\t\t\t");
-    _builder.append("(forAidList[forCounter])");
+    _builder.append("(i)");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.newLine();
@@ -637,7 +631,7 @@ public class JadescriptGenerator {
     _builder.append("on execute do");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("if forCounter = rolesetNum do");
+    _builder.append("if forCounter = 0 do");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("activate Behaviour");
@@ -726,23 +720,26 @@ public class JadescriptGenerator {
         _builder.append(_createProtocol, "\t");
         _builder.newLineIfNotEmpty();
       } else {
-        _builder.append("on message inform QUIT do");
-        _builder.newLine();
+        {
+          if (par) {
+            _builder.append("on message inform QUIT when sender of message = intAgent do");
+            _builder.newLine();
+          } else {
+            _builder.append("on message inform QUIT do");
+            _builder.newLine();
+          }
+        }
         _builder.append("\t");
         _builder.append("remove sender of message from ");
         _builder.append(this.forRoleset, "\t");
         _builder.append("List");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("forCounter = forCounter+1");
+        _builder.append("forCounter = forCounter-1");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("if(forCounter < rolesetNum) do");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("activate Behaviour");
-        _builder.append(this.forBodyNum, "\t\t");
-        _builder.append("(forAidList[forCounter])");
+        String _deactivate = this.deactivate();
+        _builder.append(_deactivate, "\t");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -1003,15 +1000,6 @@ public class JadescriptGenerator {
       _builder.append(recNumber);
       _builder.append("(intAgent)");
       _builder.newLineIfNotEmpty();
-      _builder.append("forCounter = forCounter+1");
-      _builder.newLine();
-      _builder.append("if(forCounter < rolesetNum) do");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("activate Behaviour");
-      _builder.append(this.forBodyNum, "\t");
-      _builder.append("(forAidList[forCounter])");
-      _builder.newLineIfNotEmpty();
       String _deactivate = this.deactivate();
       _builder.append(_deactivate);
       return _builder.toString();
@@ -1030,15 +1018,8 @@ public class JadescriptGenerator {
     StringConcatenation _builder = new StringConcatenation();
     {
       if (p) {
-        _builder.append("forCounter = forCounter+1");
+        _builder.append("forCounter = forCounter-1");
         _builder.newLine();
-        _builder.append("if(forCounter < rolesetNum) do");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("activate Behaviour");
-        _builder.append(this.forBodyNum, "\t");
-        _builder.append("(forAidList[forCounter])");
-        _builder.newLineIfNotEmpty();
       }
     }
     String _deactivate = this.deactivate();
