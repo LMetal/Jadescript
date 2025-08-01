@@ -1,4 +1,4 @@
-# About the Project
+# Project: Translation from global types to Jadescript agents
 
 This project is the implementation of translation from the Multiparty Global Types defined in "Global Types for Agent Interaction Protocols", presented at the 2024 ICTCS conference https://ictcs2024.di.unito.it, to Jadescript agents.
 
