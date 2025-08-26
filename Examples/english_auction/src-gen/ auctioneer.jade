@@ -31,11 +31,11 @@ cyclic behaviour WaitSubAgents0 for agent auctioneer
     on execute do
         if(now > initTime + timeout) do
             send message inform(startAuction(/*fill_TEXT*/)) to BiddersList
-            activate ForBehaviour1
+            activate MapBehaviour1
 
 
 
-cyclic behaviour ForBehaviour1 for agent auctioneer
+cyclic behaviour MapBehaviour1 for agent auctioneer
     on activate do
         forCounter = length of BiddersList
         forAidList = cloneListOfAIDs(BiddersList)
@@ -67,11 +67,11 @@ cyclic behaviour Behaviour1 for agent auctioneer
 cyclic behaviour Behaviour2 for agent auctioneer
     on activate do
         send message inform(initialPrice(/*fill_INT*/)) to BiddersList
-        activate ForBehaviour2
+        activate MapBehaviour2
 
 
 
-cyclic behaviour ForBehaviour2 for agent auctioneer
+cyclic behaviour MapBehaviour2 for agent auctioneer
     on activate do
         forCounter = length of BiddersList
         forAidList = cloneListOfAIDs(BiddersList)

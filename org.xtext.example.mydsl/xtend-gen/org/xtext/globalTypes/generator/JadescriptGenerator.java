@@ -950,10 +950,10 @@ public class JadescriptGenerator {
 
   protected CharSequence _createProtocol(final ForEachL forEach, final boolean p) {
     this.forNumber++;
-    this.behQueue.add(this.getEntry("ForBehaviour", forEach, Boolean.valueOf(true), Integer.valueOf(this.forNumber)));
+    this.behQueue.add(this.getEntry("MapBehaviour", forEach, Boolean.valueOf(true), Integer.valueOf(this.forNumber)));
     this.forVariable = forEach.getEachRole().getName();
     this.forRoleset = forEach.getRoleset().getName();
-    return ("activate ForBehaviour" + Integer.valueOf(this.forNumber));
+    return ("activate MapBehaviour" + Integer.valueOf(this.forNumber));
   }
 
   protected CharSequence _createProtocol(final RecursionL rec, final boolean p) {

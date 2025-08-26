@@ -45,11 +45,11 @@ cyclic behaviour Behaviour1 for agent broker
         else do
             send message inform(agreeJ()) to initiator
             send message inform(findAgent(/*fill_TEXT*/)) to SubagentsList
-            activate ForBehaviour1
+            activate MapBehaviour1
 
 
 
-cyclic behaviour ForBehaviour1 for agent broker
+cyclic behaviour MapBehaviour1 for agent broker
     on activate do
         forCounter = length of SubagentsList
         forAidList = cloneListOfAIDs(SubagentsList)
@@ -84,7 +84,7 @@ cyclic behaviour Behaviour3 for agent broker
         else do
             send message inform(foundMatches) to initiator
             send message inform(continueJ()) to SubagentsList
-            activate ForBehaviour2
+            activate MapBehaviour2
 
 
 
@@ -102,7 +102,7 @@ cyclic behaviour Behaviour4 for agent broker
 
 
 
-cyclic behaviour ForBehaviour2 for agent broker
+cyclic behaviour MapBehaviour2 for agent broker
     on activate do
         forCounter = length of SubagentsList
         forAidList = cloneListOfAIDs(SubagentsList)

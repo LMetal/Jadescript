@@ -459,10 +459,10 @@ class JadescriptGenerator {
 	
 	def dispatch createProtocol(ForEachL forEach, boolean p){
 		forNumber++;
-		behQueue.add(getEntry("ForBehaviour", forEach, true, forNumber))
+		behQueue.add(getEntry("MapBehaviour", forEach, true, forNumber))
 		forVariable = forEach.eachRole.name
 		forRoleset = forEach.roleset.name
-		return "activate ForBehaviour"+forNumber
+		return "activate MapBehaviour"+forNumber
 	}
 	
 	
