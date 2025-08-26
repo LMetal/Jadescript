@@ -65,6 +65,8 @@ public class JadescriptGenerator {
 
   private int forBodyNum;
 
+  private int forExitNum;
+
   public CharSequence translate(final LocalProtocol lp, final EList<Definition> definitions) {
     String _string = new String();
     this.agentString = _string;
@@ -592,7 +594,7 @@ public class JadescriptGenerator {
     this.forBodyNum = this.behaviourNumber;
     this.behQueue.add(this.getEntry("Behaviour", f.getBranch().getBegin(), Boolean.valueOf(true), Integer.valueOf(this.behaviourNumber)));
     this.behaviourNumber++;
-    final int forExitNum = this.behaviourNumber;
+    this.forExitNum = this.behaviourNumber;
     this.behQueue.add(this.getEntry("Behaviour", f.getProtocol().getBegin(), Boolean.valueOf(false), Integer.valueOf(this.behaviourNumber)));
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("cyclic behaviour ");
@@ -625,21 +627,6 @@ public class JadescriptGenerator {
     _builder.append(this.forBodyNum, "\t\t\t");
     _builder.append("(i)");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("on execute do");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("if forCounter = 0 do");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("activate Behaviour");
-    _builder.append(forExitNum, "\t\t\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t");
-    _builder.append("deactivate this");
-    _builder.newLine();
     return _builder.toString();
   }
 
@@ -737,6 +724,13 @@ public class JadescriptGenerator {
         _builder.append("\t");
         _builder.append("forCounter = forCounter-1");
         _builder.newLine();
+        _builder.append("\t");
+        _builder.append("if forCounter = 0 do");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("activate Behaviour");
+        _builder.append(this.forExitNum, "\t\t");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         String _deactivate = this.deactivate();
         _builder.append(_deactivate, "\t");
@@ -1020,6 +1014,12 @@ public class JadescriptGenerator {
       if (p) {
         _builder.append("forCounter = forCounter-1");
         _builder.newLine();
+        _builder.append("if forCounter = 0 do");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("activate Behaviour");
+        _builder.append(this.forExitNum, "\t");
+        _builder.newLineIfNotEmpty();
       }
     }
     String _deactivate = this.deactivate();

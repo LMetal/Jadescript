@@ -1,169 +1,167 @@
 
 
 function cloneListOfAIDs(
-	agents as list of aid) as list of aid do
-	result = [] of aid
-	for peer in agents do
-		add peer to result
-	return result
+    agents as list of aid) as list of aid do
+    result = [] of aid
+    for peer in agents do
+        add peer to result
+    return result
 
 agent broker uses ontology myBrokering
-	property forCounter as integer
-	property forAidList as list of aid
-	property SubagentsList as list of aid
-	
-	
-	property initiator as aid = "initiator"@
-	
-	on create do
-		activate WaitSubAgents0
+    property forCounter as integer
+    property forAidList as list of aid
+    property SubagentsList as list of aid
+    
+    
+    property initiator as aid = "initiator"@
+    
+    on create do
+        activate WaitSubAgents0
 
 
 
 cyclic behaviour WaitSubAgents0 for agent broker
-	property initTime as timestamp
+    property initTime as timestamp
     property timeout as duration = "PT1S" as duration
     on create do
         initTime = now
 
-	on message inform brokerHello do
-		add sender of message to SubagentsList
-		
-	on execute do
-	    if(now > initTime + timeout) do
-			activate Behaviour1
-			deactivate this
+    on message inform brokerHello do
+        add sender of message to SubagentsList
+        
+    on execute do
+        if(now > initTime + timeout) do
+            activate Behaviour1
+            deactivate this
 
 
 
 cyclic behaviour Behaviour1 for agent broker
-	on message inform(proxyJ(text0)) do
-		if(/*cond*/) do
-			send message inform(refuseJ()) to initiator
-			send message inform(stopJ()) to SubagentsList
-			deactivate this
-		else do
-			send message inform(agreeJ()) to initiator
-			send message inform(findAgent(/*fill_TEXT*/)) to SubagentsList
-			activate ForBehaviour1
+    on message inform(proxyJ(text0)) do
+        if(/*cond*/) do
+            send message inform(refuseJ()) to initiator
+            send message inform(stopJ()) to SubagentsList
+            deactivate this
+        else do
+            send message inform(agreeJ()) to initiator
+            send message inform(findAgent(/*fill_TEXT*/)) to SubagentsList
+            activate ForBehaviour1
 
 
 
 cyclic behaviour ForBehaviour1 for agent broker
-	on activate do
-		forCounter = length of SubagentsList
-		forAidList = cloneListOfAIDs(SubagentsList)
-		
-		for i in forAidList do
-			activate Behaviour2(i)
-		
-	on execute do
-		if forCounter = 0 do
-			activate Behaviour3
-			deactivate this
+    on activate do
+        forCounter = length of SubagentsList
+        forAidList = cloneListOfAIDs(SubagentsList)
+        
+        for i in forAidList do
+            activate Behaviour2(i)
 
 
 
 cyclic behaviour Behaviour2 for agent broker
-	property intAgent as aid
-	on create with intAgent as aid do
-		intAgent of this = intAgent
-	
-	on message inform(notPossible()) when sender of message = intAgent do
-		activate Behaviour4(intAgent)
-		deactivate this
-	on message inform(canDo()) when sender of message = intAgent do
-		forCounter = forCounter-1
-		deactivate this
+    property intAgent as aid
+    on create with intAgent as aid do
+        intAgent of this = intAgent
+    
+    on message inform(notPossible()) when sender of message = intAgent do
+        activate Behaviour4(intAgent)
+        deactivate this
+    on message inform(canDo()) when sender of message = intAgent do
+        forCounter = forCounter-1
+        if forCounter = 0 do
+            activate Behaviour3
+        deactivate this
 
 
 
 cyclic behaviour Behaviour3 for agent broker
-	on activate do
-		if(/*cond*/) do
-			send message inform(failNoMatch) to initiator
-			send message inform(stopJ()) to SubagentsList
-			deactivate this
-		else do
-			send message inform(foundMatches) to initiator
-			send message inform(continueJ()) to SubagentsList
-			activate ForBehaviour2
+    on activate do
+        if(/*cond*/) do
+            send message inform(failNoMatch) to initiator
+            send message inform(stopJ()) to SubagentsList
+            deactivate this
+        else do
+            send message inform(foundMatches) to initiator
+            send message inform(continueJ()) to SubagentsList
+            activate ForBehaviour2
 
 
 
 cyclic behaviour Behaviour4 for agent broker
-	property intAgent as aid
-	on create with intAgent as aid do
-		intAgent of this = intAgent
-		
-	on message inform QUIT when sender of message = intAgent do
-		remove sender of message from SubagentsList
-		forCounter = forCounter-1
-		deactivate this
+    property intAgent as aid
+    on create with intAgent as aid do
+        intAgent of this = intAgent
+        
+    on message inform QUIT when sender of message = intAgent do
+        remove sender of message from SubagentsList
+        forCounter = forCounter-1
+        if forCounter = 0 do
+            activate Behaviour3
+        deactivate this
 
 
 
 cyclic behaviour ForBehaviour2 for agent broker
-	on activate do
-		forCounter = length of SubagentsList
-		forAidList = cloneListOfAIDs(SubagentsList)
-		
-		for i in forAidList do
-			activate RecBehaviour1(i)
-		
-	on execute do
-		if forCounter = 0 do
-			activate Behaviour6
-			deactivate this
+    on activate do
+        forCounter = length of SubagentsList
+        forAidList = cloneListOfAIDs(SubagentsList)
+        
+        for i in forAidList do
+            activate Behaviour5(i)
 
 
 
-cyclic behaviour RecBehaviour1 for agent broker
-	property intAgent as aid
-	on create with intAgent as aid do
-		intAgent of this = intAgent
-	
-	on activate do
-		send message inform(sendMore()) to intAgent
-		activate Behaviour7(intAgent)
-		deactivate this
+cyclic behaviour Behaviour5 for agent broker
+    property intAgent as aid
+    on create with intAgent as aid do
+        intAgent of this = intAgent
+    
+    on activate do
+        send message inform(sendMore()) to intAgent
+        activate Behaviour7(intAgent)
+        deactivate this
 
 
 
 cyclic behaviour Behaviour6 for agent broker
-	on activate do
-		if(/*cond*/) do
-			send message inform(replyFromSubagents(/*fill_TEXT*/)) to initiator
-			deactivate this
-		else do
-			send message inform(failBrokering) to initiator
-			deactivate this
+    on activate do
+        if(/*cond*/) do
+            send message inform(replyFromSubagents(/*fill_TEXT*/)) to initiator
+            deactivate this
+        else do
+            send message inform(failBrokering) to initiator
+            deactivate this
 
 
 
 cyclic behaviour Behaviour7 for agent broker
-	property intAgent as aid
-	on create with intAgent as aid do
-		intAgent of this = intAgent
-	
-	on message inform(addData(text1)) when sender of message = intAgent do
-		activate RecBehaviour1(intAgent)
-		deactivate this
-	on message inform(noMoreData) when sender of message = intAgent do
-		forCounter = forCounter-1
-		deactivate this
-	on message inform(someError) when sender of message = intAgent do
-		activate Behaviour8(intAgent)
-		deactivate this
+    property intAgent as aid
+    on create with intAgent as aid do
+        intAgent of this = intAgent
+    
+    on message inform(addData(text1)) when sender of message = intAgent do
+        activate RecBehaviour(intAgent)
+        deactivate this
+    on message inform(noMoreData) when sender of message = intAgent do
+        forCounter = forCounter-1
+        if forCounter = 0 do
+            activate Behaviour6
+        deactivate this
+    on message inform(someError) when sender of message = intAgent do
+        activate Behaviour8(intAgent)
+        deactivate this
 
 
 
 cyclic behaviour Behaviour8 for agent broker
-	property intAgent as aid
-	on create with intAgent as aid do
-		intAgent of this = intAgent
-		
-	on message inform QUIT when sender of message = intAgent do
-		remove sender of message from SubagentsList
-		forCounter = forCounter-1
-		deactivate this
+    property intAgent as aid
+    on create with intAgent as aid do
+        intAgent of this = intAgent
+        
+    on message inform QUIT when sender of message = intAgent do
+        remove sender of message from SubagentsList
+        forCounter = forCounter-1
+        if forCounter = 0 do
+            activate Behaviour6
+        deactivate this

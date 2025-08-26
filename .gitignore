@@ -1,1 +1,9 @@
+# Eclipse files
+Examples/.classpath
+Examples/.project
+Examples/.gitignore
+
+# Directory da ignorare
+JadescriptTranslation/
+
 /.metadata/

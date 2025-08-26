@@ -1,9 +1,8 @@
 Manifest-Version: 1.0
 Automatic-Module-Name: org.xtext.example.mydsl
-Bundle-ActivationPolicy: lazy
 Bundle-ManifestVersion: 2
-Bundle-Name: %Bundle-Name.0
-Bundle-Vendor: %Bundle-Vendor.0
+Bundle-Name: Jadescript Translation Plugin
+Bundle-Vendor: Your Name or Org
 Bundle-Version: 0.0.0
 Bundle-SymbolicName: org.xtext.example.mydsl; singleton:=true
 Require-Bundle: org.eclipse.xtext,
@@ -25,4 +24,3 @@ Export-Package: org.xtext.globalTypes,
  org.xtext.globalTypes.serializer,
  org.xtext.globalTypes.services,
  org.xtext.globalTypes.validation
-Import-Package: org.apache.log4j

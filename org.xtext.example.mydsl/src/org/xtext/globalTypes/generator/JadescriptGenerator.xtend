@@ -34,7 +34,7 @@ class JadescriptGenerator {
 	OntologyTypes ontology = new OntologyTypes();
 	PayloadNames payloadNames = new PayloadNames();
 	int waitNumber
-	int behaviourNumber
+	int behaviourNumber //incremental number of behaviour
 	int recursionNumber
 	int forNumber
 	String forVariable
@@ -42,6 +42,7 @@ class JadescriptGenerator {
 	boolean inCreateAgent = true
 	int iteration = 0
 	int forBodyNum
+	int forExitNum
 	
 	
 	def CharSequence translate(LocalProtocol lp, EList<Definition> definitions){
@@ -265,7 +266,7 @@ class JadescriptGenerator {
 		forBodyNum = behaviourNumber
 		behQueue.add(getEntry("Behaviour", f.branch.begin, true, behaviourNumber))
 		behaviourNumber++
-		val forExitNum = behaviourNumber
+		forExitNum = behaviourNumber
 		behQueue.add(getEntry("Behaviour", f.protocol.begin, false, behaviourNumber))
 		return '''
 			cyclic behaviour «behName» for agent «agentName»
@@ -275,11 +276,6 @@ class JadescriptGenerator {
 					
 					for i in forAidList do
 						activate Behaviour«forBodyNum»(i)
-					
-				on execute do
-					if forCounter = 0 do
-						activate Behaviour«forExitNum»
-						deactivate this
 		'''
 	}
 	
@@ -321,6 +317,8 @@ class JadescriptGenerator {
 			«ENDIF»
 				remove sender of message from «forRoleset»List
 				forCounter = forCounter-1
+				if forCounter = 0 do
+					activate Behaviour«forExitNum»
 				«deactivate()»
 		«ENDIF»
 	'''
@@ -504,6 +502,8 @@ class JadescriptGenerator {
 	def dispatch createProtocol(EndProtocol end, boolean p)'''
 		«IF p»
 			forCounter = forCounter-1
+			if forCounter = 0 do
+				activate Behaviour«forExitNum»
 		«ENDIF»
 		«deactivate()»
 	'''
