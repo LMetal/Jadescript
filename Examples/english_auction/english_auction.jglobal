@@ -19,8 +19,8 @@ global protocol EnglishAuction (role auctioneer,roleset Bidders:auctioneer){
 		}
 	} ;
 	
+	initialPrice(integer) from auctioneer to Bidders.
 	rec CONT: {
-		initialPrice(integer) from auctioneer to Bidders.
 		map role bidder:<Bidders,auctioneer> {
 			choice at bidder {
 				addToPrice (integer) from bidder to auctioneer. End

@@ -15,8 +15,8 @@ local protocol EnglishAuction at roleset Bidders:auctioneer(role auctioneer) {
 		QUIT() to auctioneer.End
 	} or {
 		interested() to auctioneer.
+		initialPrice(integer) from auctioneer.
 		rec CONT: {
-			initialPrice(integer) from auctioneer.
 			choice at Bidders{
 				addToPrice(integer) to auctioneer.
 				choice at auctioneer{

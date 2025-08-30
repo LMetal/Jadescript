@@ -1,90 +1,90 @@
 
 
 function cloneListOfAIDs(
-	agents as list of aid) as list of aid do
-	result = [] of aid
-	for peer in agents do
-		add peer to result
-	return result
+    agents as list of aid) as list of aid do
+    result = [] of aid
+    for peer in agents do
+        add peer to result
+    return result
 
 agent Bidders uses ontology EnglishAuction
-	
-	
-	property auctioneer as aid = "auctioneer"@
-	
-	on create do
-		activate ContactCoordinator0
-		activate Behaviour1
+    
+    
+    property auctioneer as aid = "auctioneer"@
+    
+    on create do
+        activate ContactCoordinator0
+        activate Behaviour1
 
 
 
 one shot behaviour ContactCoordinator0 for agent Bidders
-	on execute do
-		send message inform auctioneerHello to auctioneer
+    on execute do
+        send message inform auctioneerHello to auctioneer
 
 
 
 cyclic behaviour Behaviour1 for agent Bidders
-	on message inform(startAuction(text0)) do
-		if(/*cond*/) do
-			send message inform QUIT() to auctioneer
-			deactivate this
-		else do
-			send message inform(interested) to auctioneer
-			activate RecBehaviour1
-			deactivate this
-
-
-
-cyclic behaviour RecBehaviour1 for agent Bidders
-	on activate do
-		activate Behaviour2
-		deactivate this
+    on message inform(startAuction(text0)) do
+        if(/*cond*/) do
+            send message inform QUIT() to auctioneer
+            deactivate this
+        else do
+            send message inform(interested) to auctioneer
+            activate Behaviour2
+            deactivate this
 
 
 
 cyclic behaviour Behaviour2 for agent Bidders
-	on message inform(initialPrice(integer0)) do
-		if(/*cond*/) do
-			send message inform(addToPrice(/*fill_INT*/)) to auctioneer
-			activate Behaviour3
-			deactivate this
-		else if(/*cond*/) do
-			send message inform(noBid()) to auctioneer
-			activate Behaviour4
-			deactivate this
-		else do
-			send message inform QUIT() to auctioneer
-			deactivate this
+    on message inform(initialPrice(integer0)) do
+        activate RecBehaviour1
+        deactivate this
+
+
+
+cyclic behaviour RecBehaviour1 for agent Bidders
+    on activate do
+        if(/*cond*/) do
+            send message inform(addToPrice(/*fill_INT*/)) to auctioneer
+            activate Behaviour3
+            deactivate this
+        else if(/*cond*/) do
+            send message inform(noBid()) to auctioneer
+            activate Behaviour4
+            deactivate this
+        else if(/*cond*/) do
+            send message inform QUIT() to auctioneer
+            deactivate this
 
 
 
 cyclic behaviour Behaviour3 for agent Bidders
-	on message inform(nextPrice(integer2)) do
-		activate RecBehaviour1
-		deactivate this
-	on message inform(endAuction()) do
-		activate Behaviour5
-		deactivate this
+    on message inform(nextPrice(integer2)) do
+        activate RecBehaviour1
+        deactivate this
+    on message inform(endAuction()) do
+        activate Behaviour5
+        deactivate this
 
 
 
 cyclic behaviour Behaviour4 for agent Bidders
-	on message inform(nextPrice(integer2)) do
-		activate RecBehaviour1
-		deactivate this
-	on message inform(endAuction()) do
-		activate Behaviour6
-		deactivate this
+    on message inform(nextPrice(integer2)) do
+        activate RecBehaviour1
+        deactivate this
+    on message inform(endAuction()) do
+        activate Behaviour6
+        deactivate this
 
 
 
 cyclic behaviour Behaviour5 for agent Bidders
-	on message inform(communicateWinner(text1)) do
-		deactivate this
+    on message inform(communicateWinner(text1)) do
+        deactivate this
 
 
 
 cyclic behaviour Behaviour6 for agent Bidders
-	on message inform(communicateWinner(text1)) do
-		deactivate this
+    on message inform(communicateWinner(text1)) do
+        deactivate this

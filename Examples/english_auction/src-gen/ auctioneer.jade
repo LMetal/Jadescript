@@ -67,6 +67,13 @@ cyclic behaviour Behaviour1 for agent auctioneer
 cyclic behaviour Behaviour2 for agent auctioneer
     on activate do
         send message inform(initialPrice(/*fill_INT*/)) to BiddersList
+        activate RecBehaviour1
+        deactivate this
+
+
+
+cyclic behaviour RecBehaviour1 for agent auctioneer
+    on activate do
         activate MapBehaviour2
 
 
@@ -109,7 +116,7 @@ cyclic behaviour Behaviour4 for agent auctioneer
     on activate do
         if(/*cond*/) do
             send message inform(nextPrice(/*fill_INT*/)) to BiddersList
-            activate RecBehaviour
+            activate RecBehaviour1
             deactivate this
         else do
             send message inform(endAuction()) to BiddersList
