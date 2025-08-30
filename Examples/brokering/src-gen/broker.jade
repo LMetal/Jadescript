@@ -37,13 +37,13 @@ cyclic behaviour WaitSubAgents0 for agent broker
 
 
 cyclic behaviour Behaviour1 for agent broker
-    on message inform(proxyJ(text0)) do
+    on message inform(proxy(text0)) do
         if(/*cond*/) do
-            send message inform(refuseJ()) to initiator
-            send message inform(stopJ()) to SubagentsList
+            send message inform(refuse()) to initiator
+            send message inform(stop()) to SubagentsList
             deactivate this
         else do
-            send message inform(agreeJ()) to initiator
+            send message inform(agree()) to initiator
             send message inform(findAgent(/*fill_TEXT*/)) to SubagentsList
             activate MapBehaviour1
 
@@ -79,11 +79,11 @@ cyclic behaviour Behaviour3 for agent broker
     on activate do
         if(/*cond*/) do
             send message inform(failNoMatch) to initiator
-            send message inform(stopJ()) to SubagentsList
+            send message inform(stop()) to SubagentsList
             deactivate this
         else do
             send message inform(foundMatches) to initiator
-            send message inform(continueJ()) to SubagentsList
+            send message inform(continue()) to SubagentsList
             activate MapBehaviour2
 
 
@@ -108,23 +108,21 @@ cyclic behaviour MapBehaviour2 for agent broker
         forAidList = cloneListOfAIDs(SubagentsList)
         
         for i in forAidList do
-            activate Behaviour5(i)
+            activate RecBehaviour1(i)
 
-
-
-cyclic behaviour Behaviour5 for agent broker
+cyclic behaviour RecBehaviour1 for agent broker
     property intAgent as aid
     on create with intAgent as aid do
         intAgent of this = intAgent
-    
+        
     on activate do
         send message inform(sendMore()) to intAgent
-        activate Behaviour7(intAgent)
+        activate Behaviour6(intAgent)
         deactivate this
 
 
 
-cyclic behaviour Behaviour6 for agent broker
+cyclic behaviour Behaviour5 for agent broker
     on activate do
         if(/*cond*/) do
             send message inform(replyFromSubagents(/*fill_TEXT*/)) to initiator
@@ -135,26 +133,26 @@ cyclic behaviour Behaviour6 for agent broker
 
 
 
-cyclic behaviour Behaviour7 for agent broker
+cyclic behaviour Behaviour6 for agent broker
     property intAgent as aid
     on create with intAgent as aid do
         intAgent of this = intAgent
     
     on message inform(addData(text1)) when sender of message = intAgent do
-        activate RecBehaviour(intAgent)
+        activate RecBehaviour1(intAgent)
         deactivate this
     on message inform(noMoreData) when sender of message = intAgent do
         forCounter = forCounter-1
         if forCounter = 0 do
-            activate Behaviour6
+            activate Behaviour5
         deactivate this
     on message inform(someError) when sender of message = intAgent do
-        activate Behaviour8(intAgent)
+        activate Behaviour7(intAgent)
         deactivate this
 
 
 
-cyclic behaviour Behaviour8 for agent broker
+cyclic behaviour Behaviour7 for agent broker
     property intAgent as aid
     on create with intAgent as aid do
         intAgent of this = intAgent
@@ -163,5 +161,5 @@ cyclic behaviour Behaviour8 for agent broker
         remove sender of message from SubagentsList
         forCounter = forCounter-1
         if forCounter = 0 do
-            activate Behaviour6
+            activate Behaviour5
         deactivate this
