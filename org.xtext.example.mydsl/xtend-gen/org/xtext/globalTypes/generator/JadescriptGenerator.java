@@ -63,9 +63,9 @@ public class JadescriptGenerator {
 
   private int iteration = 0;
 
-  private int forBodyNum;
+  private String forBodyNum;
 
-  private int forExitNum;
+  private String forExitName;
 
   public CharSequence translate(final LocalProtocol lp, final EList<Definition> definitions) {
     String _string = new String();
@@ -92,7 +92,7 @@ public class JadescriptGenerator {
         Object firstObj = entry.getValue().getKey();
         String behName = entry.getKey();
         Boolean par = entry.getValue().getValue();
-        System.out.println(entry.toString());
+        System.out.println(firstObj.toString());
         if ((firstObj instanceof ChoiceL)) {
           String _string_1 = entry.toString();
           String _plus_1 = ("*******CHOICEL*******" + _string_1);
@@ -590,12 +590,30 @@ public class JadescriptGenerator {
   }
 
   public String createBehaviour(final String behName, final String agentName, final ForEachL f, final boolean par) {
-    this.behaviourNumber++;
-    this.forBodyNum = this.behaviourNumber;
-    this.behQueue.add(this.getEntry("Behaviour", f.getBranch().getBegin(), Boolean.valueOf(true), Integer.valueOf(this.behaviourNumber)));
-    this.behaviourNumber++;
-    this.forExitNum = this.behaviourNumber;
-    this.behQueue.add(this.getEntry("Behaviour", f.getProtocol().getBegin(), Boolean.valueOf(false), Integer.valueOf(this.behaviourNumber)));
+    EObject _begin = f.getBranch().getBegin();
+    if ((_begin instanceof RecursionL)) {
+      this.recursionNumber++;
+      this.behQueue.add(this.getEntry("RecBehaviour", f.getBranch().getBegin(), Boolean.valueOf(true), Integer.valueOf(this.recursionNumber)));
+      EObject _begin_1 = f.getBranch().getBegin();
+      this.recNumAssociation.put(((RecursionL) _begin_1).getName(), Integer.valueOf(this.recursionNumber));
+      this.forBodyNum = ("RecBehaviour" + Integer.valueOf(this.recursionNumber));
+    } else {
+      this.behaviourNumber++;
+      this.behQueue.add(this.getEntry("Behaviour", f.getBranch().getBegin(), Boolean.valueOf(true), Integer.valueOf(this.behaviourNumber)));
+      this.forBodyNum = ("Behaviour" + Integer.valueOf(this.behaviourNumber));
+    }
+    EObject _begin_2 = f.getProtocol().getBegin();
+    if ((_begin_2 instanceof RecursionL)) {
+      this.recursionNumber++;
+      this.behQueue.add(this.getEntry("RecBehaviour", f.getProtocol().getBegin(), Boolean.valueOf(false), Integer.valueOf(this.recursionNumber)));
+      EObject _begin_3 = f.getProtocol().getBegin();
+      this.recNumAssociation.put(((RecursionL) _begin_3).getName(), Integer.valueOf(this.recursionNumber));
+      this.forExitName = ("RecBehaviour" + Integer.valueOf(this.recursionNumber));
+    } else {
+      this.behaviourNumber++;
+      this.behQueue.add(this.getEntry("Behaviour", f.getProtocol().getBegin(), Boolean.valueOf(false), Integer.valueOf(this.behaviourNumber)));
+      this.forExitName = ("Behaviour" + Integer.valueOf(this.behaviourNumber));
+    }
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("cyclic behaviour ");
     _builder.append(behName);
@@ -623,7 +641,7 @@ public class JadescriptGenerator {
     _builder.append("for i in forAidList do");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("activate Behaviour");
+    _builder.append("activate ");
     _builder.append(this.forBodyNum, "\t\t\t");
     _builder.append("(i)");
     _builder.newLineIfNotEmpty();
@@ -728,8 +746,8 @@ public class JadescriptGenerator {
         _builder.append("if forCounter = 0 do");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("activate Behaviour");
-        _builder.append(this.forExitNum, "\t\t");
+        _builder.append("activate ");
+        _builder.append(this.forExitName, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         String _deactivate = this.deactivate();
@@ -1017,8 +1035,8 @@ public class JadescriptGenerator {
         _builder.append("if forCounter = 0 do");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("activate Behaviour");
-        _builder.append(this.forExitNum, "\t");
+        _builder.append("activate ");
+        _builder.append(this.forExitName, "\t");
         _builder.newLineIfNotEmpty();
       }
     }

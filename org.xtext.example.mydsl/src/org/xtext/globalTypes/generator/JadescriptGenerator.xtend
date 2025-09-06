@@ -41,8 +41,8 @@ class JadescriptGenerator {
 	String forRoleset
 	boolean inCreateAgent = true
 	int iteration = 0
-	int forBodyNum
-	int forExitNum
+	String forBodyNum
+	String forExitName
 	
 	
 	def CharSequence translate(LocalProtocol lp, EList<Definition> definitions){
@@ -71,7 +71,7 @@ class JadescriptGenerator {
 			var behName = entry.getKey
 			var par = entry.getValue.getValue
 			
-			System.out.println(entry.toString());
+			System.out.println(firstObj.toString());
 			if(firstObj instanceof ChoiceL){
 				System.out.println("*******CHOICEL*******"+ entry.toString());
 				agentString += "\n\n\n" + createBehaviour(behName, agentName, firstObj as ChoiceL, par)
@@ -261,13 +261,29 @@ class JadescriptGenerator {
 	'''
 	
 	//creo behaviour per for
-	def createBehaviour(String behName, String agentName, ForEachL f, boolean par){
-		behaviourNumber++
-		forBodyNum = behaviourNumber
-		behQueue.add(getEntry("Behaviour", f.branch.begin, true, behaviourNumber))
-		behaviourNumber++
-		forExitNum = behaviourNumber
-		behQueue.add(getEntry("Behaviour", f.protocol.begin, false, behaviourNumber))
+	def createBehaviour(String behName, String agentName, ForEachL f, boolean par){		
+		if(f.branch.begin instanceof RecursionL){
+			recursionNumber++
+			behQueue.add(getEntry("RecBehaviour", f.branch.begin, true, recursionNumber))
+			recNumAssociation.put((f.branch.begin as RecursionL).name ,recursionNumber);
+			forBodyNum = "RecBehaviour"+recursionNumber
+		} else {
+			behaviourNumber++
+			behQueue.add(getEntry("Behaviour", f.branch.begin, true, behaviourNumber))
+			forBodyNum = "Behaviour"+behaviourNumber
+		}
+		
+				
+		if(f.protocol.begin instanceof RecursionL){
+			recursionNumber++
+			behQueue.add(getEntry("RecBehaviour", f.protocol.begin, false, recursionNumber))
+			recNumAssociation.put((f.protocol.begin as RecursionL).name ,recursionNumber);
+			forExitName = "RecBehaviour"+recursionNumber
+		} else {
+			behaviourNumber++
+			behQueue.add(getEntry("Behaviour", f.protocol.begin, false, behaviourNumber))
+			forExitName = "Behaviour"+behaviourNumber
+		}
 		return '''
 			cyclic behaviour «behName» for agent «agentName»
 				on activate do
@@ -275,7 +291,7 @@ class JadescriptGenerator {
 					forAidList = cloneListOfAIDs(«f.roleset.name»List)
 					
 					for i in forAidList do
-						activate Behaviour«forBodyNum»(i)
+						activate «forBodyNum»(i)
 		'''
 	}
 	
@@ -318,7 +334,7 @@ class JadescriptGenerator {
 				remove sender of message from «forRoleset»List
 				forCounter = forCounter-1
 				if forCounter = 0 do
-					activate Behaviour«forExitNum»
+					activate «forExitName»
 				«deactivate()»
 		«ENDIF»
 	'''
@@ -503,7 +519,7 @@ class JadescriptGenerator {
 		«IF p»
 			forCounter = forCounter-1
 			if forCounter = 0 do
-				activate Behaviour«forExitNum»
+				activate «forExitName»
 		«ENDIF»
 		«deactivate()»
 	'''
