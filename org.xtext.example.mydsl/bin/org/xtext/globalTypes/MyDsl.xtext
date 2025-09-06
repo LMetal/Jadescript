@@ -1,4 +1,4 @@
-wgrammar org.xtext.globalTypes.MyDsl with org.eclipse.xtext.common.Terminals
+grammar org.xtext.globalTypes.MyDsl with org.eclipse.xtext.common.Terminals
 
 generate myDsl "http://www.xtext.org/globalTypes/MyDsl"
 
